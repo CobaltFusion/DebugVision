@@ -27,6 +27,8 @@ NextGen DebugView++ that is portable and with better visualization of data
   
 # notes
 
+- what do we do with internationalization ? Chinese, Japanese characters, etc...
+
 Search:
 - search
 - filter ! 
@@ -40,6 +42,8 @@ Inputs:
 - logs from stdin
 - logs from structured CSV (TICS results)
 - logs from binary formatted file (use custimizable plugin?)
+- remote log sources, such as ssh/sftp
+- remote instance of the same tool?
 
 Visualize: 
 - listview, coloring / highlighting
