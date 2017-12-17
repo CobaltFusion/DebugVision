@@ -58,3 +58,23 @@ Outputs:
 - https://www.telerik.com/fiddler 
 - https://www.infoworld.com/article/3063614/analytics/6-splunk-alternatives-for-log-analysis.html
 
+free similar applications:
+- dbgview
+- http://wintail.hofle.com/ (last updated 2015)
+
+non-free similar applications:
+- http://uvviewsoft.com/logviewer/
+- http://www.hootech.com/WinTail/ (30 days trail, last updated 2013)
+- https://www.logviewplus.com/ (looks pretty nice)
+- https://www.kiwisyslog.com/kiwi-log-viewer (not very feature rich)
+- https://www.scalyr.com/product (tag: Log aggregation, system metrics, and server monitoring that's 
+fast, powerful, and easy to set up, Drop the Scalyr Agent on any server
+Each agent installation automatically registers itself and begins collecting logs and system metrics), **sounds scary**
+- 
+
+
+- 
+
+
+
+ 
