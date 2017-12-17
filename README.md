@@ -25,3 +25,29 @@ NextGen DebugView++ that is portable and with better visualization of data
   - Gui tutorial https://www.ultimatepp.org/srcdoc$CtrlLib$Tutorial$en-us.html
   
   
+# notes
+
+Search:
+- search
+- filter ! 
+- (trigger action)
+
+Inputs:
+- logs from text formatted file
+- logs from OutputDebugString API (Win32 specfic)
+- logs from http(s)
+- logs from stdin
+- logs from structured CSV (TICS results)
+- logs from binary formatted file (use custimizable plugin?)
+
+Visualize: 
+- listview, coloring / highlighting
+- timelines (gantt charts) with annotations
+- summaries / reports ?
+- scaling from scattered datapoints milliseconds <=> years ?
+
+Outputs:
+- choose filtered / unfiltered
+- to file
+- to socket? (for transport / remote monitoring) 
+ 
