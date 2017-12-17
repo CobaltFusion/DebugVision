@@ -68,6 +68,8 @@ free similar applications:
 - http://wintail.hofle.com/ (last updated 2015)
 - http://logio.org/ (looks good)
 - https://www.baremetalsoft.com/baretail/index.php
+- https://code.google.com/archive/p/log-manager/
+
 
 non-free similar applications:
 - http://uvviewsoft.com/logviewer/
@@ -78,7 +80,7 @@ non-free similar applications:
 fast, powerful, and easy to set up, Drop the Scalyr Agent on any server
 Each agent installation automatically registers itself and begins collecting logs and system metrics), **sounds scary**
 - https://www.logfusion.ca/Screenshots/ (look like a debugview++ rip-off)
-
+- https://www.sumologic.com (nice sales/ marketing pitch)
 
 
 
