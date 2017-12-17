@@ -33,6 +33,7 @@ Search:
 - (trigger action)
 
 Inputs:
+- compact binary format to collect high-resolution data (or games and financial trading applications)
 - logs from text formatted file
 - logs from OutputDebugString API (Win32 specfic)
 - logs from http(s)
