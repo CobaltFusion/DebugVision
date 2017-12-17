@@ -21,7 +21,7 @@ NextGen DebugView++ that is portable and with better visualization of data
 - maybe use https://www.ultimatepp.org/index.html
   - has a graphical IDE
   - uses GTK backend on linux and native win32 on windows
-  - Gui 'hello world' is 4MB (and can be created in 2 minutes, including installating, which requires only unzipping)
+  - Gui 'hello world' is 4MB (and can be created in 2 minutes, including installation, which requires only unzipping)
   - Gui tutorial https://www.ultimatepp.org/srcdoc$CtrlLib$Tutorial$en-us.html
   
   
