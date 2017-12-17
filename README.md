@@ -62,6 +62,7 @@ Outputs:
 free similar applications:
 - dbgview
 - http://wintail.hofle.com/ (last updated 2015)
+- http://logio.org/ (looks good)
 
 non-free similar applications:
 - http://uvviewsoft.com/logviewer/
