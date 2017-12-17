@@ -50,4 +50,11 @@ Outputs:
 - choose filtered / unfiltered
 - to file
 - to socket? (for transport / remote monitoring) 
- 
+
+# references
+
+- https://www.elastic.co/
+- https://www.splunk.com/en_us/products/splunk-light.html  (real-time correlation and rules engine)
+- https://www.telerik.com/fiddler 
+- https://www.infoworld.com/article/3063614/analytics/6-splunk-alternatives-for-log-analysis.html
+
