@@ -29,6 +29,13 @@ NextGen DebugView++ that is portable and with better visualization of data
 
 - what do we do with internationalization ? Chinese, Japanese characters, etc...
 
+Concepts:
+- multi-in/multi-out 
+   - in: for example, take multiple logfiles, or sockets
+   - out: stream to disk, stream to memory-ring-buffer  
+- client/server
+   - for example, multiple server instances on linux and a client/viewer on windows (or vice versa)   
+
 Search:
 - search
 - filter ! 
