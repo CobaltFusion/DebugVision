@@ -24,11 +24,10 @@ NextGen DebugView++ that is portable and with better visualization of data
   - Gui 'hello world' is 4MB (and can be created in 2 minutes, including installation, which requires only unzipping)
   - Gui tutorial https://www.ultimatepp.org/srcdoc$CtrlLib$Tutorial$en-us.html
 
+# more...
 - online filters/highlighing storage to sync settings over difference workstations
-  
-# notes
-
 - what do we do with internationalization ? Chinese, Japanese characters, etc...
+- 
 
 Concepts:
 - multi-in/multi-out 
@@ -52,8 +51,12 @@ Inputs:
 - logs from binary formatted file (use custimizable plugin?)
 - remote log sources, such as ssh/sftp
 - remote instance of the same tool?
+- Event log !
+- Event Tracing for Windows (ETW) is designed for C and C++ developers who write user-mode applications
+  but can also be (used in kernel drivers)[https://docs.microsoft.com/en-gb/windows-hardware/drivers/devtest/adding-event-tracing-to-kernel-mode-drivers]
 
 Visualize: 
+- open event source in new tab, allow to merge tabs
 - listview, coloring / highlighting
 - timelines (gantt charts) with annotations
 - summaries / reports ?
