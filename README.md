@@ -86,7 +86,7 @@ non-free similar applications:
 - https://www.scalyr.com/product (tag: Log aggregation, system metrics, and server monitoring that's 
 fast, powerful, and easy to set up, Drop the Scalyr Agent on any server
 Each agent installation automatically registers itself and begins collecting logs and system metrics), **sounds scary**
-- https://www.logfusion.ca/Screenshots/ (look like a debugview++ rip-off)
+- https://www.logfusion.ca/Screenshots/ (actually looks a lot like a debugview++, not optimized for speed, but nicer UI)
 - https://www.sumologic.com (nice sales/ marketing pitch)
 
 
