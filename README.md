@@ -53,7 +53,7 @@ Inputs:
 - remote instance of the same tool?
 - Event log !
 - Event Tracing for Windows (ETW) is designed for C and C++ developers who write user-mode applications
-  but can also be (used in kernel drivers)[https://docs.microsoft.com/en-gb/windows-hardware/drivers/devtest/adding-event-tracing-to-kernel-mode-drivers]
+  but can also be [used in kernel drivers](https://docs.microsoft.com/en-gb/windows-hardware/drivers/devtest/adding-event-tracing-to-kernel-mode-drivers)
 
 Visualize: 
 - open event source in new tab, allow to merge tabs
