@@ -50,10 +50,15 @@ Inputs:
 - logs from structured CSV (TICS results)
 - logs from binary formatted file (use custimizable plugin?)
 - remote log sources, such as ssh/sftp
-- remote instance of the same tool?
-- Event log !
-- Event Tracing for Windows (ETW) is designed for C and C++ developers who write user-mode applications
+- remote instance of the same tool, attach/monitor it remotely
+- [windows specific] Event log !
+- [windows specific] Event Tracing for Windows (ETW) is designed for C and C++ developers who write user-mode applications
   but can also be [used in kernel drivers](https://docs.microsoft.com/en-gb/windows-hardware/drivers/devtest/adding-event-tracing-to-kernel-mode-drivers)
+  
+ Formatting:
+ - allow to edit columns, on tabs that read form files, maybe apply restrictions on OutputDebugString/Event log tabs.
+ - unformating/parsing by allowing specification of colomn separator or fixed width (per colomn) 
+ - allow/be agnostic to (log)files without timestamps
 
 Visualize: 
 - open event source in new tab, allow to merge tabs
