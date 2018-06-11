@@ -25,16 +25,25 @@ NextGen DebugView++ that is portable and with better visualization of data
   - Gui tutorial https://www.ultimatepp.org/srcdoc$CtrlLib$Tutorial$en-us.html
 
 # more...
-- online filters/highlighing storage to sync settings over difference workstations
+- online filters/highlighing storage to sync settings over difference workstations (login with google account?)
 - what do we do with internationalization ? Chinese, Japanese characters, etc...
-- 
 
 Concepts:
 - multi-in/multi-out 
    - in: for example, take multiple logfiles, or sockets
    - out: stream to disk, stream to memory-ring-buffer  
 - client/server
-   - for example, multiple server instances on linux and a client/viewer on windows (or vice versa)   
+   - for example, multiple server instances on linux and a client/viewer on windows (or vice versa) 
+   - server side buffer (late connecting client can get messages from the past x time)
+   - Debugview++ could be one of the 'servers' for windows?
+
+Visualization:
+- use online visualization (can that still be done as a 'live' view?)
+- use some kind of elastic search?
+- 
+
+Filter:
+- separation for input and view filter, meaning filtered messages from input filters is not kept at all, and filtered messages from view  filters and only not shown. (debugview++ only has the latter, which can make it difficult to setup very long lasting tests.) 
 
 Search:
 - search
@@ -78,6 +87,8 @@ Outputs:
 - https://www.splunk.com/en_us/products/splunk-light.html  (real-time correlation and rules engine)
 - https://www.telerik.com/fiddler 
 - https://www.infoworld.com/article/3063614/analytics/6-splunk-alternatives-for-log-analysis.html
+
+- Flamegraph?
 
 free similar applications:
 - dbgview
