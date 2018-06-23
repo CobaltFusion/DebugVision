@@ -9,7 +9,6 @@ NextGen DebugView++ that is portable and with better visualization of data
 - pluggable visualizers
 - portability for MacOs, Linux and Windows
 
-
 # ideas
 - maybe use http://www.copperspice.com/
   - a derivative of Qt 4.8.2, written in modern C++
@@ -36,6 +35,7 @@ Concepts:
    - for example, multiple server instances on linux and a client/viewer on windows (or vice versa) 
    - server side buffer (late connecting client can get messages from the past x time)
    - Debugview++ could be one of the 'servers' for windows?
+   - consider .dotnet core or java for a front-end visualization, to make the UI multi-platform
 
 Visualization:
 - use online visualization (can that still be done as a 'live' view?)
