@@ -81,6 +81,10 @@ Outputs:
 - to file
 - to socket? (for transport / remote monitoring) 
 
+# google keywords
+
+**Telemetry** is an automated communications process by which measurements and other data are collected at remote or inaccessible points and transmitted to receiving equipment for monitoring.
+
 # references
 
 - https://www.elastic.co/
