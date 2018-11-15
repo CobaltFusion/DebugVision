@@ -97,6 +97,7 @@ free similar applications:
 - https://www.baremetalsoft.com/baretail/index.php
 - https://code.google.com/archive/p/log-manager/
 - notepad++ Document monitor (https://sourceforge.net/projects/npp-plugins/files/DocMonitor/)
+- https://github.com/zarunbal/LogExpert
 
 non-free similar applications:
 - http://uvviewsoft.com/logviewer/
