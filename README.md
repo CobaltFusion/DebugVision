@@ -113,7 +113,7 @@ fast, powerful, and easy to set up, Drop the Scalyr Agent on any server
 Each agent installation automatically registers itself and begins collecting logs and system metrics), **sounds scary**
 - https://www.logfusion.ca/Screenshots/ (actually looks a lot like a debugview++, not optimized for speed, but nicer UI)
 - https://www.sumologic.com (nice sales/ marketing pitch)
-
+- http://www.radgametools.com/telemetry.htm RAD Telemetry (Insanely good, but also not free)
 
 
  
