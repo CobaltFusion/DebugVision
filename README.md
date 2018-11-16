@@ -92,6 +92,9 @@ Outputs:
 - https://www.telerik.com/fiddler 
 - https://www.infoworld.com/article/3063614/analytics/6-splunk-alternatives-for-log-analysis.html
 - https://ai.google/research/pubs/pub36356
+- [racing performance of your service calls (Sleuth, Zipkin & ELK) - Rafaëla Breed](https://www.youtube.com/watch?v=hl4-tpbZGOY)
+- [Dapper, a Large-Scale Distributed Systems Tracing Infrastructure](https://ai.google/research/pubs/pub36356)
+- https://zipkin.io/
 
 - Flamegraph?
 
@@ -102,7 +105,7 @@ free similar applications:
 - https://www.baremetalsoft.com/baretail/index.php
 - https://code.google.com/archive/p/log-manager/
 - notepad++ Document monitor (https://sourceforge.net/projects/npp-plugins/files/DocMonitor/)
-- [Dapper, a Large-Scale Distributed Systems Tracing Infrastructure](https://github.com/zarunbal/LogExpert)
+- https://github.com/zarunbal/LogExpert
 
 non-free similar applications:
 - http://uvviewsoft.com/logviewer/
@@ -116,5 +119,3 @@ Each agent installation automatically registers itself and begins collecting log
 - https://www.sumologic.com (nice sales/ marketing pitch)
 - http://www.radgametools.com/telemetry.htm RAD Telemetry (Insanely good, but also not free)
 
-
- 
