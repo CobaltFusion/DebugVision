@@ -95,6 +95,8 @@ Outputs:
 - [racing performance of your service calls (Sleuth, Zipkin & ELK) - Rafaëla Breed](https://www.youtube.com/watch?v=hl4-tpbZGOY)
 - [Dapper, a Large-Scale Distributed Systems Tracing Infrastructure](https://ai.google/research/pubs/pub36356)
 - https://zipkin.io/
+- https://docs.timescale.com/v1.0/getting-started/installation/windows/installation-docker <= 
+- [Diana Hsieh - Time-Series Data NY Meetup #3 Livestream - Sep 20 2018](https://www.youtube.com/watch?v=TQk_tc03MyQ)
 
 - Flamegraph?
 
