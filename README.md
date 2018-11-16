@@ -98,6 +98,8 @@ Outputs:
 - https://docs.timescale.com/v1.0/getting-started/installation/windows/installation-docker <= 
 - [Diana Hsieh - Time-Series Data NY Meetup #3 Livestream - Sep 20 2018](https://www.youtube.com/watch?v=TQk_tc03MyQ)
 
+TimeScale+Grafana -> grouping by seconds an lowest timeunit may be a problem?
+
 - Flamegraph?
 
 free similar applications:
