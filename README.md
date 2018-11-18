@@ -13,6 +13,8 @@ NextGen DebugView++ that is portable and with better visualization of data
   - <https://en.cppreference.com/w/cpp/chrono/steady_clock> 
   - <https://docs.microsoft.com/en-gb/windows/desktop/SysInfo/acquiring-high-resolution-time-stamps>
   - <https://www.postgresql.org/docs/9.0/datatype-datetime.html>
+  - debugview++ stores times in both wall-clock format with millisecond accuracy and offset from start of the file in microsecond accuracy. We have not had requests for more accuracy in the last six years.
+  - for embedded systems it is plausible to measure in clockticks that are typically in the picosecond domain. I would say we postpone this usecase until we have good reason to support it. However, if we do decide to support it, we could just add a special type of series that supports an 'offset from start of the series' in clockticks, where the clock frequency can vary over series.
 
 # ideas
 - maybe use http://www.copperspice.com/
