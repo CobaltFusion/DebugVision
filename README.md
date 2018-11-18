@@ -10,9 +10,9 @@ NextGen DebugView++ that is portable and with better visualization of data
 - portability for MacOs, Linux and Windows
 - on very time critical systems where time is measured in nanoseconds (1e-9), picoseconds (1e-12) or femtoseconds (1e-15) optimizations are usually measured in loops, this means of we have 1 microsecond accurate storage this will cover most usecases.
   This seems to be generally available:
-  <https://en.cppreference.com/w/cpp/chrono/steady_clock> 
-  <https://docs.microsoft.com/en-gb/windows/desktop/SysInfo/acquiring-high-resolution-time-stamps>
-  <https://www.postgresql.org/docs/9.0/datatype-datetime.html>
+  - <https://en.cppreference.com/w/cpp/chrono/steady_clock> 
+  - <https://docs.microsoft.com/en-gb/windows/desktop/SysInfo/acquiring-high-resolution-time-stamps>
+  - <https://www.postgresql.org/docs/9.0/datatype-datetime.html>
 
 # ideas
 - maybe use http://www.copperspice.com/
