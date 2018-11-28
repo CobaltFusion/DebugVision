@@ -34,6 +34,15 @@ NextGen DebugView++ that is portable and with better visualization of data
 - online filters/highlighing storage to sync settings over difference workstations (login with google account?)
 - what do we do with internationalization ? Chinese, Japanese characters, etc...
 
+https://simplicable.com/new/information-analysis
+ - gather 
+ - aggregation / correlation 
+ - map (different sources may provide the same information in slightly different ways)
+ - categorization
+ - summaries (frequency, totals occurances)
+ - analysis 
+ - visualization
+
 Concepts:
 - multi-in/multi-out 
    - in: for example, take multiple logfiles, or sockets
