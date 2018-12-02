@@ -57,6 +57,9 @@ Visualization:
 - query use some kind of elastic search?
 - use online visualization (can that still be done as a 'live' view?)
 
+communication:
+ - gRPC https://grpc.io/
+ 
 
 Filter:
 - separation for input and view filter, meaning filtered messages from input filters is not kept at all, and filtered messages from view  filters and only not shown. (debugview++ only has the latter, which can make it difficult to setup very long lasting tests.) 
