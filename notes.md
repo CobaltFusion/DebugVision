@@ -11,3 +11,5 @@ Once a project is released, however, telemetry is what you’re looking for to e
 collection of data from real-world use. Telemetry is what makes it possible to collect all that
 raw data that becomes valuable, actionable analytics.
 
+Insert telemetry into existing applications:
+https://www.frida.re/docs/home/
