@@ -1,20 +1,21 @@
 # DebugVisualizer
-NextGen DebugView++ that is portable and with better visualization of data
+NextGen DebugView++ that is portable and with graphics data visualization 
 
 # gathering requirements
 
 - gantt chart timeline with markers to visualize processes and bottlenecks
 - multi level / stacked gantt chart suggested by peter bindels to visualize chronological data that is spaced unevenly (decades vs. seconds)
+- time/frequency analysis (group events per period at plot counts/timebox over time)
 - pluggable input sources
 - pluggable visualizers
 - portability for MacOs, Linux and Windows
-- on very time critical systems where time is measured in nanoseconds (1e-9), picoseconds (1e-12) or femtoseconds (1e-15) optimizations are usually measured in loops, this means of we have 1 microsecond accurate storage this will cover most usecases.
+- a 1 microsecond accurate storage will cover most usecases. On very time critical systems where time is measured in nanoseconds (1e-9), picoseconds (1e-12) or femtoseconds (1e-15) optimizations are usually measured/aggragated in loops.
   This seems to be generally available:
   - <https://en.cppreference.com/w/cpp/chrono/steady_clock> 
   - <https://docs.microsoft.com/en-gb/windows/desktop/SysInfo/acquiring-high-resolution-time-stamps>
   - <https://www.postgresql.org/docs/9.0/datatype-datetime.html>
-  - debugview++ stores times in both wall-clock format with millisecond accuracy and offset from start of the file in microsecond accuracy. We have not had requests for more accuracy in the last six years.
-  - for embedded systems it is plausible to measure in clockticks that are typically in the picosecond domain. I would say we postpone this usecase until we have good reason to support it. However, if we do decide to support it, we could just add a special type of series that supports an 'offset from start of the series' in clockticks, where the clock frequency can vary over series.
+  - debugview++ stores times in both wall-clock format with millisecond accuracy and offset from the first entry in microsecond accuracy. We have not had requests for more accuracy in the last six years.
+  - for embedded systems it is plausible to measure in clockticks that are typically in the picosecond domain. I would say we postpone this usecase until we have good reason to support it. However, if we do decide to support it, we could add a special type of series that supports an 'offset from start of the series' in clockticks, where the clock frequency can vary over series.
 
 # ideas
 - maybe use http://www.copperspice.com/
@@ -32,7 +33,7 @@ NextGen DebugView++ that is portable and with better visualization of data
 
 # more...
 - online filters/highlighing storage to sync settings over difference workstations (login with google account?)
-- what do we do with internationalization ? Chinese, Japanese characters, etc...
+- what do we do with internationalization? Chinese, Japanese characters, etc...
 
 https://simplicable.com/new/information-analysis
  - gather 
@@ -45,7 +46,7 @@ https://simplicable.com/new/information-analysis
 
 Concepts:
 - multi-in/multi-out 
-   - in: for example, take multiple logfiles, or sockets
+   - in: for example, take multiple logfiles, sockets, or other input
    - out: stream to disk, stream to memory-ring-buffer  
 - client/server
    - for example, multiple server instances on linux and a client/viewer on windows (or vice versa) 
@@ -54,7 +55,7 @@ Concepts:
    - consider .dotnet core or java for a front-end visualization, to make the UI multi-platform
 
 Visualization:
-- query use some kind of elastic search?
+- query using some kind of elastic search?
 - use online visualization (can that still be done as a 'live' view?)
 
 communication:
@@ -69,14 +70,14 @@ Search:
 - filter ! 
 - (trigger action)
 
-Inputs:
-- compact binary format to collect high-resolution data (or games and financial trading applications)
+Possible inputs:
+- compact binary format to collect high-resolution data (telemetry) for games and financial trading applications.
 - logs from text formatted file
 - logs from OutputDebugString API (Win32 specfic)
 - logs from http(s)
 - logs from stdin
 - logs from structured CSV (TICS results)
-- logs from binary formatted file (use custimizable plugin?)
+- logs from binary formatted file (use customizable plugin?)
 - remote log sources, such as ssh/sftp
 - remote instance of the same tool, attach/monitor it remotely
 - [windows specific] Event log !
