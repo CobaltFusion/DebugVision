@@ -101,6 +101,10 @@ Outputs:
 - to file
 - to socket? (for transport / remote monitoring) 
 
+# commerical logo?
+
+- <https://www.fiverr.com/mubieman/make-logo-for-the-companies>
+
 # google keywords
 
 **Telemetry** is an automated communications process by which measurements and other data are collected at remote or inaccessible points and transmitted to receiving equipment for monitoring.
