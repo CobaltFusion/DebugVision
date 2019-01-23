@@ -57,6 +57,7 @@ Concepts:
 Visualization:
 - query using some kind of elastic search?
 - use online visualization (can that still be done as a 'live' view?)
+- check out <https://github.com/jlfwong/speedscope>
 
 communication:
  - gRPC https://grpc.io/
