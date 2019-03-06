@@ -53,36 +53,6 @@
 #define DVP_FUNCTION_CALL  __stdcall
 
 
-// forward declarations
-class DVP_PluginInterface;
-class DVP_HostInterface;
-
-
-//
-// Interface version identifiers.
-//
-enum class DVP_PluginInterfaceVersion : int32_t
-{
-    Version_1 = 1,  // corresponds to DVP_PluginInterface
-    //Version_2,    // corresponds to DVP_PluginInterfaceV2 (future)
-};
-
-enum class DVP_HostInterfaceVersion : int32_t
-{
-    Version_1 = 1,  // corresponds to DVP_HostInterface
-};
-
-
-//
-// Constants used at the interface level.
-//
-struct DVP_Constants
-{
-    static constexpr uint32_t MaxStringSize = 128;
-    static constexpr uint32_t UniqueIdSize = 64;
-};
-
-
 //
 // Return status codes used at the interface level.
 //
@@ -117,7 +87,7 @@ enum class DVP_Status : int32_t
 
     4. DebugVisualizer calls DVP_GetPluginInterface() passing the current interface version 
        that it supports, and checks the return value.
-       If the returned status is VersionNotSupported then (optionally) DebugVisualizer 
+       If the function returns nullptr then (optionally) DebugVisualizer 
        retries the call passing an older version of the interface.
 
     5. DebugVisualizer calls DVP_SetHostInterface() passing the current interface version 
@@ -155,47 +125,112 @@ DVP_FUNCTION_CALL
 DVP_UnloadPlugin();
 
 
-// Returns an interface pointer if the requested interface version 
-// is implemented by the plugin.
-// Returns nullptr if the requested interface version 
-// is not implemented by the plugin. In this case, DebugVisualizer 
-// may retry the call with an older interface version.
+//
+// Returns an interface pointer if the requested interface version is implemented by 
+// the plugin. According to interfaceVersion, the return value can be casted to 
+// dvplugin::PluginInterface* or a subclass.
+//
+// Returns nullptr if the requested interface version is not implemented by the 
+// plugin. In this case, DebugVisualizer may retry the call with an older 
+// interface version.
+//
 extern "C"
-DVP_PluginInterface*
+void*
 DVP_FUNCTION_CALL
 DVP_GetPluginInterface(
-    DVP_PluginInterfaceVersion version
+    uint32_t interfaceVersion
     );
 
+//
+// According to interfaceVersion, the interface pointer can be casted to 
+// dvplugin::HostInterface* or a subclass.
+//
 // Returns DVP_Status::Success if the provided interface has been accepted
 // by the plugin, an error status otherwise. 
+//
 // Plugin code can accept a newer version of the interface than it has been 
 // compiled with because the new version is a subclass of the previous version.
+//
 extern "C"
 DVP_Status
 DVP_FUNCTION_CALL
 DVP_SetHostInterface(
-    DVP_HostInterfaceVersion version,
-    DVP_HostInterface* interface
+    uint32_t interfaceVersion,
+    void* interface
     );
 
 
 
+namespace dvplugin {
+
+
+//
+// Constants used at the interface level.
+//
+struct Constants
+{
+    static constexpr uint32_t MaxStringSize = 128;
+    static constexpr uint32_t UniqueIdSize = 64;
+};
+
 //
 // Information about the plugin.
 //
-struct DVP_PluginDescription
+struct PluginDescription
 {
     // For information only.
-    wchar_t name[DVP_Constants::MaxStringSize];
-    wchar_t provider[DVP_Constants::MaxStringSize];
+    wchar_t name[Constants::MaxStringSize];
+    wchar_t provider[Constants::MaxStringSize];
 
     // Unique identifier used to establish a configuration data context.
-    wchar_t uniqueId[DVP_Constants::UniqueIdSize];
+    wchar_t uniqueId[Constants::UniqueIdSize];
 
     // Version of the plugin implementation, not of the interface!
     uint32_t majorVersion;
     uint32_t minorVersion;
+};
+
+
+//
+// Information about a custom metadata item implemented by the plugin.
+//
+struct MetadataDescription
+{
+    uint32_t id;
+    const wchar_t* name;
+};
+
+//
+// Metadata associated with a message is described by 
+// a chain of MetadataItem objects.
+//
+struct MetadataItem
+{
+    // identifies the data item
+    uint32_t id;
+    
+    // data is always a null-terminated string
+    const wchar_t* data,
+
+    // nullptr, or pointer to next item in chain
+    const MetadataItem* next;
+};
+
+//
+// Definition of ID values.
+//
+struct MetadataId
+{
+    static constexpr uint32_t None = 0;
+
+    // metadata items known to DebugVisualizer
+    static constexpr uint32_t Timestamp = 1;
+    static constexpr uint32_t ProcessName = 2;
+    static constexpr uint32_t ProcessId = 3;
+    static constexpr uint32_t ThreadId = 4;
+
+    // custom metadata (plugin-specific) start at this offset
+    static constexpr uint32_t CustomBase = 100;
 };
 
 
@@ -209,15 +244,26 @@ struct DVP_PluginDescription
     of this interface are serialized. Interface functions never execute 
     concurrently for a given instance.
 */
-class DVP_PluginInterface
+class PluginInterface
 {
 public:
+    static constexpr uint32_t version = 1;
 
     // Return details about the plugin itself.
     virtual
     DVP_Status
-    GetDescription(
-        DVP_PluginDescription& desc
+    GetPluginDescription(
+        PluginDescription& desc
+        ) = 0;
+
+    // Return an array of MetadataDescription objects.
+    // Each item describes a custom metadata item implemented by the plugin.
+    // Returns DVP_Status::NotSupported if no custom metadata is implemented.
+    virtual
+    DVP_Status
+    GetMetadataDescription(
+        uint32_t& numElements,
+        const MetadataDescription*& descArray
         ) = 0;
 
     // Show plugin configuration settings (dialog window).
@@ -250,9 +296,10 @@ public:
     but still needs to support all existing functions.
     It would be defined as follows:
 
-    class DVP_PluginInterfaceV2 : public DVP_PluginInterface
+    class PluginInterfaceV2 : public PluginInterface
     {
     public:
+        static constexpr uint32_t version = 2;
 
         virtual
         DVP_Status        
@@ -271,20 +318,23 @@ public:
     The plugin is allowed to call interface functions concurrently
     from multiple threads.
 */
-class DVP_HostInterface
+class HostInterface
 {
 public:
+    static constexpr uint32_t version = 1;
 
     virtual
     DVP_Status
     DeliverEvent(
-        const char* text
+        const char* text,
+        const MetadataItem* metadata  // nullptr or chain of metadata items
         ) = 0;
         
     virtual
     DVP_Status
     DeliverEvent(
-        const wchar_t* text
+        const wchar_t* text,
+        const MetadataItem* metadata  // nullptr or chain of metadata items
         ) = 0;
 
     
@@ -292,7 +342,7 @@ public:
     // Write a parameter to the persistent configuration database managed by DebugVisualizer.
     // 
     // Addressing of parameters is hierarchical using three levels:
-    // 1st level: uniqueId reported in DVP_PluginDescription
+    // 1st level: uniqueId reported in PluginDescription
     // 2nd level: section name passed to this function
     // 3rd level: parameter name passed to this function
     //
@@ -321,3 +371,6 @@ public:
         ) = 0;
 
 };
+
+
+} //namespace dvplugin
