@@ -1,4 +1,5 @@
 
+```plantuml
 @startuml
 
 class PluginDescription << (S,#FF7700) struct >>
@@ -26,3 +27,4 @@ class HostInterface << (I,#FF7700) interface >>
 HostInterface : virtual DVP_Status DeliverEvent(const char* text, const MetadataItem* metadata)
 
 @enduml
+```
