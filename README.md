@@ -1,5 +1,5 @@
-# DebugVisualizer
-NextGen DebugView++ that is portable and with graphics data visualization 
+# DebugVisualizer / DebugVision
+NextGen DebugView++ that is portable and with graphical data visualization 
 
 # gathering requirements
 
