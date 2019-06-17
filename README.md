@@ -1,4 +1,4 @@
-# DebugVisualizer / DebugVision
+# DebugVision
 NextGen DebugView++ that is portable and with graphical data visualization 
 
 # gathering requirements
