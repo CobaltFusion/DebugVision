@@ -1,5 +1,5 @@
 # DebugVision
-NextGen DebugView++ that is portable and with graphical data visualization 
+NextGen DebugView++ that is portable and with graphical log visualization 
 
 # gathering requirements
 
