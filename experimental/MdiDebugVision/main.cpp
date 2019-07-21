@@ -27,12 +27,12 @@
 // - set Configuration Properties->C / C++->Code Generation->Runtime Library = > Multi - threaded DLL
 
 // for assertions to work as usual include this file:
-#include "cs_assert.h"
+//#include "cs_assert.h"
 
 // any *.ui files in the project will be automatically compiled into corresponding $(OutDir)copperspice_generated\ui_*.h files.
 // since $(OutDir)copperspice_generated in included in the compiler include path, this works:
 #include "ui_mainwindow.h"
-#include "ui_debugview.h"
+#include "ui_tabbedview.h"
 
 #include <thread>
 #include <array>
@@ -86,6 +86,8 @@ private:
 
 void addrow(std::string message, QStandardItemModel * model, QTableView * view)
 {
+	OutputDebugStringA(message.c_str());
+
 	using namespace std::chrono;
 	using clock = std::chrono::system_clock;
 	auto now = clock::now();
@@ -95,119 +97,125 @@ void addrow(std::string message, QStandardItemModel * model, QTableView * view)
 	QStandardItem* item0 = new QStandardItem(QString("%1").formatArg(newRowIndex + 1));
 	item0->setToolTip(QString("Dit is a test of colomn 0"));
 	QStandardItem* item1 = new QStandardItem(stringbuilder() << std::put_time(std::localtime(&now_c), "%T"));
-	item0->setToolTip(QString("Dit is a test of colomn 0"));
-	QStandardItem* item2 = new QStandardItem(QString("pid"));
 	item1->setToolTip(QString("Dit is a test of colomn 1"));
-	QStandardItem* item3 = new QStandardItem(QString(message.c_str()));
+	QStandardItem* item2 = new QStandardItem(QString("pid"));
 	item2->setToolTip(QString("Dit is a test of colomn 2"));
-
-	// Q1: how to select the whole line when selecting a message item
-	// Q2: how to make the line number in the verticalHeader display correctly?
-
+	QStandardItem* item3 = new QStandardItem(QString(message.c_str()));
+	item3->setToolTip(QString("Dit is a test of colomn 3"));
 	
 	model->setItem(newRowIndex, 0, item0);
 	model->setItem(newRowIndex, 1, item1);
 	model->setItem(newRowIndex, 2, item2);
 	model->setItem(newRowIndex, 3, item3);
-	view->selectRow(newRowIndex);
+	//view->selectRow(newRowIndex);				//this toggles the 'selected' state, not the 'active' line
 	//view->resizeRowToContents(newRowIndex); // crappy
 	view->setRowHeight(newRowIndex, 12);
-	//view->setContentsMargins(0, 0, 0, 0); // no having any effect?
-	// view->layout()->setContentsMargins(0, 0, 0, 0); // crash; tableview has no layout?
 }
 
-QStandardItemModel* createModel(QTableView* tableView)
+void init(QTableView* tableView)
 {
-	QStandardItemModel* model = new QStandardItemModel(0, 0);
-	tableView->setModel(model);		// set the model before doing changes like colomn width
-	model->setHorizontalHeaderLabels({ "Line", "Time", "Process", "Message" }); // this will reset the colomnsizes
-	
 	tableView->setColumnWidth(1, 100);
 	tableView->setColumnWidth(2, 100);
 	tableView->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft);
 	tableView->horizontalHeader()->setStretchLastSection(true);
-	tableView->horizontalHeader()->setFrameStyle(QFrame::Shape::NoFrame);
-	tableView->verticalHeader()->setFrameStyle(QFrame::Shape::NoFrame);
-	tableView->verticalHeader()->setVisible(false);
+	tableView->verticalHeader()->setVisible(false);		// we don't want to waste space on verticalHeaders
 
 	// alternating row colors
 	tableView->setAlternatingRowColors(true);
 	QPalette palette = tableView->palette();
 	palette.setColor(QPalette::AlternateBase, QColor(210, 230, 255, 255));
 	tableView->setPalette(palette);
-	return model;
+}
+
+class TabbedDebugWindow
+{
+public:
+	TabbedDebugWindow(QMdiArea* mdiArea)
+	{
+		model = new QStandardItemModel(0, 4);
+		model->setHorizontalHeaderLabels({ "Line", "Time", "Process", "Message" }); // this will reset the column widths
+
+		//QIcon defaultIcon;
+		//QIcon emptyStringIcon(QString(""));
+		//QIcon notfoundIcon(QString("notfound"));
+		//qwidget->setWindowIcon(notfoundIcon);
+
+		//cdbg() << "is " << defaultIcon.isNull() << "\n";
+		//cdbg() << "is " << emptyStringIcon.isNull() << "\n";
+		//cdbg() << "is " << notfoundIcon.isNull() << "\n";
+
+		//qwidget.setWindowIcon(QIcon(QString("notfound")));
+
+		tabbedview.setupUi(qwidget);
+		mdiArea->addSubWindow(qwidget);
+
+		tabbedview.tableView->setModel(model);
+		init(tabbedview.tableView);
+		tabbedview.tableView->setFrameStyle(QFrame::Shape::NoFrame);
+		tabbedview.tableView->setFont(QFont("Courier", 10));
+		tabbedview.verticalLayout->setContentsMargins(0, 0, 0, 0);
+		tabbedview.verticalLayout_2->setContentsMargins(0, 0, 0, 0);
+		qwidget->show();
+	}
+
+	void add(std::string msg)
+	{
+		addrow(msg, model, tabbedview.tableView);
+	}
+
+	QWidget* qwidget = new QWidget;
+private:
+
+	Ui::TabbedView tabbedview;
+	QStandardItemModel* model;
+
+};
+
+void tileSubWindowsHorizontally(QMdiArea* mdiArea)
+{
+	QPoint position(0, 0);
+	for (QMdiSubWindow * window: mdiArea->subWindowList()) {
+		QRect rect(0, 0, mdiArea->width() / mdiArea->subWindowList().count(), mdiArea->height());
+		window->setGeometry(rect);
+		window->move(position);
+		position.setX(position.x() + window->width());
+	}
 }
 
 int exec(int argc, char* argv[])
 {
 	QApplication app(argc, argv);
-
 	QMainWindow mainWindow;
 	Ui::MainWindow window;
 	window.setupUi(&mainWindow);
-	window.verticalLayout->setMargin(0);
-
-	//mainWindow.resize(800, 600);
 	mainWindow.setWindowTitle("DebugVision v0.1 by Jan wilmans (c) 2019");
 
 	auto menubar = mainWindow.menuBar();
-	auto menu = menubar->addMenu("Options");
-	auto flashAction = menu->addAction("Flash");
-	auto assertAction = menu->addAction("Assert");
 	auto sb = mainWindow.statusBar();
+
 	mainWindow.show();
 
-	// open debugview window -> move this into a class
-	QMainWindow mainDebugview;
-	Ui::debugview debugview;
-	debugview.setupUi(&mainDebugview);
-	mainDebugview.show();
-	debugview.verticalLayout->setContentsMargins(0, 0, 0, 0);
+	auto addviewAction = window.menuFile->addAction("New view");
+	auto tileHorizontallyAction = window.menuOptions->addAction("Horizontal tile");
 
-
-	sb->showMessage("This message will disappear after 2 seconds", 2000);
-
-	QObject::connect(flashAction, &QAction::triggered, &mainWindow, [sb] {
-		sb->showMessage("Flash message that will disappear after 2 seconds", 2000);
+	QObject::connect(addviewAction, &QAction::triggered, &mainWindow, [&] {
+		new TabbedDebugWindow(window.mdiArea);
 	});
 
-	QObject::connect(assertAction, &QAction::triggered, &mainWindow, [] {
-		assert("This is not a valid assertion" && false);
+	QObject::connect(tileHorizontallyAction, &QAction::triggered, &mainWindow, [&] {
+		tileSubWindowsHorizontally(window.mdiArea);
 	});
 
-	// no effect
-	//window.tabWidget->setContentsMargins(0, 0, 0, 0);
-	//window.tab->setContentsMargins(0, 0, 0, 0);
-	//window.tab_2->setContentsMargins(0, 0, 0, 0);
-	//window.toolBox->setContentsMargins(0, 0, 0, 0);
-	//window.toolBox->setFrameStyle(QFrame::Shape::NoFrame);
-	window.verticalLayout->setContentsMargins(0, 0, 0, 0);
-	window.verticalLayout_2->setContentsMargins(0, 0, 0, 0);
-	//window.tableView->setContentsMargins(0, 0, 0, 0);
-	//window.centralwidget->setContentsMargins(0, 0, 0, 0);
-
-
-	window.tableView->setFont(QFont("Courier", 10));
-	window.tableView->setShowGrid(false);
-	window.tableView->setFrameStyle(QFrame::Shape::NoFrame);
-
-	auto model = createModel(window.tableView);
-	auto model2 = createModel(debugview.tableView);
-
-	auto addMessage = [&](std::string msg) {
-		addrow(msg, model, window.tableView);
-		addrow(msg, model2, debugview.tableView);
-	};
+	auto subwindow = std::make_unique<TabbedDebugWindow>(window.mdiArea);
+	subwindow->qwidget->showMaximized();
 
 	QObject::connect(window.pushButton, &QPushButton::pressed, &mainWindow, [&]
 	{
-		addMessage("Mytestmessage");
-		addMessage("Mytestmessage");
-		addMessage("Mytestmessage");
-		addMessage("Mytestmessage");
-		addMessage("Mytestmessage");
-		addMessage("Mytestmessage");
-		addMessage("Mytestmessage");
+		subwindow->add("Mytestmessage");
+		subwindow->add("Mytestmessage");
+		subwindow->add("Mytestmessage");
+		subwindow->add("Mytestmessage");
+		subwindow->add("Mytestmessage");
 	});
 
 	return app.exec();
