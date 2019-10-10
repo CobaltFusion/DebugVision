@@ -154,4 +154,5 @@ Each agent installation automatically registers itself and begins collecting log
 - https://www.logfusion.ca/Screenshots/ (actually looks a lot like a debugview++, not optimized for speed, but nicer UI)
 - https://www.sumologic.com (nice sales/ marketing pitch)
 - http://www.radgametools.com/telemetry.htm RAD Telemetry (Insanely good, but also not free)
+- http://www.farrellf.com/TelemetryViewer/
 
