@@ -13,26 +13,17 @@
 #include <chrono>
 #include <iomanip>
 
-#include "infra/cdbg.h"
-#include "infra/exception.h"
-#include "infra/logfunction.h"
-
-#pragma warning( pop )
-
+#pragma warning(pop)
 #pragma warning(disable : 4996)
-
-// in Configuration: Debug 
-// these settings are required for ABI compatibility:
-// - set Configuration Properties->C / C++->Preprocessor->Preprocessor Definitions = > CSDEBUG
-// - set Configuration Properties->C / C++->Code Generation->Runtime Library = > Multi - threaded DLL
-
-// for assertions to work as usual include this file:
-//#include "cs_assert.h"
 
 // any *.ui files in the project will be automatically compiled into corresponding $(OutDir)copperspice_generated\ui_*.h files.
 // since $(OutDir)copperspice_generated in included in the compiler include path, this works:
 #include "ui_mainwindow.h"
 #include "ui_tabbedview.h"
+
+#include "infra/cdbg.h"
+#include "infra/exception.h"
+#include "infra/logfunction.h"
 
 #include <thread>
 #include <array>
@@ -42,45 +33,7 @@
 #include "cs_debugview.h"
 
 using namespace std::chrono_literals;
-
-namespace infra::dbgstream::output
-{
-	void write(const char* msg)
-	{
-		OutputDebugStringA(msg);
-	}
-
-	void write(const wchar_t* msg)
-	{
-		OutputDebugStringW(msg);
-	}
-}
-
-class stringbuilder
-{
-public:
-
-	template <typename T>
-	stringbuilder& operator<<(const T& t)
-	{
-		m_ss << t;
-		return *this;
-	}
-
-	operator std::string() const
-	{
-		return m_ss.str();
-	}
-
-	operator QString() const
-	{
-		std::string s = m_ss.str();
-		return QString(s.cbegin(), s.cend());
-	}
-
-private:
-	std::stringstream m_ss;
-};
+using infra::stringbuilder;
 
 void addrow(std::string message, QStandardItemModel * model, QTableView * view)
 {
@@ -131,14 +84,14 @@ public:
 		model = new QStandardItemModel(0, 4);
 		model->setHorizontalHeaderLabels({ "Line", "Time", "Process", "Message" }); // this will reset the column widths
 
-		//QIcon defaultIcon;
-		//QIcon emptyStringIcon(QString(""));
-		//QIcon notfoundIcon(QString("notfound"));
-		//qwidget->setWindowIcon(notfoundIcon);
+		QIcon defaultIcon;
+		QIcon emptyStringIcon(QString(""));
+		QIcon notfoundIcon(QString("notfound"));
+		qwidget->setWindowIcon(notfoundIcon);
 
-		//cdbg() << "is " << defaultIcon.isNull() << "\n";
-		//cdbg() << "is " << emptyStringIcon.isNull() << "\n";
-		//cdbg() << "is " << notfoundIcon.isNull() << "\n";
+		qDebug() << "is " << defaultIcon.isNull() << "\n";
+		qDebug() << "is " << emptyStringIcon.isNull() << "\n";
+		qDebug() << "is " << notfoundIcon.isNull() << "\n";
 
 		//qwidget.setWindowIcon(QIcon(QString("notfound")));
 
@@ -171,7 +124,7 @@ void tileSubWindowsHorizontally(QMdiArea* mdiArea)
 {
 	QPoint position(0, 0);
 	for (QMdiSubWindow * window: mdiArea->subWindowList()) {
-		QRect rect(0, 0, mdiArea->width() / mdiArea->subWindowList().count(), mdiArea->height());
+		QRect rect(0, 0, mdiArea->width() / static_cast<int> (mdiArea->subWindowList().count()), mdiArea->height());
 		window->setGeometry(rect);
 		window->move(position);
 		position.setX(position.x() + window->width());
@@ -216,38 +169,3 @@ int exec(int argc, char* argv[])
 
 	return app.exec();
 }
-
-int main(int argc, char *argv[])
-{
-	qInstallMsgHandler(CsDebugViewOutput);
-	for (std::size_t i = 0; i < argc; ++i)
-	{
-		qDebug() << argv[i];
-	}
-
-	try
-	{
-		return exec(argc, argv);
-	}
-	catch (const std::exception & ex)
-	{
-		cdbg() << "Exception: " << ex.what() << "\n";
-		throw;
-	}
-	catch (...)
-	{
-		cdbg() << "Exception: A non standard exception was thrown.\n";
-		throw;
-	}
-	return -2;
-}
-
-#ifdef _WIN32
-
-#include <windows.h>
-int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
-{
-	return main(__argc, __argv);
-}
-
-#endif

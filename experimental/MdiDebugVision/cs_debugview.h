@@ -1,5 +1,9 @@
 #pragma once
 
+#ifdef _WIN32
+#include <windows.h>
+#endif
+
 inline void CsDebugViewOutput(QtMsgType type, const char* msg)
 {
 	switch (type) {
