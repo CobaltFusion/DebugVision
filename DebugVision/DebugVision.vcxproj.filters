@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="infra\logfunction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -33,6 +30,9 @@
     <ClInclude Include="cs_debugview.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TabbedDebugWindow.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="setup.cpp">
@@ -41,5 +41,27 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TabbedDebugWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="$(MSBuildProjectDirectory)\**\*.ui" />
+    <CustomBuild Include="$(MSBuildProjectDirectory)\**\*.ui" />
+    <CustomBuild Include="$(MSBuildThisFileDirectory)copperspice\$(Configuration)\bin\*.dll" />
+    <CustomBuild Include="$(MSBuildThisFileDirectory)copperspice\$(Configuration)\bin\*.dll" />
+    <CustomBuild Include="$(MSBuildThisFileDirectory)copperspice\$(Configuration)\bin\*.dll" />
+    <CustomBuild Include="$(MSBuildThisFileDirectory)copperspice\$(Configuration)\bin\*.dll" />
+    <CustomBuild Include="$(MSBuildThisFileDirectory)copperspice\$(Configuration)\bin\*.dll" />
+    <CustomBuild Include="$(MSBuildThisFileDirectory)copperspice\$(Configuration)\bin\*.dll" />
+    <CustomBuild Include="$(MSBuildThisFileDirectory)copperspice\$(Configuration)\bin\*.dll" />
+    <CustomBuild Include="$(MSBuildThisFileDirectory)copperspice\$(Configuration)\bin\*.dll" />
+    <CustomBuild Include="$(MSBuildThisFileDirectory)copperspice\$(Configuration)\bin\*.dll" />
+    <CustomBuild Include="$(MSBuildThisFileDirectory)copperspice\$(Configuration)\bin\*.dll" />
+    <CustomBuild Include="$(MSBuildThisFileDirectory)copperspice\$(Configuration)\bin\*.dll" />
+    <CustomBuild Include="$(MSBuildThisFileDirectory)copperspice\$(Configuration)\lib\*.dll" />
+    <CustomBuild Include="$(MSBuildThisFileDirectory)copperspice\$(Configuration)\lib\*.dll" />
+    <CustomBuild Include="$(MSBuildThisFileDirectory)copperspice\$(Configuration)\lib\*.dll" />
+    <CustomBuild Include="$(MSBuildThisFileDirectory)copperspice\$(Configuration)\lib\*.dll" />
   </ItemGroup>
 </Project>

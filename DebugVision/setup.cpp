@@ -1,6 +1,6 @@
 #pragma warning(push)
-#pragma warning(disable : 4251 4275 4244)
-#include <QDebug>
+#pragma warning(disable : 4100 4127 4244 4251 4275)
+#include <QtCore>
 #pragma warning(pop)
 
 #ifdef _WIN32
@@ -53,12 +53,11 @@ int main(int argc, char *argv[])
 		cdbg() << "Exception: A non standard exception was thrown.\n";
 		throw;
 	}
-	return -2;
 }
 
 #ifdef _WIN32
 
-int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
+int __stdcall WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
 	return main(__argc, __argv);
 }
