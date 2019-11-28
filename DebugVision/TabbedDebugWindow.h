@@ -15,14 +15,12 @@ void init(QTableView* tableView);
 class TabbedDebugWindow
 {
 public:
-	TabbedDebugWindow(QMdiArea* mdiArea);
-	void add(std::string msg);
+    TabbedDebugWindow(QMdiArea* mdiArea);
+    void add(std::string msg);
 
-	QWidget* qwidget = new QWidget;
+    QWidget* qwidget = new QWidget;
+
 private:
-
-	Ui::TabbedView tabbedview;
-	QStandardItemModel* model;
-
+    Ui::TabbedView tabbedview;
+    QStandardItemModel* model;
 };
-
