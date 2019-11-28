@@ -9,7 +9,7 @@
 #include "ui_tabbedview.h"
 #include "infra/stringbuilder.h"
 
-void addrow(std::string message, QStandardItemModel* model, QTableView* view);
+void addrow(std::string message, QAbstractItemModel* model, QTableView* view);
 void init(QTableView* tableView);
 
 class TabbedDebugWindow
@@ -22,5 +22,5 @@ public:
 
 private:
     Ui::TabbedView tabbedview;
-    QStandardItemModel* model;
+    QAbstractItemModel* model;
 };

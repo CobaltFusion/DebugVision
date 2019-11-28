@@ -1,10 +1,11 @@
 
 #include "TabbedDebugWindow.h"
+#include "DynamicItemModel.h"
 
 TabbedDebugWindow::TabbedDebugWindow(QMdiArea* mdiArea)
 {
-    model = new QStandardItemModel(0, 4);
-    model->setHorizontalHeaderLabels({"Line", "Time", "Process", "Message"}); // this will reset the column widths
+    model = new DynamicItemModel();
+    //model->setHorizontalHeaderLabels({"Line", "Time", "Process", "Message"}); // this will reset the column widths
 
     //QIcon defaultIcon;
     //QIcon emptyStringIcon(QString(""));
@@ -15,7 +16,7 @@ TabbedDebugWindow::TabbedDebugWindow(QMdiArea* mdiArea)
     //qDebug() << "is " << emptyStringIcon.isNull() << "\n";
     //qDebug() << "is " << notfoundIcon.isNull() << "\n";
 
-    //qwidget.setWindowIcon(QIcon(QString("notfound")));
+    qwidget->setWindowIcon(QIcon(QString("notfound"))); // remove Qt Icon
 
     tabbedview.setupUi(qwidget);
     mdiArea->addSubWindow(qwidget);
@@ -49,7 +50,7 @@ void init(QTableView* tableView)
     tableView->setPalette(palette);
 }
 
-void addrow(std::string message, QStandardItemModel* model, QTableView* view)
+void addrow(std::string message, QAbstractItemModel* model, QTableView* view)
 {
     using infra::stringbuilder;
     using namespace std::chrono;
@@ -67,10 +68,11 @@ void addrow(std::string message, QStandardItemModel* model, QTableView* view)
     QStandardItem* item3 = new QStandardItem(QString(message.c_str()));
     item3->setToolTip(QString("Dit is a test of colomn 3"));
 
-    model->setItem(newRowIndex, 0, item0);
-    model->setItem(newRowIndex, 1, item1);
-    model->setItem(newRowIndex, 2, item2);
-    model->setItem(newRowIndex, 3, item3);
+    //model->setItem(newRowIndex, 0, item0);
+    //model->setItem(newRowIndex, 1, item1);
+    //model->setItem(newRowIndex, 2, item2);
+    //model->setItem(newRowIndex, 3, item3);
+
     //view->selectRow(newRowIndex);         //this toggles the 'selected' state, not the 'active' line
     //view->resizeRowToContents(newRowIndex); // crappy
     view->setRowHeight(newRowIndex, 12);
