@@ -124,6 +124,7 @@ Outputs:
 - [Diana Hsieh - Time-Series Data NY Meetup #3 Livestream - Sep 20 2018](https://www.youtube.com/watch?v=TQk_tc03MyQ)
 - https://papertrailapp.com
 - https://www.spectx.com/ (good demo Liisa and Jüri, thanks!)
+- https://github.com/facontidavide/PlotJuggler 
 
 # site references
 
