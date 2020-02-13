@@ -143,6 +143,7 @@ free similar applications:
 - https://code.google.com/archive/p/log-manager/
 - notepad++ Document monitor (https://sourceforge.net/projects/npp-plugins/files/DocMonitor/)
 - https://github.com/zarunbal/LogExpert
+- https://www.hawktracer.org/
 
 non-free similar applications:
 - http://uvviewsoft.com/logviewer/
