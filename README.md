@@ -157,4 +157,4 @@ Each agent installation automatically registers itself and begins collecting log
 - https://www.sumologic.com (nice sales/ marketing pitch)
 - http://www.radgametools.com/telemetry.htm RAD Telemetry (Insanely good, but also not free)
 - http://www.farrellf.com/TelemetryViewer/
-
+- https://devblogs.microsoft.com/pix/download/
