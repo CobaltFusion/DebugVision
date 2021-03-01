@@ -1,10 +1,6 @@
 #pragma once
 
-#pragma warning(push)
-#pragma warning(disable : 4100 4127 4251 4275 4244 4251 4312 4250)
-#include <QtGui>
-#pragma warning(pop)
-#pragma warning(disable : 4996)
+#include "nowarnings_cs_gui.h"
 
 #include "ui_tabbedview.h"
 #include "infra/stringbuilder.h"

@@ -74,6 +74,6 @@ void addrow(std::string message, QAbstractItemModel* model, QTableView* view)
     //model->setItem(newRowIndex, 3, item3);
 
     //view->selectRow(newRowIndex);         //this toggles the 'selected' state, not the 'active' line
-    //view->resizeRowToContents(newRowIndex); // crappy
+    view->resizeRowToContents(newRowIndex); // crappy
     view->setRowHeight(newRowIndex, 12);
 }

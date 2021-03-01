@@ -1,17 +1,15 @@
-#pragma warning(push)
-#pragma warning(disable : 4100 4127 4251 4275 4244 4251 4312 4250)
-#include <QtGui>
-#include <QDebug>
-#pragma warning(pop)
-#pragma warning(disable : 4996)
+#include "nowarnings_cs_gui.h"
 
 // any *.ui files in the project will be automatically compiled into corresponding $(OutDir)copperspice_generated\ui_*.h files.
-// since $(OutDir)copperspice_generated in included in the compiler include path, this works:
+// since $(OutDir)copperspice_generated is included in the compiler include path, this works:
 #include "ui_mainwindow.h"
 
 #include "infra/cdbg.h"
 #include "infra/exception.h"
 #include "infra/logfunction.h"
+
+#include "cs_debugview.h"
+#include "TabbedDebugWindow.h"
 
 #include <chrono>
 #include <iomanip>
@@ -19,9 +17,6 @@
 #include <array>
 #include <chrono>
 #include <iostream>
-
-#include "cs_debugview.h"
-#include "TabbedDebugWindow.h"
 
 using namespace std::chrono_literals;
 
@@ -44,7 +39,7 @@ int exec(int argc, char* argv[])
     QMainWindow mainWindow;
     Ui::MainWindow window;
     window.setupUi(&mainWindow);
-    mainWindow.setWindowTitle("DebugVision v0.1 by Jan wilmans (c) 2019");
+    mainWindow.setWindowTitle("DebugVision v0.2 by Jan wilmans (c) 2020");
     mainWindow.show();
 
     auto addviewAction = window.menuFile->addAction("New view");

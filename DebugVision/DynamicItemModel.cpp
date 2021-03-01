@@ -26,11 +26,15 @@ QVariant DynamicItemModel::data(const QModelIndex& index, int role) const
 {
     if (role == Qt::TextColorRole)
     {
-        return ((index.row() & 1) == 1) ? Qt::red : Qt::blue;
+        return QColor(((index.row() & 1) == 1) ? Qt::red : Qt::blue);
     }
 
     if (role == Qt::DisplayRole)
     {
+        if (index.column() == 2)
+        {
+            return QString("Pa's wijze lynx bezag vroom het fikse aquaduct");
+        }
         return index.row();
     }
     return {};

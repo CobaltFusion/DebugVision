@@ -143,12 +143,12 @@
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="packages\Copperspice.1.6.1.1\build\native\copperspice.targets" Condition="Exists('packages\Copperspice.1.6.1.1\build\native\copperspice.targets')" />
+    <Import Project="packages\Copperspice.1.7.0\build\native\copperspice.targets" Condition="Exists('packages\Copperspice.1.7.0\build\native\copperspice.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('packages\Copperspice.1.6.1.1\build\native\copperspice.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Copperspice.1.6.1.1\build\native\copperspice.targets'))" />
+    <Error Condition="!Exists('packages\Copperspice.1.7.0\build\native\copperspice.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Copperspice.1.7.0\build\native\copperspice.targets'))" />
   </Target>
 </Project>
