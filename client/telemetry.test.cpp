@@ -76,20 +76,15 @@ namespace dbgvision {
 } // namespace dbgvision
 
 namespace dbgvision {
-	
-    int64_t LogTimepoint(std::string_view id)
+
+    double LogTimepoint(std::string_view id)
     {
         auto now = std::chrono::steady_clock::now().time_since_epoch();
         auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(now);
-
-		auto time = timeval();
-		::gettimeofday(&time, nullptr);
-		int milliseconds = time.tv_usec / 1000;
-
-		auto microseconds = elapsed.count();
+        double elapsedMilliseconds = elapsed.count() / 1000.0;
         static auto pid = dbgvision::getpid();
         thread_local auto tid = dbgvision::gettid();
-		fmt::print("sta;{};{};{};{};{};{:%Y-%m-%d %H:%M:%S}.{};end;\n", pid, get_current_process_name(), tid, id, elapsedMicroseconds, *std::localtime(&time.tv_sec), microseconds);
+        fmt::print("sta;{};{};{};{};{};end;\n", pid, dbgvision::get_current_process_name(), tid, id, elapsedMilliseconds);
         return elapsedMilliseconds;
     }
 
