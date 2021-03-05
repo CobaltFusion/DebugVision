@@ -51,6 +51,9 @@ def gatherLine(line):
     label = data[3]
     steady_time = int(data[4])
     #system_time = data[5]
+
+    if label.startswith("CosmItemCount"):
+        return
     
     if not tid in records:
         records[tid] = DataContainer()
@@ -74,27 +77,45 @@ def gatherLine(line):
 
 
 def gatherData(lines):
+    linecounter = 0
     for line in lines: #[500:10000]:
+        linecounter = linecounter + 1
         line = line.strip()
         if line.startswith("sta;") and line.endswith(";end;"):
-            gatherLine(line[4:-5])
+            try:
+                gatherLine(line[4:-5])
+            except Exception as e:
+                eprint("Ignore line", linecounter, " because of", e)
+    if len(records.keys()) == 0:
+        eprint("No log information found!")
+        sys.exit(1)
 
 
 def plot2(tid):
-    fig, ax1 = plt.subplots(1, 1, figsize=(12,3))
+    fig, ax1 = plt.subplots()
     record = records[tid]
-
     ax2 = ax1.twinx()
 
     la = list(labels)
     ax2.yticks = la.reverse()
     
-    ax1.scatter(record.deltas, record.delta_heights, marker='v', color='red', zorder=3.5)
+    # time points
+    ax1.plot(record.time, record.labels, color='lime', zorder=1)
+    ax1.scatter(record.time, record.labels, marker='o', zorder=2)
+    ax1.grid(alpha=0.7)
 
-    ax2.scatter(record.time, record.labels, marker='o', zorder=2.5)
-    ax2.plot(record.time, record.labels, color='lime', zorder=1.5)
+    # delta Ts
+    ax2.set_ylim(300, 600)
+    ax2.scatter(record.deltas, record.delta_heights, marker='v', color='red', zorder=3)
+    ax2.grid(alpha=0.7)
+
+    #for i, v in enumerate(record.deltas):
+    #    ax2.annotate(str(v), xy=(i,v), xytext=(-7,7), textcoords='offset points')
+
+    #for i, v in enumerate(record.delta_heights):
+    #    ax2.text(i, v+25, "%d" %v, ha="center")
+
     plt.xlim(left=0)
-    plt.grid(alpha=0.7)
     plt.show()
 
 
@@ -118,7 +139,9 @@ def main():
 
     sprint("reading...")
     process(sys.stdin.readlines())
-    plot2(4540)
+    
+    sprint("found logging for threads: ", list(records.keys()))
+    plot2(27137)
     return 0
 
 
