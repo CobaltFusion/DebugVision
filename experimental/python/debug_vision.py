@@ -131,8 +131,8 @@ def plot2(tid):
     ax2 = ax1.twinx()
    
     # time points
-    ax1.plot(record.event_linenumber, record.event_labels, color='lime', zorder=1)
-    ax1.scatter(record.event_linenumber, record.event_labels, marker='o', zorder=2)
+    ax1.plot(record.event_time, record.event_labels, color='lime', zorder=1)
+    ax1.scatter(record.event_time, record.event_labels, marker='o', zorder=2)
     ax1.grid(alpha=0.7)
 
     # delta Ts
