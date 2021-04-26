@@ -110,6 +110,13 @@ Outputs:
 
 **Telemetry** is an automated communications process by which measurements and other data are collected at remote or inaccessible points and transmitted to receiving equipment for monitoring.
 
+# process mining
+
+We almost certainly have overlap between our goals and the goals from process mining
+
+- https://fluxicon.com/book/read/aboutbook/
+
+
 # references
 - https://github.com/Microsoft/krabsetw
 - https://www.elastic.co/
