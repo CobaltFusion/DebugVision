@@ -136,7 +136,8 @@ We almost certainly have overlap between our goals and the goals from process mi
 # print debugging 
 - https://buttondown.email/geoffreylitt/archive/starting-this-newsletter-print-debugging-byoc/
 - https://www.geoffreylitt.com/projects/todomvc-vis.html?utm_source=geoffreylitt&utm_medium=email&utm_campaign=starting-this-newsletter-print-debugging-byoc
-
+- https://www.geoffreylitt.com/resources/todomvc-vis.pdf
+- 
 # site references
 
 - http://newtondynamics.com/forum/viewtopic.php?f=9&t=8727
