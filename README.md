@@ -102,7 +102,7 @@ Outputs:
 - to file
 - to socket? (for transport / remote monitoring) 
 
-# commerical logo?
+# commercial logo?
 
 - <https://www.fiverr.com/mubieman/make-logo-for-the-companies>
 
