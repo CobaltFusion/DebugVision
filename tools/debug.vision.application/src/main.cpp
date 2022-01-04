@@ -1,7 +1,6 @@
-#include <format>
+#include <iostream>
 
 int main()
 {
-    auto msg = std::format("Hello world!\n");
-    puts(msg.data());
+    std::cout << "Hello world!\n";
 }
