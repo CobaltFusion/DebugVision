@@ -1,0 +1,856 @@
+0x34294ecb47982d start test_r2r/node_phy/govd/daemon/peerd/inbound/thpool/worker
+0x34294ecb47c307 gov/socket/multipeer thpool.cpp 64 empty queue 
+0x34294f07d4ff5c gov/socket/multipeer thpool.cpp 74 attending fd112 192.168.0.38:35898 remaining queue sz= 0 
+0x34294f07d56c0f gov/socket/multipeer thpool.cpp 77 -begin job --------------- fd112 192.168.0.38:35898 
+0x34294f07d57e26 gov/socket peer_t.cpp 127 newtask TAG301 192.168.0.38:35898 
+0x34294f07d58aee gov/socket peer_t.cpp 134 cur dgram 0 
+0x34294f07d596db gov/socket client.cpp 403 recv4 
+0x34294f07d5a19b gov/socket client.cpp 410 starting new datagram 
+0x34294f07d5ac99 gov/socket client.cpp 417 before: dend= 0 
+0x34294f07d5b899 gov/socket datagram.cpp 446 recvfrom 
+0x34294f07d5cefc gov/socket datagram.cpp 461 comm read 10 
+0x34294f07d5e0ff gov/socket datagram.cpp 524 Received header for dgram sz= 114 svc= 7 
+0x34294f07d5f23a gov/socket datagram.cpp 530 comm read 104 
+0x34294f07d5fed3 gov/socket datagram.cpp 441 completed? dend= 114 size= 114 completed= 1 
+0x34294f07d620d0 gov/socket datagram.cpp 441 completed? dend= 114 size= 114 completed= 1 
+0x34294f07d62d90 gov/socket datagram.cpp 552 comm read 114 114 OK 25uG4MJPdcieHnaVjpsSB44Lar8R 
+0x34294f07d67975 gov/socket datagram.cpp 441 completed? dend= 114 size= 114 completed= 1 
+0x34294f07d69863 gov/socket datagram.cpp 555 comm recv dgram hash  25uG4MJPdcieHnaVjpsSB44Lar8R svc 7 seq 0 
+0x34294f07d6dd8b gov/socket client.cpp 430 reset ts activity=now 1 dend: 0 -> 114 
+0x34294f07d6ed0e gov/socket client.cpp 436 after: dend= 114 
+0x34294f07d6f8ff gov/socket datagram.cpp 441 completed? dend= 114 size= 114 completed= 1 
+0x34294f07d7058e gov/socket peer_t.cpp 178 dgram reception completed decrypting 
+0x34294f07d7111d gov/id peer_t.cpp 198 decrypt datagram 
+0x34294f07d71b63 gov/id peer_t.cpp 201 dgram arrived without encryption. svc 7 
+0x34294f07d72eba gov/socket peer_t.cpp 186 complete dgram arrived 0x7f5764006200 sz 114 svc 7 192.168.0.38:35898 
+0x34294f07d741a8 gov/socket peer_t.cpp 189 dispatch job 192.168.0.38:35898 
+0x34294f07d74eac gov/engine peer_t.cpp 28 process_work 7 
+0x34294f07d75987 gov/engine peer_t.cpp 44 processing net_daemon datagram 7 
+0x34294f07d76539 gov/dfs peer_t.cpp 22 process_work 
+0x34294f07d7701f gov/id peer_t.cpp 249 process_work svc 7 
+0x34294f07d77c1c gov/id peer_t.cpp 129 get_keys 
+0x34294f07d78c01 gov/engine net_daemon_t.cpp 27 get_keys() 
+0x34294f07d79749 gov/id peer_t.cpp 129 get_keys 
+0x34294f07d7a1cf gov/engine net_daemon_t.cpp 27 get_keys() 
+0x34294f07d7abdc gov/id peer_t.cpp 262 process_work using keys at 0x7f586401f268 uhFavgYHr3TzSJ8mzmBHSUxgBsWGs7F6krYrwH8pCkdn svc 7 
+0x34294f07d83fbc gov/id ../../../us/api/generated/c++/gov/id/hdlr_svc_handler-impl 52 protocol::id_challenge_response 
+0x34294f07d86351 gov/id peer_t.cpp 481 challenge_response 0 
+0x34294f07d8702d gov/id peer_t.cpp 492 process_challenge_response. seq 0 
+0x34294f07da7336 gov/id peer_t.cpp 512 msgh 7ZDFmhG8dbbukguexagcmrXCqymo9hG3mZ8sMi9vztZz pubk uhFavgYHr3TzSJ8mzmBHSUxgBsWGs7F6krYrwH8pCkdn sig-der-b58 381yXYhfhEVrjeDKgFczqatKkgfJcDrpS1JmgYSZFd9UyBYr5zioW8hfoQ3VDLLFUtwWGKBKWqERwR8LZPbadoRB6Tt1JRLW 
+0x34294f07dd73f8 gov/crypto ec.cpp 633 verify_not_normalized msgh 7ZDFmhG8dbbukguexagcmrXCqymo9hG3mZ8sMi9vztZz pubk uhFavgYHr3TzSJ8mzmBHSUxgBsWGs7F6krYrwH8pCkdn sig-der-b58 381yXYhfhEVrjeDKgFczqatKkgfJcDrpS1JmgYSZFd9UyBYr5zioW8hfoQ3VDLLFUtwWGKBKWqERwR8LZPbadoRB6Tt1JRLW 
+0x34294f07de79d9 gov/crypto ec.cpp 645 was normalized 1 
+0x34294f07de85d5 gov/crypto ec.cpp 646 normalize outputs same signature? 1 sizeof(signature) 64 
+0x34294f07df1af9 gov/id peer_t.cpp 520 verified uhFavgYHr3TzSJ8mzmBHSUxgBsWGs7F6krYrwH8pCkdn 
+0x34294f07dfa704 gov/id peer_t.cpp 134 turn_on_encryption? 
+0x34294f07dfd2eb gov/id peer_t.cpp 129 get_keys 
+0x34294f07dfe2ba gov/engine net_daemon_t.cpp 27 get_keys() 
+0x34294f07dfee99 gov/crypto symmetric_encryption.cpp 26 init. pub_other: uhFavgYHr3TzSJ8mzmBHSUxgBsWGs7F6krYrwH8pCkdn 
+0x34294f07e11335 gov/id peer_t.cpp 157 ================== ENCRYPTION TURNED send:OFF recv:ON  ================== 
+0x34294f07e12162 gov/id peer_t.cpp 528 verification_completed 0 
+0x34294f07e144b7 gov/engine peer_t.cpp 130 verification_completed 192.168.0.38:35898 112 rpport 0 pin 0 
+0x34294f07e1588c gov/auth peer_t.cpp 17 verification_completed 192.168.0.38:35898 0 112 
+0x34294f07e169ab gov/engine peer_t.cpp 103 authorize? 192.168.0.38:35898 112 uhFavgYHr3TzSJ8mzmBHSUxgBsWGs7F6krYrwH8pCkdn 0 
+0x34294f07e1fc8a gov/engine peer_t.cpp 111 sysop pubkey->sysop_intent yes 
+0x34294f07e20a5e gov/auth peer_t.cpp 39 stage authorized 
+0x34294f07e217e8 gov/engine peer_t.cpp 144 role 1 = sysop 
+0x34294f07e23a8c gov/engine/auth auth/app.cpp 68 node auth completed 192.168.0.38:35898 3Q3rwHc14jbLNDKnxhmxvKZsiLqX 
+0x34294f07e28132 gov/engine/auth auth/app.cpp 75 stage is sysop 
+0x34294f07e28cef gov/engine peer_t.cpp 155 sysop 
+0x34294f07e29869 gov/engine peer_t.cpp 173 stage sysop 
+0x34294f07e2a9be gov/peer grid_t.cpp 203 add_to_grid 0x7f57540064c0 192.168.0.38:35898 
+0x34294f07e2bf59 gov/peer grid_t.cpp 223 grid-added peer_t 0x7f57540064c0 192.168.0.38:35898 3Q3rwHc14jbLNDKnxhmxvKZsiLqX 
+0x34294f07e30340 gov/engine peer_t.cpp 182 added to grid 
+0x34294f07e30feb gov/id peer_t.cpp 532 signaling VERIF_COMPLETED. 
+0x34294f07e31b59 gov/socket datagram.cpp 238 deleted datagram 0x7f5764006200 
+0x34294f07e32cef gov/socket peer_t.cpp 191 dispatched job 192.168.0.38:35898 
+0x34294f07e3385d gov/socket peer_t.cpp 202 work completed 
+0x34294f07e3438f gov/socket peer_t.cpp 123 worker ended recv TAG661 
+0x34294f07e34eb4 gov/socket peer_t.cpp 214 end service TAG301 
+0x34294f07e35a07 gov bgtask.cpp 105 wakeup 
+0x34294f07e3642b gov bgtask.cpp 111 reset resume 
+0x34294f07e372c5 gov/socket/multipeer server.cpp 113 onwakeup 
+0x34294f07e37e1a gov/socket/multipeer clients.cpp 80 feeding loopback interface 
+0x34294f07e3d097 gov/socket/multipeer thpool.cpp 81 -end job------------------ fd112 192.168.0.38:35898 
+0x34294f07e3e29b gov/socket/multipeer thpool.cpp 64 empty queue 
+0x342951a71f750a gov/socket/multipeer thpool.cpp 74 attending fd290 127.0.0.1:58646 remaining queue sz= 0 
+0x342951a71fa517 gov/socket/multipeer thpool.cpp 77 -begin job --------------- fd290 127.0.0.1:58646 
+0x342951a71fb65e gov/socket peer_t.cpp 127 newtask TAG301 127.0.0.1:58646 
+0x342951a71fc490 gov/socket peer_t.cpp 134 cur dgram 0 
+0x342951a71fd236 gov/socket client.cpp 403 recv4 
+0x342951a71fde1f gov/socket client.cpp 410 starting new datagram 
+0x342951a71feabc gov/socket client.cpp 417 before: dend= 0 
+0x342951a71ff83b gov/socket datagram.cpp 446 recvfrom 
+0x342951a7201187 gov/socket datagram.cpp 461 comm read 10 
+0x342951a72024d4 gov/socket datagram.cpp 524 Received header for dgram sz= 30 svc= 42 
+0x342951a720372b gov/socket datagram.cpp 530 comm read 20 
+0x342951a72057fc gov/socket datagram.cpp 441 completed? dend= 30 size= 30 completed= 1 
+0x342951a7207855 gov/socket datagram.cpp 441 completed? dend= 30 size= 30 completed= 1 
+0x342951a720879d gov/socket datagram.cpp 552 comm read 30 30 OK 8meTEsBTpfpUuvnMFiRnt6rTtYS 
+0x342951a720d298 gov/socket datagram.cpp 441 completed? dend= 30 size= 30 completed= 1 
+0x342951a720ebdc gov/socket datagram.cpp 555 comm recv dgram hash  8meTEsBTpfpUuvnMFiRnt6rTtYS svc 42 seq 1 
+0x342951a7213282 gov/socket client.cpp 430 reset ts activity=now 1 dend: 0 -> 30 
+0x342951a72142fd gov/socket client.cpp 436 after: dend= 30 
+0x342951a72150ba gov/socket datagram.cpp 441 completed? dend= 30 size= 30 completed= 1 
+0x342951a7215ec3 gov/socket peer_t.cpp 178 dgram reception completed decrypting 
+0x342951a7216ba4 gov/id peer_t.cpp 198 decrypt datagram 
+0x342951a7217740 gov/id peer_t.cpp 201 dgram arrived without encryption. svc 42 
+0x342951a7218aca gov/socket peer_t.cpp 186 complete dgram arrived 0x7f5764006200 sz 30 svc 42 127.0.0.1:58646 
+0x342951a7219daa gov/socket peer_t.cpp 189 dispatch job 127.0.0.1:58646 
+0x342951a721ab78 gov/engine peer_t.cpp 28 process_work 42 
+0x342951a721b823 gov/engine peer_t.cpp 51 work svc > engine_begin 13 
+0x342951a721c744 gov/engine ../../../us/api/generated/c++/gov/traders/hdlr_svc_handler-impl 24 protocol::traders_lookup_wallet 
+0x342951a721d7aa gov/engine peer_t__traders.cpp 37 lookup_wallet 
+0x342951a722030e gov/peer nodes_t.cpp 137 found:  192.168.0.38:22673 
+0x342951a7221726 gov/engine peer_t__traders.cpp 52 wallet entry found for 4ZYWVZDnXA6neSmMBBA6JKAes4te 192.168.0.38:22673 
+0x342951a722611e gov/io blob_writer_t.cpp 234 writable::get_datagram svc 43 
+0x342951a722758a gov/socket datagram.cpp 141 new datagram 0x7f5758006490 svc 43 seq 1 sz 16 payload sz 6 ch 123 
+0x342951a7228940 gov/socket datagram.cpp 238 deleted datagram 0x7f5764006200 
+0x342951a72296b2 gov/engine ../../../us/api/generated/c++/gov/traders/hdlr_svc_handler-impl 45 processing response svc =  43 
+0x342951a722a307 gov/socket peer_t.cpp 233 process_ok_work 43 
+0x342951a722b3f3 gov/socket daemon0_t.cpp 22 process_ok_work 127.0.0.1:58646 43 
+0x342951a722c166 gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f5758006490 svc 43 sz 16 
+0x342951a722d07b gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x342951a722dcf2 gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x342951a722e922 gov/id peer_t.cpp 175 Not encrypting. Encryption not turned on. 
+0x342951a722f590 gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 43 
+0x342951a723075b gov/socket/outbound send_queue.cpp 56 admission pri 43 sz 16 seq 1 recipient 127.0.0.1:58646 dgram svc field (to be overwritten) 43 
+0x342951a72318e5 gov/socket datagram.cpp 441 completed? dend= 16 size= 16 completed= 1 
+0x342951a72327b4 gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 43 
+0x342951a723356e gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 16 pri 43 cli 0x7f575400c240 sendref 0 
+0x342951a7234a91 gov bgtask.cpp 105 wakeup 
+0x342951a723569e gov bgtask.cpp 111 reset resume 
+0x342951a72365a1 gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x342951a723810b gov/socket peer_t.cpp 191 dispatched job 127.0.0.1:58646 
+0x342951a7238f95 gov/socket peer_t.cpp 202 work completed 
+0x342951a7239c20 gov/socket peer_t.cpp 123 worker ended recv TAG661 
+0x342951a723a887 gov/socket peer_t.cpp 214 end service TAG301 
+0x342951a723b485 gov bgtask.cpp 105 wakeup 
+0x342951a723be4c gov bgtask.cpp 111 reset resume 
+0x342951a723cc4c gov/socket/multipeer server.cpp 113 onwakeup 
+0x342951a723da0f gov/socket/multipeer clients.cpp 80 feeding loopback interface 
+0x342951a72423af gov/socket/multipeer thpool.cpp 81 -end job------------------ fd290 127.0.0.1:58646 
+0x342951a724375f gov/socket/multipeer thpool.cpp 64 empty queue 
+0x342955c6e4ad4f gov/socket/multipeer thpool.cpp 74 attending fd330 192.168.0.38:35946 remaining queue sz= 0 
+0x342955c6e4e02b gov/socket/multipeer thpool.cpp 77 -begin job --------------- fd330 192.168.0.38:35946 
+0x342955c6e4f390 gov/socket peer_t.cpp 127 newtask TAG301 192.168.0.38:35946 
+0x342955c6e502cd gov/socket peer_t.cpp 134 cur dgram 0 
+0x342955c6e5102e gov/socket client.cpp 403 recv4 
+0x342955c6e51cbb gov/socket client.cpp 410 starting new datagram 
+0x342955c6e52958 gov/socket client.cpp 417 before: dend= 0 
+0x342955c6e537cf gov/socket datagram.cpp 446 recvfrom 
+0x342955c6e54ffb gov/socket datagram.cpp 461 comm read 10 
+0x342955c6e562d5 gov/socket datagram.cpp 524 Received header for dgram sz= 42 svc= 5 
+0x342955c6e5761c gov/socket datagram.cpp 530 comm read 32 
+0x342955c6e58351 gov/socket datagram.cpp 441 completed? dend= 42 size= 42 completed= 1 
+0x342955c6e59de2 gov/socket datagram.cpp 441 completed? dend= 42 size= 42 completed= 1 
+0x342955c6e5acd5 gov/socket datagram.cpp 552 comm read 42 42 OK 2gvMaLck9MZz3iKbpuNYwbNLyZJn 
+0x342955c6e5fc6c gov/socket datagram.cpp 441 completed? dend= 42 size= 42 completed= 1 
+0x342955c6e61503 gov/socket datagram.cpp 555 comm recv dgram hash  2gvMaLck9MZz3iKbpuNYwbNLyZJn svc 5 seq 0 
+0x342955c6e65cd5 gov/socket client.cpp 430 reset ts activity=now 1 dend: 0 -> 42 
+0x342955c6e66d22 gov/socket client.cpp 436 after: dend= 42 
+0x342955c6e67a69 gov/socket datagram.cpp 441 completed? dend= 42 size= 42 completed= 1 
+0x342955c6e68892 gov/socket peer_t.cpp 178 dgram reception completed decrypting 
+0x342955c6e695ab gov/id peer_t.cpp 198 decrypt datagram 
+0x342955c6e6a175 gov/id peer_t.cpp 201 dgram arrived without encryption. svc 5 
+0x342955c6e6cf86 gov/socket peer_t.cpp 186 complete dgram arrived 0x7f5764006200 sz 42 svc 5 192.168.0.38:35946 
+0x342955c6e6e6f2 gov/socket peer_t.cpp 189 dispatch job 192.168.0.38:35946 
+0x342955c6e6f508 gov/engine peer_t.cpp 28 process_work 5 
+0x342955c6e70084 gov/engine peer_t.cpp 44 processing net_daemon datagram 5 
+0x342955c6e70db4 gov/dfs peer_t.cpp 22 process_work 
+0x342955c6e71b3d gov/id peer_t.cpp 249 process_work svc 5 
+0x342955c6e728b9 gov/id peer_t.cpp 129 get_keys 
+0x342955c6e73df1 gov/engine net_daemon_t.cpp 27 get_keys() 
+0x342955c6e74aa0 gov/id peer_t.cpp 129 get_keys 
+0x342955c6e75646 gov/engine net_daemon_t.cpp 27 get_keys() 
+0x342955c6e76139 gov/id peer_t.cpp 262 process_work using keys at 0x7f586401f268 uhFavgYHr3TzSJ8mzmBHSUxgBsWGs7F6krYrwH8pCkdn svc 5 
+0x342955c6e80108 gov/id ../../../us/api/generated/c++/gov/id/hdlr_svc_handler-impl 6 protocol::id_request 
+0x342955c6e813e0 gov/id peer_t.cpp 336 request 0 
+0x342955c6e82019 gov/id peer_t.cpp 129 get_keys 
+0x342955c6e82be5 gov/engine net_daemon_t.cpp 27 get_keys() 
+0x342955c6e8380c gov/id peer_t.cpp 92 handshake_t default constructor 
+0x342955c6e8453f gov/id peer_t   process_request: their handshake: msg 7ZD6xJDSHC9gfMAUZq9nMToeArW7cRWCqGjff7NTbNrY
+0x342955c6e8453f gov/id peer_t   process_request: their handshake: role peer
+0x342955c6e8453f gov/id peer_t   process_request: their handshake: pport 22372
+0x342955c6e8453f gov/id peer_t   process_request: their handshake: pin 0
+0x342955c6e8453f gov/id peer_t   process_request: their handshake: version fingerprint 26209
+0x342955c6e8ca79 gov/id peer_t.cpp 366 role peer 
+0x342955c6e937df gov/crypto ec.cpp 505 signing msgh 7ZD6xJDSHC9gfMAUZq9nMToeArW7cRWCqGjff7NTbNrY with sk for pubkey uhFavgYHr3TzSJ8mzmBHSUxgBsWGs7F6krYrwH8pCkdn 
+0x342955c6ecd32f gov/crypto ec.cpp 531 sign output AN1rKvtAvVRkU6mrcS2hz57uLvqNDEseN2uU9nZYimxe6AMbvvXjZUsTXZtLgeEYL6SfrAm5fGNhqEpRNg2KYQKaRNyGBeNTx 
+0x342955c6ece64c gov/id peer_t.cpp 81 handshake_t constructor 0 22672 0 
+0x342955c6ed94bd gov/id peer_t.cpp 88 msg 7ZDFmhG8dZXLoWCo7UbXUrzv3GDuwx2quGzrFk3Jaksx version_fingerprint 26209 pport 22672 pin 0 role 0 
+0x342955c6ee2a22 gov/id peer_t   process_request: my handshake: msg 7ZDFmhG8dZXLoWCo7UbXUrzv3GDuwx2quGzrFk3Jaksx
+0x342955c6ee2a22 gov/id peer_t   process_request: my handshake: role peer
+0x342955c6ee2a22 gov/id peer_t   process_request: my handshake: pport 22672
+0x342955c6ee2a22 gov/id peer_t   process_request: my handshake: pin 0
+0x342955c6ee2a22 gov/id peer_t   process_request: my handshake: version fingerprint 26209
+0x342955c6f13b84 gov/id peer_t.cpp 378 sending svc id_peer_challenge 6 7ZDFmhG8dZXLoWCo7UbXUrzv3GDuwx2quGzrFk3Jaksx uhFavgYHr3TzSJ8mzmBHSUxgBsWGs7F6krYrwH8pCkdn AN1rKvtAvVRkU6mrcS2hz57uLvqNDEseN2uU9nZYimxe6AMbvvXjZUsTXZtLgeEYL6SfrAm5fGNhqEpRNg2KYQKaRNyGBeNTx 
+0x342955c6f23cc4 gov/id ../../../us/api/generated/c++/gov/id/cllr_rpc-impl 9 peer_challenge 
+0x342955c6f24af2 gov/io blob_writer_t.cpp 234 writable::get_datagram svc 6 
+0x342955c6f25e5f gov/socket datagram.cpp 141 new datagram 0x7f5764006250 svc 6 seq 0 sz 147 payload sz 137 ch 123 
+0x342955c6f271e3 gov/crypto ec.cpp 245 write 
+0x342955c6f2804b gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f5764006250 svc 6 sz 147 
+0x342955c6f28eae gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x342955c6f29aea gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x342955c6f2a649 gov/id peer_t.cpp 171 Not encrypting. Basic service 6 encryption for services above or equal 8 
+0x342955c6f2b453 gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 6 
+0x342955c6f2c8cd gov/socket/outbound send_queue.cpp 56 admission pri 6 sz 147 seq 0 recipient 192.168.0.38:35946 dgram svc field (to be overwritten) 6 
+0x342955c6f2da8e gov/socket datagram.cpp 441 completed? dend= 147 size= 147 completed= 1 
+0x342955c6f2e947 gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 6 
+0x342955c6f2f718 gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 147 pri 6 cli 0x7f5754010730 sendref 0 
+0x342955c6f31955 gov bgtask.cpp 105 wakeup 
+0x342955c6f326d9 gov bgtask.cpp 111 reset resume 
+0x342955c6f33652 gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x342955c6f355ec gov/socket datagram.cpp 238 deleted datagram 0x7f5764006200 
+0x342955c6f3a6db gov/socket peer_t.cpp 191 dispatched job 192.168.0.38:35946 
+0x342955c6f3b465 gov/socket peer_t.cpp 202 work completed 
+0x342955c6f3d3ba gov/socket peer_t.cpp 123 worker ended recv TAG661 
+0x342955c6f3e403 gov/socket peer_t.cpp 214 end service TAG301 
+0x342955c6f3f12c gov bgtask.cpp 105 wakeup 
+0x342955c6f3fc1b gov bgtask.cpp 111 reset resume 
+0x342955c6f40d0e gov/socket/multipeer server.cpp 113 onwakeup 
+0x342955c6f41d76 gov/socket/multipeer clients.cpp 80 feeding loopback interface 
+0x342955c6f46538 gov/socket/multipeer thpool.cpp 81 -end job------------------ fd330 192.168.0.38:35946 
+0x342955c6f478c4 gov/socket/multipeer thpool.cpp 64 empty queue 
+0x3429567ae57543 gov/socket/multipeer thpool.cpp 74 attending fd338 192.168.0.38:22272 remaining queue sz= 0 
+0x3429567ae5a6d6 gov/socket/multipeer thpool.cpp 77 -begin job --------------- fd338 192.168.0.38:22272 
+0x3429567ae5b92c gov/socket peer_t.cpp 127 newtask TAG301 192.168.0.38:22272 
+0x3429567ae5c743 gov/socket peer_t.cpp 134 cur dgram 0 
+0x3429567ae5d4af gov/socket client.cpp 403 recv4 
+0x3429567ae5e0d4 gov/socket client.cpp 410 starting new datagram 
+0x3429567ae5ed9f gov/socket client.cpp 417 before: dend= 0 
+0x3429567ae5fb08 gov/socket datagram.cpp 446 recvfrom 
+0x3429567ae614d2 gov/socket datagram.cpp 461 comm read 10 
+0x3429567ae629ea gov/socket datagram.cpp 524 Received header for dgram sz= 147 svc= 6 
+0x3429567ae63d57 gov/socket datagram.cpp 530 comm read 137 
+0x3429567ae64b72 gov/socket datagram.cpp 441 completed? dend= 147 size= 147 completed= 1 
+0x3429567ae6aae1 gov/socket datagram.cpp 441 completed? dend= 147 size= 147 completed= 1 
+0x3429567ae6b92b gov/socket datagram.cpp 552 comm read 147 147 OK tFFr2Yn4RLBV6dcHcyiZe2ovprq 
+0x3429567ae702c4 gov/socket datagram.cpp 441 completed? dend= 147 size= 147 completed= 1 
+0x3429567ae72960 gov/socket datagram.cpp 555 comm recv dgram hash  tFFr2Yn4RLBV6dcHcyiZe2ovprq svc 6 seq 0 
+0x3429567ae76daa gov/socket client.cpp 430 reset ts activity=now 1 dend: 0 -> 147 
+0x3429567ae77d73 gov/socket client.cpp 436 after: dend= 147 
+0x3429567ae78a68 gov/socket datagram.cpp 441 completed? dend= 147 size= 147 completed= 1 
+0x3429567ae797c2 gov/socket peer_t.cpp 178 dgram reception completed decrypting 
+0x3429567ae7a3ef gov/id peer_t.cpp 198 decrypt datagram 
+0x3429567ae7aeb9 gov/id peer_t.cpp 201 dgram arrived without encryption. svc 6 
+0x3429567ae7c27d gov/socket peer_t.cpp 186 complete dgram arrived 0x7f5764006200 sz 147 svc 6 192.168.0.38:22272 
+0x3429567ae7d62f gov/socket peer_t.cpp 189 dispatch job 192.168.0.38:22272 
+0x3429567ae7e29e gov/engine peer_t.cpp 28 process_work 6 
+0x3429567ae7ed76 gov/engine peer_t.cpp 44 processing net_daemon datagram 6 
+0x3429567ae7f95e gov/dfs peer_t.cpp 22 process_work 
+0x3429567ae80531 gov/id peer_t.cpp 249 process_work svc 6 
+0x3429567ae81256 gov/id peer_t.cpp 129 get_keys 
+0x3429567ae822aa gov/engine net_daemon_t.cpp 27 get_keys() 
+0x3429567ae82e84 gov/id peer_t.cpp 129 get_keys 
+0x3429567ae83983 gov/engine net_daemon_t.cpp 27 get_keys() 
+0x3429567ae84427 gov/id peer_t.cpp 262 process_work using keys at 0x7f586401f268 uhFavgYHr3TzSJ8mzmBHSUxgBsWGs7F6krYrwH8pCkdn svc 6 
+0x3429567ae8d736 gov/id ../../../us/api/generated/c++/gov/id/hdlr_svc_handler-impl 29 protocol::id_peer_challenge 
+0x3429567ae8fd02 gov/id peer_t.cpp 383 peer_challenge 0 
+0x3429567ae90a3f gov/id peer_t.cpp 129 get_keys 
+0x3429567ae915a6 gov/engine net_daemon_t.cpp 27 get_keys() 
+0x3429567ae9218f gov/id peer_t.cpp 398 process_peer_challenge. seq 0 
+0x3429567ae92e0b gov/id peer_t.cpp 92 handshake_t default constructor 
+0x3429567ae93acc gov/id peer_t   process_peer_challenge: their handshake: msg 7ZCkv8jJMGRDTqeiVGXxe2xbh39cYH3ZQgrcxncFDD1F
+0x3429567ae93acc gov/id peer_t   process_peer_challenge: their handshake: role peer
+0x3429567ae93acc gov/id peer_t   process_peer_challenge: their handshake: pport 22272
+0x3429567ae93acc gov/id peer_t   process_peer_challenge: their handshake: pin 0
+0x3429567ae93acc gov/id peer_t   process_peer_challenge: their handshake: version fingerprint 26209
+0x3429567ae9bad0 gov/id peer_t.cpp 434 role peer 
+0x3429567aebddbb gov/id peer_t.cpp 435 msgh 7ZDFmhG8dZmyM8psfQpysbpCCR4d7XA4xQ6vxGdSXp8H pubk 2A1UGPfzie7jHbBHXqpew78c7kzTGoJDgmkCPZES1TVzD sig-der-b58 AN1rKvt9svPpXdpbCPsGGWjG7Df2g1YUtpnwq6kjtjVxdS6eYETJmXQYrapmUTMysQ1tsW3v4PiSWnVMsopeqMPgX7zJUTq8v 
+0x3429567aeef063 gov/crypto ec.cpp 633 verify_not_normalized msgh 7ZDFmhG8dZmyM8psfQpysbpCCR4d7XA4xQ6vxGdSXp8H pubk 2A1UGPfzie7jHbBHXqpew78c7kzTGoJDgmkCPZES1TVzD sig-der-b58 AN1rKvt9svPpXdpbCPsGGWjG7Df2g1YUtpnwq6kjtjVxdS6eYETJmXQYrapmUTMysQ1tsW3v4PiSWnVMsopeqMPgX7zJUTq8v 
+0x3429567aefef1b gov/crypto ec.cpp 645 was normalized 1 
+0x3429567aeffc84 gov/crypto ec.cpp 646 normalize outputs same signature? 1 sizeof(signature) 64 
+0x3429567af091bc gov/id peer_t.cpp 444 verified 2A1UGPfzie7jHbBHXqpew78c7kzTGoJDgmkCPZES1TVzD 
+0x3429567af11bc1 gov/id peer_t.cpp 446 peer msg for me to sign 7ZCkv8jJMGRDTqeiVGXxe2xbh39cYH3ZQgrcxncFDD1F 
+0x3429567af1ebf2 gov/crypto ec.cpp 505 signing msgh 7ZCkv8jJMGRDTqeiVGXxe2xbh39cYH3ZQgrcxncFDD1F with sk for pubkey uhFavgYHr3TzSJ8mzmBHSUxgBsWGs7F6krYrwH8pCkdn 
+0x3429567af54439 gov/crypto ec.cpp 531 sign output 381yXYmSsFp8kYVDc2yyAcfitUaE9qeZArBvP3x1nDULDUfPqgJ1ycjCJywdmNZ43uSAzJGAixjN6xeRTnSRX2LSuJjHuzpn 
+0x3429567af7449c gov/id peer_t.cpp 455 sending id_challenge_response 7 uhFavgYHr3TzSJ8mzmBHSUxgBsWGs7F6krYrwH8pCkdn 381yXYmSsFp8kYVDc2yyAcfitUaE9qeZArBvP3x1nDULDUfPqgJ1ycjCJywdmNZ43uSAzJGAixjN6xeRTnSRX2LSuJjHuzpn 
+0x3429567af7d349 gov/id ../../../us/api/generated/c++/gov/id/cllr_rpc-impl 19 challenge_response 
+0x3429567af7e045 gov/io blob_writer_t.cpp 234 writable::get_datagram svc 7 
+0x3429567af7f2d0 gov/socket datagram.cpp 141 new datagram 0x7f576400c8f0 svc 7 seq 0 sz 114 payload sz 104 ch 123 
+0x3429567af80750 gov/crypto ec.cpp 245 write 
+0x3429567af815d3 gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f576400c8f0 svc 7 sz 114 
+0x3429567af8244e gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x3429567af82fc9 gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x3429567af83b1e gov/id peer_t.cpp 171 Not encrypting. Basic service 7 encryption for services above or equal 8 
+0x3429567af848de gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 7 
+0x3429567af85e42 gov/socket/outbound send_queue.cpp 56 admission pri 7 sz 114 seq 0 recipient 192.168.0.38:22272 dgram svc field (to be overwritten) 7 
+0x3429567af8717f gov/socket datagram.cpp 441 completed? dend= 114 size= 114 completed= 1 
+0x3429567af87fd8 gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 7 
+0x3429567af88db9 gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 114 pri 7 cli 0x7f576c012a20 sendref 0 
+0x3429567af8a324 gov bgtask.cpp 105 wakeup 
+0x3429567af8aea9 gov bgtask.cpp 111 reset resume 
+0x3429567af8be55 gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x3429567af8da82 gov/id peer_t.cpp 134 turn_on_encryption? 
+0x3429567af95987 gov/id peer_t.cpp 129 get_keys 
+0x3429567af96b0b gov/engine net_daemon_t.cpp 27 get_keys() 
+0x3429567af978a8 gov/crypto symmetric_encryption.cpp 26 init. pub_other: 2A1UGPfzie7jHbBHXqpew78c7kzTGoJDgmkCPZES1TVzD 
+0x3429567afaa568 gov/id peer_t.cpp 157 ================== ENCRYPTION TURNED send:OFF recv:ON  ================== 
+0x3429567afab5c9 gov/id peer_t.cpp 471 verification_completed 22272 
+0x3429567afb0db7 gov/engine peer_t.cpp 130 verification_completed 192.168.0.38:22272 338 rpport 22272 pin 0 
+0x3429567afb241c gov/auth peer_t.cpp 17 verification_completed 192.168.0.38:22272 22272 338 
+0x3429567afb388b gov/engine peer_t.cpp 103 authorize? 192.168.0.38:22272 338 2A1UGPfzie7jHbBHXqpew78c7kzTGoJDgmkCPZES1TVzD 0 
+0x3429567afc00e7 gov/auth peer_t.cpp 39 stage authorized 
+0x3429567afc10a4 gov/engine peer_t.cpp 144 role 0 = peer 
+0x3429567afc3655 gov/engine/auth auth/app.cpp 68 node auth completed 192.168.0.38:22272 3qpLNoz2M4FsAmd4ahpqknLY4fo3 
+0x3429567afc89ae gov/engine/auth auth/app.cpp 87 role node 
+0x3429567afc97ef gov/engine/auth auth/app.cpp 98 Topology MESH 
+0x3429567afcab11 gov/engine/auth auth/app.cpp 108 stage is node 
+0x3429567afcb787 gov/engine/auth auth/app.cpp 131 set stage node 
+0x3429567afccc6f gov/engine/auth auth/app.cpp 139 creating tx node_address 3qpLNoz2M4FsAmd4ahpqknLY4fo3 192.168.0.38:22272 22272 
+0x3429567afd16b7 gov/engine evidence.cpp 25 created evidence 0x7f575cff7f20 
+0x3429567afd2732 gov/engine/auth auth/app.cpp 398 process node_address evidence. 3qpLNoz2M4FsAmd4ahpqknLY4fo3 
+0x3429567afd6e26 gov/engine/auth app   node_address::pkh 3qpLNoz2M4FsAmd4ahpqknLY4fo3
+0x3429567afd6e26 gov/engine/auth app   node_address::net_addr 637577408
+0x3429567afd6e26 gov/engine/auth app   node_address::pport 22272
+0x3429567afdb1bf gov/engine/auth auth/app.cpp 412 B112 
+0x3429567afdcb58 gov/engine evidence.cpp 29 destroyed evidence 0x7f575cff7f20 
+0x3429567afdd8e8 gov/engine peer_t.cpp 173 stage node 
+0x3429567afdebd3 gov/peer grid_t.cpp 203 add_to_grid 0x7f576c012a20 192.168.0.38:22272 
+0x3429567afe0149 gov/peer grid_t.cpp 223 grid-added peer_t 0x7f576c012a20 192.168.0.38:22272 3qpLNoz2M4FsAmd4ahpqknLY4fo3 
+0x3429567afe459c gov/engine peer_t.cpp 182 added to grid 
+0x3429567afe6722 gov/id peer_t.cpp 475 signaling VERIF_COMPLETED. 
+0x3429567afe771d gov/socket datagram.cpp 238 deleted datagram 0x7f5764006200 
+0x3429567afe8b94 gov/socket peer_t.cpp 191 dispatched job 192.168.0.38:22272 
+0x3429567afe9b19 gov/socket peer_t.cpp 202 work completed 
+0x3429567afea851 gov/socket peer_t.cpp 123 worker ended recv TAG661 
+0x3429567afeb566 gov/socket peer_t.cpp 214 end service TAG301 
+0x3429567afec13b gov bgtask.cpp 105 wakeup 
+0x3429567afecbc9 gov bgtask.cpp 111 reset resume 
+0x3429567afedb80 gov/socket/multipeer server.cpp 113 onwakeup 
+0x3429567afee746 gov/socket/multipeer clients.cpp 80 feeding loopback interface 
+0x3429567aff37eb gov/socket/multipeer thpool.cpp 81 -end job------------------ fd338 192.168.0.38:22272 
+0x3429567aff4a3a gov/socket/multipeer thpool.cpp 64 empty queue 
+0x3429583ee99122 gov/socket/multipeer thpool.cpp 74 attending fd290 127.0.0.1:58646 remaining queue sz= 0 
+0x3429583ee9c8c6 gov/socket/multipeer thpool.cpp 77 -begin job --------------- fd290 127.0.0.1:58646 
+0x3429583ee9dc66 gov/socket peer_t.cpp 127 newtask TAG301 127.0.0.1:58646 
+0x3429583ee9ef00 gov/socket peer_t.cpp 134 cur dgram 0 
+0x3429583ee9ff02 gov/socket client.cpp 403 recv4 
+0x3429583eea0d61 gov/socket client.cpp 410 starting new datagram 
+0x3429583eea1b4c gov/socket client.cpp 417 before: dend= 0 
+0x3429583eea2a17 gov/socket datagram.cpp 446 recvfrom 
+0x3429583eea4401 gov/socket datagram.cpp 461 comm read 10 
+0x3429583eea598d gov/socket datagram.cpp 524 Received header for dgram sz= 160 svc= 21 
+0x3429583eea6e09 gov/socket datagram.cpp 530 comm read 150 
+0x3429583eea7e8e gov/socket datagram.cpp 441 completed? dend= 160 size= 160 completed= 1 
+0x3429583eeaacc9 gov/socket datagram.cpp 441 completed? dend= 160 size= 160 completed= 1 
+0x3429583eeabf65 gov/socket datagram.cpp 552 comm read 160 160 OK 4UqQk95vT8UYKvsbMgHjRnwKi9CC 
+0x3429583eeb10d3 gov/socket datagram.cpp 441 completed? dend= 160 size= 160 completed= 1 
+0x3429583eeb3ba3 gov/socket datagram.cpp 555 comm recv dgram hash  4UqQk95vT8UYKvsbMgHjRnwKi9CC svc 21 seq 0 
+0x3429583eeb8acc gov/socket client.cpp 430 reset ts activity=now 1 dend: 0 -> 160 
+0x3429583eeb9cf9 gov/socket client.cpp 436 after: dend= 160 
+0x3429583eebac67 gov/socket datagram.cpp 441 completed? dend= 160 size= 160 completed= 1 
+0x3429583eebbdaa gov/socket peer_t.cpp 178 dgram reception completed decrypting 
+0x3429583eebccd3 gov/id peer_t.cpp 198 decrypt datagram 
+0x3429583eebda45 gov/id peer_t.cpp 201 dgram arrived without encryption. svc 21 
+0x3429583eebefb0 gov/socket peer_t.cpp 186 complete dgram arrived 0x7f5764006200 sz 160 svc 21 127.0.0.1:58646 
+0x3429583eec04e0 gov/socket peer_t.cpp 189 dispatch job 127.0.0.1:58646 
+0x3429583eec152a gov/engine peer_t.cpp 28 process_work 21 
+0x3429583eec229f gov/engine peer_t.cpp 51 work svc > engine_begin 13 
+0x3429583eec4362 gov/engine ../../../us/api/generated/c++/gov/engine/hdlr_svc_handler-impl 184 protocol::engine_ev 
+0x3429583eec51c5 gov/io blob_reader_t.cpp 251 readD 
+0x3429583eec65ca gov/engine peer_t__engine.cpp 260 ev svc 21 sz 160 
+0x3429583eec77e9 gov/engine daemon_t.cpp 1688 parse_evidence 
+0x3429583eec865c gov/engine evidence.cpp 239 from blob 150 
+0x3429583eec93c2 gov/engine evidence.cpp 195 extract_instance_id 
+0x3429583eeca01d gov/io blob_reader_t.cpp 234 read_header 
+0x3429583eecad54 gov/engine evidence.cpp 212 skipping field ts 1641321643962459511 
+0x3429583eecba91 gov/engine evidence.cpp 217 field appid 40 
+0x3429583eed8e1a gov/engine evidence.cpp 222 field eid 0 
+0x3429583eedbe56 gov/engine evidence.cpp 170 creating evidence from header info 40 0 
+0x3429583eedd27d gov/engine evidence.cpp 25 created evidence 0x7f576400cf40 
+0x3429583eede563 gov/io blob_reader_t.cpp 258 readable::read from blob 150 
+0x3429583eedf4c4 gov/io blob_reader_t.cpp 213 read_header E 
+0x3429583eee3503 gov/engine daemon_t.cpp 857 process_evidence2 
+0x3429583eee4899 engine calendar.cpp 55 schedule 1641321643962459511 
+0x3429583eee587e engine calendar.cpp 58 arrived evidence. margin 14998863099 
+0x3429583eee76be gov/engine peer_t__engine.cpp 279 relaying evidence 
+0x3429583eee8643 gov/relay daemon_t.cpp 37 send neighbours 2147483647 
+0x3429583eeea38b gov/peer grid_t.cpp 58 prepare_worker_send visited 1 
+0x3429583eeeb484 gov/peer grid_t.cpp 62 grid size 10 
+0x3429583eeec445 gov/peer grid_t.cpp 73 slot 3 is empty 
+0x3429583eeed157 gov/peer grid_t.cpp 73 slot 4 is empty 
+0x3429583eeedce6 gov/peer grid_t.cpp 73 slot 5 is empty 
+0x3429583eeee88b gov/peer grid_t.cpp 73 slot 6 is empty 
+0x3429583eeef413 gov/peer grid_t.cpp 73 slot 7 is empty 
+0x3429583eeeff5e gov/peer grid_t.cpp 73 slot 8 is empty 
+0x3429583eef0be3 gov/peer grid_t.cpp 73 slot 9 is empty 
+0x3429583eef1d99 gov/peer grid_t.cpp 82 returning slot 0 
+0x3429583eef2d16 gov/relay daemon_t.cpp 57 not role peer sysop 
+0x3429583eef3ab4 gov/peer grid_t.cpp 58 prepare_worker_send visited 2 
+0x3429583eef474a gov/peer grid_t.cpp 62 grid size 10 
+0x3429583eef5558 gov/peer grid_t.cpp 73 slot 7 is empty 
+0x3429583eef628e gov/peer grid_t.cpp 73 slot 8 is empty 
+0x3429583eef6e7b gov/peer grid_t.cpp 73 slot 9 is empty 
+0x3429583eef7c1b gov/peer grid_t.cpp 78 slot occupied 0 already visited 
+0x3429583eef8c86 gov/peer grid_t.cpp 82 returning slot 1 
+0x3429583eefa396 gov/relay daemon_t.cpp 60 sending datagram to 21 192.168.0.38:35946 
+0x3429583eefbbeb gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f576c006790 svc 21 sz 160 
+0x3429583eefcd52 gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x3429583eefdaf3 gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x3429583eefe8f7 gov/id peer_t.cpp 178 outbound_traffic__goes_encrypted 0 inbound_traffic__was_encrypted 0 
+0x3429583eeffa25 gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 21 
+0x3429583ef00fb7 gov/socket/outbound send_queue.cpp 56 admission pri 21 sz 160 seq 0 recipient 192.168.0.38:35946 dgram svc field (to be overwritten) 21 
+0x3429583ef02399 gov/socket datagram.cpp 441 completed? dend= 160 size= 160 completed= 1 
+0x3429583ef03406 gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 21 
+0x3429583ef052f5 gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 160 pri 21 cli 0x7f5754010730 sendref 0 
+0x3429583ef06cb3 gov bgtask.cpp 105 wakeup 
+0x3429583ef07a88 gov bgtask.cpp 111 reset resume 
+0x3429583ef08b73 gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x3429583ef0aeb9 gov/relay daemon_t.cpp 64 success sending datagram to 192.168.0.38:35946 
+0x3429583ef0bddf gov/peer grid_t.cpp 58 prepare_worker_send visited 3 
+0x3429583ef0cdef gov/peer grid_t.cpp 62 grid size 10 
+0x3429583ef0fae0 gov/peer grid_t.cpp 78 slot occupied 0 already visited 
+0x3429583ef11388 gov/peer grid_t.cpp 78 slot occupied 1 already visited 
+0x3429583ef15ba8 gov/peer grid_t.cpp 82 returning slot 2 
+0x3429583ef17d9c gov/relay daemon_t.cpp 60 sending datagram to 21 192.168.0.38:22272 
+0x3429583ef19460 gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f576400be40 svc 21 sz 160 
+0x3429583ef1b432 gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x3429583ef1c277 gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x3429583ef1cfb2 gov/id peer_t.cpp 178 outbound_traffic__goes_encrypted 0 inbound_traffic__was_encrypted 0 
+0x3429583ef1e375 gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 21 
+0x3429583ef1f922 gov/socket/outbound send_queue.cpp 56 admission pri 21 sz 160 seq 0 recipient 192.168.0.38:22272 dgram svc field (to be overwritten) 21 
+0x3429583ef20bae gov/socket datagram.cpp 441 completed? dend= 160 size= 160 completed= 1 
+0x3429583ef21b19 gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 21 
+0x3429583ef2283c gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 160 pri 21 cli 0x7f576c012a20 sendref 0 
+0x3429583ef243a8 gov bgtask.cpp 105 wakeup 
+0x3429583ef250b2 gov bgtask.cpp 111 reset resume 
+0x3429583ef25f3f gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x3429583ef27881 gov/relay daemon_t.cpp 64 success sending datagram to 192.168.0.38:22272 
+0x3429583ef3f199 gov/peer grid_t.cpp 58 prepare_worker_send visited 4 
+0x3429583ef4221f gov/peer grid_t.cpp 62 grid size 10 
+0x3429583ef439c9 gov/peer grid_t.cpp 78 slot occupied 0 already visited 
+0x3429583ef449e6 gov/peer grid_t.cpp 78 slot occupied 1 already visited 
+0x3429583ef45e2d gov/peer grid_t.cpp 78 slot occupied 2 already visited 
+0x3429583ef46cc7 gov/peer grid_t.cpp 73 slot 3 is empty 
+0x3429583ef47cbc gov/peer grid_t.cpp 73 slot 4 is empty 
+0x3429583ef4ab59 gov/peer grid_t.cpp 73 slot 5 is empty 
+0x3429583ef4c24b gov/peer grid_t.cpp 73 slot 6 is empty 
+0x3429583ef4dcc2 gov/peer grid_t.cpp 73 slot 7 is empty 
+0x3429583ef4eb86 gov/peer grid_t.cpp 73 slot 8 is empty 
+0x3429583ef4f7a6 gov/peer grid_t.cpp 73 slot 9 is empty 
+0x3429583ef5cfda gov/peer grid_t.cpp 85 no suitable peer found in grid 
+0x3429583ef635c3 gov/relay daemon_t.cpp 67 Sent succ 2 
+0x3429583ef65341 gov/engine net_daemon_t.cpp 146 broadcast_evidence orig 2 
+0x3429583ef6705e gov/socket datagram.cpp 238 deleted datagram 0x7f5764006200 
+0x3429583ef68b5e gov/socket peer_t.cpp 191 dispatched job 127.0.0.1:58646 
+0x3429583ef6ad28 gov/socket peer_t.cpp 202 work completed 
+0x3429583ef6db79 gov/socket peer_t.cpp 123 worker ended recv TAG661 
+0x3429583ef6ec38 gov/socket peer_t.cpp 214 end service TAG301 
+0x3429583ef721a9 gov bgtask.cpp 105 wakeup 
+0x3429583ef733a6 gov bgtask.cpp 111 reset resume 
+0x3429583ef7453e gov/socket/multipeer server.cpp 113 onwakeup 
+0x3429583ef752d6 gov/socket/multipeer clients.cpp 80 feeding loopback interface 
+0x3429583ef9912f gov/socket/multipeer thpool.cpp 81 -end job------------------ fd290 127.0.0.1:58646 
+0x3429583ef9a4ec gov/socket/multipeer thpool.cpp 64 empty queue 
+0x3429584d35481d gov/socket/multipeer thpool.cpp 74 attending fd290 127.0.0.1:58646 remaining queue sz= 0 
+0x3429584d367152 gov/socket/multipeer thpool.cpp 77 -begin job --------------- fd290 127.0.0.1:58646 
+0x3429584d36d5aa gov/socket peer_t.cpp 127 newtask TAG301 127.0.0.1:58646 
+0x3429584d371965 gov/socket peer_t.cpp 134 cur dgram 0 
+0x3429584d375748 gov/socket client.cpp 403 recv4 
+0x3429584d3790fb gov/socket client.cpp 410 starting new datagram 
+0x3429584d37c7f3 gov/socket client.cpp 417 before: dend= 0 
+0x3429584d380552 gov/socket datagram.cpp 446 recvfrom 
+0x3429584d387f91 gov/socket datagram.cpp 461 comm read 10 
+0x3429584d38e060 gov/socket datagram.cpp 524 Received header for dgram sz= 129 svc= 0 
+0x3429584d394101 gov/socket datagram.cpp 530 comm read 119 
+0x3429584d3985a7 gov/socket datagram.cpp 441 completed? dend= 129 size= 129 completed= 1 
+0x3429584d3a4a23 gov/socket datagram.cpp 441 completed? dend= 129 size= 129 completed= 1 
+0x3429584d3a927d gov/socket datagram.cpp 552 comm read 129 129 OK 2DSGfztgnFQuY2QawaXE6RcuHxZc 
+0x3429584d3bf07e gov/socket datagram.cpp 441 completed? dend= 129 size= 129 completed= 1 
+0x3429584d3ca47f gov/socket datagram.cpp 555 comm recv dgram hash  2DSGfztgnFQuY2QawaXE6RcuHxZc svc 0 seq 0 
+0x3429584d3def8a gov/socket client.cpp 430 reset ts activity=now 1 dend: 0 -> 129 
+0x3429584d3e8c68 gov/socket client.cpp 436 after: dend= 129 
+0x3429584d3ed5f3 gov/socket datagram.cpp 441 completed? dend= 129 size= 129 completed= 1 
+0x3429584d3f155d gov/socket peer_t.cpp 178 dgram reception completed decrypting 
+0x3429584d3f4f93 gov/id peer_t.cpp 198 decrypt datagram 
+0x3429584d3f894f gov/socket datagram.cpp 260 decrypt dgram 129 
+0x3429584d3fcc51 gov/crypto symmetric_encryption.cpp 105 decrypt block of  119 bytes. msg sz= 107 + IV size 12 
+0x3429584d413036 gov/crypto symmetric_encryption.cpp 58 IV sz  12 scrambled msg sz 119 enc/dec ratio( 91 ) =  1.30769 
+0x3429584d41f82b gov/id peer_t.cpp 217 deleting original encrypted datagram. 
+0x3429584d423be7 gov/socket datagram.cpp 238 deleted datagram 0x7f5764006200 
+0x3429584d4294da gov/socket peer_t.cpp 186 complete dgram arrived 0x7f576400be90 sz 91 svc 26 127.0.0.1:58646 
+0x3429584d42ee79 gov/socket peer_t.cpp 189 dispatch job 127.0.0.1:58646 
+0x3429584d4329a1 gov/engine peer_t.cpp 28 process_work 26 
+0x3429584d436049 gov/engine peer_t.cpp 51 work svc > engine_begin 13 
+0x3429584d439c32 gov/engine ../../../us/api/generated/c++/gov/cash/hdlr_svc_handler-impl 6 protocol::cash_fetch_accounts 
+0x3429584d43fe23 gov/engine peer_t__cash.cpp 32 fetch_accounts 
+0x3429584d443b35 gov/engine peer_t__cash.cpp 35 db sz 12 
+0x3429584d4478ca gov/engine peer_t__cash.cpp 37 account 3Q3rwHc14jbLNDKnxhmxvKZsiLqX 
+0x3429584d45f018 gov/engine peer_t__cash.cpp 37 account 2WtpbgeFtrmg6WbWn52WfrCpR311 
+0x3429584d47631a gov/engine peer_t__cash.cpp 37 account 445tBfyW3G7DMupu1MhdHEQC9dxL 
+0x3429584d48bdb7 gov/engine peer_t__cash.cpp 37 account 3Wu1ywP4iF8Y7vNTE3SEndLcNQpJ 
+0x3429584d4a77f7 gov/socket datagram.cpp 141 new datagram 0x7f576400ea60 svc 27 seq 2 sz 218 payload sz 208 ch 123 
+0x3429584d4b042b gov/socket datagram.cpp 238 deleted datagram 0x7f576400be90 
+0x3429584d4b4e8a gov/engine ../../../us/api/generated/c++/gov/cash/hdlr_svc_handler-impl 27 processing response svc =  27 
+0x3429584d4b8bd2 gov/socket peer_t.cpp 233 process_ok_work 27 
+0x3429584d4bda34 gov/socket daemon0_t.cpp 22 process_ok_work 127.0.0.1:58646 27 
+0x3429584d4c167d gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f576400ea60 svc 27 sz 218 
+0x3429584d4c5a2f gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x3429584d4c9203 gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x3429584d4ccbe3 gov/id peer_t.cpp 178 outbound_traffic__goes_encrypted 0 inbound_traffic__was_encrypted 1 
+0x3429584d4d0cdb gov/socket datagram.cpp 242 encrypt dgram svc= 27 
+0x3429584d4d5ed3 gov/crypto symmetric_encryption.cpp 66 encrypt block of 218 bytes. 
+0x3429584d4d9d35 gov/crypto symmetric_encryption.cpp 68 estimated size 256 
+0x3429584d4ee77a gov/crypto symmetric_encryption.cpp 79 final size 256 
+0x3429584d4f47ba gov/crypto symmetric_encryption.cpp 58 IV sz  12 scrambled msg sz 246 enc/dec ratio( 218 ) =  1.12844 
+0x3429584d4fac17 gov/crypto symmetric_encryption.cpp 84 total encrypted payload 246 bytes. 
+0x3429584d500da9 gov/id peer_t.cpp 186 datagram encrypted. svc 27 length 218 -> svc 0 length 256 
+0x3429584d50563c gov/id peer_t.cpp 187 deleting original clear-text datagram. 
+0x3429584d508dc8 gov/socket datagram.cpp 238 deleted datagram 0x7f576400ea60 
+0x3429584d50c9ac gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 27 
+0x3429584d512447 gov/socket/outbound send_queue.cpp 56 admission pri 27 sz 256 seq 0 recipient 127.0.0.1:58646 dgram svc field (to be overwritten) 26 
+0x3429584d517bdf gov/socket datagram.cpp 441 completed? dend= 256 size= 256 completed= 1 
+0x3429584d51c21a gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 27 
+0x3429584d51ffc0 gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 256 pri 27 cli 0x7f575400c240 sendref 0 
+0x3429584d5262ec gov bgtask.cpp 105 wakeup 
+0x3429584d529b94 gov bgtask.cpp 111 reset resume 
+0x3429584d52e266 gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x3429584d53b298 gov/socket peer_t.cpp 191 dispatched job 127.0.0.1:58646 
+0x3429584d53fd14 gov/socket peer_t.cpp 202 work completed 
+0x3429584d54c003 gov/socket peer_t.cpp 123 worker ended recv TAG661 
+0x3429584d550f54 gov/socket peer_t.cpp 214 end service TAG301 
+0x3429584d554a28 gov bgtask.cpp 105 wakeup 
+0x3429584d557b10 gov bgtask.cpp 111 reset resume 
+0x3429584d55bdde gov/socket/multipeer server.cpp 113 onwakeup 
+0x3429584d55f82f gov/socket/multipeer clients.cpp 80 feeding loopback interface 
+0x3429584d575500 gov/socket/multipeer thpool.cpp 81 -end job------------------ fd290 127.0.0.1:58646 
+0x3429584d57bc03 gov/socket/multipeer thpool.cpp 64 empty queue 
+0x3429594dfd4ed1 gov/socket/multipeer thpool.cpp 74 attending fd338 192.168.0.38:22272 remaining queue sz= 0 
+0x3429594dfd776c gov/socket/multipeer thpool.cpp 77 -begin job --------------- fd338 192.168.0.38:22272 
+0x3429594dfd8985 gov/socket peer_t.cpp 127 newtask TAG301 192.168.0.38:22272 
+0x3429594dff957f gov/socket peer_t.cpp 134 cur dgram 0 
+0x3429594dffa563 gov/socket client.cpp 403 recv4 
+0x3429594dffb180 gov/socket client.cpp 410 starting new datagram 
+0x3429594dffc2d5 gov/socket client.cpp 417 before: dend= 0 
+0x3429594dffd1a4 gov/socket datagram.cpp 446 recvfrom 
+0x3429594dffe7bc gov/socket datagram.cpp 461 comm read 10 
+0x3429594dfff9f2 gov/socket datagram.cpp 524 Received header for dgram sz= 160 svc= 21 
+0x3429594e000b7e gov/socket datagram.cpp 530 comm read 150 
+0x3429594e0019ab gov/socket datagram.cpp 441 completed? dend= 160 size= 160 completed= 1 
+0x3429594e00757d gov/socket datagram.cpp 441 completed? dend= 160 size= 160 completed= 1 
+0x3429594e00958f gov/socket datagram.cpp 552 comm read 160 160 OK yRNVZPGZt8dRFEMXjH1UahSy4a2 
+0x3429594e00eac5 gov/socket datagram.cpp 441 completed? dend= 160 size= 160 completed= 1 
+0x3429594e0117a4 gov/socket datagram.cpp 555 comm recv dgram hash  yRNVZPGZt8dRFEMXjH1UahSy4a2 svc 21 seq 0 
+0x3429594e01621f gov/socket client.cpp 430 reset ts activity=now 1 dend: 0 -> 160 
+0x3429594e01729a gov/socket client.cpp 436 after: dend= 160 
+0x3429594e01a054 gov/socket datagram.cpp 441 completed? dend= 160 size= 160 completed= 1 
+0x3429594e01c400 gov/socket peer_t.cpp 178 dgram reception completed decrypting 
+0x3429594e01d49a gov/id peer_t.cpp 198 decrypt datagram 
+0x3429594e01ed9f gov/id peer_t.cpp 201 dgram arrived without encryption. svc 21 
+0x3429594e0205a2 gov/socket peer_t.cpp 186 complete dgram arrived 0x7f576400ea60 sz 160 svc 21 192.168.0.38:22272 
+0x3429594e021d33 gov/socket peer_t.cpp 189 dispatch job 192.168.0.38:22272 
+0x3429594e022dea gov/engine peer_t.cpp 28 process_work 21 
+0x3429594e023d02 gov/engine peer_t.cpp 51 work svc > engine_begin 13 
+0x3429594e02649e gov/engine ../../../us/api/generated/c++/gov/engine/hdlr_svc_handler-impl 184 protocol::engine_ev 
+0x3429594e027492 gov/io blob_reader_t.cpp 251 readD 
+0x3429594e028a0e gov/engine peer_t__engine.cpp 260 ev svc 21 sz 160 
+0x3429594e029af4 gov/engine daemon_t.cpp 1688 parse_evidence 
+0x3429594e02a748 gov/engine evidence.cpp 239 from blob 150 
+0x3429594e02b3b9 gov/engine evidence.cpp 195 extract_instance_id 
+0x3429594e02bfbc gov/io blob_reader_t.cpp 234 read_header 
+0x3429594e0368c8 gov/engine evidence.cpp 212 skipping field ts 1641321648509210685 
+0x3429594e04c719 gov/engine evidence.cpp 217 field appid 40 
+0x3429594e04d965 gov/engine evidence.cpp 222 field eid 0 
+0x3429594e04e7a3 gov/engine evidence.cpp 170 creating evidence from header info 40 0 
+0x3429594e04f727 gov/engine evidence.cpp 25 created evidence 0x7f5764015420 
+0x3429594e051598 gov/io blob_reader_t.cpp 258 readable::read from blob 150 
+0x3429594e05295f gov/io blob_reader_t.cpp 213 read_header E 
+0x3429594e0552cf gov/engine daemon_t.cpp 857 process_evidence2 
+0x3429594e056152 engine calendar.cpp 55 schedule 1641321648509210685 
+0x3429594e057144 engine calendar.cpp 58 arrived evidence. margin 14997475360 
+0x3429594e05895f gov/engine peer_t__engine.cpp 279 relaying evidence 
+0x3429594e0597bd gov/relay daemon_t.cpp 37 send neighbours 2147483647 
+0x3429594e05b063 gov/peer grid_t.cpp 58 prepare_worker_send visited 1 
+0x3429594e05c24f gov/peer grid_t.cpp 62 grid size 10 
+0x3429594e05d881 gov/peer grid_t.cpp 82 returning slot 1 
+0x3429594e05fbb8 gov/relay daemon_t.cpp 60 sending datagram to 21 192.168.0.38:35946 
+0x3429594e061dbd gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f5764012620 svc 21 sz 160 
+0x3429594e0630ed gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x3429594e063e54 gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x3429594e064bbe gov/id peer_t.cpp 178 outbound_traffic__goes_encrypted 0 inbound_traffic__was_encrypted 0 
+0x3429594e065cd5 gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 21 
+0x3429594e068049 gov/socket/outbound send_queue.cpp 56 admission pri 21 sz 160 seq 0 recipient 192.168.0.38:35946 dgram svc field (to be overwritten) 21 
+0x3429594e06a029 gov/socket datagram.cpp 441 completed? dend= 160 size= 160 completed= 1 
+0x3429594e06b3b9 gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 21 
+0x3429594e06c3cb gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 160 pri 21 cli 0x7f5754010730 sendref 0 
+0x3429594e06d9e9 gov bgtask.cpp 105 wakeup 
+0x3429594e06e9a0 gov bgtask.cpp 111 reset resume 
+0x3429594e06f9a4 gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x3429594e0855fe gov/relay daemon_t.cpp 64 success sending datagram to 192.168.0.38:35946 
+0x3429594e086965 gov/peer grid_t.cpp 58 prepare_worker_send visited 2 
+0x3429594e087672 gov/peer grid_t.cpp 62 grid size 10 
+0x3429594e088654 gov/peer grid_t.cpp 78 slot occupied 1 already visited 
+0x3429594e0a134b gov/peer grid_t.cpp 78 slot occupied 2 already visited 
+0x3429594e0a28e2 gov/peer grid_t.cpp 73 slot 3 is empty 
+0x3429594e0a3933 gov/peer grid_t.cpp 73 slot 4 is empty 
+0x3429594e0a47c6 gov/peer grid_t.cpp 73 slot 5 is empty 
+0x3429594e0a53bb gov/peer grid_t.cpp 73 slot 6 is empty 
+0x3429594e0a5f3f gov/peer grid_t.cpp 73 slot 7 is empty 
+0x3429594e0a6b2b gov/peer grid_t.cpp 73 slot 8 is empty 
+0x3429594e0a765c gov/peer grid_t.cpp 73 slot 9 is empty 
+0x3429594e0a9666 gov/peer grid_t.cpp 82 returning slot 0 
+0x3429594e0aa8e4 gov/relay daemon_t.cpp 57 not role peer sysop 
+0x3429594e0ab99e gov/peer grid_t.cpp 58 prepare_worker_send visited 3 
+0x3429594e0ac838 gov/peer grid_t.cpp 62 grid size 10 
+0x3429594e0b3d28 gov/peer grid_t.cpp 78 slot occupied 0 already visited 
+0x3429594e0bc4f6 gov/peer grid_t.cpp 78 slot occupied 1 already visited 
+0x3429594e0bd678 gov/peer grid_t.cpp 78 slot occupied 2 already visited 
+0x3429594e0be66f gov/peer grid_t.cpp 73 slot 3 is empty 
+0x3429594e0bf342 gov/peer grid_t.cpp 73 slot 4 is empty 
+0x3429594e0c00d6 gov/peer grid_t.cpp 73 slot 5 is empty 
+0x3429594e0c0ee7 gov/peer grid_t.cpp 73 slot 6 is empty 
+0x3429594e0c1ab3 gov/peer grid_t.cpp 73 slot 7 is empty 
+0x3429594e0c289c gov/peer grid_t.cpp 73 slot 8 is empty 
+0x3429594e0c36c8 gov/peer grid_t.cpp 73 slot 9 is empty 
+0x3429594e0c4353 gov/peer grid_t.cpp 85 no suitable peer found in grid 
+0x3429594e0dcdc7 gov/relay daemon_t.cpp 67 Sent succ 1 
+0x3429594e0de3ef gov/engine net_daemon_t.cpp 146 broadcast_evidence orig 1 
+0x3429594e0df327 gov/socket datagram.cpp 238 deleted datagram 0x7f576400ea60 
+0x3429594e0e1449 gov/socket peer_t.cpp 191 dispatched job 192.168.0.38:22272 
+0x3429594e0e26ba gov/socket peer_t.cpp 202 work completed 
+0x3429594e0eada2 gov/socket peer_t.cpp 123 worker ended recv TAG661 
+0x3429594e0ebc6c gov/socket peer_t.cpp 214 end service TAG301 
+0x3429594e0eca0d gov bgtask.cpp 105 wakeup 
+0x3429594e0ed50b gov bgtask.cpp 111 reset resume 
+0x3429594e0ee404 gov/socket/multipeer server.cpp 113 onwakeup 
+0x3429594e0ef063 gov/socket/multipeer clients.cpp 80 feeding loopback interface 
+0x3429594e0f460e gov/socket/multipeer thpool.cpp 81 -end job------------------ fd338 192.168.0.38:22272 
+0x3429594e0f5a6b gov/socket/multipeer thpool.cpp 64 empty queue 
+0x342959a6f3e79e gov/socket/multipeer thpool.cpp 74 attending fd330 192.168.0.38:35946 remaining queue sz= 0 
+0x342959a6f4f33f gov/socket/multipeer thpool.cpp 77 -begin job --------------- fd330 192.168.0.38:35946 
+0x342959a6f5fdfa gov/socket peer_t.cpp 127 newtask TAG301 192.168.0.38:35946 
+0x342959a6f67724 gov/socket peer_t.cpp 134 cur dgram 0 
+0x342959a6f6c833 gov/socket client.cpp 403 recv4 
+0x342959a6f79628 gov/socket client.cpp 410 starting new datagram 
+0x342959a6f84478 gov/socket client.cpp 417 before: dend= 0 
+0x342959a6f89c30 gov/socket datagram.cpp 446 recvfrom 
+0x342959a6f95e5b gov/socket datagram.cpp 461 comm read 10 
+0x342959a6f9d231 gov/socket datagram.cpp 524 Received header for dgram sz= 30 svc= 15 
+0x342959a6fa573f gov/socket datagram.cpp 530 comm read 20 
+0x342959a6faac59 gov/socket datagram.cpp 441 completed? dend= 30 size= 30 completed= 1 
+0x342959a6fb4586 gov/socket datagram.cpp 441 completed? dend= 30 size= 30 completed= 1 
+0x342959a6fb963c gov/socket datagram.cpp 552 comm read 30 30 OK JqQiE62fdhiL984UVcUf16qhsHn 
+0x342959a6fd61e2 gov/socket datagram.cpp 441 completed? dend= 30 size= 30 completed= 1 
+0x342959a6fdf92c gov/socket datagram.cpp 555 comm recv dgram hash  JqQiE62fdhiL984UVcUf16qhsHn svc 15 seq 0 
+0x342959a6ffc05b gov/socket client.cpp 430 reset ts activity=now 1 dend: 0 -> 30 
+0x342959a7002578 gov/socket client.cpp 436 after: dend= 30 
+0x342959a700800b gov/socket datagram.cpp 441 completed? dend= 30 size= 30 completed= 1 
+0x342959a7010210 gov/socket peer_t.cpp 178 dgram reception completed decrypting 
+0x342959a7015fe8 gov/id peer_t.cpp 198 decrypt datagram 
+0x342959a701b176 gov/id peer_t.cpp 201 dgram arrived without encryption. svc 15 
+0x342959a702383d gov/socket peer_t.cpp 186 complete dgram arrived 0x7f576400ea60 sz 30 svc 15 192.168.0.38:35946 
+0x342959a702acce gov/socket peer_t.cpp 189 dispatch job 192.168.0.38:35946 
+0x342959a7033d6e gov/engine peer_t.cpp 28 process_work 15 
+0x342959a70386b0 gov/engine peer_t.cpp 51 work svc > engine_begin 13 
+0x342959a703db95 gov/engine ../../../us/api/generated/c++/gov/engine/hdlr_svc_handler-impl 51 protocol::engine_query_block 
+0x342959a7043019 gov/engine peer_t__engine.cpp 178 query_block ZiJJfqmFd42n2yQ4JjvCaEYz1DE 
+0x342959a7073bc1 gov/io cfg0.cpp 192 KO 8401 Likely the file doesn't exist in the local filesystem. logs/us-trader-test_969207/test_r2r/home/node_phy/123/gov/blocks/ZiJJfqmFd42n2yQ4JjvCaEYz1DE 
+0x342959a7079d00 gov/socket peer_t.cpp 238 process_ko_work. seq 0 KO 8401 Likely the file doesn't exist in the local filesystem. 
+0x342959a707f5ac gov/socket daemon0_t.cpp 34 process_ko_work KO 8401 Likely the file doesn't exist in the local filesystem. 
+0x342959a7087073 gov/socket datagram.cpp 141 new datagram 0x7f5764012650 svc 1 seq 0 sz 73 payload sz 63 ch 123 
+0x342959a708edd7 gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f5764012650 svc 1 sz 73 
+0x342959a7094505 gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x342959a7098a35 gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x342959a709cd88 gov/id peer_t.cpp 171 Not encrypting. Basic service 1 encryption for services above or equal 8 
+0x342959a70a276e gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 1 
+0x342959a70adcd7 gov/socket/outbound send_queue.cpp 56 admission pri 1 sz 73 seq 0 recipient 192.168.0.38:35946 dgram svc field (to be overwritten) 1 
+0x342959a70b4957 gov/socket datagram.cpp 441 completed? dend= 73 size= 73 completed= 1 
+0x342959a70bca9f gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 1 
+0x342959a70cc886 gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 73 pri 1 cli 0x7f5754010730 sendref 0 
+0x342959a70d84a3 gov bgtask.cpp 105 wakeup 
+0x342959a70dd770 gov bgtask.cpp 111 reset resume 
+0x342959a70e3b5c gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x342959a70eb775 gov/socket datagram.cpp 238 deleted datagram 0x7f576400ea60 
+0x342959a70f2f7c gov/socket peer_t.cpp 191 dispatched job 192.168.0.38:35946 
+0x342959a70f7681 gov/socket peer_t.cpp 202 work completed 
+0x342959a70fb8cb gov/socket peer_t.cpp 123 worker ended recv TAG661 
+0x342959a70fffca gov/socket peer_t.cpp 214 end service TAG301 
+0x342959a7104738 gov bgtask.cpp 105 wakeup 
+0x342959a7108202 gov bgtask.cpp 111 reset resume 
+0x342959a71108fb gov/socket/multipeer server.cpp 113 onwakeup 
+0x342959a7115cc4 gov/socket/multipeer clients.cpp 80 feeding loopback interface 
+0x342959a7130276 gov/socket/multipeer thpool.cpp 81 -end job------------------ fd330 192.168.0.38:35946 
+0x342959a713d842 gov/socket/multipeer thpool.cpp 64 empty queue 
+0x342959a7216835 gov/socket/multipeer thpool.cpp 74 attending fd338 192.168.0.38:22272 remaining queue sz= 0 
+0x342959a72182ed gov/socket/multipeer thpool.cpp 77 -begin job --------------- fd338 192.168.0.38:22272 
+0x342959a7219310 gov/socket peer_t.cpp 127 newtask TAG301 192.168.0.38:22272 
+0x342959a721ab6b gov/socket peer_t.cpp 134 cur dgram 0 
+0x342959a721ba5d gov/socket client.cpp 403 recv4 
+0x342959a721c603 gov/socket client.cpp 410 starting new datagram 
+0x342959a721d3c7 gov/socket client.cpp 417 before: dend= 0 
+0x342959a721e0b4 gov/socket datagram.cpp 446 recvfrom 
+0x342959a721f5aa gov/socket datagram.cpp 461 comm read 10 
+0x342959a722075c gov/socket datagram.cpp 524 Received header for dgram sz= 106 svc= 16 
+0x342959a72222bb gov/socket datagram.cpp 530 comm read 96 
+0x342959a72232a3 gov/socket datagram.cpp 441 completed? dend= 106 size= 106 completed= 1 
+0x342959a72255aa gov/socket datagram.cpp 441 completed? dend= 106 size= 106 completed= 1 
+0x342959a72263cb gov/socket datagram.cpp 552 comm read 106 106 OK 3NmjyuTk2xFFb7Qu1BnGj2L8pS5q 
+0x342959a722abc1 gov/socket datagram.cpp 441 completed? dend= 106 size= 106 completed= 1 
+0x342959a722cba2 gov/socket datagram.cpp 555 comm recv dgram hash  3NmjyuTk2xFFb7Qu1BnGj2L8pS5q svc 16 seq 0 
+0x342959a72311ac gov/socket client.cpp 430 reset ts activity=now 1 dend: 0 -> 106 
+0x342959a7232234 gov/socket client.cpp 436 after: dend= 106 
+0x342959a7232f0e gov/socket datagram.cpp 441 completed? dend= 106 size= 106 completed= 1 
+0x342959a7233fab gov/socket peer_t.cpp 178 dgram reception completed decrypting 
+0x342959a7234d26 gov/id peer_t.cpp 198 decrypt datagram 
+0x342959a7235b18 gov/id peer_t.cpp 201 dgram arrived without encryption. svc 16 
+0x342959a7237163 gov/socket peer_t.cpp 186 complete dgram arrived 0x7f576400ea60 sz 106 svc 16 192.168.0.38:22272 
+0x342959a72384c4 gov/socket peer_t.cpp 189 dispatch job 192.168.0.38:22272 
+0x342959a7239e5f gov/engine peer_t.cpp 28 process_work 16 
+0x342959a723ac2a gov/engine peer_t.cpp 51 work svc > engine_begin 13 
+0x342959a723be05 gov/io blob_reader_t.cpp 251 readD 
+0x342959a723d04c gov/engine peer_t__engine.cpp 194 query_block_response 96 
+0x342959a723fd9e gov/engine peer_t__engine.cpp 198 received block ZiJJfqmFd42n2yQ4JjvCaEYz1DE 96 bytes 
+0x342959a72510b0 gov bgtask.cpp 105 wakeup 
+0x342959a7252669 gov bgtask.cpp 111 reset resume 
+0x342959a7254192 gov/engine peer_t__engine.cpp 213 saved file logs/us-trader-test_969207/test_r2r/home/node_phy/123/gov/blocks/ZiJJfqmFd42n2yQ4JjvCaEYz1DE 
+0x342959a7255faa gov/socket datagram.cpp 238 deleted datagram 0x7f576400ea60 
+0x342959a725770b gov/socket peer_t.cpp 191 dispatched job 192.168.0.38:22272 
+0x342959a72584a5 gov/socket peer_t.cpp 202 work completed 
+0x342959a7259137 gov/socket peer_t.cpp 123 worker ended recv TAG661 
+0x342959a725af6a gov/socket peer_t.cpp 214 end service TAG301 
+0x342959a725bf87 gov bgtask.cpp 105 wakeup 
+0x342959a725cb14 gov bgtask.cpp 111 reset resume 
+0x342959a725e2ff gov/socket/multipeer server.cpp 113 onwakeup 
+0x342959a72614b6 gov/socket/multipeer clients.cpp 80 feeding loopback interface 
+0x342959a726b85a gov/socket/multipeer thpool.cpp 81 -end job------------------ fd338 192.168.0.38:22272 
+0x342959a726d13d gov/socket/multipeer thpool.cpp 64 empty queue 
+0x34295a59f13193 gov/socket/multipeer thpool.cpp 74 attending fd330 192.168.0.38:35946 remaining queue sz= 0 
+0x34295a59f224a9 gov/socket/multipeer thpool.cpp 77 -begin job --------------- fd330 192.168.0.38:35946 
+0x34295a59f377fe gov/socket peer_t.cpp 127 newtask TAG301 192.168.0.38:35946 
+0x34295a59f409a7 gov/socket peer_t.cpp 134 cur dgram 0 
+0x34295a59f455a6 gov/socket client.cpp 403 recv4 
+0x34295a59f499fb gov/socket client.cpp 410 starting new datagram 
+0x34295a59f4dbfe gov/socket client.cpp 417 before: dend= 0 
+0x34295a59f5243d gov/socket datagram.cpp 446 recvfrom 
+0x34295a59f5b261 gov/socket datagram.cpp 461 comm read 10 
+0x34295a59f61c59 gov/socket datagram.cpp 524 Received header for dgram sz= 30 svc= 15 
+0x34295a59f6d87a gov/socket datagram.cpp 530 comm read 20 
+0x34295a59f73027 gov/socket datagram.cpp 441 completed? dend= 30 size= 30 completed= 1 
+0x34295a59f7c73c gov/socket datagram.cpp 441 completed? dend= 30 size= 30 completed= 1 
+0x34295a59f8147c gov/socket datagram.cpp 552 comm read 30 30 OK JqQiE62fdhiL984UVcUf16qhsHn 
+0x34295a59f9d95b gov/socket datagram.cpp 441 completed? dend= 30 size= 30 completed= 1 
+0x34295a59fa6d7e gov/socket datagram.cpp 555 comm recv dgram hash  JqQiE62fdhiL984UVcUf16qhsHn svc 15 seq 0 
+0x34295a59fc0596 gov/socket client.cpp 430 reset ts activity=now 1 dend: 0 -> 30 
+0x34295a59fd1998 gov/socket client.cpp 436 after: dend= 30 
+0x34295a59fd988f gov/socket datagram.cpp 441 completed? dend= 30 size= 30 completed= 1 
+0x34295a59fe3c48 gov/socket peer_t.cpp 178 dgram reception completed decrypting 
+0x34295a59fe955d gov/id peer_t.cpp 198 decrypt datagram 
+0x34295a59fedde7 gov/id peer_t.cpp 201 dgram arrived without encryption. svc 15 
+0x34295a59ff5455 gov/socket peer_t.cpp 186 complete dgram arrived 0x7f576400ea60 sz 30 svc 15 192.168.0.38:35946 
+0x34295a59ffc39b gov/socket peer_t.cpp 189 dispatch job 192.168.0.38:35946 
+0x34295a5a000af0 gov/engine peer_t.cpp 28 process_work 15 
+0x34295a5a008cb9 gov/engine peer_t.cpp 51 work svc > engine_begin 13 
+0x34295a5a00e13d gov/engine ../../../us/api/generated/c++/gov/engine/hdlr_svc_handler-impl 51 protocol::engine_query_block 
+0x34295a5a032935 gov/engine peer_t__engine.cpp 178 query_block ZiJJfqmFd42n2yQ4JjvCaEYz1DE 
+0x34295a5a073fe9 gov/io cfg0.cpp 201 size file 96 
+0x34295a5a080297 gov/io cfg0.cpp 211 is.fail? 0 
+0x34295a5a089d2b gov/io blob_writer_t.cpp 176 get_datagram from blob 16 0 96 
+0x34295a5a0919dd gov/socket datagram.cpp 141 new datagram 0x7f57640125f0 svc 16 seq 0 sz 106 payload sz 96 ch 123 
+0x34295a5a09957b gov/socket datagram.cpp 238 deleted datagram 0x7f576400ea60 
+0x34295a5a09e93a gov/engine ../../../us/api/generated/c++/gov/engine/hdlr_svc_handler-impl 72 processing response svc =  16 
+0x34295a5a0a38bf gov/socket peer_t.cpp 233 process_ok_work 16 
+0x34295a5a0ab8c5 gov/socket daemon0_t.cpp 22 process_ok_work 192.168.0.38:35946 16 
+0x34295a5a0b1b39 gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f57640125f0 svc 16 sz 106 
+0x34295a5a0bd1f6 gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x34295a5a0c31ca gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x34295a5a0c7de8 gov/id peer_t.cpp 178 outbound_traffic__goes_encrypted 0 inbound_traffic__was_encrypted 0 
+0x34295a5a0cd6e8 gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 16 
+0x34295a5a0d4789 gov/socket/outbound send_queue.cpp 56 admission pri 16 sz 106 seq 0 recipient 192.168.0.38:35946 dgram svc field (to be overwritten) 16 
+0x34295a5a0dadb2 gov/socket datagram.cpp 441 completed? dend= 106 size= 106 completed= 1 
+0x34295a5a0e4d91 gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 16 
+0x34295a5a0ea236 gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 106 pri 16 cli 0x7f5754010730 sendref 0 
+0x34295a5a0f1a51 gov bgtask.cpp 105 wakeup 
+0x34295a5a0f5f6e gov bgtask.cpp 111 reset resume 
+0x34295a5a0ffb75 gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x34295a5a10ab6c gov/socket peer_t.cpp 191 dispatched job 192.168.0.38:35946 
+0x34295a5a10ff03 gov/socket peer_t.cpp 202 work completed 
+0x34295a5a121fd4 gov/socket peer_t.cpp 123 worker ended recv TAG661 
+0x34295a5a12a4d7 gov/socket peer_t.cpp 214 end service TAG301 
+0x34295a5a12ebff gov bgtask.cpp 105 wakeup 
+0x34295a5a132bde gov bgtask.cpp 111 reset resume 
+0x34295a5a137cee gov/socket/multipeer server.cpp 113 onwakeup 
+0x34295a5a13c340 gov/socket/multipeer clients.cpp 80 feeding loopback interface 
+0x34295a5a157c31 gov/socket/multipeer thpool.cpp 81 -end job------------------ fd330 192.168.0.38:35946 
+0x34295a5a16cde3 gov/socket/multipeer thpool.cpp 64 empty queue 
+0x34295cc11009b6 gov/socket/multipeer thpool.cpp 74 attending fd364 192.168.0.38:35974 remaining queue sz= 0 
+0x34295cc1108dd3 gov/socket/multipeer thpool.cpp 77 -begin job --------------- fd364 192.168.0.38:35974 
+0x34295cc110fac2 gov/socket peer_t.cpp 127 newtask TAG301 192.168.0.38:35974 
+0x34295cc111276b gov/socket peer_t.cpp 134 cur dgram 0 
+0x34295cc1114c70 gov/socket client.cpp 403 recv4 
+0x34295cc1116f42 gov/socket client.cpp 410 starting new datagram 
+0x34295cc1119361 gov/socket client.cpp 417 before: dend= 0 
+0x34295cc111c373 gov/socket datagram.cpp 446 recvfrom 
+0x34295cc1120bfb gov/socket datagram.cpp 461 comm read 10 
+0x34295cc1124358 gov/socket datagram.cpp 524 Received header for dgram sz= 115 svc= 7 
+0x34295cc11279db gov/socket datagram.cpp 530 comm read 105 
+0x34295cc112a2ae gov/socket datagram.cpp 441 completed? dend= 115 size= 115 completed= 1 
+0x34295cc11308bf gov/socket datagram.cpp 441 completed? dend= 115 size= 115 completed= 1 
+0x34295cc1133197 gov/socket datagram.cpp 552 comm read 115 115 OK 2nmXuaTzdsh2NesvgZAsWnUSCRpY 
+0x34295cc1140d20 gov/socket datagram.cpp 441 completed? dend= 115 size= 115 completed= 1 
+0x34295cc11469a1 gov/socket datagram.cpp 555 comm recv dgram hash  2nmXuaTzdsh2NesvgZAsWnUSCRpY svc 7 seq 0 
+0x34295cc11537d6 gov/socket client.cpp 430 reset ts activity=now 1 dend: 0 -> 115 
+0x34295cc1156811 gov/socket client.cpp 436 after: dend= 115 
+0x34295cc115930d gov/socket datagram.cpp 441 completed? dend= 115 size= 115 completed= 1 
+0x34295cc115ba37 gov/socket peer_t.cpp 178 dgram reception completed decrypting 
+0x34295cc115df7d gov/id peer_t.cpp 198 decrypt datagram 
+0x34295cc115ff46 gov/id peer_t.cpp 201 dgram arrived without encryption. svc 7 
+0x34295cc1163a5e gov/socket peer_t.cpp 186 complete dgram arrived 0x7f576400ea60 sz 115 svc 7 192.168.0.38:35974 
+0x34295cc116744f gov/socket peer_t.cpp 189 dispatch job 192.168.0.38:35974 
+0x34295cc1169b61 gov/engine peer_t.cpp 28 process_work 7 
+0x34295cc116bc8b gov/engine peer_t.cpp 44 processing net_daemon datagram 7 
+0x34295cc116dedf gov/dfs peer_t.cpp 22 process_work 
+0x34295cc117008b gov/id peer_t.cpp 249 process_work svc 7 
+0x34295cc11725c6 gov/id peer_t.cpp 129 get_keys 
+0x34295cc11754e3 gov/engine net_daemon_t.cpp 27 get_keys() 
+0x34295cc117794d gov/id peer_t.cpp 129 get_keys 
+0x34295cc117a2e2 gov/engine net_daemon_t.cpp 27 get_keys() 
+0x34295cc117c376 gov/id peer_t.cpp 262 process_work using keys at 0x7f586401f268 uhFavgYHr3TzSJ8mzmBHSUxgBsWGs7F6krYrwH8pCkdn svc 7 
+0x34295cc1196961 gov/id ../../../us/api/generated/c++/gov/id/hdlr_svc_handler-impl 52 protocol::id_challenge_response 
+0x34295cc119cf10 gov/id peer_t.cpp 481 challenge_response 0 
+0x34295cc119f667 gov/id peer_t.cpp 492 process_challenge_response. seq 0 
+0x34295cc11fd092 gov/id peer_t.cpp 512 msgh 7ZDFmhG8dZqWGRkhipAuG1icaEbbMKY3Bsxkziko5Xia pubk wyUcXsttiHEUWYpzQbFVngVP2MrSK3abYruhxQVtZDXp sig-der-b58 AN1rKvtoDUES6WosCHn93Ne8xnVuZRLUWU8ZrwUkwWZ6Nyemzf3K318wdY6BPiZpCNZAykSJLF3B9ceZmMzNVuyHLjdoF7v6r 
+0x34295cc1283db8 gov/crypto ec.cpp 633 verify_not_normalized msgh 7ZDFmhG8dZqWGRkhipAuG1icaEbbMKY3Bsxkziko5Xia pubk wyUcXsttiHEUWYpzQbFVngVP2MrSK3abYruhxQVtZDXp sig-der-b58 AN1rKvtoDUES6WosCHn93Ne8xnVuZRLUWU8ZrwUkwWZ6Nyemzf3K318wdY6BPiZpCNZAykSJLF3B9ceZmMzNVuyHLjdoF7v6r 
+0x34295cc12b0d7f gov/crypto ec.cpp 645 was normalized 1 
+0x34295cc12b30f4 gov/crypto ec.cpp 646 normalize outputs same signature? 1 sizeof(signature) 64 
+0x34295cc12cbb50 gov/id peer_t.cpp 520 verified wyUcXsttiHEUWYpzQbFVngVP2MrSK3abYruhxQVtZDXp 
+0x34295cc12e4fd4 gov/id peer_t.cpp 134 turn_on_encryption? 
+0x34295cc12ecd20 gov/id peer_t.cpp 129 get_keys 
+0x34295cc12efd0e gov/engine net_daemon_t.cpp 27 get_keys() 
+0x34295cc12f205e gov/crypto symmetric_encryption.cpp 26 init. pub_other: wyUcXsttiHEUWYpzQbFVngVP2MrSK3abYruhxQVtZDXp 
+0x34295cc132530f gov/id peer_t.cpp 157 ================== ENCRYPTION TURNED send:OFF recv:ON  ================== 
+0x34295cc1327bc0 gov/id peer_t.cpp 528 verification_completed 22572 
+0x34295cc132b21f gov/engine peer_t.cpp 130 verification_completed 192.168.0.38:35974 364 rpport 22572 pin 0 
+0x34295cc132e827 gov/auth peer_t.cpp 17 verification_completed 192.168.0.38:35974 22572 364 
+0x34295cc1331a13 gov/engine peer_t.cpp 103 authorize? 192.168.0.38:35974 364 wyUcXsttiHEUWYpzQbFVngVP2MrSK3abYruhxQVtZDXp 0 
+0x34295cc134d7eb gov/auth peer_t.cpp 39 stage authorized 
+0x34295cc13504d6 gov/engine peer_t.cpp 144 role 0 = peer 
+0x34295cc1355fb0 gov/engine/auth auth/app.cpp 68 node auth completed 192.168.0.38:35974 2P2drgw2oBRmi2deSrs8smWmJi4a 
+0x34295cc13626c1 gov/engine/auth auth/app.cpp 87 role node 
+0x34295cc13647fb gov/engine/auth auth/app.cpp 98 Topology MESH 
+0x34295cc1367653 gov/engine/auth auth/app.cpp 108 stage is node 
+0x34295cc1369866 gov/engine/auth auth/app.cpp 131 set stage node 
+0x34295cc136c99a gov/engine/auth auth/app.cpp 139 creating tx node_address 2P2drgw2oBRmi2deSrs8smWmJi4a 192.168.0.38:35974 22572 
+0x34295cc1379387 gov/engine evidence.cpp 25 created evidence 0x7f575cff80d0 
+0x34295cc137b663 gov/engine/auth auth/app.cpp 398 process node_address evidence. 2P2drgw2oBRmi2deSrs8smWmJi4a 
+0x34295cc1386eda gov/engine/auth app   node_address::pkh 2P2drgw2oBRmi2deSrs8smWmJi4a
+0x34295cc1386eda gov/engine/auth app   node_address::net_addr 637577408
+0x34295cc1386eda gov/engine/auth app   node_address::pport 22572
+0x34295cc1393185 gov/engine/auth auth/app.cpp 412 B112 
+0x34295cc1396a73 gov/engine evidence.cpp 29 destroyed evidence 0x7f575cff80d0 
+0x34295cc1398f63 gov/engine peer_t.cpp 173 stage node 
+0x34295cc139bf29 gov/peer grid_t.cpp 203 add_to_grid 0x7f5754013670 192.168.0.38:35974 
+0x34295cc139f7de gov/peer grid_t.cpp 223 grid-added peer_t 0x7f5754013670 192.168.0.38:35974 2P2drgw2oBRmi2deSrs8smWmJi4a 
+0x34295cc13ab751 gov/engine peer_t.cpp 182 added to grid 
+0x34295cc13ada2f gov/id peer_t.cpp 532 signaling VERIF_COMPLETED. 
+0x34295cc13afc54 gov/socket datagram.cpp 238 deleted datagram 0x7f576400ea60 
+0x34295cc13b2f0c gov/socket peer_t.cpp 191 dispatched job 192.168.0.38:35974 
+0x34295cc13b51ab gov/socket peer_t.cpp 202 work completed 
+0x34295cc13b7314 gov/socket peer_t.cpp 123 worker ended recv TAG661 
+0x34295cc13b94e8 gov/socket peer_t.cpp 214 end service TAG301 
+0x34295cc13bb57d gov bgtask.cpp 105 wakeup 
+0x34295cc13bd4ae gov bgtask.cpp 111 reset resume 
+0x34295cc13bfe67 gov/socket/multipeer server.cpp 113 onwakeup 
+0x34295cc13c1fe2 gov/socket/multipeer clients.cpp 80 feeding loopback interface 
+0x34295cc13cf51d gov/socket/multipeer thpool.cpp 81 -end job------------------ fd364 192.168.0.38:35974 
+0x34295cc13d285f gov/socket/multipeer thpool.cpp 64 empty queue 

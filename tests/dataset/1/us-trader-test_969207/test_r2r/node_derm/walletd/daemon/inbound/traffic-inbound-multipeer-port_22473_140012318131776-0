@@ -1,0 +1,968 @@
+0x3429503985608c start test_r2r/node_derm/walletd/daemon/inbound/traffic-inbound-multipeer-port_22473
+0x34295039857aca gov/socket/multipeer server.cpp 124 recv thread init 
+0x3429503985d607 gov/socket client.cpp 390 connect0 127.0.0.1 block?= 0 
+0x3429503985f62d gov/socket client.cpp 187 ip4_encode. resolved IP4  127.0.0.1 16777343 
+0x34295039861257 gov/socket client.cpp 360 connect0 127.0.0.1:22473 block?= 0 
+0x34295039862e9b gov/socket client.cpp 327 init_sock block= 0 
+0x34295039864bf1 gov/socket client.cpp 334 is non-blocking? 0 
+0x34295039866239 gov/socket client.cpp 339 ::connect 127.0.0.1:22473 
+0x342950398722be gov/socket client.cpp 341 / ::connect 127.0.0.1:22473 0 
+0x34295039873f56 gov/socket client.cpp 353 init_sock set non-block 
+0x34295039875102 gov/socket client.cpp 380 reset ts activity = now 2 
+0x342950398766cd gov/socket client.cpp 384 connect-outbound 195 127.0.0.1:22473 
+0x3429503987745a gov/socket client.cpp 395 on_connect ok 
+0x34295039879459 gov/socket/multipeer server.cpp 170 main recv loop 
+0x3429503987a367 gov/socket/multipeer server.cpp 175 update 
+0x3429503987b203 gov/socket/multipeer clients.cpp 86 update 0 0 clients sz 0 
+0x3429503987d1f4 gov/socket/multipeer server.cpp 187 select 
+0x342950752dcb22 gov/socket/multipeer server.cpp 193 1 197 
+0x342950752df995 gov/socket/multipeer server.cpp 196 accept 194 
+0x342950752e58de gov/socket daemon_t.cpp 160 new_peer 211 
+0x342950752ebb29 gov/socket client.cpp 57 contructor-inbound 211 192.168.0.38:33034 
+0x342950752f0cb0 gov/socket daemon_t.cpp 162 new inbound connection 211 192.168.0.38:33034 
+0x342950752f1d61 gov/socket daemon_t.cpp 43 attach 211 192.168.0.38:33034 
+0x342950752f297a gov/socket daemon_t.cpp 48 RBF -DISABLED BAN- lookup ban list 
+0x342950752f3778 gov/socket daemon_t.cpp 60 connected 192.168.0.38:33034 
+0x342950752f42d3 gov/socket daemon_t.cpp 62 setting not_blocking_mode 211 
+0x342950752f522d gov/socket/multipeer clients.cpp 32 add 211 sz 0 
+0x342950752f753c gov/socket/multipeer clients.cpp 39 added 211 clients_sz 1 
+0x342950752f84ef gov bgtask.cpp 105 wakeup 
+0x342950752f9065 gov bgtask.cpp 111 reset resume 
+0x342950752fa293 gov/socket/multipeer server.cpp 113 onwakeup 
+0x342950752faefe gov/socket/multipeer clients.cpp 80 feeding loopback interface 
+0x342950752ff6fe gov/socket/multipeer server.cpp 216 honest sz  0 
+0x34295075300f57 gov/socket/multipeer server.cpp 175 update 
+0x34295075301b82 gov/socket/multipeer clients.cpp 86 update 0 0 clients sz 1 
+0x34295075303342 gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x34295075304308 gov/socket peer_t.cpp 57 check stalled 
+0x34295075304edc gov/socket peer_t.cpp 60 no dgram created yet 
+0x34295075305e3e gov/peer peer_t.cpp 61 auth_window 10 
+0x34295075306bc5 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429507530779f gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x342950753089be gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x3429507530a2f3 gov/socket/multipeer server.cpp 187 select 
+0x3429507530b2d7 gov/socket/multipeer server.cpp 193 1 211 
+0x3429507530be41 gov/socket/multipeer server.cpp 216 honest sz  1 
+0x3429507530ca86 gov/socket/multipeer server.cpp 234 flush loopback 
+0x3429507530dab5 gov/socket/multipeer server.cpp 175 update 
+0x3429507530e570 gov/socket/multipeer clients.cpp 86 update 1 0 clients sz 1 
+0x3429507530f6d1 gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x3429507531024e gov/socket peer_t.cpp 57 check stalled 
+0x34295075310bf6 gov/socket peer_t.cpp 60 no dgram created yet 
+0x34295075311799 gov/peer peer_t.cpp 61 auth_window 10 
+0x3429507531232c gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x34295075312dc2 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x34295075313c8d gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x34295075314a14 gov/socket/multipeer server.cpp 187 select 
+0x34295075342fac gov/socket/multipeer server.cpp 193 1 211 
+0x342950753455e3 gov/socket/multipeer server.cpp 216 honest sz  1 
+0x342950753473c6 gov/socket/multipeer server.cpp 229 work out incoming data 192.168.0.38:33034 
+0x342950753495b4 gov/socket/multipeer handler_daemon_t.cpp 87 receive_and_process 
+0x3429507534a449 gov/socket/multipeer thpool.cpp 90 add client to work processing queue 
+0x3429507534b6c0 gov/socket peer_t.cpp 117 prepare_worker recv TAG661 
+0x3429507534c4a9 gov/socket/multipeer thpool.cpp 100 worker locked. recv work queued 
+0x3429507534d926 gov/socket/multipeer thpool.cpp 102 pool fd211 192.168.0.38:33034 
+0x3429507534f28a gov/socket/multipeer thpool.cpp 104 work queue sz= 1 
+0x3429507535001a gov/socket/multipeer thpool.cpp 110 signal one thread to handle the job 
+0x34295075354610 gov/socket/multipeer server.cpp 175 update 
+0x34295075355290 gov/socket/multipeer clients.cpp 86 update 1 0 clients sz 1 
+0x3429507535a2e7 gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x3429507535b01f gov/socket peer_t.cpp 57 check stalled 
+0x3429507535bb0e gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429507535c8b2 gov/peer peer_t.cpp 61 auth_window 10 
+0x3429507535d538 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429507535e2c8 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429507535f425 gov/socket/multipeer clients.cpp 117 not ready to receive. 211 192.168.0.38:33034 
+0x3429507536044a gov/socket/multipeer server.cpp 187 select 
+0x34295075458bee gov/socket/multipeer server.cpp 193 1 197 
+0x3429507545b3dc gov/socket/multipeer server.cpp 216 honest sz  0 
+0x3429507545c54f gov/socket/multipeer server.cpp 234 flush loopback 
+0x3429507545d7d4 gov/socket/multipeer server.cpp 175 update 
+0x3429507545e519 gov/socket/multipeer clients.cpp 86 update 0 0 clients sz 1 
+0x3429507545fee2 gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x34295075460e51 gov/socket peer_t.cpp 57 check stalled 
+0x34295075461a82 gov/socket peer_t.cpp 60 no dgram created yet 
+0x34295075463aba gov/peer peer_t.cpp 61 auth_window 10 
+0x34295075464b4e gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x342950754657cf gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x34295075466a36 gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x34295075467e26 gov/socket/multipeer server.cpp 187 select 
+0x342950755cbde1 gov/socket/multipeer server.cpp 193 1 211 
+0x342950755ce5e6 gov/socket/multipeer server.cpp 216 honest sz  1 
+0x342950755d0554 gov/socket/multipeer server.cpp 229 work out incoming data 192.168.0.38:33034 
+0x342950755d14a3 gov/socket/multipeer handler_daemon_t.cpp 87 receive_and_process 
+0x342950755d2105 gov/socket/multipeer thpool.cpp 90 add client to work processing queue 
+0x342950755d31b8 gov/socket peer_t.cpp 117 prepare_worker recv TAG661 
+0x342950755d3eae gov/socket/multipeer thpool.cpp 100 worker locked. recv work queued 
+0x342950755d527c gov/socket/multipeer thpool.cpp 102 pool fd211 192.168.0.38:33034 
+0x342950755d6505 gov/socket/multipeer thpool.cpp 104 work queue sz= 1 
+0x342950755d71d1 gov/socket/multipeer thpool.cpp 110 signal one thread to handle the job 
+0x342950755d887f gov/socket/multipeer server.cpp 175 update 
+0x342950755d96a2 gov/socket/multipeer clients.cpp 86 update 1 0 clients sz 1 
+0x342950755dacf4 gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x342950755dbada gov/socket peer_t.cpp 57 check stalled 
+0x342950755dc683 gov/socket peer_t.cpp 60 no dgram created yet 
+0x342950755dd426 gov/peer peer_t.cpp 61 auth_window 10 
+0x342950755de0e3 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x342950755deca4 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x342950755dfe98 gov/socket/multipeer clients.cpp 117 not ready to receive. 211 192.168.0.38:33034 
+0x342950755e0f33 gov/socket/multipeer server.cpp 187 select 
+0x342950756e2d55 gov/socket/multipeer server.cpp 193 1 197 
+0x342950756e5579 gov/socket/multipeer server.cpp 216 honest sz  0 
+0x342950756e6704 gov/socket/multipeer server.cpp 234 flush loopback 
+0x342950756e7a1c gov/socket/multipeer server.cpp 175 update 
+0x342950756e87a3 gov/socket/multipeer clients.cpp 86 update 0 0 clients sz 1 
+0x342950756ea187 gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x342950756eb093 gov/socket peer_t.cpp 57 check stalled 
+0x342950756eca36 gov/socket peer_t.cpp 60 no dgram created yet 
+0x342950756ed851 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x342950756ee45d gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x342950756f0470 gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x342950756f193b gov/socket/multipeer server.cpp 187 select 
+0x342950b10e3e99 gov/socket/multipeer server.cpp 193 1 211 
+0x342950b10f3d5e gov/socket/multipeer server.cpp 216 honest sz  1 
+0x342950b10ffa76 gov/socket/multipeer server.cpp 229 work out incoming data 192.168.0.38:33034 
+0x342950b1104f62 gov/socket/multipeer handler_daemon_t.cpp 87 receive_and_process 
+0x342950b1108fb3 gov/socket/multipeer thpool.cpp 90 add client to work processing queue 
+0x342950b110e9cc gov/socket peer_t.cpp 117 prepare_worker recv TAG661 
+0x342950b1112dbd gov/socket/multipeer thpool.cpp 100 worker locked. recv work queued 
+0x342950b111980d gov/socket/multipeer thpool.cpp 102 pool fd211 192.168.0.38:33034 
+0x342950b111fd49 gov/socket/multipeer thpool.cpp 104 work queue sz= 1 
+0x342950b11240ea gov/socket/multipeer thpool.cpp 110 signal one thread to handle the job 
+0x342950b112bbde gov/socket/multipeer server.cpp 175 update 
+0x342950b11309be gov/socket/multipeer clients.cpp 86 update 1 0 clients sz 1 
+0x342950b113843c gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x342950b113d1b2 gov/socket peer_t.cpp 57 check stalled 
+0x342950b1141006 gov/socket peer_t.cpp 60 no dgram created yet 
+0x342950b114566a gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x342950b1149737 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x342950b1155a77 gov/socket/multipeer clients.cpp 117 not ready to receive. 211 192.168.0.38:33034 
+0x342950b115c860 gov/socket/multipeer server.cpp 187 select 
+0x342950b1436996 gov/socket/multipeer server.cpp 193 1 197 
+0x342950b1444d5c gov/socket/multipeer server.cpp 216 honest sz  0 
+0x342950b144ab07 gov/socket/multipeer server.cpp 234 flush loopback 
+0x342950b1450ed2 gov/socket/multipeer server.cpp 175 update 
+0x342950b1455594 gov/socket/multipeer clients.cpp 86 update 0 0 clients sz 1 
+0x342950b145e24e gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x342950b1463d10 gov/socket peer_t.cpp 57 check stalled 
+0x342950b1468172 gov/socket peer_t.cpp 60 no dgram created yet 
+0x342950b146c6a2 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x342950b1470565 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x342950b14769ef gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x342950b147cf03 gov/socket/multipeer server.cpp 187 select 
+0x3429522313877c gov/socket/multipeer server.cpp 193 1 211 
+0x3429522314819c gov/socket/multipeer server.cpp 216 honest sz  1 
+0x34295223153749 gov/socket/multipeer server.cpp 229 work out incoming data 192.168.0.38:33034 
+0x3429522315922e gov/socket/multipeer handler_daemon_t.cpp 87 receive_and_process 
+0x3429522315d04a gov/socket/multipeer thpool.cpp 90 add client to work processing queue 
+0x342952231620e0 gov/socket peer_t.cpp 117 prepare_worker recv TAG661 
+0x3429522316619b gov/socket/multipeer thpool.cpp 100 worker locked. recv work queued 
+0x3429522316c9b8 gov/socket/multipeer thpool.cpp 102 pool fd211 192.168.0.38:33034 
+0x3429522317296c gov/socket/multipeer thpool.cpp 104 work queue sz= 1 
+0x34295223176c0d gov/socket/multipeer thpool.cpp 110 signal one thread to handle the job 
+0x3429522317e050 gov/socket/multipeer server.cpp 175 update 
+0x3429522318289f gov/socket/multipeer clients.cpp 86 update 1 0 clients sz 1 
+0x3429522318a1f9 gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x3429522318f055 gov/socket peer_t.cpp 57 check stalled 
+0x34295223192cae gov/socket peer_t.cpp 60 no dgram created yet 
+0x34295223196f66 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x342952231a17d9 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x342952231a8cc3 gov/socket/multipeer clients.cpp 117 not ready to receive. 211 192.168.0.38:33034 
+0x342952231aeb88 gov/socket/multipeer server.cpp 187 select 
+0x342952233a3803 gov/socket/multipeer server.cpp 193 1 197 
+0x342952233b6bf2 gov/socket/multipeer server.cpp 216 honest sz  0 
+0x342952233bd159 gov/socket/multipeer server.cpp 234 flush loopback 
+0x342952233c363c gov/socket/multipeer server.cpp 175 update 
+0x342952233c7cc7 gov/socket/multipeer clients.cpp 86 update 0 0 clients sz 1 
+0x342952233d1543 gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x342952233d6848 gov/socket peer_t.cpp 57 check stalled 
+0x342952233da599 gov/socket peer_t.cpp 60 no dgram created yet 
+0x342952233de802 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x342952233e2611 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x342952233e8307 gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x342952233ee39f gov/socket/multipeer server.cpp 187 select 
+0x3429559e84b70e gov/socket/multipeer server.cpp 193 1 211 
+0x3429559e85ad3e gov/socket/multipeer server.cpp 196 accept 194 
+0x3429559e864afe gov/socket daemon_t.cpp 160 new_peer 326 
+0x3429559e870a58 gov/socket client.cpp 57 contructor-inbound 326 192.168.0.38:33062 
+0x3429559e879821 gov/socket daemon_t.cpp 162 new inbound connection 326 192.168.0.38:33062 
+0x3429559e87f2b3 gov/socket daemon_t.cpp 43 attach 326 192.168.0.38:33062 
+0x3429559e882e43 gov/socket daemon_t.cpp 48 RBF -DISABLED BAN- lookup ban list 
+0x3429559e887db2 gov/socket daemon_t.cpp 60 connected 192.168.0.38:33062 
+0x3429559e88bae0 gov/socket daemon_t.cpp 62 setting not_blocking_mode 326 
+0x3429559e890691 gov/socket/multipeer clients.cpp 32 add 326 sz 1 
+0x3429559e89914d gov/socket/multipeer clients.cpp 39 added 326 clients_sz 2 
+0x3429559e89e25e gov bgtask.cpp 105 wakeup 
+0x3429559e8a1bd3 gov bgtask.cpp 111 reset resume 
+0x3429559e8a6acb gov/socket/multipeer server.cpp 113 onwakeup 
+0x3429559e8aaa52 gov/socket/multipeer clients.cpp 80 feeding loopback interface 
+0x3429559e8be472 gov/socket/multipeer server.cpp 216 honest sz  1 
+0x3429559e8c5b21 gov/socket/multipeer server.cpp 175 update 
+0x3429559e8ca457 gov/socket/multipeer clients.cpp 86 update 1 0 clients sz 2 
+0x3429559e8d24d0 gov/socket/multipeer clients.cpp 95 192.168.0.38:33062 
+0x3429559e8d7255 gov/socket peer_t.cpp 57 check stalled 
+0x3429559e8dad9c gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429559e8df6e8 gov/peer peer_t.cpp 61 auth_window 10 
+0x3429559e8e3d5d gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429559e8e7992 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429559e8eda46 gov/socket/multipeer clients.cpp 113 ready to receive. 326 192.168.0.38:33062 
+0x3429559e8f3c85 gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x3429559e8f78f1 gov/socket peer_t.cpp 57 check stalled 
+0x3429559e8faeff gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429559e8fe62f gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429559e901d71 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429559e906cf8 gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x3429559e90d502 gov/socket/multipeer server.cpp 187 select 
+0x3429559e913ca6 gov/socket/multipeer server.cpp 193 1 326 
+0x3429559e917b20 gov/socket/multipeer server.cpp 216 honest sz  2 
+0x3429559e91bf53 gov/socket/multipeer server.cpp 234 flush loopback 
+0x3429559e92124c gov/socket/multipeer server.cpp 175 update 
+0x3429559e924b32 gov/socket/multipeer clients.cpp 86 update 2 0 clients sz 2 
+0x3429559e92b0b7 gov/socket/multipeer clients.cpp 95 192.168.0.38:33062 
+0x3429559e92ee6d gov/socket peer_t.cpp 57 check stalled 
+0x3429559e9327d8 gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429559e93652f gov/peer peer_t.cpp 61 auth_window 10 
+0x3429559e93a1e7 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429559e93db8a gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429559e942f38 gov/socket/multipeer clients.cpp 113 ready to receive. 326 192.168.0.38:33062 
+0x3429559e94840e gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x3429559e94bec0 gov/socket peer_t.cpp 57 check stalled 
+0x3429559e94f944 gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429559e953302 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429559e9572c3 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429559e961648 gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x3429559e9663e4 gov/socket/multipeer server.cpp 187 select 
+0x3429559e9d7f36 gov/socket/multipeer server.cpp 193 1 326 
+0x3429559e9e6500 gov/socket/multipeer server.cpp 216 honest sz  2 
+0x3429559e9f117b gov/socket/multipeer server.cpp 229 work out incoming data 192.168.0.38:33062 
+0x3429559e9f64ac gov/socket/multipeer handler_daemon_t.cpp 87 receive_and_process 
+0x3429559e9fa4e5 gov/socket/multipeer thpool.cpp 90 add client to work processing queue 
+0x3429559ea008a8 gov/socket peer_t.cpp 117 prepare_worker recv TAG661 
+0x3429559ea053d3 gov/socket/multipeer thpool.cpp 100 worker locked. recv work queued 
+0x3429559ea0c0ce gov/socket/multipeer thpool.cpp 102 pool fd326 192.168.0.38:33062 
+0x3429559ea12492 gov/socket/multipeer thpool.cpp 104 work queue sz= 1 
+0x3429559ea16f68 gov/socket/multipeer thpool.cpp 110 signal one thread to handle the job 
+0x3429559ea1e629 gov/socket/multipeer server.cpp 175 update 
+0x3429559ea2310c gov/socket/multipeer clients.cpp 86 update 2 0 clients sz 2 
+0x3429559ea2b71d gov/socket/multipeer clients.cpp 95 192.168.0.38:33062 
+0x3429559ea30af2 gov/socket peer_t.cpp 57 check stalled 
+0x3429559ea34cc7 gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429559ea4137a gov/peer peer_t.cpp 61 auth_window 10 
+0x3429559ea537cd gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429559ea5beca gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429559ea62a13 gov/socket/multipeer clients.cpp 117 not ready to receive. 326 192.168.0.38:33062 
+0x3429559ea68a0d gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x3429559ea6cccb gov/socket peer_t.cpp 57 check stalled 
+0x3429559ea709a1 gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429559ea7474d gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429559ea7c728 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429559ea8286b gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x3429559ea88dcf gov/socket/multipeer server.cpp 187 select 
+0x3429559ecdfa07 gov/socket/multipeer server.cpp 193 1 211 
+0x3429559ece254d gov/socket/multipeer server.cpp 216 honest sz  1 
+0x3429559ece3704 gov/socket/multipeer server.cpp 234 flush loopback 
+0x3429559ece4a3c gov/socket/multipeer server.cpp 175 update 
+0x3429559ece57f0 gov/socket/multipeer clients.cpp 86 update 1 0 clients sz 2 
+0x3429559ece7498 gov/socket/multipeer clients.cpp 95 192.168.0.38:33062 
+0x3429559ece849c gov/socket peer_t.cpp 57 check stalled 
+0x3429559ece905e gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429559eceb146 gov/peer peer_t.cpp 61 auth_window 10 
+0x3429559ecec0a7 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429559ececd34 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429559ecee01e gov/socket/multipeer clients.cpp 113 ready to receive. 326 192.168.0.38:33062 
+0x3429559ecef440 gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x3429559eceff3f gov/socket peer_t.cpp 57 check stalled 
+0x3429559ecf0976 gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429559ecf1589 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429559ecf204f gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429559ecf2f7a gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x3429559ecf4015 gov/socket/multipeer server.cpp 187 select 
+0x3429559ee6b957 gov/socket/multipeer server.cpp 193 1 326 
+0x3429559ee6e31d gov/socket/multipeer server.cpp 216 honest sz  2 
+0x3429559ee702ec gov/socket/multipeer server.cpp 229 work out incoming data 192.168.0.38:33062 
+0x3429559ee71240 gov/socket/multipeer handler_daemon_t.cpp 87 receive_and_process 
+0x3429559ee72046 gov/socket/multipeer thpool.cpp 90 add client to work processing queue 
+0x3429559ee72fde gov/socket peer_t.cpp 117 prepare_worker recv TAG661 
+0x3429559ee73bfe gov/socket/multipeer thpool.cpp 100 worker locked. recv work queued 
+0x3429559ee74f6c gov/socket/multipeer thpool.cpp 102 pool fd326 192.168.0.38:33062 
+0x3429559ee76135 gov/socket/multipeer thpool.cpp 104 work queue sz= 1 
+0x3429559ee77fc6 gov/socket/multipeer thpool.cpp 110 signal one thread to handle the job 
+0x3429559ee79846 gov/socket/multipeer server.cpp 175 update 
+0x3429559ee7a616 gov/socket/multipeer clients.cpp 86 update 2 0 clients sz 2 
+0x3429559ee7bcbc gov/socket/multipeer clients.cpp 95 192.168.0.38:33062 
+0x3429559ee7ca80 gov/socket peer_t.cpp 57 check stalled 
+0x3429559ee7d622 gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429559ee7e3e5 gov/peer peer_t.cpp 61 auth_window 10 
+0x3429559ee7f0e7 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429559ee7fd39 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429559ee80e5f gov/socket/multipeer clients.cpp 117 not ready to receive. 326 192.168.0.38:33062 
+0x3429559ee81ed9 gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x3429559ee8298e gov/socket peer_t.cpp 57 check stalled 
+0x3429559ee832f2 gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429559ee83f7d gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429559ee84c49 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429559ee86dbd gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x3429559ee8821a gov/socket/multipeer server.cpp 187 select 
+0x3429559f00c88b gov/socket/multipeer server.cpp 193 1 211 
+0x3429559f00dc98 gov/socket/multipeer server.cpp 216 honest sz  1 
+0x3429559f00edd1 gov/socket/multipeer server.cpp 234 flush loopback 
+0x3429559f00fdfb gov/socket/multipeer server.cpp 175 update 
+0x3429559f010b65 gov/socket/multipeer clients.cpp 86 update 1 0 clients sz 2 
+0x3429559f0123d0 gov/socket/multipeer clients.cpp 95 192.168.0.38:33062 
+0x3429559f01335f gov/socket peer_t.cpp 57 check stalled 
+0x3429559f013fa8 gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429559f01747f gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429559f018bf9 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429559f019ff0 gov/socket/multipeer clients.cpp 113 ready to receive. 326 192.168.0.38:33062 
+0x3429559f01b43b gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x3429559f01c033 gov/socket peer_t.cpp 57 check stalled 
+0x3429559f01cb65 gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429559f01d6b6 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429559f01e16d gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429559f01f176 gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x3429559f020450 gov/socket/multipeer server.cpp 187 select 
+0x3429559f055c53 gov/socket/multipeer server.cpp 193 1 326 
+0x3429559f056cf0 gov/socket/multipeer server.cpp 216 honest sz  2 
+0x3429559f05856f gov/socket/multipeer server.cpp 229 work out incoming data 192.168.0.38:33062 
+0x3429559f059380 gov/socket/multipeer handler_daemon_t.cpp 87 receive_and_process 
+0x3429559f059ebd gov/socket/multipeer thpool.cpp 90 add client to work processing queue 
+0x3429559f05adb8 gov/socket peer_t.cpp 117 prepare_worker recv TAG661 
+0x3429559f05ba1d gov/socket/multipeer thpool.cpp 100 worker locked. recv work queued 
+0x3429559f05cc97 gov/socket/multipeer thpool.cpp 102 pool fd326 192.168.0.38:33062 
+0x3429559f05de06 gov/socket/multipeer thpool.cpp 104 work queue sz= 1 
+0x3429559f05ea1e gov/socket/multipeer thpool.cpp 110 signal one thread to handle the job 
+0x3429559f05fe92 gov/socket/multipeer server.cpp 175 update 
+0x3429559f060d19 gov/socket/multipeer clients.cpp 86 update 2 0 clients sz 2 
+0x3429559f0622c4 gov/socket/multipeer clients.cpp 95 192.168.0.38:33062 
+0x3429559f0630d2 gov/socket peer_t.cpp 57 check stalled 
+0x3429559f063c76 gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429559f064899 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429559f065403 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429559f066441 gov/socket/multipeer clients.cpp 117 not ready to receive. 326 192.168.0.38:33062 
+0x3429559f0674d4 gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x3429559f067ffa gov/socket peer_t.cpp 57 check stalled 
+0x3429559f0689af gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429559f0693d7 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429559f06b0ce gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429559f06c21b gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x3429559f06d34c gov/socket/multipeer server.cpp 187 select 
+0x3429559f3fd6e9 gov/socket/multipeer server.cpp 193 1 211 
+0x3429559f400330 gov/socket/multipeer server.cpp 216 honest sz  1 
+0x3429559f401739 gov/socket/multipeer server.cpp 234 flush loopback 
+0x3429559f402b98 gov/socket/multipeer server.cpp 175 update 
+0x3429559f4038ec gov/socket/multipeer clients.cpp 86 update 1 0 clients sz 2 
+0x3429559f405536 gov/socket/multipeer clients.cpp 95 192.168.0.38:33062 
+0x3429559f4063b8 gov/socket peer_t.cpp 57 check stalled 
+0x3429559f406f69 gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429559f407c3b gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429559f40879b gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429559f409940 gov/socket/multipeer clients.cpp 113 ready to receive. 326 192.168.0.38:33062 
+0x3429559f40ad9c gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x3429559f40b94a gov/socket peer_t.cpp 57 check stalled 
+0x3429559f40c351 gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429559f40cd9a gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429559f40d764 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429559f40e5e8 gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x3429559f40f59b gov/socket/multipeer server.cpp 187 select 
+0x3429559f682b8b gov/socket/multipeer server.cpp 193 1 326 
+0x3429559f685366 gov/socket/multipeer server.cpp 216 honest sz  2 
+0x3429559f68745f gov/socket/multipeer server.cpp 229 work out incoming data 192.168.0.38:33062 
+0x3429559f688422 gov/socket/multipeer handler_daemon_t.cpp 87 receive_and_process 
+0x3429559f688ff5 gov/socket/multipeer thpool.cpp 90 add client to work processing queue 
+0x3429559f689f93 gov/socket peer_t.cpp 117 prepare_worker recv TAG661 
+0x3429559f68ac7c gov/socket/multipeer thpool.cpp 100 worker locked. recv work queued 
+0x3429559f68bff1 gov/socket/multipeer thpool.cpp 102 pool fd326 192.168.0.38:33062 
+0x3429559f68d1c7 gov/socket/multipeer thpool.cpp 104 work queue sz= 1 
+0x3429559f68de09 gov/socket/multipeer thpool.cpp 110 signal one thread to handle the job 
+0x3429559f68f3a9 gov/socket/multipeer server.cpp 175 update 
+0x3429559f690171 gov/socket/multipeer clients.cpp 86 update 2 0 clients sz 2 
+0x3429559f691735 gov/socket/multipeer clients.cpp 95 192.168.0.38:33062 
+0x3429559f6925f0 gov/socket peer_t.cpp 57 check stalled 
+0x3429559f6931ed gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429559f693eb7 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429559f694a57 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429559f695c94 gov/socket/multipeer clients.cpp 117 not ready to receive. 326 192.168.0.38:33062 
+0x3429559f697107 gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x3429559f697cfb gov/socket peer_t.cpp 57 check stalled 
+0x3429559f698763 gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429559f699217 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429559f69d3b9 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429559f69f21b gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x3429559f6a0595 gov/socket/multipeer server.cpp 187 select 
+0x3429559f7bf633 gov/socket/multipeer server.cpp 193 1 211 
+0x3429559f7c20e7 gov/socket/multipeer server.cpp 216 honest sz  1 
+0x3429559f7c32d8 gov/socket/multipeer server.cpp 234 flush loopback 
+0x3429559f7c45bc gov/socket/multipeer server.cpp 175 update 
+0x3429559f7c530c gov/socket/multipeer clients.cpp 86 update 1 0 clients sz 2 
+0x3429559f7c6ec7 gov/socket/multipeer clients.cpp 95 192.168.0.38:33062 
+0x3429559f7c7dfa gov/socket peer_t.cpp 57 check stalled 
+0x3429559f7c8990 gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429559f7c960d gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429559f7ca22c gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429559f7cb42f gov/socket/multipeer clients.cpp 113 ready to receive. 326 192.168.0.38:33062 
+0x3429559f7cda06 gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x3429559f7ce595 gov/socket peer_t.cpp 57 check stalled 
+0x3429559f7cef23 gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429559f7cf932 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429559f7d032f gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429559f7d12d7 gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x3429559f7d2297 gov/socket/multipeer server.cpp 187 select 
+0x3429559f9503ed gov/socket/multipeer server.cpp 193 1 326 
+0x3429559f952ce5 gov/socket/multipeer server.cpp 216 honest sz  2 
+0x3429559f954b77 gov/socket/multipeer server.cpp 229 work out incoming data 192.168.0.38:33034 
+0x3429559f955a1a gov/socket/multipeer handler_daemon_t.cpp 87 receive_and_process 
+0x3429559f95795c gov/socket/multipeer thpool.cpp 90 add client to work processing queue 
+0x3429559f958d20 gov/socket peer_t.cpp 117 prepare_worker recv TAG661 
+0x3429559f9599f7 gov/socket/multipeer thpool.cpp 100 worker locked. recv work queued 
+0x3429559f95adf6 gov/socket/multipeer thpool.cpp 102 pool fd211 192.168.0.38:33034 
+0x3429559f95c093 gov/socket/multipeer thpool.cpp 104 work queue sz= 1 
+0x3429559f95cd1d gov/socket/multipeer thpool.cpp 110 signal one thread to handle the job 
+0x3429559f95e1b8 gov/socket/multipeer server.cpp 175 update 
+0x3429559f95ef67 gov/socket/multipeer clients.cpp 86 update 2 0 clients sz 2 
+0x3429559f96058b gov/socket/multipeer clients.cpp 95 192.168.0.38:33062 
+0x3429559f9613d0 gov/socket peer_t.cpp 57 check stalled 
+0x3429559f961f5f gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429559f962c08 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429559f96378c gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429559f964881 gov/socket/multipeer clients.cpp 113 ready to receive. 326 192.168.0.38:33062 
+0x3429559f965dab gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x3429559f96696c gov/socket peer_t.cpp 57 check stalled 
+0x3429559f9673d5 gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429559f967ec8 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429559f96897c gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429559f96986e gov/socket/multipeer clients.cpp 117 not ready to receive. 211 192.168.0.38:33034 
+0x3429559f96a864 gov/socket/multipeer server.cpp 187 select 
+0x3429559f9aa3ca gov/socket/multipeer server.cpp 193 1 326 
+0x3429559f9acbe7 gov/socket/multipeer server.cpp 216 honest sz  1 
+0x3429559f9add61 gov/socket/multipeer server.cpp 234 flush loopback 
+0x3429559f9af0b3 gov/socket/multipeer server.cpp 175 update 
+0x3429559f9afde1 gov/socket/multipeer clients.cpp 86 update 1 0 clients sz 2 
+0x3429559f9b1844 gov/socket/multipeer clients.cpp 95 192.168.0.38:33062 
+0x3429559f9b2773 gov/socket peer_t.cpp 57 check stalled 
+0x3429559f9b32fa gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429559f9b4094 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429559f9b4c29 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429559f9b5df4 gov/socket/multipeer clients.cpp 113 ready to receive. 326 192.168.0.38:33062 
+0x3429559f9b6f88 gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x3429559f9b7a65 gov/socket peer_t.cpp 57 check stalled 
+0x3429559f9b84eb gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429559f9b8f5b gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429559f9b9923 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429559f9ba83c gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x3429559f9bb73c gov/socket/multipeer server.cpp 187 select 
+0x3429559fda1242 gov/socket/multipeer server.cpp 193 1 326 
+0x3429559fda3f3b gov/socket/multipeer server.cpp 216 honest sz  2 
+0x3429559fda5f41 gov/socket/multipeer server.cpp 229 work out incoming data 192.168.0.38:33062 
+0x3429559fda6f1f gov/socket/multipeer handler_daemon_t.cpp 87 receive_and_process 
+0x3429559fda7b1d gov/socket/multipeer thpool.cpp 90 add client to work processing queue 
+0x3429559fda8b05 gov/socket peer_t.cpp 117 prepare_worker recv TAG661 
+0x3429559fda979e gov/socket/multipeer thpool.cpp 100 worker locked. recv work queued 
+0x3429559fdac3d8 gov/socket/multipeer thpool.cpp 102 pool fd326 192.168.0.38:33062 
+0x3429559fdad8d3 gov/socket/multipeer thpool.cpp 104 work queue sz= 1 
+0x3429559fdae5c0 gov/socket/multipeer thpool.cpp 110 signal one thread to handle the job 
+0x3429559fdafae7 gov/socket/multipeer server.cpp 175 update 
+0x3429559fdb087f gov/socket/multipeer clients.cpp 86 update 2 0 clients sz 2 
+0x3429559fdb1f09 gov/socket/multipeer clients.cpp 95 192.168.0.38:33062 
+0x3429559fdb2d6d gov/socket peer_t.cpp 57 check stalled 
+0x3429559fdb39ff gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429559fdb472c gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429559fdb538e gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429559fdb6596 gov/socket/multipeer clients.cpp 117 not ready to receive. 326 192.168.0.38:33062 
+0x3429559fdb75dc gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x3429559fdb80a4 gov/socket peer_t.cpp 57 check stalled 
+0x3429559fdb8a45 gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429559fdb949d gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429559fdb9f53 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429559fdbaf46 gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x3429559fdbc1c0 gov/socket/multipeer server.cpp 187 select 
+0x3429559fe68810 gov/socket/multipeer server.cpp 193 1 211 
+0x3429559fe6b074 gov/socket/multipeer server.cpp 216 honest sz  1 
+0x3429559fe6c2e3 gov/socket/multipeer server.cpp 234 flush loopback 
+0x3429559fe6d692 gov/socket/multipeer server.cpp 175 update 
+0x3429559fe6e3a7 gov/socket/multipeer clients.cpp 86 update 1 0 clients sz 2 
+0x3429559fe6fe01 gov/socket/multipeer clients.cpp 95 192.168.0.38:33062 
+0x3429559fe70d6a gov/socket peer_t.cpp 57 check stalled 
+0x3429559fe71bc9 gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429559fe729e2 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429559fe736c4 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429559fe7497b gov/socket/multipeer clients.cpp 113 ready to receive. 326 192.168.0.38:33062 
+0x3429559fe75c16 gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x3429559fe7670c gov/socket peer_t.cpp 57 check stalled 
+0x3429559fe77176 gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429559fe77bda gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429559fe786b1 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429559fe795de gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x3429559fe7a67b gov/socket/multipeer server.cpp 187 select 
+0x342955a27c26bd gov/socket/multipeer server.cpp 193 1 326 
+0x342955a27c83d9 gov/socket/multipeer server.cpp 216 honest sz  2 
+0x342955a27cc39a gov/socket/multipeer server.cpp 229 work out incoming data 192.168.0.38:33062 
+0x342955a27ce208 gov/socket/multipeer handler_daemon_t.cpp 87 receive_and_process 
+0x342955a27cf8ab gov/socket/multipeer thpool.cpp 90 add client to work processing queue 
+0x342955a27d1895 gov/socket peer_t.cpp 117 prepare_worker recv TAG661 
+0x342955a27d313a gov/socket/multipeer thpool.cpp 100 worker locked. recv work queued 
+0x342955a27d5825 gov/socket/multipeer thpool.cpp 102 pool fd326 192.168.0.38:33062 
+0x342955a27d7bc7 gov/socket/multipeer thpool.cpp 104 work queue sz= 1 
+0x342955a27d93dc gov/socket/multipeer thpool.cpp 110 signal one thread to handle the job 
+0x342955a27dbf2b gov/socket/multipeer server.cpp 175 update 
+0x342955a27dda89 gov/socket/multipeer clients.cpp 86 update 2 0 clients sz 2 
+0x342955a27e0634 gov/socket/multipeer clients.cpp 95 192.168.0.38:33062 
+0x342955a27e20f5 gov/socket peer_t.cpp 57 check stalled 
+0x342955a27e37fe gov/socket peer_t.cpp 60 no dgram created yet 
+0x342955a27e503b gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x342955a27e6664 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x342955a27e888b gov/socket/multipeer clients.cpp 117 not ready to receive. 326 192.168.0.38:33062 
+0x342955a27ea96a gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x342955a27ec379 gov/socket peer_t.cpp 57 check stalled 
+0x342955a27f1635 gov/socket peer_t.cpp 60 no dgram created yet 
+0x342955a27f35c6 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x342955a27f4c57 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x342955a27f6cf6 gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x342955a27f91ae gov/socket/multipeer server.cpp 187 select 
+0x342955a297fe73 gov/socket/multipeer server.cpp 193 1 211 
+0x342955a299847a gov/socket/multipeer server.cpp 216 honest sz  1 
+0x342955a299eee7 gov/socket/multipeer server.cpp 234 flush loopback 
+0x342955a29a2679 gov/socket/multipeer server.cpp 175 update 
+0x342955a29a47bf gov/socket/multipeer clients.cpp 86 update 1 0 clients sz 2 
+0x342955a29a8453 gov/socket/multipeer clients.cpp 95 192.168.0.38:33062 
+0x342955a29aa66a gov/socket peer_t.cpp 57 check stalled 
+0x342955a29acb17 gov/socket peer_t.cpp 60 no dgram created yet 
+0x342955a29b1406 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x342955a29b35c9 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x342955a29b5f91 gov/socket/multipeer clients.cpp 113 ready to receive. 326 192.168.0.38:33062 
+0x342955a29b8aac gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x342955a29ba42e gov/socket peer_t.cpp 57 check stalled 
+0x342955a29bba80 gov/socket peer_t.cpp 60 no dgram created yet 
+0x342955a29bd19e gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x342955a29be6c6 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x342955a29c0864 gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x342955a29c4768 gov/socket/multipeer server.cpp 187 select 
+0x342955a2e5da95 gov/socket/multipeer server.cpp 193 1 326 
+0x342955a2e64e19 gov/socket/multipeer server.cpp 216 honest sz  2 
+0x342955a2e6a188 gov/socket/multipeer server.cpp 229 work out incoming data 192.168.0.38:33062 
+0x342955a2e6c993 gov/socket/multipeer handler_daemon_t.cpp 87 receive_and_process 
+0x342955a2e6e7e7 gov/socket/multipeer thpool.cpp 90 add client to work processing queue 
+0x342955a2e71086 gov/socket peer_t.cpp 117 prepare_worker recv TAG661 
+0x342955a2e7318f gov/socket/multipeer thpool.cpp 100 worker locked. recv work queued 
+0x342955a2e762c4 gov/socket/multipeer thpool.cpp 102 pool fd326 192.168.0.38:33062 
+0x342955a2e791f8 gov/socket/multipeer thpool.cpp 104 work queue sz= 1 
+0x342955a2e7b176 gov/socket/multipeer thpool.cpp 110 signal one thread to handle the job 
+0x342955a2e7ee12 gov/socket/multipeer server.cpp 175 update 
+0x342955a2e81394 gov/socket/multipeer clients.cpp 86 update 2 0 clients sz 2 
+0x342955a2e84df2 gov/socket/multipeer clients.cpp 95 192.168.0.38:33062 
+0x342955a2e87280 gov/socket peer_t.cpp 57 check stalled 
+0x342955a2e890f8 gov/socket peer_t.cpp 60 no dgram created yet 
+0x342955a2e8b6c9 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x342955a2e8d7a3 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x342955a2e9040b gov/socket/multipeer clients.cpp 117 not ready to receive. 326 192.168.0.38:33062 
+0x342955a2e92f40 gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x342955a2e94b0a gov/socket peer_t.cpp 57 check stalled 
+0x342955a2e96540 gov/socket peer_t.cpp 60 no dgram created yet 
+0x342955a2e98186 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x342955a2e99bfd gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x342955a2e9c785 gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x342955a2e9f663 gov/socket/multipeer server.cpp 187 select 
+0x342955a38346f7 gov/socket/multipeer server.cpp 193 1 211 
+0x342955a383e525 gov/socket/multipeer server.cpp 216 honest sz  1 
+0x342955a384232d gov/socket/multipeer server.cpp 234 flush loopback 
+0x342955a384650e gov/socket/multipeer server.cpp 175 update 
+0x342955a3849397 gov/socket/multipeer clients.cpp 86 update 1 0 clients sz 2 
+0x342955a384ec75 gov/socket/multipeer clients.cpp 95 192.168.0.38:33062 
+0x342955a3852286 gov/socket peer_t.cpp 57 check stalled 
+0x342955a38548ab gov/socket peer_t.cpp 60 no dgram created yet 
+0x342955a3857161 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x342955a385967f gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x342955a3861453 gov/socket/multipeer clients.cpp 113 ready to receive. 326 192.168.0.38:33062 
+0x342955a3865719 gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x342955a3867e18 gov/socket peer_t.cpp 57 check stalled 
+0x342955a386a206 gov/socket peer_t.cpp 60 no dgram created yet 
+0x342955a38718fc gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x342955a38749d5 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x342955a38786a0 gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x342955a387be88 gov/socket/multipeer server.cpp 187 select 
+0x342955a69d91c3 gov/socket/multipeer server.cpp 193 1 326 
+0x342955a69e7e1d gov/socket/multipeer server.cpp 216 honest sz  2 
+0x342955a69f3146 gov/socket/multipeer server.cpp 229 work out incoming data 192.168.0.38:33062 
+0x342955a69f8777 gov/socket/multipeer handler_daemon_t.cpp 87 receive_and_process 
+0x342955a69fc6eb gov/socket/multipeer thpool.cpp 90 add client to work processing queue 
+0x342955a6a01d82 gov/socket peer_t.cpp 117 prepare_worker recv TAG661 
+0x342955a6a06a69 gov/socket/multipeer thpool.cpp 100 worker locked. recv work queued 
+0x342955a6a14045 gov/socket/multipeer thpool.cpp 102 pool fd326 192.168.0.38:33062 
+0x342955a6a1b859 gov/socket/multipeer thpool.cpp 104 work queue sz= 1 
+0x342955a6a20166 gov/socket/multipeer thpool.cpp 110 signal one thread to handle the job 
+0x342955a6a27b5a gov/socket/multipeer server.cpp 175 update 
+0x342955a6a30786 gov/socket/multipeer clients.cpp 86 update 2 0 clients sz 2 
+0x342955a6a38fca gov/socket/multipeer clients.cpp 95 192.168.0.38:33062 
+0x342955a6a3ddea gov/socket peer_t.cpp 57 check stalled 
+0x342955a6a4205f gov/socket peer_t.cpp 60 no dgram created yet 
+0x342955a6a46b56 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x342955a6a4aca1 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x342955a6a50f21 gov/socket/multipeer clients.cpp 117 not ready to receive. 326 192.168.0.38:33062 
+0x342955a6a56b34 gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x342955a6a5dec0 gov/socket peer_t.cpp 57 check stalled 
+0x342955a6a61f08 gov/socket peer_t.cpp 60 no dgram created yet 
+0x342955a6a658dc gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x342955a6a69237 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x342955a6a6e5f8 gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x342955a6a745f8 gov/socket/multipeer server.cpp 187 select 
+0x342955a7a05d50 gov/socket/multipeer server.cpp 193 1 211 
+0x342955a7a1414a gov/socket/multipeer server.cpp 216 honest sz  1 
+0x342955a7a3fca3 gov/socket/multipeer server.cpp 234 flush loopback 
+0x342955a7a5072b gov/socket/multipeer server.cpp 175 update 
+0x342955a7a56077 gov/socket/multipeer clients.cpp 86 update 1 0 clients sz 2 
+0x342955a7a5f70a gov/socket/multipeer clients.cpp 95 192.168.0.38:33062 
+0x342955a7a64aa8 gov/socket peer_t.cpp 57 check stalled 
+0x342955a7a69214 gov/socket peer_t.cpp 60 no dgram created yet 
+0x342955a7a6d762 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x342955a7a715e3 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x342955a7a776c8 gov/socket/multipeer clients.cpp 113 ready to receive. 326 192.168.0.38:33062 
+0x342955a7a7da58 gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x342955a7a81e19 gov/socket peer_t.cpp 57 check stalled 
+0x342955a7a8566a gov/socket peer_t.cpp 60 no dgram created yet 
+0x342955a7a8920a gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x342955a7a8ca84 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x342955a7a91d7f gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x342955a7a971a2 gov/socket/multipeer server.cpp 187 select 
+0x342955a7a9d7de gov/socket/multipeer server.cpp 193 1 326 
+0x342955a7aa1b29 gov/socket/multipeer server.cpp 216 honest sz  2 
+0x342955a7aa8c6d gov/socket/multipeer server.cpp 229 work out incoming data 192.168.0.38:33062 
+0x342955a7aae740 gov/socket/multipeer handler_daemon_t.cpp 87 receive_and_process 
+0x342955a7ab2b1d gov/socket/multipeer thpool.cpp 90 add client to work processing queue 
+0x342955a7abd3fb gov/socket peer_t.cpp 117 prepare_worker recv TAG661 
+0x342955a7ac20b8 gov/socket/multipeer thpool.cpp 100 worker locked. recv work queued 
+0x342955a7ac8cea gov/socket/multipeer thpool.cpp 102 pool fd326 192.168.0.38:33062 
+0x342955a7aceedd gov/socket/multipeer thpool.cpp 104 work queue sz= 1 
+0x342955a7ad33cb gov/socket/multipeer thpool.cpp 110 signal one thread to handle the job 
+0x342955a7ada60c gov/socket/multipeer server.cpp 175 update 
+0x342955a7adeb41 gov/socket/multipeer clients.cpp 86 update 2 0 clients sz 2 
+0x342955a7ae5705 gov/socket/multipeer clients.cpp 95 192.168.0.38:33062 
+0x342955a7ae9a2f gov/socket peer_t.cpp 57 check stalled 
+0x342955a7aed4e3 gov/socket peer_t.cpp 60 no dgram created yet 
+0x342955a7af11aa gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x342955a7af504d gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x342955a7afaced gov/socket/multipeer clients.cpp 117 not ready to receive. 326 192.168.0.38:33062 
+0x342955a7b00afc gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x342955a7b04850 gov/socket peer_t.cpp 57 check stalled 
+0x342955a7b07c57 gov/socket peer_t.cpp 60 no dgram created yet 
+0x342955a7b0b987 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x342955a7b15516 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x342955a7b1bb65 gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x342955a7b211b0 gov/socket/multipeer server.cpp 187 select 
+0x342955a868ede5 gov/socket/multipeer server.cpp 193 1 211 
+0x342955a86a09d1 gov/socket/multipeer server.cpp 216 honest sz  1 
+0x342955a86a70aa gov/socket/multipeer server.cpp 234 flush loopback 
+0x342955a86ad89a gov/socket/multipeer server.cpp 175 update 
+0x342955a86b1f1c gov/socket/multipeer clients.cpp 86 update 1 0 clients sz 2 
+0x342955a86baef4 gov/socket/multipeer clients.cpp 95 192.168.0.38:33062 
+0x342955a86c00dc gov/socket peer_t.cpp 57 check stalled 
+0x342955a86c445a gov/socket peer_t.cpp 60 no dgram created yet 
+0x342955a86c8802 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x342955a86cc5f8 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x342955a86d2492 gov/socket/multipeer clients.cpp 113 ready to receive. 326 192.168.0.38:33062 
+0x342955a86d8342 gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x342955a86dbf47 gov/socket peer_t.cpp 57 check stalled 
+0x342955a86df49e gov/socket peer_t.cpp 60 no dgram created yet 
+0x342955a86e8d2b gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x342955a86ed1e6 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x342955a86f60f4 gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x342955a86fc1ce gov/socket/multipeer server.cpp 187 select 
+0x3429561e30e151 gov/socket/multipeer server.cpp 193 1 326 
+0x3429561e315ec0 gov/socket/multipeer server.cpp 216 honest sz  2 
+0x3429561e31e774 gov/socket/multipeer server.cpp 229 work out incoming data 192.168.0.38:33062 
+0x3429561e322f18 gov/socket/multipeer handler_daemon_t.cpp 87 receive_and_process 
+0x3429561e326ec1 gov/socket/multipeer thpool.cpp 90 add client to work processing queue 
+0x3429561e32b910 gov/socket peer_t.cpp 117 prepare_worker recv TAG661 
+0x3429561e32fd76 gov/socket/multipeer thpool.cpp 100 worker locked. recv work queued 
+0x3429561e3360b8 gov/socket/multipeer thpool.cpp 102 pool fd326 192.168.0.38:33062 
+0x3429561e33c027 gov/socket/multipeer thpool.cpp 104 work queue sz= 1 
+0x3429561e344157 gov/socket/multipeer thpool.cpp 110 signal one thread to handle the job 
+0x3429561e34a018 gov/socket/multipeer server.cpp 175 update 
+0x3429561e34de35 gov/socket/multipeer clients.cpp 86 update 2 0 clients sz 2 
+0x3429561e354ed5 gov/socket/multipeer clients.cpp 95 192.168.0.38:33062 
+0x3429561e3598bc gov/socket peer_t.cpp 57 check stalled 
+0x3429561e35d20e gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429561e3611cb gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429561e3648e2 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429561e36a644 gov/socket/multipeer clients.cpp 117 not ready to receive. 326 192.168.0.38:33062 
+0x3429561e374123 gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x3429561e377b52 gov/socket peer_t.cpp 57 check stalled 
+0x3429561e3914c1 gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429561e3a0889 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429561e3a64e7 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429561e3b3251 gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x3429561e3bafb5 gov/socket/multipeer server.cpp 187 select 
+0x3429561ed9032b gov/socket/multipeer server.cpp 193 1 211 
+0x3429561ed99cad gov/socket/multipeer server.cpp 216 honest sz  1 
+0x3429561ed9de41 gov/socket/multipeer server.cpp 234 flush loopback 
+0x3429561eda21f9 gov/socket/multipeer server.cpp 175 update 
+0x3429561eda529d gov/socket/multipeer clients.cpp 86 update 1 0 clients sz 2 
+0x3429561edab24c gov/socket/multipeer clients.cpp 95 192.168.0.38:33062 
+0x3429561edae799 gov/socket peer_t.cpp 57 check stalled 
+0x3429561edb10fe gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429561edb3b3a gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429561edb65ef gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429561edba631 gov/socket/multipeer clients.cpp 113 ready to receive. 326 192.168.0.38:33062 
+0x3429561edbe844 gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x3429561edc0df8 gov/socket peer_t.cpp 57 check stalled 
+0x3429561edc3086 gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429561edc5a4e gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429561edc7e3a gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429561edcb3af gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x3429561edcefa6 gov/socket/multipeer server.cpp 187 select 
+0x3429565abf5ac4 gov/socket/multipeer server.cpp 193 1 326 
+0x3429565ac04882 gov/socket/multipeer server.cpp 216 honest sz  2 
+0x3429565ac0ffe4 gov/socket/multipeer server.cpp 229 work out incoming data 192.168.0.38:33034 
+0x3429565ac1532f gov/socket/multipeer handler_daemon_t.cpp 87 receive_and_process 
+0x3429565ac190ca gov/socket/multipeer thpool.cpp 90 add client to work processing queue 
+0x3429565ac1ebf1 gov/socket peer_t.cpp 117 prepare_worker recv TAG661 
+0x3429565ac22ef3 gov/socket/multipeer thpool.cpp 100 worker locked. recv work queued 
+0x3429565ac29833 gov/socket/multipeer thpool.cpp 102 pool fd211 192.168.0.38:33034 
+0x3429565ac2fbf2 gov/socket/multipeer thpool.cpp 104 work queue sz= 1 
+0x3429565ac341da gov/socket/multipeer thpool.cpp 110 signal one thread to handle the job 
+0x3429565ac3bdd4 gov/socket/multipeer server.cpp 175 update 
+0x3429565ac40a9f gov/socket/multipeer clients.cpp 86 update 2 0 clients sz 2 
+0x3429565ac483f0 gov/socket/multipeer clients.cpp 95 192.168.0.38:33062 
+0x3429565ac4d287 gov/socket peer_t.cpp 57 check stalled 
+0x3429565ac511fa gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429565ac56133 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429565ac5a394 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429565ac600cb gov/socket/multipeer clients.cpp 113 ready to receive. 326 192.168.0.38:33062 
+0x3429565ac66634 gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x3429565ac69fc0 gov/socket peer_t.cpp 57 check stalled 
+0x3429565ac6d884 gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429565ac71147 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429565ac74d8e gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429565ac7a101 gov/socket/multipeer clients.cpp 117 not ready to receive. 211 192.168.0.38:33034 
+0x3429565ac7f973 gov/socket/multipeer server.cpp 187 select 
+0x3429565addee07 gov/socket/multipeer server.cpp 193 1 326 
+0x3429565aded5e6 gov/socket/multipeer server.cpp 216 honest sz  1 
+0x3429565adf33ef gov/socket/multipeer server.cpp 234 flush loopback 
+0x3429565adf9920 gov/socket/multipeer server.cpp 175 update 
+0x3429565adfe369 gov/socket/multipeer clients.cpp 86 update 1 0 clients sz 2 
+0x3429565ae07057 gov/socket/multipeer clients.cpp 95 192.168.0.38:33062 
+0x3429565ae0c777 gov/socket peer_t.cpp 57 check stalled 
+0x3429565ae15fbf gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429565ae1ae27 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429565ae1eddf gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429565ae251f4 gov/socket/multipeer clients.cpp 113 ready to receive. 326 192.168.0.38:33062 
+0x3429565ae2cba4 gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x3429565ae30cfc gov/socket peer_t.cpp 57 check stalled 
+0x3429565ae34520 gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429565ae37d69 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429565ae3b4f8 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429565ae406ac gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x3429565ae45cc6 gov/socket/multipeer server.cpp 187 select 
+0x3429565ba3fd85 gov/socket/multipeer server.cpp 193 1 326 
+0x3429565ba42b02 gov/socket/multipeer server.cpp 216 honest sz  2 
+0x3429565ba44c26 gov/socket/multipeer server.cpp 229 work out incoming data 192.168.0.38:33062 
+0x3429565ba45df4 gov/socket/multipeer handler_daemon_t.cpp 87 receive_and_process 
+0x3429565ba46ad1 gov/socket/multipeer thpool.cpp 90 add client to work processing queue 
+0x3429565ba47c00 gov/socket peer_t.cpp 117 prepare_worker recv TAG661 
+0x3429565ba48bcc gov/socket/multipeer thpool.cpp 100 worker locked. recv work queued 
+0x3429565ba4a0f6 gov/socket/multipeer thpool.cpp 102 pool fd326 192.168.0.38:33062 
+0x3429565ba4b409 gov/socket/multipeer thpool.cpp 104 work queue sz= 1 
+0x3429565ba4c225 gov/socket/multipeer thpool.cpp 110 signal one thread to handle the job 
+0x3429565ba4d969 gov/socket/multipeer server.cpp 175 update 
+0x3429565ba4e800 gov/socket/multipeer clients.cpp 86 update 2 0 clients sz 2 
+0x3429565ba4ff73 gov/socket/multipeer clients.cpp 95 192.168.0.38:33062 
+0x3429565ba50e5d gov/socket peer_t.cpp 57 check stalled 
+0x3429565ba51ac4 gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429565ba527b8 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429565ba53381 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429565ba5461b gov/socket/multipeer clients.cpp 117 not ready to receive. 326 192.168.0.38:33062 
+0x3429565ba55843 gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x3429565ba563e5 gov/socket peer_t.cpp 57 check stalled 
+0x3429565ba56e87 gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429565ba57a3d gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429565ba58674 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429565ba596fe gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x3429565ba5ab65 gov/socket/multipeer server.cpp 187 select 
+0x3429565bb144e8 gov/socket/multipeer server.cpp 193 1 211 
+0x3429565bb1704f gov/socket/multipeer server.cpp 216 honest sz  1 
+0x3429565bb183f9 gov/socket/multipeer server.cpp 234 flush loopback 
+0x3429565bb19907 gov/socket/multipeer server.cpp 175 update 
+0x3429565bb1a6ec gov/socket/multipeer clients.cpp 86 update 1 0 clients sz 2 
+0x3429565bb1c2aa gov/socket/multipeer clients.cpp 95 192.168.0.38:33062 
+0x3429565bb1d2bc gov/socket peer_t.cpp 57 check stalled 
+0x3429565bb1df19 gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429565bb1ec69 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429565bb1f956 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429565bb20c68 gov/socket/multipeer clients.cpp 113 ready to receive. 326 192.168.0.38:33062 
+0x3429565bb21feb gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x3429565bb22b86 gov/socket peer_t.cpp 57 check stalled 
+0x3429565bb23606 gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429565bb24105 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429565bb24c54 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429565bb25bc9 gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x3429565bb26c7a gov/socket/multipeer server.cpp 187 select 
+0x3429565bd638a7 gov/socket/multipeer server.cpp 193 1 326 
+0x3429565bd66591 gov/socket/multipeer server.cpp 216 honest sz  2 
+0x3429565bd687ed gov/socket/multipeer server.cpp 229 work out incoming data 192.168.0.38:33062 
+0x3429565bd6aac6 gov/socket/multipeer handler_daemon_t.cpp 87 receive_and_process 
+0x3429565bd6bc0b gov/socket/multipeer thpool.cpp 90 add client to work processing queue 
+0x3429565bd6cdab gov/socket peer_t.cpp 117 prepare_worker recv TAG661 
+0x3429565bd6dc67 gov/socket/multipeer thpool.cpp 100 worker locked. recv work queued 
+0x3429565bd6f26f gov/socket/multipeer thpool.cpp 102 pool fd326 192.168.0.38:33062 
+0x3429565bd70650 gov/socket/multipeer thpool.cpp 104 work queue sz= 1 
+0x3429565bd7141a gov/socket/multipeer thpool.cpp 110 signal one thread to handle the job 
+0x3429565bd72cec gov/socket/multipeer server.cpp 175 update 
+0x3429565bd73c4c gov/socket/multipeer clients.cpp 86 update 2 0 clients sz 2 
+0x3429565bd75445 gov/socket/multipeer clients.cpp 95 192.168.0.38:33062 
+0x3429565bd76322 gov/socket peer_t.cpp 57 check stalled 
+0x3429565bd76f7d gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429565bd77d01 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429565bd7891b gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429565bd79b4d gov/socket/multipeer clients.cpp 117 not ready to receive. 326 192.168.0.38:33062 
+0x3429565bd7ae4f gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x3429565bd7ba17 gov/socket peer_t.cpp 57 check stalled 
+0x3429565bd7c4f1 gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429565bd7cfd7 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429565bd7db2f gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429565bd7eaeb gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x3429565bd7fd6a gov/socket/multipeer server.cpp 187 select 
+0x3429565c0e5111 gov/socket/multipeer server.cpp 193 1 211 
+0x3429565c0e8208 gov/socket/multipeer server.cpp 216 honest sz  1 
+0x3429565c0e964e gov/socket/multipeer server.cpp 234 flush loopback 
+0x3429565c0eafa8 gov/socket/multipeer server.cpp 175 update 
+0x3429565c0ec002 gov/socket/multipeer clients.cpp 86 update 1 0 clients sz 2 
+0x3429565c0ee1cf gov/socket/multipeer clients.cpp 95 192.168.0.38:33062 
+0x3429565c0ef36f gov/socket peer_t.cpp 57 check stalled 
+0x3429565c0f0156 gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429565c0f0fb6 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429565c0f1c65 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429565c0f31ca gov/socket/multipeer clients.cpp 113 ready to receive. 326 192.168.0.38:33062 
+0x3429565c0f476f gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x3429565c0f5424 gov/socket peer_t.cpp 57 check stalled 
+0x3429565c0f5edc gov/socket peer_t.cpp 60 no dgram created yet 
+0x3429565c0f6c14 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x3429565c0f7737 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x3429565c0f8855 gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x3429565c0f9ac4 gov/socket/multipeer server.cpp 187 select 
+0x342957fe2d6e74 gov/socket/multipeer server.cpp 193 1 326 
+0x342957fe2e6da8 gov/socket/multipeer server.cpp 216 honest sz  2 
+0x342957fe2f2175 gov/socket/multipeer server.cpp 229 work out incoming data 192.168.0.38:33062 
+0x342957fe2f77d6 gov/socket/multipeer handler_daemon_t.cpp 87 receive_and_process 
+0x342957fe2fbc77 gov/socket/multipeer thpool.cpp 90 add client to work processing queue 
+0x342957fe3014d7 gov/socket peer_t.cpp 117 prepare_worker recv TAG661 
+0x342957fe30c82e gov/socket/multipeer thpool.cpp 100 worker locked. recv work queued 
+0x342957fe3146c0 gov/socket/multipeer thpool.cpp 102 pool fd326 192.168.0.38:33062 
+0x342957fe31b807 gov/socket/multipeer thpool.cpp 104 work queue sz= 1 
+0x342957fe32088b gov/socket/multipeer thpool.cpp 110 signal one thread to handle the job 
+0x342957fe3288d9 gov/socket/multipeer server.cpp 175 update 
+0x342957fe334441 gov/socket/multipeer clients.cpp 86 update 2 0 clients sz 2 
+0x342957fe33d49c gov/socket/multipeer clients.cpp 95 192.168.0.38:33062 
+0x342957fe34274d gov/socket peer_t.cpp 57 check stalled 
+0x342957fe3469b8 gov/socket peer_t.cpp 60 no dgram created yet 
+0x342957fe34b17e gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x342957fe34f4bf gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x342957fe35b500 gov/socket/multipeer clients.cpp 117 not ready to receive. 326 192.168.0.38:33062 
+0x342957fe361cc0 gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x342957fe365ab9 gov/socket peer_t.cpp 57 check stalled 
+0x342957fe3693e4 gov/socket peer_t.cpp 60 no dgram created yet 
+0x342957fe36cecf gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x342957fe370e5a gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x342957fe37646a gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x342957fe37c3a1 gov/socket/multipeer server.cpp 187 select 
+0x342957feb81ecb gov/socket/multipeer server.cpp 193 1 211 
+0x342957feb84b93 gov/socket/multipeer server.cpp 216 honest sz  1 
+0x342957feb85de3 gov/socket/multipeer server.cpp 234 flush loopback 
+0x342957feb871c0 gov/socket/multipeer server.cpp 175 update 
+0x342957feb880c9 gov/socket/multipeer clients.cpp 86 update 1 0 clients sz 2 
+0x342957feb89c5f gov/socket/multipeer clients.cpp 95 192.168.0.38:33062 
+0x342957feb8aca0 gov/socket peer_t.cpp 57 check stalled 
+0x342957feb8ba12 gov/socket peer_t.cpp 60 no dgram created yet 
+0x342957feb8c7f1 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x342957feb8d3f4 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x342957feb8e5cb gov/socket/multipeer clients.cpp 113 ready to receive. 326 192.168.0.38:33062 
+0x342957feb8f75a gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x342957feb901f1 gov/socket peer_t.cpp 57 check stalled 
+0x342957feb90d10 gov/socket peer_t.cpp 60 no dgram created yet 
+0x342957feb91765 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x342957feb92255 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x342957feb93115 gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x342957feb940b1 gov/socket/multipeer server.cpp 187 select 
+0x342957feb957c0 gov/socket/multipeer server.cpp 193 1 326 
+0x342957feb997b2 gov/socket/multipeer server.cpp 216 honest sz  2 
+0x342957feb9b877 gov/socket/multipeer server.cpp 229 work out incoming data 192.168.0.38:33062 
+0x342957feb9c707 gov/socket/multipeer handler_daemon_t.cpp 87 receive_and_process 
+0x342957feb9d350 gov/socket/multipeer thpool.cpp 90 add client to work processing queue 
+0x342957feb9e350 gov/socket peer_t.cpp 117 prepare_worker recv TAG661 
+0x342957feb9efdd gov/socket/multipeer thpool.cpp 100 worker locked. recv work queued 
+0x342957feba02d7 gov/socket/multipeer thpool.cpp 102 pool fd326 192.168.0.38:33062 
+0x342957feba1511 gov/socket/multipeer thpool.cpp 104 work queue sz= 1 
+0x342957feba2355 gov/socket/multipeer thpool.cpp 110 signal one thread to handle the job 
+0x342957feba39d9 gov/socket/multipeer server.cpp 175 update 
+0x342957feba46d3 gov/socket/multipeer clients.cpp 86 update 2 0 clients sz 2 
+0x342957feba5be8 gov/socket/multipeer clients.cpp 95 192.168.0.38:33062 
+0x342957feba6ab8 gov/socket peer_t.cpp 57 check stalled 
+0x342957feba7630 gov/socket peer_t.cpp 60 no dgram created yet 
+0x342957feba8213 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x342957febabb9e gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x342957febadb23 gov/socket/multipeer clients.cpp 117 not ready to receive. 326 192.168.0.38:33062 
+0x342957febaedca gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x342957febafb61 gov/socket peer_t.cpp 57 check stalled 
+0x342957febb0644 gov/socket peer_t.cpp 60 no dgram created yet 
+0x342957febb11d7 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x342957febb1d58 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x342957febb2d03 gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x342957febb3e73 gov/socket/multipeer server.cpp 187 select 
+0x342957fedc243f gov/socket/multipeer server.cpp 193 1 211 
+0x342957fedc3443 gov/socket/multipeer server.cpp 216 honest sz  1 
+0x342957fedc41e3 gov/socket/multipeer server.cpp 234 flush loopback 
+0x342957fedc53d6 gov/socket/multipeer server.cpp 175 update 
+0x342957fedc60f4 gov/socket/multipeer clients.cpp 86 update 1 0 clients sz 2 
+0x342957fedc8c09 gov/socket/multipeer clients.cpp 95 192.168.0.38:33062 
+0x342957fedc9b12 gov/socket peer_t.cpp 57 check stalled 
+0x342957fedca62c gov/socket peer_t.cpp 60 no dgram created yet 
+0x342957fedcb20c gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x342957fedcbdb4 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x342957fedccddb gov/socket/multipeer clients.cpp 113 ready to receive. 326 192.168.0.38:33062 
+0x342957fedcdf70 gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x342957fedcea03 gov/socket peer_t.cpp 57 check stalled 
+0x342957fedcf367 gov/socket peer_t.cpp 60 no dgram created yet 
+0x342957fedd398c gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x342957fedd43a0 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x342957fedd5262 gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x342957fedd624e gov/socket/multipeer server.cpp 187 select 
+0x34295a7d3eecd3 gov/socket/multipeer server.cpp 193 1 326 
+0x34295a7d3f5361 gov/socket/multipeer server.cpp 216 honest sz  2 
+0x34295a7d3f9321 gov/socket/multipeer server.cpp 229 work out incoming data 192.168.0.38:33034 
+0x34295a7d3faddd gov/socket/multipeer handler_daemon_t.cpp 87 receive_and_process 
+0x34295a7d3fc42a gov/socket/multipeer thpool.cpp 90 add client to work processing queue 
+0x34295a7d3fe2d4 gov/socket peer_t.cpp 117 prepare_worker recv TAG661 
+0x34295a7d3ffbf0 gov/socket/multipeer thpool.cpp 100 worker locked. recv work queued 
+0x34295a7d402336 gov/socket/multipeer thpool.cpp 102 pool fd211 192.168.0.38:33034 
+0x34295a7d404651 gov/socket/multipeer thpool.cpp 104 work queue sz= 1 
+0x34295a7d405e15 gov/socket/multipeer thpool.cpp 110 signal one thread to handle the job 
+0x34295a7d408676 gov/socket/multipeer server.cpp 175 update 
+0x34295a7d409fdc gov/socket/multipeer clients.cpp 86 update 2 0 clients sz 2 
+0x34295a7d40c98d gov/socket/multipeer clients.cpp 95 192.168.0.38:33062 
+0x34295a7d40e431 gov/socket peer_t.cpp 57 check stalled 
+0x34295a7d40fa55 gov/socket peer_t.cpp 60 no dgram created yet 
+0x34295a7d4111de gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x34295a7d4127c6 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x34295a7d414762 gov/socket/multipeer clients.cpp 113 ready to receive. 326 192.168.0.38:33062 
+0x34295a7d4169a0 gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x34295a7d417d48 gov/socket peer_t.cpp 57 check stalled 
+0x34295a7d419203 gov/socket peer_t.cpp 60 no dgram created yet 
+0x34295a7d41a676 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x34295a7d41ba4c gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x34295a7d41d722 gov/socket/multipeer clients.cpp 117 not ready to receive. 211 192.168.0.38:33034 
+0x34295a7d41f5ec gov/socket/multipeer server.cpp 187 select 
+0x34295a7d53875f gov/socket/multipeer server.cpp 193 1 326 
+0x34295a7d53e0b6 gov/socket/multipeer server.cpp 216 honest sz  1 
+0x34295a7d54074d gov/socket/multipeer server.cpp 234 flush loopback 
+0x34295a7d542f30 gov/socket/multipeer server.cpp 175 update 
+0x34295a7d547a8b gov/socket/multipeer clients.cpp 86 update 1 0 clients sz 2 
+0x34295a7d54bf40 gov/socket/multipeer clients.cpp 95 192.168.0.38:33062 
+0x34295a7d54e167 gov/socket peer_t.cpp 57 check stalled 
+0x34295a7d54fa9e gov/socket peer_t.cpp 60 no dgram created yet 
+0x34295a7d5516a4 gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x34295a7d552e99 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x34295a7d555547 gov/socket/multipeer clients.cpp 113 ready to receive. 326 192.168.0.38:33062 
+0x34295a7d557ec3 gov/socket/multipeer clients.cpp 95 192.168.0.38:33034 
+0x34295a7d559698 gov/socket peer_t.cpp 57 check stalled 
+0x34295a7d55ad43 gov/socket peer_t.cpp 60 no dgram created yet 
+0x34295a7d55dfdb gov/peer peer_t.cpp 70 RBF IDLE disabled 
+0x34295a7d55fb86 gov/socket/multipeer clients.cpp 110 update check sec lvl 0 
+0x34295a7d5644b6 gov/socket/multipeer clients.cpp 113 ready to receive. 211 192.168.0.38:33034 
+0x34295a7d5680b4 gov/socket/multipeer server.cpp 187 select 

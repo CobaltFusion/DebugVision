@@ -1,0 +1,187 @@
+0x34294fbfb9f600 start test_r2r/node_ask/walletd/daemon/inbound/thpool/worker
+0x34294fbfba1000 gov/socket/multipeer thpool.cpp 64 empty queue 
+0x34295261869309 gov/socket/multipeer thpool.cpp 74 attending fd316 192.168.0.38:39924 remaining queue sz= 0 
+0x3429526186c420 gov/socket/multipeer thpool.cpp 77 -begin job --------------- fd316 192.168.0.38:39924 
+0x3429526186d9f2 gov/socket peer_t.cpp 127 newtask TAG301 192.168.0.38:39924 
+0x3429526186eb0d gov/socket peer_t.cpp 134 cur dgram 0 
+0x3429526186fd0e gov/socket client.cpp 403 recv4 
+0x34295261870c03 gov/socket client.cpp 410 starting new datagram 
+0x34295261871bc6 gov/socket client.cpp 417 before: dend= 0 
+0x34295261872d2b gov/socket datagram.cpp 446 recvfrom 
+0x34295261874a86 gov/socket datagram.cpp 461 comm read 10 
+0x342952618772ec gov/socket datagram.cpp 524 Received header for dgram sz= 71 svc= 0 
+0x34295261878d64 gov/socket datagram.cpp 530 comm read 61 
+0x34295261879f8d gov/socket datagram.cpp 441 completed? dend= 71 size= 71 completed= 1 
+0x3429526187cd39 gov/socket datagram.cpp 441 completed? dend= 71 size= 71 completed= 1 
+0x3429526187de98 gov/socket datagram.cpp 552 comm read 71 71 OK ybNwyPHBBHmhVVegFnQKpznbV1Y 
+0x34295261884287 gov/socket datagram.cpp 441 completed? dend= 71 size= 71 completed= 1 
+0x34295261886ae1 gov/socket datagram.cpp 555 comm recv dgram hash  ybNwyPHBBHmhVVegFnQKpznbV1Y svc 0 seq 0 
+0x3429526188c8bd gov/socket client.cpp 430 reset ts activity=now 1 dend: 0 -> 71 
+0x3429526188dc35 gov/socket client.cpp 436 after: dend= 71 
+0x3429526188ebef gov/socket datagram.cpp 441 completed? dend= 71 size= 71 completed= 1 
+0x3429526188fc8f gov/socket peer_t.cpp 178 dgram reception completed decrypting 
+0x34295261890bff gov/id peer_t.cpp 198 decrypt datagram 
+0x34295261891b94 gov/socket datagram.cpp 260 decrypt dgram 71 
+0x34295261892db0 gov/crypto symmetric_encryption.cpp 105 decrypt block of  61 bytes. msg sz= 49 + IV size 12 
+0x3429526189948f gov/crypto symmetric_encryption.cpp 58 IV sz  12 scrambled msg sz 61 enc/dec ratio( 33 ) =  1.84848 
+0x3429526189ca1e gov/id peer_t.cpp 217 deleting original encrypted datagram. 
+0x3429526189dc80 gov/socket datagram.cpp 238 deleted datagram 0x7f5830006320 
+0x3429526189f62d gov/socket peer_t.cpp 186 complete dgram arrived 0x7f5830009680 sz 33 svc 81 192.168.0.38:39924 
+0x342952618a0ee3 gov/socket peer_t.cpp 189 dispatch job 192.168.0.38:39924 
+0x342952618a1ed9 wallet/engine peer_t.cpp 50 process_work svc 81 
+0x342952618a2f55 wallet/engine ../../../us/api/generated/c++/wallet/r2r/hdlr_svc_handler-impl 6 protocol::r2r_trading_msg 
+0x342952618a439b wallet/engine peer_t__r2r.cpp 42 trading_msg 0 
+0x342952618a53d7 wallet/engine peer_t__r2r.cpp 48 trading message arrived for trade 3oa6pFzv9UwoeuQnpatcfHCgjYJu code 101 
+0x342952618ab434 wallet traders_t.cpp 351 trading_msg [bin] svc 101 0  bytes 
+0x342952618ac6b2 wallet traders_t.cpp 422 looking up trader 
+0x342952618ad54e wallet traders_t.cpp 314 lock_trader_ 
+0x342952618ae2c2 wallet traders_t.cpp 322 unlocked_trader_ 
+0x342952618af837 wallet traders_t.cpp 316 ++busyref 3oa6pFzv9UwoeuQnpatcfHCgjYJu 
+0x342952618b53a1 wallet/trader tid 3oa6pFzv9UwoeuQnpatcfHCgjYJu trader_t.cpp 472 trading_msg [bin] svc 101 
+0x342952618ba8b1 wallet/trader tid 3oa6pFzv9UwoeuQnpatcfHCgjYJu trader_t.cpp 198 update activity timestamp 
+0x342952618c0264 wallet/trader tid 3oa6pFzv9UwoeuQnpatcfHCgjYJu trader_t.cpp 513 trading_msg_trader 101 
+0x342952618cb9c1 wallet/trader tid 3oa6pFzv9UwoeuQnpatcfHCgjYJu trader_t.cpp 658 Received svc_pong. ts 1641321618774573688 ping sent ts 1641321618772970174 calling pong_hander with roundtrip of 1603514 ns 
+0x342952618d6618 wallet/trader tid 3oa6pFzv9UwoeuQnpatcfHCgjYJu trader_t.cpp 1466 calling 2nd pong handler 
+0x342952618dcf14 wallet/trader tid 3oa6pFzv9UwoeuQnpatcfHCgjYJu trader_t.cpp 1419 Received Pong!. Roundtrip took 1603514 ns. 
+0x342952618e2cb3 gov/relay pushman.cpp 101 pushing OK: Received Pong!. Roundtrip took 1603514 ns. tid 3oa6pFzv9UwoeuQnpatcfHCgjYJu 
+0x342952618e8a71 gov/io blob_writer_t.cpp 184 blob from string 
+0x342952618ea652 gov/io blob_writer_t.cpp 234 writable::get_datagram svc 10 
+0x342952618ed700 gov/socket datagram.cpp 141 new datagram 0x7f5830009730 svc 10 seq 0 sz 76 payload sz 66 ch 123 
+0x342952618efa4a gov/relay pushman.cpp 39 flush_push 
+0x342952618f0c12 gov bgtask.cpp 105 wakeup 
+0x342952618f1b8d gov bgtask.cpp 111 reset resume 
+0x342952618f3d79 wallet/trader tid 3oa6pFzv9UwoeuQnpatcfHCgjYJu trader_t.cpp 1468 reset pong handler 
+0x342952618fa408 gov/socket datagram.cpp 238 deleted datagram 0x7f5830009680 
+0x342952618fdb18 gov/socket peer_t.cpp 191 dispatched job 192.168.0.38:39924 
+0x342952618ff01d gov/socket peer_t.cpp 202 work completed 
+0x342952619001e8 gov/socket peer_t.cpp 123 worker ended recv TAG661 
+0x3429526190140f gov/socket peer_t.cpp 214 end service TAG301 
+0x342952619024f8 gov bgtask.cpp 105 wakeup 
+0x3429526190349c gov bgtask.cpp 111 reset resume 
+0x3429526190487a gov/socket/multipeer server.cpp 113 onwakeup 
+0x34295261905a2a gov/socket/multipeer clients.cpp 80 feeding loopback interface 
+0x3429526190ce14 gov/socket/multipeer thpool.cpp 81 -end job------------------ fd316 192.168.0.38:39924 
+0x3429526190e75d gov/socket/multipeer thpool.cpp 64 empty queue 
+0x34295279c14057 gov/socket/multipeer thpool.cpp 74 attending fd316 192.168.0.38:39924 remaining queue sz= 0 
+0x34295279c19ac1 gov/socket/multipeer thpool.cpp 77 -begin job --------------- fd316 192.168.0.38:39924 
+0x34295279c1c6f5 gov/socket peer_t.cpp 127 newtask TAG301 192.168.0.38:39924 
+0x34295279c1ed27 gov/socket peer_t.cpp 134 cur dgram 0 
+0x34295279c226d3 gov/socket client.cpp 403 recv4 
+0x34295279c246b1 gov/socket client.cpp 410 starting new datagram 
+0x34295279c26274 gov/socket client.cpp 417 before: dend= 0 
+0x34295279c281b9 gov/socket datagram.cpp 446 recvfrom 
+0x34295279c2b564 gov/socket datagram.cpp 461 comm read 10 
+0x34295279c2df20 gov/socket datagram.cpp 524 Received header for dgram sz= 102 svc= 0 
+0x34295279c3066f gov/socket datagram.cpp 530 comm read 92 
+0x34295279c3259d gov/socket datagram.cpp 441 completed? dend= 102 size= 102 completed= 1 
+0x34295279c374ce gov/socket datagram.cpp 441 completed? dend= 102 size= 102 completed= 1 
+0x34295279c3960f gov/socket datagram.cpp 552 comm read 102 102 OK 2yfcUpMaVrvVP5hbWJysJA9ibK2q 
+0x34295279c44540 gov/socket datagram.cpp 441 completed? dend= 102 size= 102 completed= 1 
+0x34295279c48c76 gov/socket datagram.cpp 555 comm recv dgram hash  2yfcUpMaVrvVP5hbWJysJA9ibK2q svc 0 seq 0 
+0x34295279c52903 gov/socket client.cpp 430 reset ts activity=now 1 dend: 0 -> 102 
+0x34295279c54cea gov/socket client.cpp 436 after: dend= 102 
+0x34295279c568b4 gov/socket datagram.cpp 441 completed? dend= 102 size= 102 completed= 1 
+0x34295279c5880b gov/socket peer_t.cpp 178 dgram reception completed decrypting 
+0x34295279c5a4c4 gov/id peer_t.cpp 198 decrypt datagram 
+0x34295279c5c2d2 gov/socket datagram.cpp 260 decrypt dgram 102 
+0x34295279c5e4e2 gov/crypto symmetric_encryption.cpp 105 decrypt block of  92 bytes. msg sz= 80 + IV size 12 
+0x34295279c6ac7f gov/crypto symmetric_encryption.cpp 58 IV sz  12 scrambled msg sz 92 enc/dec ratio( 64 ) =  1.4375 
+0x34295279c70ecc gov/id peer_t.cpp 217 deleting original encrypted datagram. 
+0x34295279c73052 gov/socket datagram.cpp 238 deleted datagram 0x7f581800ae50 
+0x34295279c75ffb gov/socket peer_t.cpp 186 complete dgram arrived 0x7f583000abc0 sz 64 svc 81 192.168.0.38:39924 
+0x34295279c78dad gov/socket peer_t.cpp 189 dispatch job 192.168.0.38:39924 
+0x34295279c7ab1e wallet/engine peer_t.cpp 50 process_work svc 81 
+0x34295279c7cbdc wallet/engine ../../../us/api/generated/c++/wallet/r2r/hdlr_svc_handler-impl 6 protocol::r2r_trading_msg 
+0x34295279c7fa54 wallet/engine peer_t__r2r.cpp 42 trading_msg 0 
+0x34295279c8188d wallet/engine peer_t__r2r.cpp 48 trading message arrived for trade 3oa6pFzv9UwoeuQnpatcfHCgjYJu code 305 
+0x34295279c8c6d6 wallet traders_t.cpp 351 trading_msg [bin] svc 305 31  bytes 
+0x34295279c8e7a8 wallet traders_t.cpp 422 looking up trader 
+0x34295279c903a4 wallet traders_t.cpp 314 lock_trader_ 
+0x34295279c91d34 wallet traders_t.cpp 322 unlocked_trader_ 
+0x34295279c943ae wallet traders_t.cpp 316 ++busyref 3oa6pFzv9UwoeuQnpatcfHCgjYJu 
+0x34295279ca01a8 wallet/trader tid 3oa6pFzv9UwoeuQnpatcfHCgjYJu trader_t.cpp 472 trading_msg [bin] svc 305 
+0x34295279ca9d9c wallet/trader tid 3oa6pFzv9UwoeuQnpatcfHCgjYJu trader_t.cpp 198 update activity timestamp 
+0x34295279cb312c wallet/trader tid 3oa6pFzv9UwoeuQnpatcfHCgjYJu trader_t.cpp 479 given to protocol 
+0x34295279cbd06b trader/r2r/bid2ask/ask protocol.cpp 451 trading_msg 305 
+0x34295279cbee7d trader/r2r/bid2ask/ask protocol.cpp 483 select product 
+0x34295279cc166e trader/r2r/bid2ask/ask protocol.cpp 491 select product 2rbPjmoN3TpZ3KeVQnA6EJsKEkhi 3 
+0x34295279ccbbaf trader ch_t.cpp 20 new ch_t with ref to locked local_params 
+0x34295279ccdfc1 trader/r2r/bid2ask/ask protocol.cpp 235 selecting product 2rbPjmoN3TpZ3KeVQnA6EJsKEkhi 3 0 
+0x34295279ce08c4 trader/workflow/consumer basket.cpp 25 basket transfer 
+0x34295279ce310e trader/workflow/consumer basket.cpp 49 substracting stock 3 2rbPjmoN3TpZ3KeVQnA6EJsKEkhi 
+0x34295279cec73d trader/workflow/consumer basket.cpp 86 substract 2rbPjmoN3TpZ3KeVQnA6EJsKEkhi 3 
+0x34295279cf5dad trader/workflow/consumer basket.cpp 115 adding new product vol: 3 product 2rbPjmoN3TpZ3KeVQnA6EJsKEkhi 
+0x34295279cff7c5 trader/workflow/consumer basket.cpp 77 incr serial basket stock 0x7f586409e6a0 5 
+0x34295279d01626 trader/workflow/consumer basket.cpp 77 incr serial basket customer_twin 0x7f586409e6a0 4 
+0x34295279d02f63 trader/workflow/consumer basket.cpp 80 setting shared_params 
+0x34295279d054cb trader/workflow/consumer basket.cpp 65 set basket serial in shared_params for basket  customer_twin : 4 ch before priv: 0; shared_params: 0; personality: 0; update devices: 1 
+0x34295279d07fa8 wallet/trader kv.cpp 169 set kv basket_serial 4 
+0x34295279d0ac9c wallet/trader kv.cpp 172 key basket_serial ;old_value 3 ; new_value 4 
+0x34295279d0ddac trader/workflow/consumer basket.cpp 67 ch after priv: 0; shared_params: 1; personality: 0; update devices: 1 
+0x34295279d107aa trader/r2r/bid2ask/ask protocol.cpp 253 stock transfer returned: vol: 3 sale price per unit:  5050 reward price per unit: 17 priv: 0; shared_params: 1; personality: 0; update devices: 1 
+0x34295279d14298 trader/r2r/bid2ask/ask protocol basket> basket serial 4. 2 items.
+0x34295279d14298 trader/r2r/bid2ask/ask protocol basket>   * 2rbPjmoN3TpZ3KeVQnA6EJsKEkhi 3 5050 17
+0x34295279d14298 trader/r2r/bid2ask/ask protocol basket>   * 3qRd49QNBqpH6XzPyug67fQBuufe 3 7510 230
+0x34295279d25422 wallet/engine ../../../us/api/generated/c++/wallet/r2r/cllr_rpc-impl 4 trading_msg 
+0x34295279d27537 gov/io blob_writer_t.cpp 234 writable::get_datagram svc 81 
+0x34295279d2a058 gov/socket datagram.cpp 141 new datagram 0x7f583000ac70 svc 81 seq 0 sz 74 payload sz 64 ch 123 
+0x34295279d2d435 gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f583000ac70 svc 81 sz 74 
+0x34295279d2f634 gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x34295279d31273 gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x34295279d32ede gov/id peer_t.cpp 178 outbound_traffic__goes_encrypted 1 inbound_traffic__was_encrypted 1 
+0x34295279d34db6 gov/socket datagram.cpp 242 encrypt dgram svc= 81 
+0x34295279d37060 gov/crypto symmetric_encryption.cpp 66 encrypt block of 74 bytes. 
+0x34295279d38da6 gov/crypto symmetric_encryption.cpp 68 estimated size 112 
+0x34295279d416ea gov/crypto symmetric_encryption.cpp 79 final size 112 
+0x34295279d46b09 gov/crypto symmetric_encryption.cpp 58 IV sz  12 scrambled msg sz 102 enc/dec ratio( 74 ) =  1.37838 
+0x34295279d4b69d gov/crypto symmetric_encryption.cpp 84 total encrypted payload 102 bytes. 
+0x34295279d4eef8 gov/id peer_t.cpp 186 datagram encrypted. svc 81 length 74 -> svc 0 length 112 
+0x34295279d5176e gov/id peer_t.cpp 187 deleting original clear-text datagram. 
+0x34295279d531ed gov/socket datagram.cpp 238 deleted datagram 0x7f583000ac70 
+0x34295279d54f9d gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 81 
+0x34295279d581dc gov/socket/outbound send_queue.cpp 56 admission pri 81 sz 112 seq 0 recipient 192.168.0.38:39924 dgram svc field (to be overwritten) 13364 
+0x34295279d5c75a gov/socket datagram.cpp 441 completed? dend= 112 size= 112 completed= 1 
+0x34295279d5efb5 gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 81 
+0x34295279d60f12 gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 112 pri 81 cli 0x7f580800e290 sendref 1 
+0x34295279d6407f gov bgtask.cpp 105 wakeup 
+0x34295279d65d99 gov bgtask.cpp 111 reset resume 
+0x34295279d67e4b gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x34295279d6c398 wallet/trader tid 3oa6pFzv9UwoeuQnpatcfHCgjYJu trader_t.cpp 246 update_peer priv: 0; shared_params: 1; personality: 0; update devices: 0 
+0x34295279d7719a wallet/trader tid 3oa6pFzv9UwoeuQnpatcfHCgjYJu trader_t.cpp 277 shared_params_changed 
+0x34295279d82b11 wallet/trader trader_protocol.cpp 713 send_shared_params 
+0x34295279d84ddd wallet/engine ../../../us/api/generated/c++/wallet/r2r/cllr_rpc-impl 4 trading_msg 
+0x34295279d86b00 gov/io blob_writer_t.cpp 234 writable::get_datagram svc 81 
+0x34295279d89168 gov/socket datagram.cpp 141 new datagram 0x7f583000ac70 svc 81 seq 0 sz 355 payload sz 345 ch 123 
+0x34295279d8c301 gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f583000ac70 svc 81 sz 355 
+0x34295279d8e506 gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x34295279d90274 gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x34295279d91eb3 gov/id peer_t.cpp 178 outbound_traffic__goes_encrypted 1 inbound_traffic__was_encrypted 1 
+0x34295279d93e96 gov/socket datagram.cpp 242 encrypt dgram svc= 81 
+0x34295279d96059 gov/crypto symmetric_encryption.cpp 66 encrypt block of 355 bytes. 
+0x34295279d98454 gov/crypto symmetric_encryption.cpp 68 estimated size 393 
+0x34295279da0757 gov/crypto symmetric_encryption.cpp 79 final size 393 
+0x34295279da347b gov/crypto symmetric_encryption.cpp 58 IV sz  12 scrambled msg sz 383 enc/dec ratio( 355 ) =  1.07887 
+0x34295279da6648 gov/crypto symmetric_encryption.cpp 84 total encrypted payload 383 bytes. 
+0x34295279da9685 gov/id peer_t.cpp 186 datagram encrypted. svc 81 length 355 -> svc 0 length 393 
+0x34295279dabaa3 gov/id peer_t.cpp 187 deleting original clear-text datagram. 
+0x34295279dad587 gov/socket datagram.cpp 238 deleted datagram 0x7f583000ac70 
+0x34295279daf302 gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 81 
+0x34295279db2207 gov/socket/outbound send_queue.cpp 56 admission pri 81 sz 393 seq 0 recipient 192.168.0.38:39924 dgram svc field (to be overwritten) 7978 
+0x34295279db4aa0 gov/socket datagram.cpp 441 completed? dend= 393 size= 393 completed= 1 
+0x34295279db6dd6 gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 81 
+0x34295279dc7e42 gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 393 pri 81 cli 0x7f580800e290 sendref 1 
+0x34295279dcb4de gov bgtask.cpp 105 wakeup 
+0x34295279dcd0e9 gov bgtask.cpp 111 reset resume 
+0x34295279dcf14f gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x34295279dd2ce1 trader ch_t.cpp 24 destroyed ch_t 
+0x34295279dd576f gov/socket datagram.cpp 238 deleted datagram 0x7f583000abc0 
+0x34295279dd850c gov/socket peer_t.cpp 191 dispatched job 192.168.0.38:39924 
+0x34295279dda6b8 gov/socket peer_t.cpp 202 work completed 
+0x34295279de5f64 gov/socket peer_t.cpp 123 worker ended recv TAG661 
+0x34295279de90cc gov/socket peer_t.cpp 214 end service TAG301 
+0x34295279deae8f gov bgtask.cpp 105 wakeup 
+0x34295279dec5b7 gov bgtask.cpp 111 reset resume 
+0x34295279dee5d3 gov/socket/multipeer server.cpp 113 onwakeup 
+0x34295279df040b gov/socket/multipeer clients.cpp 80 feeding loopback interface 
+0x34295279df9452 gov/socket/multipeer thpool.cpp 81 -end job------------------ fd316 192.168.0.38:39924 
+0x34295279dfbc3b gov/socket/multipeer thpool.cpp 64 empty queue 

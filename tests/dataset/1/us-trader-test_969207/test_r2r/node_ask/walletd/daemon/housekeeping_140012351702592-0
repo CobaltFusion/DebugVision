@@ -1,0 +1,28 @@
+0x34294fbfc526b6 start test_r2r/node_ask/walletd/daemon/housekeeping
+0x34294fbfc541b4 wallet/engine daemon_t.cpp 165 starting housekeeping thread 
+0x34294fbfc56a94 wallet/engine daemon_t.cpp 168 housekeeping tasks 
+0x34294fbfc57b50 wallet/engine daemon_t.cpp 170 task: announce wallet: 
+0x34294fbfc58a08 wallet/engine daemon_t.cpp 110 lookup myself  2T3t7YjoXwk5p1AuWzSRNURnqNKB 
+0x34294fbfc5e3ae gov/engine ../../../us/api/generated/c++/gov/traders/cllr_rpc-impl 27 lookup_wallet 
+0x34294fbfc6015b gov/socket datagram.cpp 141 new datagram 0x55f8a954e2f0 svc 42 seq 0 sz 30 payload sz 20 ch 123 
+0x34294fbfc61b48 gov/socket peer_t.cpp 228 sendrecv 
+0x34294fbfc63eaa gov/socket rendezvous_t.cpp 86 sendrecv. sending dgram seq 1 
+0x34294fbfc64ff4 gov/socket/outbound caller_daemon_t.cpp 18 send1 0x55f8a954e2f0 svc 42 sz 30 
+0x34294fbfc66c7c gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x34294fbfc67ab8 gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x34294fbfc688b9 gov/id peer_t.cpp 175 Not encrypting. Encryption not turned on. 
+0x34294fbfc697dd gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 42 
+0x34294fbfc6b067 gov/socket/outbound send_queue.cpp 56 admission pri 42 sz 30 seq 1 recipient 127.0.0.1:22172 dgram svc field (to be overwritten) 42 
+0x34294fbfc6c563 gov/socket datagram.cpp 441 completed? dend= 30 size= 30 completed= 1 
+0x34294fbfc6d753 gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 42 
+0x34294fbfc6e662 gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 30 pri 42 cli 0x7f5864034310 sendref 0 
+0x34294fbfc6fe1a gov bgtask.cpp 105 wakeup 
+0x34294fbfc70b92 gov bgtask.cpp 111 reset resume 
+0x34294fbfc71b5b gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x34294fbfc73604 gov/socket rendezvous_t.cpp 97 waiting for 5 seconds 
+0x34294fbff0a4d7 gov/socket rendezvous_t.cpp 106 sendrecv: wakeup 
+0x34294fbff0db3e gov/socket rendezvous_t.cpp 144 returning dgram svc 43 
+0x34294fbff103ad gov/socket datagram.cpp 238 deleted datagram 0x7f5840006460 
+0x34294fbff123e5 wallet/engine daemon_t.cpp 116 Already in wallet directory 192.168.0.38:22173 
+0x34294fbff1489d gov bgtask.cpp 100 reset_wait 0 
+0x34294fbff15fe4 wallet/engine daemon_t.cpp 84 waiting 600 secs 

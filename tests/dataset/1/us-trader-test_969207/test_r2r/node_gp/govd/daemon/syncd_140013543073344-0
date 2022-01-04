@@ -1,0 +1,156 @@
+0x34294e53644587 start test_r2r/node_gp/govd/daemon/syncd
+0x34294e5364ee30 gov/engine syncd.cpp 108 patch_db 1 
+0x34294e53656879 gov/io cfg0.cpp 201 size file 1070 
+0x34294e53658f46 gov/io cfg0.cpp 211 is.fail? 0 
+0x34294e5365a7be gov/io blob_reader_t.cpp 234 read_header 
+0x34294e53662313 gov/engine/auth auth/collusion_control_t.cpp 24 collusion control allow? 192.168.0.38 
+0x34294e53664c0b gov/engine/auth auth/collusion_control_t.cpp 28 yes. first appearance 
+0x34294e53665a14 gov/engine/auth auth/collusion_control_t.cpp 24 collusion control allow? 192.168.0.38 
+0x34294e536668b7 gov/engine/auth auth/collusion_control_t.cpp 36 2 nodes with same ip address 192.168.0.38 max 255 
+0x34294e536676d9 gov/engine/auth auth/collusion_control_t.cpp 24 collusion control allow? 192.168.0.38 
+0x34294e53668320 gov/engine/auth auth/collusion_control_t.cpp 36 3 nodes with same ip address 192.168.0.38 max 255 
+0x34294e53668ef5 gov/engine/auth auth/collusion_control_t.cpp 24 collusion control allow? 192.168.0.38 
+0x34294e53669b42 gov/engine/auth auth/collusion_control_t.cpp 36 4 nodes with same ip address 192.168.0.38 max 255 
+0x34294e5366a721 gov/engine/auth auth/collusion_control_t.cpp 24 collusion control allow? 192.168.0.38 
+0x34294e5366b2ae gov/engine/auth auth/collusion_control_t.cpp 36 5 nodes with same ip address 192.168.0.38 max 255 
+0x34294e5366be40 gov/engine/auth auth/collusion_control_t.cpp 24 collusion control allow? 192.168.0.38 
+0x34294e5366c972 gov/engine/auth auth/collusion_control_t.cpp 36 6 nodes with same ip address 192.168.0.38 max 255 
+0x34294e5368565f gov/engine syncd.cpp 117 on_sync 
+0x34294e53686d8f gov/engine daemon_t.cpp 801 on_sync 
+0x34294e536878ac gov/engine daemon_t.cpp 1141 update_dfs_index 
+0x34294e53688bb8 gov/engine daemon_t.cpp 1144 peerd.index_set 0 
+0x34294e536898b4 gov/dfs daemon_t.cpp 152 index_set 0 
+0x34294e536997d3 gov/engine syncd.cpp 142 wait 
+0x34294e5369ac3a gov bgtask.cpp 100 reset_wait 0 
+0x342959a6c83760 gov bgtask.cpp 97 reset_wait 1 
+0x342959a6cb82d3 gov/engine syncd.cpp 62 query block ZiJJfqmFd42n2yQ4JjvCaEYz1DE 
+0x342959a6cd4047 gov/engine daemon_t.cpp 905 query_block ZiJJfqmFd42n2yQ4JjvCaEYz1DE 
+0x342959a6cede04 gov/socket datagram.cpp 141 new datagram 0x55f8a9549aa0 svc 15 seq 0 sz 30 payload sz 20 ch 123 
+0x342959a6cfd335 gov/relay daemon_t.cpp 37 send neighbours 2 
+0x342959a6d07dd4 gov/peer grid_t.cpp 58 prepare_worker_send visited 0 
+0x342959a6d0def2 gov/peer grid_t.cpp 62 grid size 10 
+0x342959a6d18207 gov/peer grid_t.cpp 82 returning slot 1 
+0x342959a6d25abd gov/relay daemon_t.cpp 60 sending datagram to 15 192.168.0.38:22672 
+0x342959a6d5d107 gov/socket/outbound caller_daemon_t.cpp 18 send1 0x55f8a9551160 svc 15 sz 30 
+0x342959a6d6e3c8 gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x342959a6d75e6f gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x342959a6d7b931 gov/id peer_t.cpp 178 outbound_traffic__goes_encrypted 0 inbound_traffic__was_encrypted 0 
+0x342959a6d85edc gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 15 
+0x342959a6d90a7d gov/socket/outbound send_queue.cpp 56 admission pri 15 sz 30 seq 0 recipient 192.168.0.38:22672 dgram svc field (to be overwritten) 15 
+0x342959a6d9911f gov/socket datagram.cpp 441 completed? dend= 30 size= 30 completed= 1 
+0x342959a6d9f5df gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 15 
+0x342959a6da5850 gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 30 pri 15 cli 0x7f575800ef80 sendref 0 
+0x342959a6dae910 gov bgtask.cpp 105 wakeup 
+0x342959a6db9063 gov bgtask.cpp 111 reset resume 
+0x342959a6dbffd0 gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x342959a6dcb28f gov/relay daemon_t.cpp 64 success sending datagram to 192.168.0.38:22672 
+0x342959a6dd0c4c gov/peer grid_t.cpp 58 prepare_worker_send visited 1 
+0x342959a6dda068 gov/peer grid_t.cpp 62 grid size 10 
+0x342959a6de1900 gov/peer grid_t.cpp 78 slot occupied 1 already visited 
+0x342959a6e0d26c gov/peer grid_t.cpp 82 returning slot 2 
+0x342959a6e3c714 gov/relay daemon_t.cpp 60 sending datagram to 15 192.168.0.38:55056 
+0x342959a6e568f2 gov/socket/outbound caller_daemon_t.cpp 18 send1 0x55f8a9559c20 svc 15 sz 30 
+0x342959a6e5deae gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x342959a6e6377e gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x342959a6e6ecd4 gov/id peer_t.cpp 178 outbound_traffic__goes_encrypted 0 inbound_traffic__was_encrypted 0 
+0x342959a6e7e1a9 gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 15 
+0x342959a6e88117 gov/socket/outbound send_queue.cpp 56 admission pri 15 sz 30 seq 0 recipient 192.168.0.38:55056 dgram svc field (to be overwritten) 15 
+0x342959a6e92938 gov/socket datagram.cpp 441 completed? dend= 30 size= 30 completed= 1 
+0x342959a6e98e8b gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 15 
+0x342959a6e9dc65 gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 30 pri 15 cli 0x7f576c016cf0 sendref 0 
+0x342959a6ea55e0 gov bgtask.cpp 105 wakeup 
+0x342959a6ecf4ad gov bgtask.cpp 111 reset resume 
+0x342959a6ed976a gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x342959a6f00d4d gov/relay daemon_t.cpp 64 success sending datagram to 192.168.0.38:55056 
+0x342959a6f0d622 gov/relay daemon_t.cpp 43 done enough 
+0x342959a6f12c88 gov/relay daemon_t.cpp 67 Sent succ 2 
+0x342959a6f19415 gov/socket datagram.cpp 238 deleted datagram 0x55f8a9549aa0 
+0x342959a6f1e2d9 gov/engine syncd.cpp 88 wait4file 
+0x34295a59c882e7 gov bgtask.cpp 100 reset_wait 0 
+0x34295a59cc0866 gov/engine syncd.cpp 62 query block ZiJJfqmFd42n2yQ4JjvCaEYz1DE 
+0x34295a59cd8cf2 gov/engine daemon_t.cpp 905 query_block ZiJJfqmFd42n2yQ4JjvCaEYz1DE 
+0x34295a59cf1e16 gov/socket datagram.cpp 141 new datagram 0x55f8a9549ad0 svc 15 seq 0 sz 30 payload sz 20 ch 123 
+0x34295a59cfa602 gov/relay daemon_t.cpp 37 send neighbours 2 
+0x34295a59d0073a gov/peer grid_t.cpp 58 prepare_worker_send visited 0 
+0x34295a59d054fd gov/peer grid_t.cpp 62 grid size 10 
+0x34295a59d103a0 gov/peer grid_t.cpp 82 returning slot 0 
+0x34295a59d15dc3 gov/relay daemon_t.cpp 57 not role peer sysop 
+0x34295a59d1a59a gov/peer grid_t.cpp 58 prepare_worker_send visited 1 
+0x34295a59d1e31e gov/peer grid_t.cpp 62 grid size 10 
+0x34295a59d2380f gov/peer grid_t.cpp 82 returning slot 2 
+0x34295a59d2b552 gov/relay daemon_t.cpp 60 sending datagram to 15 192.168.0.38:55056 
+0x34295a59d32392 gov/socket/outbound caller_daemon_t.cpp 18 send1 0x55f8a9559f20 svc 15 sz 30 
+0x34295a59d37dd1 gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x34295a59d3c452 gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x34295a59d41035 gov/id peer_t.cpp 178 outbound_traffic__goes_encrypted 0 inbound_traffic__was_encrypted 0 
+0x34295a59d46cf0 gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 15 
+0x34295a59d4e319 gov/socket/outbound send_queue.cpp 56 admission pri 15 sz 30 seq 0 recipient 192.168.0.38:55056 dgram svc field (to be overwritten) 15 
+0x34295a59d54e43 gov/socket datagram.cpp 441 completed? dend= 30 size= 30 completed= 1 
+0x34295a59d5a4a9 gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 15 
+0x34295a59d5f385 gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 30 pri 15 cli 0x7f576c016cf0 sendref 0 
+0x34295a59d672c9 gov bgtask.cpp 105 wakeup 
+0x34295a59d6b52d gov bgtask.cpp 111 reset resume 
+0x34295a59d70e65 gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x34295a59d7accc gov/relay daemon_t.cpp 64 success sending datagram to 192.168.0.38:55056 
+0x34295a59d7fb9d gov/peer grid_t.cpp 58 prepare_worker_send visited 2 
+0x34295a59d83e47 gov/peer grid_t.cpp 62 grid size 10 
+0x34295a59d8ee5c gov/peer grid_t.cpp 73 slot 5 is empty 
+0x34295a59d94848 gov/peer grid_t.cpp 73 slot 6 is empty 
+0x34295a59d987ca gov/peer grid_t.cpp 73 slot 7 is empty 
+0x34295a59d9c139 gov/peer grid_t.cpp 73 slot 8 is empty 
+0x34295a59d9f9e5 gov/peer grid_t.cpp 73 slot 9 is empty 
+0x34295a59da493b gov/peer grid_t.cpp 78 slot occupied 0 already visited 
+0x34295a59daad19 gov/peer grid_t.cpp 82 returning slot 1 
+0x34295a59db0f4c gov/relay daemon_t.cpp 60 sending datagram to 15 192.168.0.38:22672 
+0x34295a59db766e gov/socket/outbound caller_daemon_t.cpp 18 send1 0x55f8a9559c20 svc 15 sz 30 
+0x34295a59dc3e0e gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x34295a59dc873a gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x34295a59dcc660 gov/id peer_t.cpp 178 outbound_traffic__goes_encrypted 0 inbound_traffic__was_encrypted 0 
+0x34295a59dd10e1 gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 15 
+0x34295a59dd783c gov/socket/outbound send_queue.cpp 56 admission pri 15 sz 30 seq 0 recipient 192.168.0.38:22672 dgram svc field (to be overwritten) 15 
+0x34295a59de2095 gov/socket datagram.cpp 441 completed? dend= 30 size= 30 completed= 1 
+0x34295a59de7f4f gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 15 
+0x34295a59e2b329 gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 30 pri 15 cli 0x7f575800ef80 sendref 0 
+0x34295a59e3c66f gov bgtask.cpp 105 wakeup 
+0x34295a59e42a17 gov bgtask.cpp 111 reset resume 
+0x34295a59e483b6 gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x34295a59e53330 gov/relay daemon_t.cpp 64 success sending datagram to 192.168.0.38:22672 
+0x34295a59e64d80 gov/relay daemon_t.cpp 43 done enough 
+0x34295a59e6b33a gov/relay daemon_t.cpp 67 Sent succ 2 
+0x34295a59e724b1 gov/socket datagram.cpp 238 deleted datagram 0x55f8a9549ad0 
+0x34295a59e778a3 gov/engine syncd.cpp 88 wait4file 
+0x34295a5a3544df gov bgtask.cpp 97 reset_wait 1 
+0x34295a5a390049 gov/engine syncd.cpp 108 patch_db 1 
+0x34295a5a3b0a8f gov/io cfg0.cpp 201 size file 96 
+0x34295a5a3b9aa2 gov/io cfg0.cpp 211 is.fail? 0 
+0x34295a5a3c054d gov/io blob_reader_t.cpp 234 read_header 
+0x34295a5a3da6c7 gov/engine daemon_t.cpp 1223 import diff ZiJJfqmFd42n2yQ4JjvCaEYz1DE id 1641321600000000000 
+0x34295a5a3f5f36 gov/engine daemon_t.cpp 1243 apps 
+0x34295a5a3fc013 gov/engine daemon_t.cpp 1248 importing app   
+0x34295a5a4047d8 gov/engine daemon_t.cpp 1248 importing app   
+0x34295a5a4093e2 gov/engine/auth auth/app.cpp 492 import delta 
+0x34295a5a40d843 gov/engine/auth auth/app.cpp 418 import 0 
+0x34295a5a412250 gov/engine/auth auth/app.cpp 425 block_ts 1639764300000000000 seen 18978 
+0x34295a5a418006 gov/engine/auth auth/app.cpp 428 nn 6 nh 0 
+0x34295a5a41d6b5 gov/engine/auth auth/app.cpp 311 cut 18958 
+0x34295a5a422766 gov/engine/auth auth/app.cpp 313 lay off hall 
+0x34295a5a426cd2 gov/engine/auth auth/app.cpp 292 layoff 18958 
+0x34295a5a42b5d1 gov/engine/auth auth/app.cpp 318 lay off nodes 
+0x34295a5a42f4f5 gov/engine/auth auth/app.cpp 292 layoff 18958 
+0x34295a5a435405 gov/engine/auth auth/app.cpp 325 add growth tx. seed 3609278299 growth 0.01 min_growth 1 
+0x34295a5a43e1f1 gov/engine/auth auth/app.cpp 341 empty hall 
+0x34295a5a4499df gov/engine daemon_t.cpp 1251 update_peers_state 
+0x34295a5a461b4e gov/engine daemon_t.cpp 1248 importing app   
+0x34295a5a46f923 gov/engine daemon_t.cpp 1248 importing app  ( 
+0x34295a5a474649 gov/traders app.cpp 91 import delta 
+0x34295a5a4785fe gov/traders app.cpp 63 import 0 
+0x34295a5a47c947 gov/traders app.cpp 69 block_ts 1639764300000000000 seen 18978 
+0x34295a5a480de1 gov/traders app.cpp 71 nw 6 
+0x34295a5a4cfc61 gov/engine daemon_t.cpp 1257 updated depth to 1 
+0x34295a5a4e0e63 gov/engine syncd.cpp 117 on_sync 
+0x34295a5a4e6553 gov/engine daemon_t.cpp 801 on_sync 
+0x34295a5a4ea0ff gov/engine daemon_t.cpp 1141 update_dfs_index 
+0x34295a5a4effd3 gov/engine daemon_t.cpp 1144 peerd.index_set 0 
+0x34295a5a4f4bd5 gov/dfs daemon_t.cpp 152 index_set 0 
+0x34295a5a534bf3 gov/engine syncd.cpp 142 wait 
+0x34295a5a53bad7 gov bgtask.cpp 100 reset_wait 0 
