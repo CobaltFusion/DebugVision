@@ -1,0 +1,93 @@
+0x342950397830d9 start test_r2r/node_derm/walletd/daemon/inbound/thpool/worker
+0x34295039784b8c gov/socket/multipeer thpool.cpp 64 empty queue 
+0x3429559ee84847 gov/socket/multipeer thpool.cpp 74 attending fd326 192.168.0.38:33062 remaining queue sz= 0 
+0x3429559ee87623 gov/socket/multipeer thpool.cpp 77 -begin job --------------- fd326 192.168.0.38:33062 
+0x3429559ee88838 gov/socket peer_t.cpp 127 newtask TAG301 192.168.0.38:33062 
+0x3429559ee89645 gov/socket peer_t.cpp 134 cur dgram 0 
+0x3429559ee8a3a2 gov/socket client.cpp 403 recv4 
+0x3429559ee8af62 gov/socket client.cpp 410 starting new datagram 
+0x3429559ee8bb4c gov/socket client.cpp 417 before: dend= 0 
+0x3429559ee8c80c gov/socket datagram.cpp 446 recvfrom 
+0x3429559ee912ae gov/socket datagram.cpp 461 comm read 10 
+0x3429559ee92431 gov/socket datagram.cpp 524 Received header for dgram sz= 115 svc= 7 
+0x3429559ee97309 gov/socket datagram.cpp 530 comm read 105 
+0x3429559ee9a4ac gov/socket datagram.cpp 441 completed? dend= 115 size= 115 completed= 1 
+0x3429559eea09fd gov/socket datagram.cpp 441 completed? dend= 115 size= 115 completed= 1 
+0x3429559eea18d3 gov/socket datagram.cpp 552 comm read 115 115 OK 4WGTMVQV6AZ6vkLMsc5tEXPmSkQ6 
+0x3429559eeaa775 gov/socket datagram.cpp 441 completed? dend= 115 size= 115 completed= 1 
+0x3429559eeac729 gov/socket datagram.cpp 555 comm recv dgram hash  4WGTMVQV6AZ6vkLMsc5tEXPmSkQ6 svc 7 seq 0 
+0x3429559eeb0e65 gov/socket client.cpp 430 reset ts activity=now 1 dend: 0 -> 115 
+0x3429559eeb1de1 gov/socket client.cpp 436 after: dend= 115 
+0x3429559eeb2c67 gov/socket datagram.cpp 441 completed? dend= 115 size= 115 completed= 1 
+0x3429559eeb39eb gov/socket peer_t.cpp 178 dgram reception completed decrypting 
+0x3429559eeb4660 gov/id peer_t.cpp 198 decrypt datagram 
+0x3429559eeb512e gov/id peer_t.cpp 201 dgram arrived without encryption. svc 7 
+0x3429559eeb66c3 gov/socket peer_t.cpp 186 complete dgram arrived 0x7f578c00aa80 sz 115 svc 7 192.168.0.38:33062 
+0x3429559eeb7a7a gov/socket peer_t.cpp 189 dispatch job 192.168.0.38:33062 
+0x3429559eeb87f0 wallet/engine peer_t.cpp 50 process_work svc 7 
+0x3429559eeb953e gov/id peer_t.cpp 249 process_work svc 7 
+0x3429559eeba201 gov/id peer_t.cpp 129 get_keys 
+0x3429559eebb059 gov/id peer_t.cpp 129 get_keys 
+0x3429559eebbbea gov/id peer_t.cpp 262 process_work using keys at 0x7f58640494f0 dZwa7cKnFeBxCncHhZ2rGGKeZYYQ32jCwm6m5XpB2QY7 svc 7 
+0x3429559eec5058 gov/id ../../../us/api/generated/c++/gov/id/hdlr_svc_handler-impl 52 protocol::id_challenge_response 
+0x3429559eec74c4 gov/id peer_t.cpp 481 challenge_response 0 
+0x3429559eec8222 gov/id peer_t.cpp 492 process_challenge_response. seq 0 
+0x3429559eee965e gov/id peer_t.cpp 512 msgh 7ZDTC5kkjG8YJF1r3rwcUR9ghePDZDP4uDz6BuHicYNQ pubk pTek1cq5xi7ifAQgP4NiuEUkyQVXUxWLKnAut5e5TzJ3 sig-der-b58 AN1rKvtXapeDGZBAvVew4uXAFHxeATWAfjjSMf6V6zZvH4j2hVZ2cKCqrspUUQo7QnTiQSDQZtoeMSnAnNvKxJha8i4bf31jq 
+0x3429559ef1b892 gov/crypto ec.cpp 633 verify_not_normalized msgh 7ZDTC5kkjG8YJF1r3rwcUR9ghePDZDP4uDz6BuHicYNQ pubk pTek1cq5xi7ifAQgP4NiuEUkyQVXUxWLKnAut5e5TzJ3 sig-der-b58 AN1rKvtXapeDGZBAvVew4uXAFHxeATWAfjjSMf6V6zZvH4j2hVZ2cKCqrspUUQo7QnTiQSDQZtoeMSnAnNvKxJha8i4bf31jq 
+0x3429559ef2c3a6 gov/crypto ec.cpp 645 was normalized 1 
+0x3429559ef2cfec gov/crypto ec.cpp 646 normalize outputs same signature? 1 sizeof(signature) 64 
+0x3429559ef36ef1 gov/id peer_t.cpp 520 verified pTek1cq5xi7ifAQgP4NiuEUkyQVXUxWLKnAut5e5TzJ3 
+0x3429559ef400d6 gov/id peer_t.cpp 134 turn_on_encryption? 
+0x3429559ef4304f gov/id peer_t.cpp 129 get_keys 
+0x3429559ef441a6 gov/crypto symmetric_encryption.cpp 26 init. pub_other: pTek1cq5xi7ifAQgP4NiuEUkyQVXUxWLKnAut5e5TzJ3 
+0x3429559ef56782 gov/id peer_t.cpp 154 ================== ENCRYPTION TURNED ON ================== 
+0x3429559ef574c2 gov/id peer_t.cpp 528 verification_completed 22273 
+0x3429559ef58773 wallet/engine peer_t.cpp 145 verification_completed 192.168.0.38:33062 326 22273 0 
+0x3429559ef59961 gov/auth peer_t.cpp 17 verification_completed 192.168.0.38:33062 22273 326 
+0x3429559ef5a6d7 wallet/engine peer_t.cpp 121 role peer or sysop authorized 1 0 
+0x3429559ef5c55b gov/auth peer_t.cpp 39 stage authorized 
+0x3429559ef5d3ca wallet/engine peer_t.cpp 159 role_peer or role_sysop 
+0x3429559ef5df3c wallet/engine peer_t.cpp 166 role_peer 
+0x3429559ef5ef77 gov/peer grid_t.cpp 203 add_to_grid 0x7f575800ed60 192.168.0.38:33062 
+0x3429559ef60f29 gov/peer grid_t.cpp 223 grid-added peer_t 0x7f575800ed60 192.168.0.38:33062 4PY4ucMMWScmtEHjHe4xUvLaaqDR 
+0x3429559ef65704 wallet/engine peer_t.cpp 172 post_auth TRACE 8c 
+0x3429559ef669e2 wallet/engine peer_t.cpp 23 post-auth announcing peer in correspondence 192.168.0.38:33062 reachable at port 22273 
+0x3429559ef67aa4 wallet/engine daemon_t.cpp 281 on_peer_wallet 4PY4ucMMWScmtEHjHe4xUvLaaqDR 637577408 22273 
+0x3429559ef6c44c gov/engine evidence.cpp 25 created evidence 0x7f57217b90c0 
+0x3429559ef6d416 gov/traders wallet_address.cpp 24 wallet_address constructor 4PY4ucMMWScmtEHjHe4xUvLaaqDR 637577408 22273 
+0x3429559ef77a05 gov/crypto ec.cpp 505 signing msgh MC1iaSdJTCheW4UvMSxmNv4Li7xMG2aPDG3YuyzpmuW with sk for pubkey dZwa7cKnFeBxCncHhZ2rGGKeZYYQ32jCwm6m5XpB2QY7 
+0x3429559efb0bdc gov/crypto ec.cpp 531 sign output 381yXYhJbNDbEQPAsaTUXapeoSG27nDCaYXdhv5jXfH6zVbjeyTuEAazFKzcTEfiaVzQ4CtN3SD5bTkEob2KVuydWMgQFpqn 
+0x3429559efd1a3b gov/engine signed_data.cpp 18 sign with pubkey dZwa7cKnFeBxCncHhZ2rGGKeZYYQ32jCwm6m5XpB2QY7 msghash MC1iaSdJTCheW4UvMSxmNv4Li7xMG2aPDG3YuyzpmuW produced signature 381yXYhJbNDbEQPAsaTUXapeoSG27nDCaYXdhv5jXfH6zVbjeyTuEAazFKzcTEfiaVzQ4CtN3SD5bTkEob2KVuydWMgQFpqn 
+0x3429559efe1ecb gov/io blob_writer_t.cpp 197 writable::write to blob 
+0x3429559efe3190 gov/io blob_writer_t.cpp 163 write_header 69 = E 
+0x3429559efe4012 gov/io blob_writer_t.cpp 165 writing blob header 7 69 
+0x3429559efe4f20 gov/crypto ec.cpp 245 write 
+0x3429559efe601a gov/traders wallet_address.cpp 38 destroying wallet_address 
+0x3429559efe6ee4 gov/engine evidence.cpp 29 destroyed evidence 0x7f57217b90c0 
+0x3429559efe7fa0 gov/engine ../../../us/api/generated/c++/gov/engine/cllr_rpc-impl 98 ev 
+0x3429559efe8bd4 gov/io blob_writer_t.cpp 176 get_datagram from blob 21 0 150 
+0x3429559efe9edf gov/socket datagram.cpp 141 new datagram 0x7f578c00d7b0 svc 21 seq 0 sz 160 payload sz 150 ch 123 
+0x3429559efeb592 gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f578c00d7b0 svc 21 sz 160 
+0x3429559efec378 gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x3429559efed01e gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x3429559efedd86 gov/id peer_t.cpp 178 outbound_traffic__goes_encrypted 0 inbound_traffic__was_encrypted 0 
+0x3429559efeed8f gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 21 
+0x3429559eff1694 gov/socket/outbound send_queue.cpp 56 admission pri 21 sz 160 seq 0 recipient 127.0.0.1:22472 dgram svc field (to be overwritten) 21 
+0x3429559eff2e8c gov/socket datagram.cpp 441 completed? dend= 160 size= 160 completed= 1 
+0x3429559eff3f79 gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 21 
+0x3429559eff5069 gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 160 pri 21 cli 0x7f5864041e60 sendref 0 
+0x3429559eff68d5 gov bgtask.cpp 105 wakeup 
+0x3429559eff75c8 gov bgtask.cpp 111 reset resume 
+0x3429559eff862f gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x3429559effa212 gov/id peer_t.cpp 532 signaling VERIF_COMPLETED. 
+0x3429559effaff1 gov/socket datagram.cpp 238 deleted datagram 0x7f578c00aa80 
+0x3429559effc4fc gov/socket peer_t.cpp 191 dispatched job 192.168.0.38:33062 
+0x3429559effd273 gov/socket peer_t.cpp 202 work completed 
+0x3429559effe03c gov/socket peer_t.cpp 123 worker ended recv TAG661 
+0x3429559effedb4 gov/socket peer_t.cpp 214 end service TAG301 
+0x3429559efff962 gov bgtask.cpp 105 wakeup 
+0x3429559f0003cc gov bgtask.cpp 111 reset resume 
+0x3429559f001690 gov/socket/multipeer server.cpp 113 onwakeup 
+0x3429559f002294 gov/socket/multipeer clients.cpp 80 feeding loopback interface 
+0x3429559f00946e gov/socket/multipeer thpool.cpp 81 -end job------------------ fd326 192.168.0.38:33062 
+0x3429559f00a836 gov/socket/multipeer thpool.cpp 64 empty queue 
