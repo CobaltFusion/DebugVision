@@ -1,0 +1,132 @@
+0x34294d63119620 start test_r2r/node_ask/govd/daemon/consensus_engine
+0x34294d631205f4 gov/engine daemon_t.cpp 561 consensus cycle period 60 secs 
+0x34294d63127eb1 gov/engine daemon_t.cpp 578 not ready for consensus 
+0x34294d6312c6a5 gov/engine daemon_t.cpp 613 collecting votes 
+0x34294d6312d37f gov bgtask.cpp 100 reset_wait 0 
+0x34294d6312eb24 gov/engine votes_t.cpp 127 selecting null vote 
+0x34294d6312fa93 gov/engine daemon_t.cpp 631 most voted tip 11111111111111111111 
+0x34294d63132722 gov/engine daemon_t.cpp 638 tip 0 
+0x34294d63133335 gov/engine daemon_t.cpp 649 cycle completed 
+0x342951945e2ad7 gov/engine daemon_t.cpp 652 new cycle 
+0x342951945e9e79 gov/engine daemon_t.cpp 585 broadcast local_deltas 1641321600000000000 
+0x342951945ebff8 gov/engine net_daemon_t.cpp 51 send local deltas 
+0x342951945ed4d6 gov/engine net_daemon_t.cpp 60 brodcast local_deltas 
+0x342951945eed84 gov/io blob_writer_t.cpp 234 writable::get_datagram svc 13 
+0x342951945f3942 gov/socket datagram.cpp 141 new datagram 0x7f57cc003520 svc 13 seq 0 sz 160 payload sz 150 ch 123 
+0x342951945f66d2 gov/io blob_writer_t.cpp 163 write_header 76 = L 
+0x342951945f7e6d gov/io blob_writer_t.cpp 165 writing blob header 7 76 
+0x342951945f9cfb gov/crypto ec.cpp 245 write 
+0x342951945fca1e gov/relay daemon_t.cpp 37 send neighbours 2147483647 
+0x342951946003db gov/peer grid_t.cpp 58 prepare_worker_send visited 0 
+0x34295194602508 gov/peer grid_t.cpp 62 grid size 10 
+0x342951946041a2 gov/peer grid_t.cpp 73 slot 3 is empty 
+0x342951946058fb gov/peer grid_t.cpp 73 slot 4 is empty 
+0x34295194606b68 gov/peer grid_t.cpp 73 slot 5 is empty 
+0x34295194607d60 gov/peer grid_t.cpp 73 slot 6 is empty 
+0x34295194609064 gov/peer grid_t.cpp 73 slot 7 is empty 
+0x3429519460a2dd gov/peer grid_t.cpp 73 slot 8 is empty 
+0x3429519460b546 gov/peer grid_t.cpp 73 slot 9 is empty 
+0x3429519460e74c gov/peer grid_t.cpp 82 returning slot 0 
+0x342951946101d1 gov/relay daemon_t.cpp 57 not role peer sysop 
+0x342951946117c4 gov/peer grid_t.cpp 58 prepare_worker_send visited 1 
+0x34295194612bac gov/peer grid_t.cpp 62 grid size 10 
+0x34295194613fa3 gov/peer grid_t.cpp 73 slot 1 is empty 
+0x3429519461540e gov/peer grid_t.cpp 73 slot 2 is empty 
+0x342951946166da gov/peer grid_t.cpp 73 slot 3 is empty 
+0x342951946179cc gov/peer grid_t.cpp 73 slot 4 is empty 
+0x34295194618c3e gov/peer grid_t.cpp 73 slot 5 is empty 
+0x34295194619de6 gov/peer grid_t.cpp 73 slot 6 is empty 
+0x3429519461afb1 gov/peer grid_t.cpp 73 slot 7 is empty 
+0x3429519461c188 gov/peer grid_t.cpp 73 slot 8 is empty 
+0x3429519461d361 gov/peer grid_t.cpp 73 slot 9 is empty 
+0x3429519461ebaa gov/peer grid_t.cpp 78 slot occupied 0 already visited 
+0x342951946203ba gov/peer grid_t.cpp 85 no suitable peer found in grid 
+0x34295194621934 gov/relay daemon_t.cpp 67 Sent succ 0 
+0x34295194623bd1 gov/socket datagram.cpp 238 deleted datagram 0x7f57cc003520 
+0x3429519462581c gov/engine pools_t.cpp 19 looking for diff id 1641321600000000000 
+0x34295194627685 gov/engine pools_t.cpp 23 diff not found 1641321600000000000 
+0x3429519462aec5 gov/engine pools_t.cpp 30 new diff created for 1641321600000000000 
+0x3429519462ca86 gov/engine diff.cpp 48 adding local_deltas 1641321600000000000 
+0x3429519462e06b gov/engine diff.cpp 52 looking for proof_of_work for 3sJsBz5TrMkGWTZ45syVs7b3wnkV 
+0x342951946377f7 gov/engine diff.cpp 32 adding localdelta for app 1 
+0x342951946394c7 gov/engine diff.cpp 35 first time, creating new delta 
+0x3429519463d574 gov/sys delta.cpp 58 merge local_delta src= 3sJsBz5TrMkGWTZ45syVs7b3wnkV new size 1 
+0x34295194645f8e gov/engine diff.cpp 32 adding localdelta for app 20 
+0x34295194647631 gov/engine diff.cpp 35 first time, creating new delta 
+0x34295194649ae5 gov/engine diff.cpp 32 adding localdelta for app 30 
+0x3429519464b03f gov/engine diff.cpp 35 first time, creating new delta 
+0x3429519465118f gov/engine diff.cpp 32 adding localdelta for app 40 
+0x34295194652ea3 gov/engine diff.cpp 35 first time, creating new delta 
+0x34295194655179 gov/engine diff.cpp 70 registered proof_of_work for  3sJsBz5TrMkGWTZ45syVs7b3wnkV work 0 
+0x3429519466068d gov bgtask.cpp 100 reset_wait 0 
+0x34295752b05a41 gov/engine daemon_t.cpp 596 local_deltas accepted in pool. 
+0x34295752b35cdb gov/sys delta.cpp 64 end_merge. total sensors received 1 
+0x34295752b514eb gov/io blob_writer_t.cpp 197 writable::write to blob 
+0x34295752b69b4d gov/io blob_writer_t.cpp 163 write_header 68 = D 
+0x34295752b6ecc9 gov/io blob_writer_t.cpp 165 writing blob header 7 68 
+0x34295752b80ca3 gov/engine daemon_t.cpp 787 vote for  2x2egB48NkRMEybFBhfskxQ7WttL 
+0x34295752b97c76 gov/engine votes_t.cpp 20 new round 
+0x34295752bd7407 gov/crypto ec.cpp 505 signing msgh AR2xGadrSNAZoQHZH6TockuE8NwE5eu3qGTTMgXDYpUo with sk for pubkey cZf2wjuJzueqq294JUxpd93uHDkqkgyXuyzoU9XbueFE 
+0x34295752cae599 gov/crypto ec.cpp 531 sign output AN1rKvtGKZj2mwopygfVmdCS6DNPennxyhHFjUDwchPnnEnRWn8gwyzR4joeEjPrX1664GVGAhJMPPjKdqgn9aSmLjXquoUeH 
+0x34295752cb33d4 gov/engine daemon_t.cpp 793 voting 2x2egB48NkRMEybFBhfskxQ7WttL 
+0x34295752cc73a1 gov/io blob_writer_t.cpp 234 writable::get_datagram svc 14 
+0x34295752ccd15f gov/socket datagram.cpp 141 new datagram 0x7f57cc009160 svc 14 seq 0 sz 135 payload sz 125 ch 123 
+0x34295752cd5a39 gov/crypto ec.cpp 245 write 
+0x34295752cda281 gov/engine net_daemon_t.cpp 77 broadcast vote. svc 14 
+0x34295752cdd843 gov/relay daemon_t.cpp 37 send neighbours 2147483647 
+0x34295752ce128b gov/peer grid_t.cpp 58 prepare_worker_send visited 0 
+0x34295752ce45c1 gov/peer grid_t.cpp 62 grid size 10 
+0x34295752ce7e94 gov/peer grid_t.cpp 73 slot 6 is empty 
+0x34295752ceb491 gov/peer grid_t.cpp 73 slot 7 is empty 
+0x34295752cee9c6 gov/peer grid_t.cpp 73 slot 8 is empty 
+0x34295752cf178c gov/peer grid_t.cpp 73 slot 9 is empty 
+0x34295752cf9c44 gov/peer grid_t.cpp 82 returning slot 0 
+0x34295752cfe321 gov/relay daemon_t.cpp 57 not role peer sysop 
+0x34295752d01971 gov/peer grid_t.cpp 58 prepare_worker_send visited 1 
+0x34295752d04a7c gov/peer grid_t.cpp 62 grid size 10 
+0x34295752d078fb gov/peer grid_t.cpp 73 slot 7 is empty 
+0x34295752d0a424 gov/peer grid_t.cpp 73 slot 8 is empty 
+0x34295752d0cd12 gov/peer grid_t.cpp 73 slot 9 is empty 
+0x34295752d10057 gov/peer grid_t.cpp 78 slot occupied 0 already visited 
+0x34295752d14662 gov/peer grid_t.cpp 82 returning slot 1 
+0x34295752d1cfba gov/relay daemon_t.cpp 60 sending datagram to 14 192.168.0.38:35646 
+0x34295752d23235 gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f57cc003520 svc 14 sz 135 
+0x34295752d27133 gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x34295752d2a454 gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x34295752d3017a gov/id peer_t.cpp 178 outbound_traffic__goes_encrypted 0 inbound_traffic__was_encrypted 0 
+0x34295752d34ec0 gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 14 
+0x34295752d3a9e1 gov/socket/outbound send_queue.cpp 56 admission pri 14 sz 135 seq 0 recipient 192.168.0.38:35646 dgram svc field (to be overwritten) 14 
+0x34295752d3f64b gov/socket datagram.cpp 441 completed? dend= 135 size= 135 completed= 1 
+0x34295752d431a9 gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 14 
+0x34295752d46be3 gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 135 pri 14 cli 0x7f57e000cc60 sendref 0 
+0x34295752d4cbee gov bgtask.cpp 105 wakeup 
+0x34295752d4fc9c gov bgtask.cpp 111 reset resume 
+0x34295752d53f7a gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x34295752d5ae37 gov/relay daemon_t.cpp 64 success sending datagram to 192.168.0.38:35646 
+0x34295752d5e615 gov/peer grid_t.cpp 58 prepare_worker_send visited 2 
+0x34295752d618e8 gov/peer grid_t.cpp 62 grid size 10 
+0x34295752d64ed2 gov/peer grid_t.cpp 73 slot 2 is empty 
+0x34295752d67f26 gov/peer grid_t.cpp 73 slot 3 is empty 
+0x34295752d739bf gov/peer grid_t.cpp 73 slot 4 is empty 
+0x34295752d798df gov/peer grid_t.cpp 73 slot 5 is empty 
+0x34295752d81299 gov/peer grid_t.cpp 73 slot 6 is empty 
+0x34295752d849a4 gov/peer grid_t.cpp 73 slot 7 is empty 
+0x34295752d87977 gov/peer grid_t.cpp 73 slot 8 is empty 
+0x34295752d8a3af gov/peer grid_t.cpp 73 slot 9 is empty 
+0x34295752d901a8 gov/peer grid_t.cpp 78 slot occupied 0 already visited 
+0x34295752d99923 gov/peer grid_t.cpp 78 slot occupied 1 already visited 
+0x34295752d9d100 gov/peer grid_t.cpp 85 no suitable peer found in grid 
+0x34295752da01a1 gov/relay daemon_t.cpp 67 Sent succ 1 
+0x34295752da4a15 gov/socket datagram.cpp 238 deleted datagram 0x7f57cc009160 
+0x34295752daf074 gov/engine daemon_t.cpp 613 collecting votes 
+0x34295752db83c4 gov bgtask.cpp 100 reset_wait 0 
+0x342959a6bec2bb gov/engine votes_t.cpp 130 selecting stronger beam vote 435RT1WCV1JrdHnreKbKN6V6uPu8 
+0x342959a6c1afaf gov/engine daemon_t.cpp 631 most voted tip 435RT1WCV1JrdHnreKbKN6V6uPu8 
+0x342959a6c34b4c gov/engine daemon_t.cpp 633 eat diff 
+0x342959a6c3af1a gov/engine daemon_t.cpp 434 eat_diff 435RT1WCV1JrdHnreKbKN6V6uPu8 0x7f57cc00ac70 
+0x342959a6c568e4 gov/engine daemon_t.cpp 460 saved unsuccesfull block 2x2egB48NkRMEybFBhfskxQ7WttL 435RT1WCV1JrdHnreKbKN6V6uPu8 
+0x342959a6c82413 gov/io blob_writer_t.cpp 197 writable::write to blob 
+0x342959a6c962a7 gov/io blob_writer_t.cpp 163 write_header 68 = D 
+0x342959a6c9dcb9 gov/io blob_writer_t.cpp 165 writing blob header 7 68 
+0x342959a6d13a81 gov bgtask.cpp 111 reset resume 
+0x342959a6d1f87d gov/engine daemon_t.cpp 649 cycle completed 

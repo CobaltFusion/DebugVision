@@ -1,0 +1,236 @@
+0x3429559f232dfd start test_r2r/node_derm/walletd/daemon/traders/trades/trade_3J7DQuecSq4z3XcTtjawBQAPezFS
+0x3429559f2345e0 wallet/trader conman.cpp 173 starting trade worker thread 
+0x3429559f236cec wallet/trader olog_t.inc 24 olog personal trader start initial state online 
+0x3429559f2391ae wallet/trader conman.cpp 167 on_start 
+0x3429559f239ed6 wallet/trader conman.cpp 99 connection_supervisor state online shch 1 
+0x3429559f23ae4e wallet/trader conman.cpp 180 connection_supervisor returned 1 online 
+0x3429559f23bb79 wallet/trader conman.cpp 187 connection state changed, exec show data 
+0x3429559f23ccbb wallet/trader conman.cpp 195 cmdq sz 1 next cmd is show data 
+0x3429559f23daae wallet/trader conman.cpp 203 flushing command show data 
+0x3429559f23ea8d trader ch_t.cpp 15 new ch_t 
+0x3429559f23f807 wallet/trader conman.cpp 245 calling exec_offline show data 
+0x3429559f2404b3 wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 1117 exec_offline show data 
+0x3429559f245132 wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 198 update activity timestamp 
+0x3429559f249f8b trader ch_t.cpp 57 always_update_devices set. update_devices: 1  -> 2 
+0x3429559f24b277 wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 246 update_peer priv: 0; shared_params: 0; personality: 0; update devices: 2 
+stack trace:
+  /usr/local/lib/libusgov.so : us::dbg::task::log_stacktrace() const+0x21
+  /usr/local/lib/libusgov.so : us::dbg::thread_logger::log_stacktrace() const+0x20
+  /usr/local/lib/libuswallet.so : ()+0x267a99
+  /usr/local/lib/libuswallet.so : us::wallet::trader::trader_t::update_peer(us::wallet::engine::peer_t&, us::wallet::trader::ch_t&&) const+0x467
+  /usr/local/lib/libuswallet.so : us::wallet::trader::conman::run()+0x74b
+  /usr/local/lib/libuswallet.so : void std::__invoke_impl<void, void (us::wallet::trader::conman::*&)(), us::wallet::trader::conman*&>(std::__invoke_memfun_deref, void (us::wallet::trader::conman::*&)(), us::wallet::trader::conman*&)+0x66
+  /usr/local/lib/libuswallet.so : std::__invoke_result<void (us::wallet::trader::conman::*&)(), us::wallet::trader::conman*&>::type std::__invoke<void (us::wallet::trader::conman::*&)(), us::wallet::trader::conman*&>(void (us::wallet::trader::conman::*&)(), us::wallet::trader::conman*&)+0x37
+  /usr/local/lib/libuswallet.so : void std::_Bind<void (us::wallet::trader::conman::*(us::wallet::trader::conman*))()>::__call<void, , 0ul>(std::tuple<>&&, std::_Index_tuple<0ul>)+0x48
+  /usr/local/lib/libuswallet.so : void std::_Bind<void (us::wallet::trader::conman::*(us::wallet::trader::conman*))()>::operator()<, void>()+0x24
+  /usr/local/lib/libuswallet.so : void std::__invoke_impl<void, std::_Bind<void (us::wallet::trader::conman::*(us::wallet::trader::conman*))()>&>(std::__invoke_other, std::_Bind<void (us::wallet::trader::conman::*(us::wallet::trader::conman*))()>&)+0x20
+0x3429559f360ae8 wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 287 push_data trace 5i0S trace c983Z 
+0x3429559f365ef6 wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 712 push_payload. push code 101 
+0x3429559f36a45a wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 724 pushing data 
+0x3429559f3882c1 wallet/trader trader_protocol.cpp 78 generating push_data info 
+0x3429559f3898ac wallet/trader trader_protocol.cpp 337 datasubdir is empty using trade_id 3J7DQuecSq4z3XcTtjawBQAPezFS 
+0x3429559f391e42 wallet/trader trader_protocol.cpp 344 datadir logs/us-trader-test_969207/test_r2r/home/node_derm/123/wallet/trader/trade_data/3J7DQuecSq4z3XcTtjawBQAPezFS 
+0x3429559f39680e wallet/trader trader_protocol.cpp 94 trade_state is 0  
+0x3429559f39902f wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 996 push_data sz str 1449 blob 1452 
+0x3429559f39de64 gov/io blob_writer_t.cpp 234 writable::get_datagram svc 10 
+0x3429559f39f534 gov/socket datagram.cpp 141 new datagram 0x7f583000d420 svc 10 seq 0 sz 1487 payload sz 1477 ch 123 
+0x3429559f3a0ba3 wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 707 get_push_datagram 101 blob sz 1452 dgram sz 1487 
+0x3429559f3a5926 gov/relay pushman.cpp 39 flush_push 
+0x3429559f3a7c34 gov bgtask.cpp 105 wakeup 
+0x3429559f3a8888 gov bgtask.cpp 111 reset resume 
+0x3429559f3aa272 trader ch_t.cpp 24 destroyed ch_t 
+0x3429559f3ab339 wallet/trader conman.cpp 99 connection_supervisor state online shch 0 
+0x3429559f3ac316 wallet/trader conman.cpp 180 connection_supervisor returned 0 online 
+0x3429559f3ad0d3 gov bgtask.cpp 97 reset_wait 1 
+0x3429559f3add43 wallet/trader conman.cpp 99 connection_supervisor state online shch 0 
+0x3429559f3ae890 wallet/trader conman.cpp 180 connection_supervisor returned 0 online 
+0x3429559f3c1785 gov bgtask.cpp 100 reset_wait 0 
+0x3429559f3c3415 wallet/trader conman.cpp 306 waiting 
+0x3429559f9a07f5 gov bgtask.cpp 97 reset_wait 1 
+0x3429559f9a37e5 wallet/trader conman.cpp 309 resumed 
+0x3429559f9a4993 wallet/trader conman.cpp 99 connection_supervisor state online shch 0 
+0x3429559f9a5b5b wallet/trader conman.cpp 180 connection_supervisor returned 0 online 
+0x3429559f9a6b0d wallet/trader conman.cpp 195 cmdq sz 1 next cmd is show data 
+0x3429559f9a78dc wallet/trader conman.cpp 203 flushing command show data 
+0x3429559f9a888c trader ch_t.cpp 15 new ch_t 
+0x3429559f9a99d6 wallet/trader conman.cpp 245 calling exec_offline show data 
+0x3429559f9aa5dd wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 1117 exec_offline show data 
+0x3429559f9af598 wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 198 update activity timestamp 
+0x3429559f9b4231 trader ch_t.cpp 57 always_update_devices set. update_devices: 1  -> 2 
+0x3429559f9b55c0 wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 246 update_peer priv: 0; shared_params: 0; personality: 0; update devices: 2 
+stack trace:
+  /usr/local/lib/libusgov.so : us::dbg::task::log_stacktrace() const+0x21
+  /usr/local/lib/libusgov.so : us::dbg::thread_logger::log_stacktrace() const+0x20
+  /usr/local/lib/libuswallet.so : ()+0x267a99
+  /usr/local/lib/libuswallet.so : us::wallet::trader::trader_t::update_peer(us::wallet::engine::peer_t&, us::wallet::trader::ch_t&&) const+0x467
+  /usr/local/lib/libuswallet.so : us::wallet::trader::conman::run()+0x74b
+  /usr/local/lib/libuswallet.so : void std::__invoke_impl<void, void (us::wallet::trader::conman::*&)(), us::wallet::trader::conman*&>(std::__invoke_memfun_deref, void (us::wallet::trader::conman::*&)(), us::wallet::trader::conman*&)+0x66
+  /usr/local/lib/libuswallet.so : std::__invoke_result<void (us::wallet::trader::conman::*&)(), us::wallet::trader::conman*&>::type std::__invoke<void (us::wallet::trader::conman::*&)(), us::wallet::trader::conman*&>(void (us::wallet::trader::conman::*&)(), us::wallet::trader::conman*&)+0x37
+  /usr/local/lib/libuswallet.so : void std::_Bind<void (us::wallet::trader::conman::*(us::wallet::trader::conman*))()>::__call<void, , 0ul>(std::tuple<>&&, std::_Index_tuple<0ul>)+0x48
+  /usr/local/lib/libuswallet.so : void std::_Bind<void (us::wallet::trader::conman::*(us::wallet::trader::conman*))()>::operator()<, void>()+0x24
+  /usr/local/lib/libuswallet.so : void std::__invoke_impl<void, std::_Bind<void (us::wallet::trader::conman::*(us::wallet::trader::conman*))()>&>(std::__invoke_other, std::_Bind<void (us::wallet::trader::conman::*(us::wallet::trader::conman*))()>&)+0x20
+0x3429559fba3c91 wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 287 push_data trace 5i0S trace c983Z 
+0x3429559fba9b6f wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 712 push_payload. push code 101 
+0x3429559fbae210 wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 724 pushing data 
+0x3429559fbc1e3c wallet/trader trader_protocol.cpp 78 generating push_data info 
+0x3429559fbc3119 wallet/trader trader_protocol.cpp 337 datasubdir is empty using trade_id 3J7DQuecSq4z3XcTtjawBQAPezFS 
+0x3429559fbcba18 wallet/trader trader_protocol.cpp 344 datadir logs/us-trader-test_969207/test_r2r/home/node_derm/123/wallet/trader/trade_data/3J7DQuecSq4z3XcTtjawBQAPezFS 
+0x3429559fbd02a9 wallet/trader trader_protocol.cpp 94 trade_state is 0  
+0x3429559fbd1c01 wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 996 push_data sz str 1597 blob 1600 
+0x3429559fbd7926 gov/io blob_writer_t.cpp 234 writable::get_datagram svc 10 
+0x3429559fbd8efd gov/socket datagram.cpp 141 new datagram 0x7f583000ac10 svc 10 seq 0 sz 1635 payload sz 1625 ch 123 
+0x3429559fbda4fc wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 707 get_push_datagram 101 blob sz 1600 dgram sz 1635 
+0x3429559fbdf01f gov/relay pushman.cpp 39 flush_push 
+0x3429559fbdfcda gov bgtask.cpp 105 wakeup 
+0x3429559fbe07d5 gov bgtask.cpp 111 reset resume 
+0x3429559fbe2278 trader ch_t.cpp 24 destroyed ch_t 
+0x3429559fbe33e2 wallet/trader conman.cpp 99 connection_supervisor state online shch 0 
+0x3429559fbe43e9 wallet/trader conman.cpp 180 connection_supervisor returned 0 online 
+0x3429559fbe519b gov bgtask.cpp 100 reset_wait 0 
+0x3429559fbe5d0d wallet/trader conman.cpp 306 waiting 
+0x3429565ada21c4 gov bgtask.cpp 97 reset_wait 1 
+0x3429565adb2e76 wallet/trader conman.cpp 309 resumed 
+0x3429565adb8d8f wallet/trader conman.cpp 99 connection_supervisor state online shch 0 
+0x3429565adbf03a wallet/trader conman.cpp 180 connection_supervisor returned 0 online 
+0x3429565adc4a99 wallet/trader conman.cpp 195 cmdq sz 1 next cmd is show data 
+0x3429565adc9803 wallet/trader conman.cpp 203 flushing command show data 
+0x3429565adcf148 trader ch_t.cpp 15 new ch_t 
+0x3429565add5594 wallet/trader conman.cpp 245 calling exec_offline show data 
+0x3429565add9bb1 wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 1117 exec_offline show data 
+0x3429565adf3f1c wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 198 update activity timestamp 
+0x3429565ae0d720 trader ch_t.cpp 57 always_update_devices set. update_devices: 1  -> 2 
+0x3429565ae13dc5 wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 246 update_peer priv: 0; shared_params: 0; personality: 0; update devices: 2 
+stack trace:
+  /usr/local/lib/libusgov.so : us::dbg::task::log_stacktrace() const+0x21
+  /usr/local/lib/libusgov.so : us::dbg::thread_logger::log_stacktrace() const+0x20
+  /usr/local/lib/libuswallet.so : ()+0x267a99
+  /usr/local/lib/libuswallet.so : us::wallet::trader::trader_t::update_peer(us::wallet::engine::peer_t&, us::wallet::trader::ch_t&&) const+0x467
+  /usr/local/lib/libuswallet.so : us::wallet::trader::conman::run()+0x74b
+  /usr/local/lib/libuswallet.so : void std::__invoke_impl<void, void (us::wallet::trader::conman::*&)(), us::wallet::trader::conman*&>(std::__invoke_memfun_deref, void (us::wallet::trader::conman::*&)(), us::wallet::trader::conman*&)+0x66
+  /usr/local/lib/libuswallet.so : std::__invoke_result<void (us::wallet::trader::conman::*&)(), us::wallet::trader::conman*&>::type std::__invoke<void (us::wallet::trader::conman::*&)(), us::wallet::trader::conman*&>(void (us::wallet::trader::conman::*&)(), us::wallet::trader::conman*&)+0x37
+  /usr/local/lib/libuswallet.so : void std::_Bind<void (us::wallet::trader::conman::*(us::wallet::trader::conman*))()>::__call<void, , 0ul>(std::tuple<>&&, std::_Index_tuple<0ul>)+0x48
+  /usr/local/lib/libuswallet.so : void std::_Bind<void (us::wallet::trader::conman::*(us::wallet::trader::conman*))()>::operator()<, void>()+0x24
+  /usr/local/lib/libuswallet.so : void std::__invoke_impl<void, std::_Bind<void (us::wallet::trader::conman::*(us::wallet::trader::conman*))()>&>(std::__invoke_other, std::_Bind<void (us::wallet::trader::conman::*(us::wallet::trader::conman*))()>&)+0x20
+0x3429565b7c713f wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 287 push_data trace 5i0S trace c983Z 
+0x3429565b7cd1d2 wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 712 push_payload. push code 101 
+0x3429565b7d1acf wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 724 pushing data 
+0x3429565b7e8d68 wallet/trader trader_protocol.cpp 78 generating push_data info 
+0x3429565b7ea325 wallet/trader trader_protocol.cpp 337 datasubdir is empty using trade_id 3J7DQuecSq4z3XcTtjawBQAPezFS 
+0x3429565b7f269a wallet/trader trader_protocol.cpp 344 datadir logs/us-trader-test_969207/test_r2r/home/node_derm/123/wallet/trader/trade_data/3J7DQuecSq4z3XcTtjawBQAPezFS 
+0x3429565b7f916f wallet/trader trader_protocol.cpp 94 trade_state is 0  
+0x3429565b7fad7e wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 996 push_data sz str 1881 blob 1884 
+0x3429565b7ffc46 gov/io blob_writer_t.cpp 234 writable::get_datagram svc 10 
+0x3429565b800fe7 gov/socket datagram.cpp 141 new datagram 0x7f583000d930 svc 10 seq 0 sz 1919 payload sz 1909 ch 123 
+0x3429565b802605 wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 707 get_push_datagram 101 blob sz 1884 dgram sz 1919 
+0x3429565b80710c gov/relay pushman.cpp 39 flush_push 
+0x3429565b807e18 gov bgtask.cpp 105 wakeup 
+0x3429565b8088fd gov bgtask.cpp 111 reset resume 
+0x3429565b80a4b4 trader ch_t.cpp 24 destroyed ch_t 
+0x3429565b80b577 wallet/trader conman.cpp 99 connection_supervisor state online shch 0 
+0x3429565b80c599 wallet/trader conman.cpp 180 connection_supervisor returned 0 online 
+0x3429565b80d3b3 gov bgtask.cpp 100 reset_wait 0 
+0x3429565b80e050 wallet/trader conman.cpp 306 waiting 
+0x342957c1b18878 gov bgtask.cpp 97 reset_wait 1 
+0x342957c1b28f09 wallet/trader conman.cpp 309 resumed 
+0x342957c1b2eec9 wallet/trader conman.cpp 99 connection_supervisor state online shch 0 
+0x342957c1b35229 wallet/trader conman.cpp 180 connection_supervisor returned 0 online 
+0x342957c1b3b1cc wallet/trader conman.cpp 195 cmdq sz 1 next cmd is msg Thanks. 
+0x342957c1b40289 wallet/trader conman.cpp 203 flushing command msg Thanks. 
+0x342957c1b45e6b trader ch_t.cpp 15 new ch_t 
+0x342957c1b4c456 wallet/trader conman.cpp 210 cmd requires online cur_st online 
+0x342957c1b50bff wallet/trader conman.cpp 226 calling exec_online msg Thanks. 
+0x342957c1b54988 wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 1286 exec_online msg Thanks. 
+0x342957c1b6f10d wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 198 update activity timestamp 
+0x342957c1b90511 gov/io blob_writer_t.cpp 197 writable::write to blob 
+0x342957c1b9a090 wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 1096 sending chat msg 
+0x342957c1bb2005 wallet/engine ../../../us/api/generated/c++/wallet/r2r/cllr_rpc-impl 4 trading_msg 
+0x342957c1bb6756 gov/io blob_writer_t.cpp 234 writable::get_datagram svc 81 
+0x342957c1bbd265 gov/socket datagram.cpp 141 new datagram 0x7f583000ddd0 svc 81 seq 0 sz 43 payload sz 33 ch 123 
+0x342957c1bc58a9 gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f583000ddd0 svc 81 sz 43 
+0x342957c1bcae3b gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x342957c1bcf15b gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x342957c1bd38d4 gov/id peer_t.cpp 178 outbound_traffic__goes_encrypted 1 inbound_traffic__was_encrypted 0 
+0x342957c1bd8426 gov/socket datagram.cpp 242 encrypt dgram svc= 81 
+0x342957c1bdd967 gov/crypto symmetric_encryption.cpp 66 encrypt block of 43 bytes. 
+0x342957c1be2223 gov/crypto symmetric_encryption.cpp 68 estimated size 81 
+0x342957c1bfdfb5 gov/crypto symmetric_encryption.cpp 79 final size 81 
+0x342957c1c046bb gov/crypto symmetric_encryption.cpp 58 IV sz  12 scrambled msg sz 71 enc/dec ratio( 43 ) =  1.65116 
+0x342957c1c0d8be gov/crypto symmetric_encryption.cpp 84 total encrypted payload 71 bytes. 
+0x342957c1c16293 gov/id peer_t.cpp 186 datagram encrypted. svc 81 length 43 -> svc 0 length 81 
+0x342957c1c1b7dc gov/id peer_t.cpp 187 deleting original clear-text datagram. 
+0x342957c1c1f4c7 gov/socket datagram.cpp 238 deleted datagram 0x7f583000ddd0 
+0x342957c1c23a4d gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 81 
+0x342957c1c2bc05 gov/socket/outbound send_queue.cpp 56 admission pri 81 sz 81 seq 0 recipient 192.168.0.38:33062 dgram svc field (to be overwritten) 14629 
+0x342957c1c32af5 gov/socket datagram.cpp 441 completed? dend= 81 size= 81 completed= 1 
+0x342957c1c3805a gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 81 
+0x342957c1c3cd5a gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 81 pri 81 cli 0x7f575800ed60 sendref 2 
+0x342957c1c44b59 gov bgtask.cpp 105 wakeup 
+0x342957c1c488f4 gov bgtask.cpp 111 reset resume 
+0x342957c1c4d98d gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x342957c1c5d218 wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 712 push_payload. push code 108 
+0x342957c1c784a4 wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 730 pushing chat 
+0x342957c1c90620 gov/io blob_writer_t.cpp 197 writable::write to blob 
+0x342957c1c9d694 gov/io blob_writer_t.cpp 234 writable::get_datagram svc 10 
+0x342957c1ca3c2a gov/socket datagram.cpp 141 new datagram 0x7f583000ddd0 svc 10 seq 0 sz 890 payload sz 880 ch 123 
+0x342957c1caaf46 wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 707 get_push_datagram 108 blob sz 855 dgram sz 890 
+0x342957c1ccc589 gov/relay pushman.cpp 39 flush_push 
+0x342957c1cd1b67 gov bgtask.cpp 105 wakeup 
+0x342957c1cd58c9 gov bgtask.cpp 111 reset resume 
+0x342957c1ce07a3 wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 246 update_peer priv: 0; shared_params: 0; personality: 0; update devices: 0 
+0x342957c1cfb088 trader ch_t.cpp 24 destroyed ch_t 
+0x342957c1d04aa2 wallet/trader conman.cpp 99 connection_supervisor state online shch 0 
+0x342957c1d0aded wallet/trader conman.cpp 180 connection_supervisor returned 0 online 
+0x342957c1d0fbfe gov bgtask.cpp 100 reset_wait 0 
+0x342957c1d14976 wallet/trader conman.cpp 306 waiting 
+0x342957fd53ba25 gov bgtask.cpp 97 reset_wait 1 
+0x342957fd54c4fd wallet/trader conman.cpp 309 resumed 
+0x342957fd5523f5 wallet/trader conman.cpp 99 connection_supervisor state online shch 0 
+0x342957fd5587e5 wallet/trader conman.cpp 180 connection_supervisor returned 0 online 
+0x342957fd55e6ee wallet/trader conman.cpp 195 cmdq sz 1 next cmd is msg Is there anything else you'd like to add? 
+0x342957fd563508 wallet/trader conman.cpp 203 flushing command msg Is there anything else you'd like to add? 
+0x342957fd569709 trader ch_t.cpp 15 new ch_t 
+0x342957fd56ff0f wallet/trader conman.cpp 210 cmd requires online cur_st online 
+0x342957fd574752 wallet/trader conman.cpp 226 calling exec_online msg Is there anything else you'd like to add? 
+0x342957fd5784da wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 1286 exec_online msg Is there anything else you'd like to add? 
+0x342957fd5938e4 wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 198 update activity timestamp 
+0x342957fd5b53fe gov/io blob_writer_t.cpp 197 writable::write to blob 
+0x342957fd5becac wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 1096 sending chat msg 
+0x342957fd5d6593 wallet/engine ../../../us/api/generated/c++/wallet/r2r/cllr_rpc-impl 4 trading_msg 
+0x342957fd5dad05 gov/io blob_writer_t.cpp 234 writable::get_datagram svc 81 
+0x342957fd5e1861 gov/socket datagram.cpp 141 new datagram 0x7f5830003520 svc 81 seq 0 sz 77 payload sz 67 ch 123 
+0x342957fd5e9d2b gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f5830003520 svc 81 sz 77 
+0x342957fd5ef35b gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x342957fd5f36b0 gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x342957fd5f7e27 gov/id peer_t.cpp 178 outbound_traffic__goes_encrypted 1 inbound_traffic__was_encrypted 0 
+0x342957fd5fca86 gov/socket datagram.cpp 242 encrypt dgram svc= 81 
+0x342957fd601fd9 gov/crypto symmetric_encryption.cpp 66 encrypt block of 77 bytes. 
+0x342957fd60682e gov/crypto symmetric_encryption.cpp 68 estimated size 115 
+0x342957fd62846a gov/crypto symmetric_encryption.cpp 79 final size 115 
+0x342957fd62f484 gov/crypto symmetric_encryption.cpp 58 IV sz  12 scrambled msg sz 105 enc/dec ratio( 77 ) =  1.36364 
+0x342957fd638622 gov/crypto symmetric_encryption.cpp 84 total encrypted payload 105 bytes. 
+0x342957fd640d8f gov/id peer_t.cpp 186 datagram encrypted. svc 81 length 77 -> svc 0 length 115 
+0x342957fd64634c gov/id peer_t.cpp 187 deleting original clear-text datagram. 
+0x342957fd649f5d gov/socket datagram.cpp 238 deleted datagram 0x7f5830003520 
+0x342957fd64e608 gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 81 
+0x342957fd656836 gov/socket/outbound send_queue.cpp 56 admission pri 81 sz 115 seq 0 recipient 192.168.0.38:33062 dgram svc field (to be overwritten) 14629 
+0x342957fd662bdb gov/socket datagram.cpp 441 completed? dend= 115 size= 115 completed= 1 
+0x342957fd6689bf gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 81 
+0x342957fd66d7f5 gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 115 pri 81 cli 0x7f575800ed60 sendref 2 
+0x342957fd6754c1 gov bgtask.cpp 105 wakeup 
+0x342957fd67915a gov bgtask.cpp 111 reset resume 
+0x342957fd67e225 gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x342957fd686929 wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 712 push_payload. push code 108 
+0x342957fd6a0a83 wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 730 pushing chat 
+0x342957fd6b72ec gov/io blob_writer_t.cpp 197 writable::write to blob 
+0x342957fd6c46ac gov/io blob_writer_t.cpp 234 writable::get_datagram svc 10 
+0x342957fd6caa46 gov/socket datagram.cpp 141 new datagram 0x7f5830003520 svc 10 seq 0 sz 942 payload sz 932 ch 123 
+0x342957fd6d1b75 wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 707 get_push_datagram 108 blob sz 907 dgram sz 942 
+0x342957fd6f2203 gov/relay pushman.cpp 39 flush_push 
+0x342957fd6f7618 gov bgtask.cpp 105 wakeup 
+0x342957fd6fb45b gov bgtask.cpp 111 reset resume 
+0x342957fd73eae2 wallet/trader tid 3J7DQuecSq4z3XcTtjawBQAPezFS trader_t.cpp 246 update_peer priv: 0; shared_params: 0; personality: 0; update devices: 0 
+0x342957fd7606ea trader ch_t.cpp 24 destroyed ch_t 
+0x342957fd7671e8 wallet/trader conman.cpp 99 connection_supervisor state online shch 0 
+0x342957fd76ca92 wallet/trader conman.cpp 180 connection_supervisor returned 0 online 
+0x342957fd771d78 gov bgtask.cpp 100 reset_wait 0 
+0x342957fd7761c9 wallet/trader conman.cpp 306 waiting 

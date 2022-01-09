@@ -1,0 +1,151 @@
+0x34294ecb56c724 start test_r2r/node_phy/govd/daemon/peerd/peer_daemon
+0x34294ecb56e035 gov/peer daemon_untrusted_mesh.cpp 125 open-untrusted mesh configuration 
+0x34294ecb57085c gov/peer daemon_untrusted_mesh.cpp 130 grid size 10 grid_dev size 2 
+0x34294ecb573811 gov/peer daemon_untrusted_mesh.cpp 135 peerd-sleep random seconds 33 
+0x3429567a4f905f gov bgtask.cpp 100 reset_wait 0 
+0x3429567a51560f gov/peer daemon_untrusted_mesh.cpp 141 enter main loop 
+0x3429567a51ae3e gov/peer daemon_untrusted_mesh.cpp 143 switch to db nodes force_seeds 0 nodes empty? 0 
+0x3429567a52603a gov/peer daemon_untrusted_mesh.cpp 18 rotate 
+0x3429567a52ab6d gov/peer daemon_untrusted_mesh.cpp 21 nodes, grid sizes  6 10 
+0x3429567a52fc74 gov/peer daemon_untrusted_mesh nodes>2P2drgw2oBRmi2deSrs8smWmJi4a 192.168.0.38:22572
+0x3429567a52fc74 gov/peer daemon_untrusted_mesh nodes>3Q3rwHc14jbLNDKnxhmxvKZsiLqX 192.168.0.38:22672
+0x3429567a52fc74 gov/peer daemon_untrusted_mesh nodes>5jBMeew8qzFMGKzmLHbPnixT2r2 192.168.0.38:22472
+0x3429567a52fc74 gov/peer daemon_untrusted_mesh nodes>jG2eggrHVTrvfrqJL1wJqapAWrE 192.168.0.38:22372
+0x3429567a52fc74 gov/peer daemon_untrusted_mesh nodes>3sJsBz5TrMkGWTZ45syVs7b3wnkV 192.168.0.38:22172
+0x3429567a52fc74 gov/peer daemon_untrusted_mesh nodes>3qpLNoz2M4FsAmd4ahpqknLY4fo3 192.168.0.38:22272
+0x3429567a5ef976 gov/peer daemon_untrusted_mesh.cpp 40 grid has room. prepare next connection 
+0x3429567a5f88ff gov/peer daemon_untrusted_mesh.cpp 52 tries 5 
+0x3429567a5fe8d1 gov/peer daemon_untrusted_mesh.cpp 59 nodes cur 5 6 
+0x3429567a6036c8 gov/peer daemon_untrusted_mesh.cpp 65 cur 3qpLNoz2M4FsAmd4ahpqknLY4fo3 myself pubkeyh 3Q3rwHc14jbLNDKnxhmxvKZsiLqX 
+0x3429567a62ec63 gov/peer daemon_untrusted_mesh.cpp 81 found suitable peer to connect to 3qpLNoz2M4FsAmd4ahpqknLY4fo3 
+0x3429567a648958 gov/peer daemon_untrusted_mesh.cpp 101 connecting to 192.168.0.38 22272 3qpLNoz2M4FsAmd4ahpqknLY4fo3 
+0x3429567a664fdf gov/socket client.cpp 60 contructor-outbound 
+0x3429567a66ef74 gov/peer peer_t.cpp 28 connecting_to 192.168.0.38:22272 pport 22672 pin 0 role peer 
+0x3429567a676a24 gov/id peer_t.cpp 38 connect_as 192.168.0.38:22272 role peer pport 22672 pin 0 block 1 
+0x3429567a67e022 gov/socket client.cpp 360 connect0 192.168.0.38:22272 block?= 1 
+0x3429567a685caf gov/socket client.cpp 327 init_sock block= 1 
+0x3429567a691de1 gov/socket client.cpp 334 is non-blocking? 0 
+0x3429567a6987b8 gov/socket client.cpp 339 ::connect 192.168.0.38:22272 
+0x3429567a6c7ad3 gov/socket client.cpp 341 / ::connect 192.168.0.38:22272 0 
+0x3429567a6ce9f5 gov/socket client.cpp 349 init_sock set timeout 
+0x3429567a6d3ee5 gov/socket client.cpp 380 reset ts activity = now 2 
+0x3429567a6e9fa5 gov/socket client.cpp 384 connect-outbound 338 192.168.0.38:22272 
+0x3429567a6f0cef gov/socket client.cpp 395 on_connect ok 
+0x3429567a6f594d gov/id peer_t.cpp 41 initiating dialogue as role ' 0 ' pport 22672 pin 0 
+0x3429567a6fb22e gov/id peer_t.cpp 313 initiate_dialogue as  peer 22672 0 
+0x3429567a6ff974 gov/id peer_t.cpp 323 reseting state. 
+0x3429567a703c29 gov/id peer_t.cpp 81 handshake_t constructor 0 22672 0 
+0x3429567a73456e gov/id peer_t.cpp 88 msg 7ZDFmhG8dZmyM8psfQpysbpCCR4d7XA4xQ6vxGdSXp8H version_fingerprint 26209 pport 22672 pin 0 role 0 
+0x3429567a76f107 gov/id peer_t   initiate_dialogue: my handshake: msg 7ZDFmhG8dZmyM8psfQpysbpCCR4d7XA4xQ6vxGdSXp8H
+0x3429567a76f107 gov/id peer_t   initiate_dialogue: my handshake: role peer
+0x3429567a76f107 gov/id peer_t   initiate_dialogue: my handshake: pport 22672
+0x3429567a76f107 gov/id peer_t   initiate_dialogue: my handshake: pin 0
+0x3429567a76f107 gov/id peer_t   initiate_dialogue: my handshake: version fingerprint 26209
+0x3429567a79c45c gov/id peer_t.cpp 328 sending id_request 5 7ZDFmhG8dZmyM8psfQpysbpCCR4d7XA4xQ6vxGdSXp8H role peer 
+0x3429567a7c99fe gov/id ../../../us/api/generated/c++/gov/id/cllr_rpc-impl 4 request 
+0x3429567a7d0fd7 gov/socket datagram.cpp 141 new datagram 0x7f576c0067c0 svc 5 seq 0 sz 42 payload sz 32 ch 123 
+0x3429567a7d8a23 gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f576c0067c0 svc 5 sz 42 
+0x3429567a7e331d gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x3429567a7e80f4 gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x3429567a7ec73e gov/id peer_t.cpp 171 Not encrypting. Basic service 5 encryption for services above or equal 8 
+0x3429567a7f184f gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 5 
+0x3429567a7f8f3e gov/socket/outbound send_queue.cpp 56 admission pri 5 sz 42 seq 0 recipient 192.168.0.38:22272 dgram svc field (to be overwritten) 5 
+0x3429567a7ffa7b gov/socket datagram.cpp 441 completed? dend= 42 size= 42 completed= 1 
+0x3429567a804fcf gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 5 
+0x3429567a809878 gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 42 pri 5 cli 0x7f576c012a20 sendref 0 
+0x3429567a81134f gov bgtask.cpp 105 wakeup 
+0x3429567a8156ae gov bgtask.cpp 111 reset resume 
+0x3429567a81aa71 gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x3429567a822534 gov/id peer_t.cpp 44 result ok 
+0x3429567a826df0 gov/peer peer_t.cpp 31 OK fd is 338 
+0x3429567a82ce28 gov/peer daemon_t.cpp 152 grid-connect 192.168.0.38:22272 pport 22672 0x7f576c012a20 
+0x3429567a833080 gov/peer daemon_untrusted_mesh.cpp 104 pre-attach 
+0x3429567a838d90 gov/socket daemon_t.cpp 43 attach 338 192.168.0.38:22272 
+0x3429567a83cd02 gov/socket daemon_t.cpp 48 RBF -DISABLED BAN- lookup ban list 
+0x3429567a841b3f gov/socket daemon_t.cpp 60 connected 192.168.0.38:22272 
+0x3429567a8457f4 gov/socket daemon_t.cpp 62 setting not_blocking_mode 338 
+0x3429567a84a366 gov/socket/multipeer clients.cpp 32 add 338 sz 3 
+0x3429567a852ae1 gov/socket/multipeer clients.cpp 39 added 338 clients_sz 4 
+0x3429567a857ba5 gov bgtask.cpp 105 wakeup 
+0x3429567a85b5da gov bgtask.cpp 111 reset resume 
+0x3429567a8601aa gov/socket/multipeer server.cpp 113 onwakeup 
+0x3429567a8641fb gov/socket/multipeer clients.cpp 80 feeding loopback interface 
+0x3429567a87cb92 gov/peer daemon_t.cpp 155 Attached to grid 192.168.0.38:22272 pport 22672 0x7f576c012a20 
+0x3429567a883f7f gov/peer daemon_untrusted_mesh.cpp 110 on-going connection created? yes 
+0x3429567a888edf gov/peer daemon_untrusted_mesh.cpp 115 end rotate 
+0x3429567a88d428 gov bgtask.cpp 100 reset_wait 0 
+0x3429567a891cf9 gov/peer daemon_t.cpp 194 going to sleep for  15 secs 
+0x342959f89d4f08 gov/peer daemon_t.cpp 198 wakeup 
+0x342959f89e5397 gov bgtask.cpp 100 reset_wait 0 
+0x342959f89ec20c gov/peer daemon_untrusted_mesh.cpp 18 rotate 
+0x342959f89f0a88 gov/peer daemon_untrusted_mesh.cpp 21 nodes, grid sizes  6 10 
+0x342959f89fc128 gov/peer daemon_untrusted_mesh nodes>2P2drgw2oBRmi2deSrs8smWmJi4a 192.168.0.38:22572
+0x342959f89fc128 gov/peer daemon_untrusted_mesh nodes>3Q3rwHc14jbLNDKnxhmxvKZsiLqX 192.168.0.38:22672
+0x342959f89fc128 gov/peer daemon_untrusted_mesh nodes>5jBMeew8qzFMGKzmLHbPnixT2r2 192.168.0.38:22472
+0x342959f89fc128 gov/peer daemon_untrusted_mesh nodes>jG2eggrHVTrvfrqJL1wJqapAWrE 192.168.0.38:22372
+0x342959f89fc128 gov/peer daemon_untrusted_mesh nodes>3sJsBz5TrMkGWTZ45syVs7b3wnkV 192.168.0.38:22172
+0x342959f89fc128 gov/peer daemon_untrusted_mesh nodes>3qpLNoz2M4FsAmd4ahpqknLY4fo3 192.168.0.38:22272
+0x342959f8a7f2ba gov/peer daemon_untrusted_mesh.cpp 40 grid has room. prepare next connection 
+0x342959f8a84fde gov/peer daemon_untrusted_mesh.cpp 52 tries 5 
+0x342959f8a8af1e gov/peer daemon_untrusted_mesh.cpp 59 nodes cur 3 6 
+0x342959f8a903de gov/peer daemon_untrusted_mesh.cpp 65 cur jG2eggrHVTrvfrqJL1wJqapAWrE myself pubkeyh 3Q3rwHc14jbLNDKnxhmxvKZsiLqX 
+0x342959f8abcc6a gov/peer daemon_untrusted_mesh.cpp 84 jG2eggrHVTrvfrqJL1wJqapAWrE already in grid 
+0x342959f8ad5023 gov/peer daemon_untrusted_mesh.cpp 65 cur 3sJsBz5TrMkGWTZ45syVs7b3wnkV myself pubkeyh 3Q3rwHc14jbLNDKnxhmxvKZsiLqX 
+0x342959f8b019ee gov/peer daemon_untrusted_mesh.cpp 81 found suitable peer to connect to 3sJsBz5TrMkGWTZ45syVs7b3wnkV 
+0x342959f8b1c38f gov/peer daemon_untrusted_mesh.cpp 101 connecting to 192.168.0.38 22172 3sJsBz5TrMkGWTZ45syVs7b3wnkV 
+0x342959f8b38310 gov/socket client.cpp 60 contructor-outbound 
+0x342959f8b422ba gov/peer peer_t.cpp 28 connecting_to 192.168.0.38:22172 pport 22672 pin 0 role peer 
+0x342959f8b5177e gov/id peer_t.cpp 38 connect_as 192.168.0.38:22172 role peer pport 22672 pin 0 block 1 
+0x342959f8b595d9 gov/socket client.cpp 360 connect0 192.168.0.38:22172 block?= 1 
+0x342959f8b61342 gov/socket client.cpp 327 init_sock block= 1 
+0x342959f8b6d433 gov/socket client.cpp 334 is non-blocking? 0 
+0x342959f8b73e33 gov/socket client.cpp 339 ::connect 192.168.0.38:22172 
+0x342959f8ba2f79 gov/socket client.cpp 341 / ::connect 192.168.0.38:22172 0 
+0x342959f8baa34f gov/socket client.cpp 349 init_sock set timeout 
+0x342959f8bb02ac gov/socket client.cpp 380 reset ts activity = now 2 
+0x342959f8bb6cf0 gov/socket client.cpp 384 connect-outbound 355 192.168.0.38:22172 
+0x342959f8bbb149 gov/socket client.cpp 395 on_connect ok 
+0x342959f8bbf675 gov/id peer_t.cpp 41 initiating dialogue as role ' 0 ' pport 22672 pin 0 
+0x342959f8bc5222 gov/id peer_t.cpp 313 initiate_dialogue as  peer 22672 0 
+0x342959f8bc9a68 gov/id peer_t.cpp 323 reseting state. 
+0x342959f8bcdca6 gov/id peer_t.cpp 81 handshake_t constructor 0 22672 0 
+0x342959f8bfefe5 gov/id peer_t.cpp 88 msg 7ZDFmhG8db9bfwHNJY2xNHMVoWY7SsXaRBgme5b3pbyN version_fingerprint 26209 pport 22672 pin 0 role 0 
+0x342959f8c36388 gov/id peer_t   initiate_dialogue: my handshake: msg 7ZDFmhG8db9bfwHNJY2xNHMVoWY7SsXaRBgme5b3pbyN
+0x342959f8c36388 gov/id peer_t   initiate_dialogue: my handshake: role peer
+0x342959f8c36388 gov/id peer_t   initiate_dialogue: my handshake: pport 22672
+0x342959f8c36388 gov/id peer_t   initiate_dialogue: my handshake: pin 0
+0x342959f8c36388 gov/id peer_t   initiate_dialogue: my handshake: version fingerprint 26209
+0x342959f8c64827 gov/id peer_t.cpp 328 sending id_request 5 7ZDFmhG8db9bfwHNJY2xNHMVoWY7SsXaRBgme5b3pbyN role peer 
+0x342959f8c94320 gov/id ../../../us/api/generated/c++/gov/id/cllr_rpc-impl 4 request 
+0x342959f8c9ba28 gov/socket datagram.cpp 141 new datagram 0x7f576c012dd0 svc 5 seq 0 sz 42 payload sz 32 ch 123 
+0x342959f8ca375e gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f576c012dd0 svc 5 sz 42 
+0x342959f8ca89e6 gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x342959f8cad065 gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x342959f8cb0ee2 gov/id peer_t.cpp 171 Not encrypting. Basic service 5 encryption for services above or equal 8 
+0x342959f8cb5e88 gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 5 
+0x342959f8cbca95 gov/socket/outbound send_queue.cpp 56 admission pri 5 sz 42 seq 0 recipient 192.168.0.38:22172 dgram svc field (to be overwritten) 5 
+0x342959f8cc3358 gov/socket datagram.cpp 441 completed? dend= 42 size= 42 completed= 1 
+0x342959f8cc89f0 gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 5 
+0x342959f8ccd78c gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 42 pri 5 cli 0x7f576c017940 sendref 0 
+0x342959f8cd4ef2 gov bgtask.cpp 105 wakeup 
+0x342959f8cd8d6f gov bgtask.cpp 111 reset resume 
+0x342959f8cddf9e gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x342959f8ce60e7 gov/id peer_t.cpp 44 result ok 
+0x342959f8ceb05c gov/peer peer_t.cpp 31 OK fd is 355 
+0x342959f8cf1017 gov/peer daemon_t.cpp 152 grid-connect 192.168.0.38:22172 pport 22672 0x7f576c017940 
+0x342959f8cf6184 gov/peer daemon_untrusted_mesh.cpp 104 pre-attach 
+0x342959f8cfb65e gov/socket daemon_t.cpp 43 attach 355 192.168.0.38:22172 
+0x342959f8cff2bd gov/socket daemon_t.cpp 48 RBF -DISABLED BAN- lookup ban list 
+0x342959f8d0434b gov/socket daemon_t.cpp 60 connected 192.168.0.38:22172 
+0x342959f8d08637 gov/socket daemon_t.cpp 62 setting not_blocking_mode 355 
+0x342959f8d1e058 gov/socket/multipeer clients.cpp 32 add 355 sz 4 
+0x342959f8d2b97a gov/socket/multipeer clients.cpp 39 added 355 clients_sz 5 
+0x342959f8d30d73 gov bgtask.cpp 105 wakeup 
+0x342959f8d3466d gov bgtask.cpp 111 reset resume 
+0x342959f8d3a762 gov/socket/multipeer server.cpp 113 onwakeup 
+0x342959f8d3eb52 gov/socket/multipeer clients.cpp 80 feeding loopback interface 
+0x342959f8d565d9 gov/peer daemon_t.cpp 155 Attached to grid 192.168.0.38:22172 pport 22672 0x7f576c017940 
+0x342959f8d679de gov/peer daemon_untrusted_mesh.cpp 110 on-going connection created? yes 
+0x342959f8d6dc65 gov/peer daemon_untrusted_mesh.cpp 115 end rotate 
+0x342959f8d725ca gov bgtask.cpp 100 reset_wait 0 
+0x342959f8d7712b gov/peer daemon_t.cpp 194 going to sleep for  26 secs 

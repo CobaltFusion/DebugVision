@@ -1,0 +1,224 @@
+0x34294fbfb87a6a start test_r2r/node_ask/walletd/daemon/inbound/thpool/worker
+0x34294fbfb88b27 gov/socket/multipeer thpool.cpp 64 empty queue 
+0x342952616c13ae gov/socket/multipeer thpool.cpp 74 attending fd178 192.168.0.38:39896 remaining queue sz= 0 
+0x342952616c50ce gov/socket/multipeer thpool.cpp 77 -begin job --------------- fd178 192.168.0.38:39896 
+0x342952616c6869 gov/socket peer_t.cpp 127 newtask TAG301 192.168.0.38:39896 
+0x342952616c7841 gov/socket peer_t.cpp 134 cur dgram 0 
+0x342952616c8746 gov/socket client.cpp 403 recv4 
+0x342952616c94e6 gov/socket client.cpp 410 starting new datagram 
+0x342952616ca2f0 gov/socket client.cpp 417 before: dend= 0 
+0x342952616cb217 gov/socket datagram.cpp 446 recvfrom 
+0x342952616cce0b gov/socket datagram.cpp 461 comm read 10 
+0x342952616ce426 gov/socket datagram.cpp 524 Received header for dgram sz= 73 svc= 0 
+0x342952616cf998 gov/socket datagram.cpp 530 comm read 63 
+0x342952616d0945 gov/socket datagram.cpp 441 completed? dend= 73 size= 73 completed= 1 
+0x342952616d34f8 gov/socket datagram.cpp 441 completed? dend= 73 size= 73 completed= 1 
+0x342952616d45af gov/socket datagram.cpp 552 comm read 73 73 OK 3MqwjXRAYvLidT7wTpGFjxyrmxHh 
+0x342952616da46c gov/socket datagram.cpp 441 completed? dend= 73 size= 73 completed= 1 
+0x342952616dcbe6 gov/socket datagram.cpp 555 comm recv dgram hash  3MqwjXRAYvLidT7wTpGFjxyrmxHh svc 0 seq 0 
+0x342952616e2640 gov/socket client.cpp 430 reset ts activity=now 1 dend: 0 -> 73 
+0x342952616e38ed gov/socket client.cpp 436 after: dend= 73 
+0x342952616e4816 gov/socket datagram.cpp 441 completed? dend= 73 size= 73 completed= 1 
+0x342952616e57aa gov/socket peer_t.cpp 178 dgram reception completed decrypting 
+0x342952616e65e1 gov/id peer_t.cpp 198 decrypt datagram 
+0x342952616e749c gov/socket datagram.cpp 260 decrypt dgram 73 
+0x342952616e8592 gov/crypto symmetric_encryption.cpp 105 decrypt block of  63 bytes. msg sz= 51 + IV size 12 
+0x342952616ee0f1 gov/crypto symmetric_encryption.cpp 58 IV sz  12 scrambled msg sz 63 enc/dec ratio( 35 ) =  1.8 
+0x342952616f13b9 gov/id peer_t.cpp 217 deleting original encrypted datagram. 
+0x342952616f250d gov/socket datagram.cpp 238 deleted datagram 0x7f580c0061b0 
+0x342952616f3deb gov/socket peer_t.cpp 186 complete dgram arrived 0x7f580c00bbf0 sz 35 svc 170 192.168.0.38:39896 
+0x342952616f5648 gov/socket peer_t.cpp 189 dispatch job 192.168.0.38:39896 
+0x342952616f6521 wallet/engine peer_t.cpp 50 process_work svc 170 
+0x342952616f75a5 wallet/engine ../../../us/api/generated/c++/wallet/wallet/hdlr_svc_handler-impl 1141 protocol::wallet_exec_trade 
+0x342952616f8e2e wallet/wallet local_api__wallet.cpp 1004 exec_trade 
+0x342952616f9fc2 wallet traders_t.cpp 704 exec 3oa6pFzv9UwoeuQnpatcfHCgjYJu ping 
+0x34295261700751 wallet/trader conman.cpp 156 schedule_exec ping 
+0x34295261701bed wallet/trader conman.cpp 162 queued ping 
+0x34295261702b27 gov bgtask.cpp 105 wakeup 
+0x342952617037fb gov bgtask.cpp 111 reset resume 
+0x342952617049ba wallet/trader conman.cpp 313 onwakeup 
+0x34295261706469 gov/socket datagram.cpp 238 deleted datagram 0x7f580c00bbf0 
+0x34295261707e03 gov/socket peer_t.cpp 191 dispatched job 192.168.0.38:39896 
+0x34295261708d0c gov/socket peer_t.cpp 202 work completed 
+0x34295261709bad gov/socket peer_t.cpp 123 worker ended recv TAG661 
+0x3429526170aa68 gov/socket peer_t.cpp 214 end service TAG301 
+0x3429526170b82f gov bgtask.cpp 105 wakeup 
+0x3429526170c388 gov bgtask.cpp 111 reset resume 
+0x3429526170d382 gov/socket/multipeer server.cpp 113 onwakeup 
+0x3429526170e0c2 gov/socket/multipeer clients.cpp 80 feeding loopback interface 
+0x34295261714395 gov/socket/multipeer thpool.cpp 81 -end job------------------ fd178 192.168.0.38:39896 
+0x342952617159ed gov/socket/multipeer thpool.cpp 64 empty queue 
+0x34295279185f84 gov/socket/multipeer thpool.cpp 74 attending fd316 192.168.0.38:39924 remaining queue sz= 0 
+0x3429527918c54c gov/socket/multipeer thpool.cpp 77 -begin job --------------- fd316 192.168.0.38:39924 
+0x3429527918eeb0 gov/socket peer_t.cpp 127 newtask TAG301 192.168.0.38:39924 
+0x34295279190e24 gov/socket peer_t.cpp 134 cur dgram 0 
+0x34295279194dfa gov/socket client.cpp 403 recv4 
+0x34295279196c39 gov/socket client.cpp 410 starting new datagram 
+0x34295279198646 gov/socket client.cpp 417 before: dend= 0 
+0x3429527919a37f gov/socket datagram.cpp 446 recvfrom 
+0x3429527919d718 gov/socket datagram.cpp 461 comm read 10 
+0x342952791a0281 gov/socket datagram.cpp 524 Received header for dgram sz= 312 svc= 0 
+0x342952791a2b21 gov/socket datagram.cpp 530 comm read 302 
+0x342952791a4850 gov/socket datagram.cpp 441 completed? dend= 312 size= 312 completed= 1 
+0x342952791ad936 gov/socket datagram.cpp 441 completed? dend= 312 size= 312 completed= 1 
+0x342952791af888 gov/socket datagram.cpp 552 comm read 312 312 OK 3x8RFpXTCY83c6NhJejxjsfAoVav 
+0x342952791ba43c gov/socket datagram.cpp 441 completed? dend= 312 size= 312 completed= 1 
+0x342952791c3468 gov/socket datagram.cpp 555 comm recv dgram hash  3x8RFpXTCY83c6NhJejxjsfAoVav svc 0 seq 0 
+0x342952791cd7c7 gov/socket client.cpp 430 reset ts activity=now 1 dend: 0 -> 312 
+0x342952791cfaf3 gov/socket client.cpp 436 after: dend= 312 
+0x342952791d3836 gov/socket datagram.cpp 441 completed? dend= 312 size= 312 completed= 1 
+0x342952791d5bee gov/socket peer_t.cpp 178 dgram reception completed decrypting 
+0x342952791d76e4 gov/id peer_t.cpp 198 decrypt datagram 
+0x342952791d92c5 gov/socket datagram.cpp 260 decrypt dgram 312 
+0x342952791dddee gov/crypto symmetric_encryption.cpp 105 decrypt block of  302 bytes. msg sz= 290 + IV size 12 
+0x342952791e8f88 gov/crypto symmetric_encryption.cpp 58 IV sz  12 scrambled msg sz 302 enc/dec ratio( 274 ) =  1.10219 
+0x342952791eec9d gov/id peer_t.cpp 217 deleting original encrypted datagram. 
+0x342952791f099e gov/socket datagram.cpp 238 deleted datagram 0x7f580c00d860 
+0x342952791f3813 gov/socket peer_t.cpp 186 complete dgram arrived 0x7f580c00d5f0 sz 274 svc 81 192.168.0.38:39924 
+0x342952791f63a4 gov/socket peer_t.cpp 189 dispatch job 192.168.0.38:39924 
+0x342952791f7eb5 wallet/engine peer_t.cpp 50 process_work svc 81 
+0x342952791f9a52 wallet/engine ../../../us/api/generated/c++/wallet/r2r/hdlr_svc_handler-impl 6 protocol::r2r_trading_msg 
+0x342952791fc693 wallet/engine peer_t__r2r.cpp 42 trading_msg 0 
+0x342952791fe49f wallet/engine peer_t__r2r.cpp 48 trading message arrived for trade 3oa6pFzv9UwoeuQnpatcfHCgjYJu code 204 
+0x3429527920a69d wallet traders_t.cpp 351 trading_msg [bin] svc 204 241  bytes 
+0x3429527920cc9e wallet traders_t.cpp 422 looking up trader 
+0x3429527920e65f wallet traders_t.cpp 314 lock_trader_ 
+0x3429527920fce4 wallet traders_t.cpp 322 unlocked_trader_ 
+0x34295279212087 wallet traders_t.cpp 316 ++busyref 3oa6pFzv9UwoeuQnpatcfHCgjYJu 
+0x3429527921bc86 wallet/trader tid 3oa6pFzv9UwoeuQnpatcfHCgjYJu trader_t.cpp 472 trading_msg [bin] svc 204 
+0x342952792253f1 wallet/trader tid 3oa6pFzv9UwoeuQnpatcfHCgjYJu trader_t.cpp 198 update activity timestamp 
+0x3429527922ec6c wallet/trader tid 3oa6pFzv9UwoeuQnpatcfHCgjYJu trader_t.cpp 479 given to protocol 
+0x342952792382f0 wallet/trader/workflow trader_protocol.cpp 196 trading_msg svc 204 payload size 241 bytes 
+0x3429527923aa10 wallet/trader trader_protocol.cpp 606 trading_msg svc 204 payload size 241 bytes 
+0x3429527923c81e wallet/trader trader_protocol.cpp 650 Received svc_params. 
+0x3429527923e78a trader ch_t.cpp 20 new ch_t with ref to locked local_params 
+0x34295279248a94 wallet/trader trader_protocol remote shared params:basket_serial 3
+0x34295279248a94 wallet/trader trader_protocol remote shared params:doctypes_consumer 288 290 292 
+0x34295279248a94 wallet/trader trader_protocol remote shared params:doctypes_producer 291 
+0x34295279248a94 wallet/trader trader_protocol remote shared params:wf_cat Y
+0x34295279248a94 wallet/trader trader_protocol remote shared params:wf_cat_expiry 1727721618782118144
+0x34295279248a94 wallet/trader trader_protocol remote shared params:wf_cat_mode recv
+0x34295279248a94 wallet/trader trader_protocol remote shared params:wf_cat_ts 1641321618782117738
+0x34295279248a94 wallet/trader trader_protocol remote shared params:wf_inv N
+0x34295279248a94 wallet/trader trader_protocol remote shared params:wf_inv_mode recv
+0x34295279248a94 wallet/trader trader_protocol remote shared params:wf_pay N
+0x34295279248a94 wallet/trader trader_protocol remote shared params:wf_pay_mode send
+0x34295279248a94 wallet/trader trader_protocol remote shared params:wf_rcpt N
+0x34295279248a94 wallet/trader trader_protocol remote shared params:wf_rcpt_mode recv
+0x3429527924da22 wallet/trader trader_protocol.cpp 748 on_remote_params 
+0x34295279251300 wallet/trader trader_protocol remote_shared_params> basket_serial 3
+0x34295279251300 wallet/trader trader_protocol remote_shared_params> doctypes_consumer 288 290 292 
+0x34295279251300 wallet/trader trader_protocol remote_shared_params> doctypes_producer 291 
+0x34295279251300 wallet/trader trader_protocol remote_shared_params> wf_cat Y
+0x34295279251300 wallet/trader trader_protocol remote_shared_params> wf_cat_expiry 1727721618782118144
+0x34295279251300 wallet/trader trader_protocol remote_shared_params> wf_cat_mode recv
+0x34295279251300 wallet/trader trader_protocol remote_shared_params> wf_cat_ts 1641321618782117738
+0x34295279251300 wallet/trader trader_protocol remote_shared_params> wf_inv N
+0x34295279251300 wallet/trader trader_protocol remote_shared_params> wf_inv_mode recv
+0x34295279251300 wallet/trader trader_protocol remote_shared_params> wf_pay N
+0x34295279251300 wallet/trader trader_protocol remote_shared_params> wf_pay_mode send
+0x34295279251300 wallet/trader trader_protocol remote_shared_params> wf_rcpt N
+0x34295279251300 wallet/trader trader_protocol remote_shared_params> wf_rcpt_mode recv
+0x3429527925681b wallet/trader trader_protocol RP> basket_serial 3
+0x3429527925681b wallet/trader trader_protocol RP> doctypes_consumer 288 290 292 
+0x3429527925681b wallet/trader trader_protocol RP> doctypes_producer 291 
+0x3429527925681b wallet/trader trader_protocol RP> wf_cat Y
+0x3429527925681b wallet/trader trader_protocol RP> wf_cat_expiry 1727721618782118144
+0x3429527925681b wallet/trader trader_protocol RP> wf_cat_mode recv
+0x3429527925681b wallet/trader trader_protocol RP> wf_cat_ts 1641321618782117738
+0x3429527925681b wallet/trader trader_protocol RP> wf_inv N
+0x3429527925681b wallet/trader trader_protocol RP> wf_inv_mode recv
+0x3429527925681b wallet/trader trader_protocol RP> wf_pay N
+0x3429527925681b wallet/trader trader_protocol RP> wf_pay_mode send
+0x3429527925681b wallet/trader trader_protocol RP> wf_rcpt N
+0x3429527925681b wallet/trader trader_protocol RP> wf_rcpt_mode recv
+0x3429527925a7d0 wallet/trader trader_protocol.cpp 311 rehome_apply. logs/us-trader-test_969207/test_r2r/home/node_ask/123/wallet/trader/bid2ask/ask/zzqCyAiEUz9mrw6EX1Rdehmovpv/11111111111111111111 
+0x3429527925d2e4 wallet/trader trader_protocol.cpp 397 rehome. Starting ch priv: 0; shared_params: 0; personality: 0; update devices: 1 pphome logs/us-trader-test_969207/test_r2r/home/node_ask/123/wallet/trader/bid2ask/ask/zzqCyAiEUz9mrw6EX1Rdehmovpv/11111111111111111111 
+0x342952792600a7 wallet/trader trader_protocol.cpp 399 modeis_mepeer 1 
+0x34295279261d6f wallet/trader trader_protocol.cpp 408 personalities: me  zzqCyAiEUz9mrw6EX1Rdehmovpv / peer 11111111111111111111 
+0x34295279274b22 wallet/trader trader_protocol.cpp 388 rehome_dir logs/us-trader-test_969207/test_r2r/home/node_ask/123/wallet/trader/bid2ask/ask/zzqCyAiEUz9mrw6EX1Rdehmovpv 
+0x34295279278b68 wallet/trader trader_protocol.cpp 859 underride_default_params 
+0x3429527927b0c2 wallet/trader kv.cpp 179 underride kv homemode me/peer 
+0x3429527927d96a wallet/trader kv.cpp 179 underride kv personality_sk  
+0x3429527927fd11 wallet/trader kv.cpp 179 underride kv personality_moniker anonymous 
+0x34295279281da7 wallet/trader kv.cpp 179 underride kv chat_script 0 
+0x34295279283b8c wallet/trader params_t.cpp 19 load params from dir logs/us-trader-test_969207/test_r2r/home/node_ask/123/wallet/trader/bid2ask/ask/zzqCyAiEUz9mrw6EX1Rdehmovpv 
+0x34295279285a7b wallet/trader kv.cpp 224 loading params from logs/us-trader-test_969207/test_r2r/home/node_ask/123/wallet/trader/bid2ask/ask/zzqCyAiEUz9mrw6EX1Rdehmovpv/params_private 
+0x34295279289969 wallet/trader kv.cpp 199 loading params from input stream 
+0x3429527928e09d wallet/trader kv.cpp 219 params changed? no 
+0x34295279290345 wallet/trader kv.cpp 224 loading params from logs/us-trader-test_969207/test_r2r/home/node_ask/123/wallet/trader/bid2ask/ask/zzqCyAiEUz9mrw6EX1Rdehmovpv/params_shared 
+0x34295279292b93 wallet/trader kv.cpp 199 loading params from input stream 
+0x34295279294567 wallet/trader kv.cpp 219 params changed? no 
+0x34295279297086 wallet/trader trader_protocol.cpp 364 set_personality 3RHpTGvmFTvoDaVcymMMgXMuapTTT8v5rtprEGjZMdNG Impact Shopping 
+0x34295279298ec8 wallet/trader tid 3oa6pFzv9UwoeuQnpatcfHCgjYJu trader_t.cpp 155 set_personality Impact Shopping 
+0x342952792a40a9 wallet/trader/personality personality_t.cpp 64 reset_if_distinct Impact Shopping 
+0x342952792b5329 wallet/trader/personality personality_t.cpp 77 reset_if_distinct2 Impact Shopping 
+0x342952792b791b wallet/trader trader_protocol.cpp 372 personality didnt change 
+0x342952792b9f02 wallet/trader trader_protocol.cpp 388 rehome_dir logs/us-trader-test_969207/test_r2r/home/node_ask/123/wallet/trader/bid2ask/ask/zzqCyAiEUz9mrw6EX1Rdehmovpv/11111111111111111111 
+0x342952792bc903 wallet/trader trader_protocol.cpp 859 underride_default_params 
+0x342952792bec26 wallet/trader kv.cpp 179 underride kv homemode me/peer 
+0x342952792c10d8 wallet/trader kv.cpp 179 underride kv personality_sk  
+0x342952792c31de wallet/trader kv.cpp 179 underride kv personality_moniker anonymous 
+0x342952792c522a wallet/trader kv.cpp 179 underride kv chat_script 0 
+0x342952792c6d2b wallet/trader params_t.cpp 19 load params from dir logs/us-trader-test_969207/test_r2r/home/node_ask/123/wallet/trader/bid2ask/ask/zzqCyAiEUz9mrw6EX1Rdehmovpv/11111111111111111111 
+0x342952792c886c wallet/trader kv.cpp 224 loading params from logs/us-trader-test_969207/test_r2r/home/node_ask/123/wallet/trader/bid2ask/ask/zzqCyAiEUz9mrw6EX1Rdehmovpv/11111111111111111111/params_private 
+0x342952792cb835 wallet/trader kv.cpp 199 loading params from input stream 
+0x342952792cd44e wallet/trader kv.cpp 219 params changed? no 
+0x342952792cf19e wallet/trader kv.cpp 224 loading params from logs/us-trader-test_969207/test_r2r/home/node_ask/123/wallet/trader/bid2ask/ask/zzqCyAiEUz9mrw6EX1Rdehmovpv/11111111111111111111/params_shared 
+0x342952792d17d8 wallet/trader kv.cpp 199 loading params from input stream 
+0x342952792d2f8e wallet/trader kv.cpp 219 params changed? no 
+0x342952792d5503 wallet/trader trader_protocol.cpp 364 set_personality 3RHpTGvmFTvoDaVcymMMgXMuapTTT8v5rtprEGjZMdNG Impact Shopping 
+0x342952792d70d2 wallet/trader tid 3oa6pFzv9UwoeuQnpatcfHCgjYJu trader_t.cpp 155 set_personality Impact Shopping 
+0x342952792e0ae9 wallet/trader/personality personality_t.cpp 64 reset_if_distinct Impact Shopping 
+0x342952792f1225 wallet/trader/personality personality_t.cpp 77 reset_if_distinct2 Impact Shopping 
+0x342952792f301f wallet/trader trader_protocol.cpp 372 personality didnt change 
+0x342952792f57e0 wallet/trader trader_protocol.cpp 437 rehome. Leaving ch priv: 0; shared_params: 0; personality: 0; update devices: 1 pphome logs/us-trader-test_969207/test_r2r/home/node_ask/123/wallet/trader/bid2ask/ask/zzqCyAiEUz9mrw6EX1Rdehmovpv/11111111111111111111 jumps 0 
+0x342952792f7e21 wallet/trader trader_protocol.cpp 337 datasubdir is empty using trade_id 3oa6pFzv9UwoeuQnpatcfHCgjYJu 
+0x34295279309a92 wallet/trader trader_protocol.cpp 344 datadir logs/us-trader-test_969207/test_r2r/home/node_ask/123/wallet/trader/trade_data/3oa6pFzv9UwoeuQnpatcfHCgjYJu 
+0x3429527930be08 wallet/trader/workflow workflows_t.cpp 78 set workflows home logs/us-trader-test_969207/test_r2r/home/node_ask/123/wallet/trader/trade_data/3oa6pFzv9UwoeuQnpatcfHCgjYJu 
+0x3429527930e656 trader/workflow/consumer basket.cpp 65 set basket serial in shared_params for basket  customer_twin : 3 ch before priv: 0; shared_params: 0; personality: 0; update devices: 1 
+0x34295279310c8e wallet/trader kv.cpp 169 set kv basket_serial 3 
+0x3429527931379b trader/workflow/consumer basket.cpp 67 ch after priv: 0; shared_params: 0; personality: 0; update devices: 1 
+0x34295279316df0 wallet/trader trader_protocol.cpp 316 changed? priv: 0; shared_params: 0; personality: 0; update devices: 1 pphome logs/us-trader-test_969207/test_r2r/home/node_ask/123/wallet/trader/bid2ask/ask/zzqCyAiEUz9mrw6EX1Rdehmovpv/11111111111111111111 
+0x34295279318c37 trader ch_t.cpp 57 always_update_devices set. update_devices: 1  -> 2 
+0x3429527931d56e wallet/trader trader_protocol.cpp 761 setting ch always_update_devices priv: 0; shared_params: 0; personality: 0; update devices: 2 
+0x3429527931ff95 wallet/trader tid 3oa6pFzv9UwoeuQnpatcfHCgjYJu trader_t.cpp 246 update_peer priv: 0; shared_params: 0; personality: 0; update devices: 2 
+stack trace:
+  /usr/local/lib/libusgov.so : us::dbg::task::log_stacktrace() const+0x21
+  /usr/local/lib/libusgov.so : us::dbg::thread_logger::log_stacktrace() const+0x20
+  /usr/local/lib/libuswallet.so : ()+0x267a99
+  /usr/local/lib/libuswallet.so : us::wallet::trader::trader_t::update_peer(us::wallet::engine::peer_t&, us::wallet::trader::ch_t&&) const+0x467
+  /usr/local/lib/libuswallet.so : us::wallet::trader::trader_protocol::trading_msg(us::wallet::engine::peer_t&, unsigned short, std::vector<unsigned char, std::allocator<unsigned char> >&&)+0x53f
+  /usr/local/lib/libuswallet.so : us::wallet::trader::workflow::trader_protocol::trading_msg(us::wallet::engine::peer_t&, unsigned short, std::vector<unsigned char, std::allocator<unsigned char> >&&)+0x105
+  logs/us-trader-test_969207/test_r2r/home/node_ask/123/wallet/trader/lib/libuswallet-bid2ask-ask.so : us::trader::r2r::bid2ask::ask::protocol::trading_msg(us::wallet::engine::peer_t&, unsigned short, std::vector<unsigned char, std::allocator<unsigned char> >&&)+0x6e
+  /usr/local/lib/libuswallet.so : us::wallet::trader::trader_t::trading_msg(us::wallet::engine::peer_t&, unsigned short, std::vector<unsigned char, std::allocator<unsigned char> >&&)+0x14b
+  /usr/local/lib/libuswallet.so : us::wallet::trader::traders_t::trading_msg(us::wallet::engine::peer_t&, unsigned short, us::gov::crypto::ripemd160::value_type const&, std::vector<unsigned char, std::allocator<unsigned char> >&&)+0x638
+  /usr/local/lib/libuswallet.so : us::wallet::engine::peer_t::handle_trading_msg(unsigned short, us::wallet::engine::dto::trading_msg_in_dst_t&&)+0xc4
+0x342952797140f3 wallet/trader tid 3oa6pFzv9UwoeuQnpatcfHCgjYJu trader_t.cpp 287 push_data trace 5i0S trace c983Z 
+0x342952797222be wallet/trader tid 3oa6pFzv9UwoeuQnpatcfHCgjYJu trader_t.cpp 712 push_payload. push code 101 
+0x3429527972c13b wallet/trader tid 3oa6pFzv9UwoeuQnpatcfHCgjYJu trader_t.cpp 724 pushing data 
+0x3429527975872f wallet/trader trader_protocol.cpp 78 generating push_data info 
+0x3429527975b407 wallet/trader trader_protocol.cpp 337 datasubdir is empty using trade_id 3oa6pFzv9UwoeuQnpatcfHCgjYJu 
+0x3429527976d4d8 wallet/trader trader_protocol.cpp 344 datadir logs/us-trader-test_969207/test_r2r/home/node_ask/123/wallet/trader/trade_data/3oa6pFzv9UwoeuQnpatcfHCgjYJu 
+0x34295279777d65 wallet/trader trader_protocol.cpp 94 trade_state is 0  
+0x3429527977a590 gov/io blob_writer_t.cpp 214 writable::write to encoded string 
+0x3429527977c11f gov/io blob_writer_t.cpp 197 writable::write to blob 
+0x342952797bb032 wallet/trader tid 3oa6pFzv9UwoeuQnpatcfHCgjYJu trader_t.cpp 996 push_data sz str 1814 blob 1817 
+0x342952797c5168 gov/io blob_writer_t.cpp 234 writable::get_datagram svc 10 
+0x342952797c7be8 gov/socket datagram.cpp 141 new datagram 0x7f580c00da60 svc 10 seq 0 sz 1852 payload sz 1842 ch 123 
+0x342952797caa88 wallet/trader tid 3oa6pFzv9UwoeuQnpatcfHCgjYJu trader_t.cpp 707 get_push_datagram 101 blob sz 1817 dgram sz 1852 
+0x342952797d56b9 gov/relay pushman.cpp 39 flush_push 
+0x342952797d7274 gov bgtask.cpp 105 wakeup 
+0x342952797d89f5 gov bgtask.cpp 111 reset resume 
+0x342952797dc51d trader ch_t.cpp 24 destroyed ch_t 
+0x342952797dea78 gov/socket datagram.cpp 238 deleted datagram 0x7f580c00d5f0 
+0x342952797e1a2f gov/socket peer_t.cpp 191 dispatched job 192.168.0.38:39924 
+0x342952797e3477 gov/socket peer_t.cpp 202 work completed 
+0x342952797e4e78 gov/socket peer_t.cpp 123 worker ended recv TAG661 
+0x342952797e8a28 gov/socket peer_t.cpp 214 end service TAG301 
+0x342952797ea7a5 gov bgtask.cpp 105 wakeup 
+0x342952797ebd65 gov bgtask.cpp 111 reset resume 
+0x342952797edd17 gov/socket/multipeer server.cpp 113 onwakeup 
+0x342952797ef7f7 gov/socket/multipeer clients.cpp 80 feeding loopback interface 
+0x34295279824d5c gov/socket/multipeer thpool.cpp 81 -end job------------------ fd316 192.168.0.38:39924 
+0x34295279826d8a gov/socket/multipeer thpool.cpp 64 empty queue 

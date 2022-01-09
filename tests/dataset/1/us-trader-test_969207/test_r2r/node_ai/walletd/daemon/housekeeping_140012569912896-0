@@ -1,0 +1,143 @@
+0x34294f44150fc6 start test_r2r/node_ai/walletd/daemon/housekeeping
+0x34294f44153072 wallet/engine daemon_t.cpp 165 starting housekeeping thread 
+0x34294f441564b9 wallet/engine daemon_t.cpp 168 housekeeping tasks 
+0x34294f44157c05 wallet/engine daemon_t.cpp 170 task: announce wallet: 
+0x34294f441592cb wallet/engine daemon_t.cpp 110 lookup myself  4Ay18obsJ6bMYZgLoDYWJ2dH9Y3p 
+0x34294f441616d7 gov/engine ../../../us/api/generated/c++/gov/traders/cllr_rpc-impl 27 lookup_wallet 
+0x34294f44165cab gov/socket datagram.cpp 141 new datagram 0x7f57fc006320 svc 42 seq 0 sz 30 payload sz 20 ch 123 
+0x34294f44169199 gov/socket peer_t.cpp 228 sendrecv 
+0x34294f44175361 gov/socket rendezvous_t.cpp 86 sendrecv. sending dgram seq 1 
+0x34294f44176ccd gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f57fc006320 svc 42 sz 30 
+0x34294f44178274 gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x34294f441792ac gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x34294f4417abb9 gov/id peer_t.cpp 175 Not encrypting. Encryption not turned on. 
+0x34294f4417c361 gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 42 
+0x34294f4417e586 gov/socket/outbound send_queue.cpp 56 admission pri 42 sz 30 seq 1 recipient 0.0.0.0:0 dgram svc field (to be overwritten) 42 
+0x34294f441803ac gov/socket datagram.cpp 441 completed? dend= 30 size= 30 completed= 1 
+0x34294f44181a37 gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 42 
+0x34294f44182e3f gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 30 pri 42 cli 0x7f5864024b00 sendref 0 
+0x34294f44185959 gov bgtask.cpp 105 wakeup 
+0x34294f4418691c gov bgtask.cpp 111 reset resume 
+0x34294f44187ec3 gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x34294f44189767 gov/socket rendezvous_t.cpp 97 waiting for 5 seconds 
+0x3429506e208492 gov/socket rendezvous_t.cpp 106 sendrecv: wakeup 
+0x3429506e220b55 gov/socket rendezvous_t.cpp 111 partial chunk has arrived, give more time since it is not stalled. 
+0x3429506e227138 gov/socket rendezvous_t.cpp 97 waiting for 5 seconds 
+0x342951982b2d62 gov/socket rendezvous_t.cpp 106 sendrecv: wakeup 
+0x342951982cd016 gov/socket rendezvous_t.cpp 127 KO 3029.2 Timeout. null dgram found in rendezvous table. Timeout. seq= 1 
+0x342951982db032 gov/engine ../../../us/api/generated/c++/gov/traders/cllr_rpc-impl 54 random_wallet 
+0x342951982e59be gov/socket datagram.cpp 141 new datagram 0x7f57fc0063c0 svc 44 seq 0 sz 10 payload sz 0 ch 123 
+0x342951982eddc4 gov/socket peer_t.cpp 228 sendrecv 
+0x342951982f5203 gov/socket rendezvous_t.cpp 86 sendrecv. sending dgram seq 2 
+0x342951982f9d95 gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f57fc0063c0 svc 44 sz 10 
+0x342951982ff45f gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x3429519830373c gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x342951983080b1 gov/id peer_t.cpp 178 outbound_traffic__goes_encrypted 0 inbound_traffic__was_encrypted 0 
+0x3429519830d8fb gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 44 
+0x342951983164f1 gov/socket/outbound send_queue.cpp 56 admission pri 44 sz 10 seq 2 recipient 127.0.0.1:22572 dgram svc field (to be overwritten) 44 
+0x3429519831d43d gov/socket datagram.cpp 441 completed? dend= 10 size= 10 completed= 1 
+0x342951983226fd gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 44 
+0x342951983271a8 gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 10 pri 44 cli 0x7f5864024b00 sendref 0 
+0x3429519832f622 gov bgtask.cpp 105 wakeup 
+0x342951983337c6 gov bgtask.cpp 111 reset resume 
+0x34295198338d2f gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x3429519834044a gov/socket rendezvous_t.cpp 97 waiting for 5 seconds 
+0x34295198651d95 gov/socket rendezvous_t.cpp 106 sendrecv: wakeup 
+0x342951986618ff gov/socket rendezvous_t.cpp 144 returning dgram svc 45 
+0x3429519866b0a7 gov/socket datagram.cpp 238 deleted datagram 0x7f57f4007f90 
+0x3429519867623a wallet/engine daemon_t.cpp 129 Register my wallet: Connecting to random wallet 34BbcyDJZ32krdi1HtpJKUbz3TyJ 192.168.0.38:22373 
+0x342951986962a2 gov/socket client.cpp 60 contructor-outbound 
+0x342951986a5302 wallet/engine daemon_t.cpp 137 pre-connect 
+0x342951986b21f4 gov/peer peer_t.cpp 28 connecting_to 192.168.0.38:22373 pport 22573 pin 0 role peer 
+0x342951986bda61 gov/id peer_t.cpp 38 connect_as 192.168.0.38:22373 role peer pport 22573 pin 0 block 1 
+0x342951986c51b5 gov/socket client.cpp 360 connect0 192.168.0.38:22373 block?= 1 
+0x342951986cc9bd gov/socket client.cpp 327 init_sock block= 1 
+0x342951986d7a1b gov/socket client.cpp 334 is non-blocking? 0 
+0x342951986ddfef gov/socket client.cpp 339 ::connect 192.168.0.38:22373 
+0x34295198708c69 gov/socket client.cpp 341 / ::connect 192.168.0.38:22373 0 
+0x3429519870fab8 gov/socket client.cpp 349 init_sock set timeout 
+0x34295198715261 gov/socket client.cpp 380 reset ts activity = now 2 
+0x3429519871b340 gov/socket client.cpp 384 connect-outbound 278 192.168.0.38:22373 
+0x3429519871f47d gov/socket client.cpp 395 on_connect ok 
+0x34295198724674 gov/id peer_t.cpp 41 initiating dialogue as role ' 0 ' pport 22573 pin 0 
+0x34295198729fae gov/id peer_t.cpp 313 initiate_dialogue as  peer 22573 0 
+0x3429519872f042 gov/id peer_t.cpp 323 reseting state. 
+0x34295198733440 gov/id peer_t.cpp 81 handshake_t constructor 0 22573 0 
+0x3429519876f6b3 gov/id peer_t.cpp 88 msg 7ZCuw9qBDjhMTHHBrQmQQbZ5gqNgh5HRbrypn6QJPEFe version_fingerprint 26209 pport 22573 pin 0 role 0 
+0x342951987a7793 gov/id peer_t   initiate_dialogue: my handshake: msg 7ZCuw9qBDjhMTHHBrQmQQbZ5gqNgh5HRbrypn6QJPEFe
+0x342951987a7793 gov/id peer_t   initiate_dialogue: my handshake: role peer
+0x342951987a7793 gov/id peer_t   initiate_dialogue: my handshake: pport 22573
+0x342951987a7793 gov/id peer_t   initiate_dialogue: my handshake: pin 0
+0x342951987a7793 gov/id peer_t   initiate_dialogue: my handshake: version fingerprint 26209
+0x342951987d660a gov/id peer_t.cpp 328 sending id_request 5 7ZCuw9qBDjhMTHHBrQmQQbZ5gqNgh5HRbrypn6QJPEFe role peer 
+0x34295198804fd8 gov/id ../../../us/api/generated/c++/gov/id/cllr_rpc-impl 4 request 
+0x3429519880b80b gov/socket datagram.cpp 141 new datagram 0x7f57fc009780 svc 5 seq 0 sz 42 payload sz 32 ch 123 
+0x34295198813231 gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f57fc009780 svc 5 sz 42 
+0x3429519881833c gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x3429519881c3a1 gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x342951988205b0 gov/id peer_t.cpp 171 Not encrypting. Basic service 5 encryption for services above or equal 8 
+0x342951988256e3 gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 5 
+0x3429519882c595 gov/socket/outbound send_queue.cpp 56 admission pri 5 sz 42 seq 0 recipient 192.168.0.38:22373 dgram svc field (to be overwritten) 5 
+0x342951988329c6 gov/socket datagram.cpp 441 completed? dend= 42 size= 42 completed= 1 
+0x34295198837cc8 gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 5 
+0x3429519883c472 gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 42 pri 5 cli 0x7f57fc0097f0 sendref 0 
+0x34295198843197 gov bgtask.cpp 105 wakeup 
+0x34295198847023 gov bgtask.cpp 111 reset resume 
+0x3429519884bd1b gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x34295198852d5e gov/id peer_t.cpp 44 result ok 
+0x3429519885831c gov/peer peer_t.cpp 31 OK fd is 278 
+0x3429519886b588 gov/peer daemon_t.cpp 152 grid-connect 192.168.0.38:22373 pport 22573 0x7f57fc0097f0 
+0x342951988752e2 wallet/engine daemon_t.cpp 144 post-connect/pre-attach 
+0x3429519887ac26 wallet/engine daemon_t.cpp 145 Another wallet is aware of me. Soon I'll be in the ledger. Disconnect in 5s, next task in 120s 
+0x34295198882a31 gov/socket daemon_t.cpp 43 attach 278 192.168.0.38:22373 
+0x34295198886bb4 gov/socket daemon_t.cpp 48 RBF -DISABLED BAN- lookup ban list 
+0x3429519888bd3d gov/socket daemon_t.cpp 60 connected 192.168.0.38:22373 
+0x3429519888f5da gov/socket daemon_t.cpp 62 setting not_blocking_mode 278 
+0x342951988941a6 gov/socket/multipeer clients.cpp 32 add 278 sz 1 
+0x3429519889c0dc gov/socket/multipeer clients.cpp 39 added 278 clients_sz 2 
+0x342951988a0ad6 gov bgtask.cpp 105 wakeup 
+0x342951988a8299 gov bgtask.cpp 111 reset resume 
+0x342951988ad443 gov/socket/multipeer server.cpp 113 onwakeup 
+0x342951988bd01c gov/socket/multipeer clients.cpp 80 feeding loopback interface 
+0x342951988da931 gov/peer daemon_t.cpp 155 Attached to grid 192.168.0.38:22373 pport 22573 0x7f57fc0097f0 
+0x342951988e34de wallet/engine daemon_t.cpp 152 disconnect buddy 
+0x342951988ebb78 gov bgtask.cpp 100 reset_wait 0 
+0x342951988f1148 wallet/engine daemon_t.cpp 84 waiting 5 secs 
+0x342952c297ea3f gov bgtask.cpp 100 reset_wait 0 
+0x342952c29964c1 wallet/engine daemon_t.cpp 154 disconnect buddy 
+0x342952c299bba3 gov/socket client.cpp 96 disconnect 
+0x342952c29a4780 gov/peer peer_t.cpp 103 disconnect 192.168.0.38:22373 ch 123 0 Thanks for broadcasting evidence of me. 
+0x342952c29ab6df gov/id peer_t.cpp 53 disconnect 123 0 Thanks for broadcasting evidence of me. 
+0x342952c29b1878 gov/socket client.cpp 89 disconnect 192.168.0.38:22373 fd 278 chan 123 
+0x342952c29baed1 gov/socket client.cpp 81 adding finishing reason Thanks for broadcasting evidence of me. seq 0 
+0x342952c29c1aba gov/socket daemon_t.cpp 33 detach 192.168.0.38:22373 
+0x342952c29c67a6 gov/socket peer_t.cpp 243 set finished 
+0x342952c29cb07a gov/socket peer_t.cpp 248 reporting gov_socket_finished with reason Thanks for broadcasting evidence of me. 
+0x342952c29d4f7b gov/socket datagram.cpp 141 new datagram 0x7f57fc00a8f0 svc 4 seq 0 sz 50 payload sz 40 ch 123 
+0x342952c29dd0fd gov/socket peer_t.cpp 253 svc socket_finished goes for channel 123 
+0x342952c29e23e4 gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f57fc00a8f0 svc 4 sz 50 
+0x342952c29e7887 gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x342952c29ebdf7 gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x342952c29efe4e gov/id peer_t.cpp 171 Not encrypting. Basic service 4 encryption for services above or equal 8 
+0x342952c29f4cf9 gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 4 
+0x342952c29fbbae gov/socket/outbound send_queue.cpp 56 admission pri 4 sz 50 seq 0 recipient 192.168.0.38:22373 dgram svc field (to be overwritten) 4 
+0x342952c2a02ae2 gov/socket datagram.cpp 441 completed? dend= 50 size= 50 completed= 1 
+0x342952c2a07f87 gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 4 
+0x342952c2a0cbb8 gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 50 pri 4 cli 0x7f57fc0097f0 sendref 1 
+0x342952c2a151ca gov bgtask.cpp 105 wakeup 
+0x342952c2a192f9 gov bgtask.cpp 111 reset resume 
+0x342952c2a1ebcf gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x342952c2a26835 gov/socket peer_t.cpp 255 success 
+0x342952c2a2ab44 gov/socket peer_t.cpp 256 flushing send_queue 
+0x342952c2ae3f1a gov/socket peer_t.cpp 258 flushed send_queue 
+0x342952c2af16dd gov/socket client.cpp 121 set finished 
+0x342952c2af6511 gov/socket daemon_t.cpp 36 shutdown recv channel 
+0x342952c2b02c31 gov bgtask.cpp 105 wakeup 
+0x342952c2b07a58 gov bgtask.cpp 111 reset resume 
+0x342952c2b3c910 gov/socket/multipeer server.cpp 113 onwakeup 
+0x342952c2b58fc4 gov/socket/multipeer clients.cpp 80 feeding loopback interface 
+0x342952c2b72847 wallet/engine daemon_t.cpp 157 Announced 
+0x342952c2b7b85d gov bgtask.cpp 100 reset_wait 0 
+0x342952c2b80cac wallet/engine daemon_t.cpp 84 waiting 120 secs 
+0x34295ec0e4b328 gov bgtask.cpp 97 reset_wait 1 
+0x34295ec0e580b3 wallet/engine daemon_t.cpp 184 stopped housekeeping thread 

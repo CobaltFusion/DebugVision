@@ -1,0 +1,810 @@
+0x342950b2171c2f start test_r2r/node_gp/walletd/daemon/pushman
+0x342950b21735e1 gov/relay pushman.cpp 56 push_to_devices 
+0x342950b2176b02 gov/relay pushman.cpp 77 wait 
+0x342950b2177e9f gov bgtask.cpp 100 reset_wait 0 
+0x342950b2178f94 gov/relay pushman.cpp 84 waiting 
+0x342952cbcb0d55 gov bgtask.cpp 97 reset_wait 1 
+0x342952cbcb23cb gov/relay pushman.cpp 88 resumed 
+0x342952cbcb3047 gov/relay pushman.cpp 56 push_to_devices 
+0x342952cbcb421b gov/relay daemon_t.cpp 72 grid_devices_send 1 
+0x342952cbcb5bb7 gov/peer grid_t.cpp 58 prepare_worker_send visited 0 
+0x342952cbcb6e3b gov/peer grid_t.cpp 62 grid size 2 
+0x342952cbcb8590 gov/peer grid_t.cpp 82 returning slot 0 
+0x342952cbcb9980 gov/relay daemon_t.cpp 80 sending datagram to 192.168.0.38:36308 
+0x342952cbcba73f wallet/wallet local_api.cpp 33 filter: peer subhome  subhomeh 11111111111111111111 == 11111111111111111111 
+0x342952cbcbcaa5 gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f581c006a00 svc 10 sz 33 
+0x342952cbcbdd35 gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x342952cbcbe995 gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x342952cbcbf61f gov/id peer_t.cpp 178 outbound_traffic__goes_encrypted 1 inbound_traffic__was_encrypted 0 
+0x342952cbcc0405 gov/socket datagram.cpp 242 encrypt dgram svc= 10 
+0x342952cbcc1393 gov/crypto symmetric_encryption.cpp 66 encrypt block of 33 bytes. 
+0x342952cbcc216b gov/crypto symmetric_encryption.cpp 68 estimated size 71 
+0x342952cbcc6786 gov/crypto symmetric_encryption.cpp 79 final size 71 
+0x342952cbcc7ba6 gov/crypto symmetric_encryption.cpp 58 IV sz  12 scrambled msg sz 61 enc/dec ratio( 33 ) =  1.84848 
+0x342952cbcc9291 gov/crypto symmetric_encryption.cpp 84 total encrypted payload 61 bytes. 
+0x342952cbccaa8b gov/id peer_t.cpp 186 datagram encrypted. svc 10 length 33 -> svc 0 length 71 
+0x342952cbccba04 gov/id peer_t.cpp 187 deleting original clear-text datagram. 
+0x342952cbccc4d0 gov/socket datagram.cpp 238 deleted datagram 0x7f581c006a00 
+0x342952cbccd1bd gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 10 
+0x342952cbcce60b gov/socket/outbound send_queue.cpp 56 admission pri 10 sz 71 seq 0 recipient 192.168.0.38:36308 dgram svc field (to be overwritten) 170 
+0x342952cbccf814 gov/socket datagram.cpp 441 completed? dend= 71 size= 71 completed= 1 
+0x342952cbcd0738 gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 10 
+0x342952cbcd13fc gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 71 pri 10 cli 0x7f57d4009140 sendref 0 
+0x342952cbcd27f1 gov bgtask.cpp 105 wakeup 
+0x342952cbcd334d gov bgtask.cpp 111 reset resume 
+0x342952cbcd410e gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x342952cbcd5663 gov/relay daemon_t.cpp 87 success 
+0x342952cbcd680c gov/relay daemon_t.cpp 90 success sending datagram to 192.168.0.38:36308 
+0x342952cbcd7565 gov/peer grid_t.cpp 58 prepare_worker_send visited 1 
+0x342952cbcd81d5 gov/peer grid_t.cpp 62 grid size 2 
+0x342952cbcd8ee4 gov/peer grid_t.cpp 73 slot 1 is empty 
+0x342952cbcd9eed gov/peer grid_t.cpp 78 slot occupied 0 already visited 
+0x342952cbcdaac7 gov/peer grid_t.cpp 85 no suitable peer found in grid 
+0x342952cbcdb5f9 gov/relay daemon_t.cpp 94 Sent 1 dgrams succ to a number of devices= 1 
+0x342952cbcdd703 gov/socket datagram.cpp 238 deleted datagram 0x7f580000d890 
+0x342952cbcde8ef gov/relay pushman.cpp 77 wait 
+0x342952cbcdf4b9 gov bgtask.cpp 100 reset_wait 0 
+0x342952cbce00b7 gov/relay pushman.cpp 84 waiting 
+0x342952cbef2159 gov bgtask.cpp 97 reset_wait 1 
+0x342952cbef4f06 gov/relay pushman.cpp 88 resumed 
+0x342952cbef5dce gov/relay pushman.cpp 56 push_to_devices 
+0x342952cbef6e64 gov/relay daemon_t.cpp 72 grid_devices_send 1 
+0x342952cbef7d14 gov/peer grid_t.cpp 58 prepare_worker_send visited 0 
+0x342952cbef89dd gov/peer grid_t.cpp 62 grid size 2 
+0x342952cbef9873 gov/peer grid_t.cpp 73 slot 1 is empty 
+0x342952cbefaff4 gov/peer grid_t.cpp 82 returning slot 0 
+0x342952cbefc617 gov/relay daemon_t.cpp 80 sending datagram to 192.168.0.38:36308 
+0x342952cbefd480 wallet/wallet local_api.cpp 33 filter: peer subhome  subhomeh 11111111111111111111 == 11111111111111111111 
+0x342952cbf00db0 gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f580000d890 svc 10 sz 616 
+0x342952cbf02207 gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x342952cbf02efa gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x342952cbf03bb3 gov/id peer_t.cpp 178 outbound_traffic__goes_encrypted 1 inbound_traffic__was_encrypted 0 
+0x342952cbf04994 gov/socket datagram.cpp 242 encrypt dgram svc= 10 
+0x342952cbf05a40 gov/crypto symmetric_encryption.cpp 66 encrypt block of 616 bytes. 
+0x342952cbf0675b gov/crypto symmetric_encryption.cpp 68 estimated size 654 
+0x342952cbf0aacf gov/crypto symmetric_encryption.cpp 79 final size 654 
+0x342952cbf0bd8c gov/crypto symmetric_encryption.cpp 58 IV sz  12 scrambled msg sz 644 enc/dec ratio( 616 ) =  1.04545 
+0x342952cbf0d478 gov/crypto symmetric_encryption.cpp 84 total encrypted payload 644 bytes. 
+0x342952cbf0ebdf gov/id peer_t.cpp 186 datagram encrypted. svc 10 length 616 -> svc 0 length 654 
+0x342952cbf0fb28 gov/id peer_t.cpp 187 deleting original clear-text datagram. 
+0x342952cbf106c3 gov/socket datagram.cpp 238 deleted datagram 0x7f580000d890 
+0x342952cbf113ff gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 10 
+0x342952cbf1296a gov/socket/outbound send_queue.cpp 56 admission pri 10 sz 654 seq 0 recipient 192.168.0.38:36308 dgram svc field (to be overwritten) 8209 
+0x342952cbf13cf6 gov/socket datagram.cpp 441 completed? dend= 654 size= 654 completed= 1 
+0x342952cbf14cc0 gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 10 
+0x342952cbf15a3b gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 654 pri 10 cli 0x7f57d4009140 sendref 0 
+0x342952cbf16f23 gov bgtask.cpp 105 wakeup 
+0x342952cbf17b55 gov bgtask.cpp 111 reset resume 
+0x342952cbf18a15 gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x342952cbf1a082 gov/relay daemon_t.cpp 87 success 
+0x342952cbf1b2ee gov/relay daemon_t.cpp 90 success sending datagram to 192.168.0.38:36308 
+0x342952cbf1c058 gov/peer grid_t.cpp 58 prepare_worker_send visited 1 
+0x342952cbf1cd42 gov/peer grid_t.cpp 62 grid size 2 
+0x342952cbf1dfe6 gov/peer grid_t.cpp 78 slot occupied 0 already visited 
+0x342952cbf1ed65 gov/peer grid_t.cpp 73 slot 1 is empty 
+0x342952cbf1f8cb gov/peer grid_t.cpp 85 no suitable peer found in grid 
+0x342952cbf203b4 gov/relay daemon_t.cpp 94 Sent 1 dgrams succ to a number of devices= 1 
+0x342952cbf21543 gov/socket datagram.cpp 238 deleted datagram 0x7f5820009510 
+0x342952cbf224f3 gov/relay pushman.cpp 77 wait 
+0x342952cbf230c1 gov bgtask.cpp 100 reset_wait 0 
+0x342952cbf23cc3 gov/relay pushman.cpp 84 waiting 
+0x342952cc3ffb3b gov bgtask.cpp 97 reset_wait 1 
+0x342952cc402c1e gov/relay pushman.cpp 88 resumed 
+0x342952cc403b55 gov/relay pushman.cpp 56 push_to_devices 
+0x342952cc404cd1 gov/relay daemon_t.cpp 72 grid_devices_send 1 
+0x342952cc405ccb gov/peer grid_t.cpp 58 prepare_worker_send visited 0 
+0x342952cc406a66 gov/peer grid_t.cpp 62 grid size 2 
+0x342952cc40792d gov/peer grid_t.cpp 73 slot 1 is empty 
+0x342952cc4091b5 gov/peer grid_t.cpp 82 returning slot 0 
+0x342952cc40a956 gov/relay daemon_t.cpp 80 sending datagram to 192.168.0.38:36308 
+0x342952cc40b8a0 wallet/wallet local_api.cpp 33 filter: peer subhome  subhomeh 11111111111111111111 == 11111111111111111111 
+0x342952cc40e2da gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f5820009510 svc 10 sz 1260 
+0x342952cc40f493 gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x342952cc4101ba gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x342952cc410ee4 gov/id peer_t.cpp 178 outbound_traffic__goes_encrypted 1 inbound_traffic__was_encrypted 0 
+0x342952cc411d66 gov/socket datagram.cpp 242 encrypt dgram svc= 10 
+0x342952cc412dae gov/crypto symmetric_encryption.cpp 66 encrypt block of 1260 bytes. 
+0x342952cc413bfd gov/crypto symmetric_encryption.cpp 68 estimated size 1298 
+0x342952cc418184 gov/crypto symmetric_encryption.cpp 79 final size 1298 
+0x342952cc41952b gov/crypto symmetric_encryption.cpp 58 IV sz  12 scrambled msg sz 1288 enc/dec ratio( 1260 ) =  1.02222 
+0x342952cc41c0b9 gov/crypto symmetric_encryption.cpp 84 total encrypted payload 1288 bytes. 
+0x342952cc41dbd7 gov/id peer_t.cpp 186 datagram encrypted. svc 10 length 1260 -> svc 0 length 1298 
+0x342952cc41ec13 gov/id peer_t.cpp 187 deleting original clear-text datagram. 
+0x342952cc41f7d2 gov/socket datagram.cpp 238 deleted datagram 0x7f5820009510 
+0x342952cc42073b gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 10 
+0x342952cc421dda gov/socket/outbound send_queue.cpp 56 admission pri 10 sz 1298 seq 0 recipient 192.168.0.38:36308 dgram svc field (to be overwritten) 10 
+0x342952cc423170 gov/socket datagram.cpp 441 completed? dend= 1298 size= 1298 completed= 1 
+0x342952cc4240e6 gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 10 
+0x342952cc424e27 gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 1298 pri 10 cli 0x7f57d4009140 sendref 0 
+0x342952cc426bd4 gov bgtask.cpp 105 wakeup 
+0x342952cc427840 gov bgtask.cpp 111 reset resume 
+0x342952cc42866b gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x342952cc4294db gov/relay daemon_t.cpp 87 success 
+0x342952cc42a56a gov/relay daemon_t.cpp 90 success sending datagram to 192.168.0.38:36308 
+0x342952cc42b2cf gov/peer grid_t.cpp 58 prepare_worker_send visited 1 
+0x342952cc42bf9d gov/peer grid_t.cpp 62 grid size 2 
+0x342952cc42d1aa gov/peer grid_t.cpp 78 slot occupied 0 already visited 
+0x342952cc42f397 gov/peer grid_t.cpp 73 slot 1 is empty 
+0x342952cc43036c gov/peer grid_t.cpp 85 no suitable peer found in grid 
+0x342952cc430eeb gov/relay daemon_t.cpp 94 Sent 1 dgrams succ to a number of devices= 1 
+0x342952cc432166 gov/socket datagram.cpp 238 deleted datagram 0x7f582000fb90 
+0x342952cc433102 gov/relay pushman.cpp 77 wait 
+0x342952cc433cd9 gov bgtask.cpp 100 reset_wait 0 
+0x342952cc434910 gov/relay pushman.cpp 84 waiting 
+0x342952cc63f0ca gov bgtask.cpp 97 reset_wait 1 
+0x342952cc642474 gov/relay pushman.cpp 88 resumed 
+0x342952cc6433a0 gov/relay pushman.cpp 56 push_to_devices 
+0x342952cc6446ae gov/relay daemon_t.cpp 72 grid_devices_send 1 
+0x342952cc645830 gov/peer grid_t.cpp 58 prepare_worker_send visited 0 
+0x342952cc6466fd gov/peer grid_t.cpp 62 grid size 2 
+0x342952cc64766b gov/peer grid_t.cpp 73 slot 1 is empty 
+0x342952cc649308 gov/peer grid_t.cpp 82 returning slot 0 
+0x342952cc64aa90 gov/relay daemon_t.cpp 80 sending datagram to 192.168.0.38:36308 
+0x342952cc64b94b wallet/wallet local_api.cpp 33 filter: peer subhome  subhomeh 11111111111111111111 == 11111111111111111111 
+0x342952cc64e263 gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f582000fb90 svc 10 sz 1260 
+0x342952cc64f7be gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x342952cc6505d4 gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x342952cc6512bf gov/id peer_t.cpp 178 outbound_traffic__goes_encrypted 1 inbound_traffic__was_encrypted 0 
+0x342952cc65220c gov/socket datagram.cpp 242 encrypt dgram svc= 10 
+0x342952cc653368 gov/crypto symmetric_encryption.cpp 66 encrypt block of 1260 bytes. 
+0x342952cc65432a gov/crypto symmetric_encryption.cpp 68 estimated size 1298 
+0x342952cc659359 gov/crypto symmetric_encryption.cpp 79 final size 1298 
+0x342952cc65a71a gov/crypto symmetric_encryption.cpp 58 IV sz  12 scrambled msg sz 1288 enc/dec ratio( 1260 ) =  1.02222 
+0x342952cc65bfe1 gov/crypto symmetric_encryption.cpp 84 total encrypted payload 1288 bytes. 
+0x342952cc65d829 gov/id peer_t.cpp 186 datagram encrypted. svc 10 length 1260 -> svc 0 length 1298 
+0x342952cc65e922 gov/id peer_t.cpp 187 deleting original clear-text datagram. 
+0x342952cc65f4eb gov/socket datagram.cpp 238 deleted datagram 0x7f582000fb90 
+0x342952cc661671 gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 10 
+0x342952cc663066 gov/socket/outbound send_queue.cpp 56 admission pri 10 sz 1298 seq 0 recipient 192.168.0.38:36308 dgram svc field (to be overwritten) 10 
+0x342952cc6644cb gov/socket datagram.cpp 441 completed? dend= 1298 size= 1298 completed= 1 
+0x342952cc6654c3 gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 10 
+0x342952cc667356 gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 1298 pri 10 cli 0x7f57d4009140 sendref 0 
+0x342952cc668a6d gov bgtask.cpp 105 wakeup 
+0x342952cc669693 gov bgtask.cpp 111 reset resume 
+0x342952cc66a553 gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x342952cc66bdd0 gov/relay daemon_t.cpp 87 success 
+0x342952cc66d0e9 gov/relay daemon_t.cpp 90 success sending datagram to 192.168.0.38:36308 
+0x342952cc66e16c gov/peer grid_t.cpp 58 prepare_worker_send visited 1 
+0x342952cc66ef34 gov/peer grid_t.cpp 62 grid size 2 
+0x342952cc670bd9 gov/peer grid_t.cpp 73 slot 1 is empty 
+0x342952cc67202f gov/peer grid_t.cpp 78 slot occupied 0 already visited 
+0x342952cc672df2 gov/peer grid_t.cpp 85 no suitable peer found in grid 
+0x342952cc6841e2 gov/relay daemon_t.cpp 94 Sent 1 dgrams succ to a number of devices= 1 
+0x342952cc699905 gov/socket datagram.cpp 238 deleted datagram 0x7f5828005700 
+0x342952cc69ca35 gov/relay pushman.cpp 77 wait 
+0x342952cc69ddae gov bgtask.cpp 100 reset_wait 0 
+0x342952cc69ec2e gov/relay pushman.cpp 84 waiting 
+0x342952cc7b011e gov bgtask.cpp 97 reset_wait 1 
+0x342952cc7b2c88 gov/relay pushman.cpp 88 resumed 
+0x342952cc7b3c27 gov/relay pushman.cpp 56 push_to_devices 
+0x342952cc7b4e0f gov/relay daemon_t.cpp 72 grid_devices_send 1 
+0x342952cc7b5e17 gov/peer grid_t.cpp 58 prepare_worker_send visited 0 
+0x342952cc7b6bf1 gov/peer grid_t.cpp 62 grid size 2 
+0x342952cc7b84c4 gov/peer grid_t.cpp 82 returning slot 0 
+0x342952cc7b9b81 gov/relay daemon_t.cpp 80 sending datagram to 192.168.0.38:36308 
+0x342952cc7ba9c4 wallet/wallet local_api.cpp 33 filter: peer subhome  subhomeh 11111111111111111111 == 11111111111111111111 
+0x342952cc7bcfe3 gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f5828005700 svc 10 sz 1260 
+0x342952cc7be12e gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x342952cc7bee01 gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x342952cc7bfaa1 gov/id peer_t.cpp 178 outbound_traffic__goes_encrypted 1 inbound_traffic__was_encrypted 0 
+0x342952cc7c0872 gov/socket datagram.cpp 242 encrypt dgram svc= 10 
+0x342952cc7c1900 gov/crypto symmetric_encryption.cpp 66 encrypt block of 1260 bytes. 
+0x342952cc7c25fd gov/crypto symmetric_encryption.cpp 68 estimated size 1298 
+0x342952cc7c6850 gov/crypto symmetric_encryption.cpp 79 final size 1298 
+0x342952cc7c7b5d gov/crypto symmetric_encryption.cpp 58 IV sz  12 scrambled msg sz 1288 enc/dec ratio( 1260 ) =  1.02222 
+0x342952cc7c9474 gov/crypto symmetric_encryption.cpp 84 total encrypted payload 1288 bytes. 
+0x342952cc7cacdb gov/id peer_t.cpp 186 datagram encrypted. svc 10 length 1260 -> svc 0 length 1298 
+0x342952cc7cbd21 gov/id peer_t.cpp 187 deleting original clear-text datagram. 
+0x342952cc7cc8a3 gov/socket datagram.cpp 238 deleted datagram 0x7f5828005700 
+0x342952cc7cd60e gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 10 
+0x342952cc7ceb94 gov/socket/outbound send_queue.cpp 56 admission pri 10 sz 1298 seq 0 recipient 192.168.0.38:36308 dgram svc field (to be overwritten) 10 
+0x342952cc7cfdfb gov/socket datagram.cpp 441 completed? dend= 1298 size= 1298 completed= 1 
+0x342952cc7d0d47 gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 10 
+0x342952cc7d1b4c gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 1298 pri 10 cli 0x7f57d4009140 sendref 0 
+0x342952cc7d30b3 gov bgtask.cpp 105 wakeup 
+0x342952cc7d3d0f gov bgtask.cpp 111 reset resume 
+0x342952cc7d4bd3 gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x342952cc7d6167 gov/relay daemon_t.cpp 87 success 
+0x342952cc7d732a gov/relay daemon_t.cpp 90 success sending datagram to 192.168.0.38:36308 
+0x342952cc7d8090 gov/peer grid_t.cpp 58 prepare_worker_send visited 1 
+0x342952cc7d8d9d gov/peer grid_t.cpp 62 grid size 2 
+0x342952cc7d9fef gov/peer grid_t.cpp 78 slot occupied 0 already visited 
+0x342952cc7dadd7 gov/peer grid_t.cpp 73 slot 1 is empty 
+0x342952cc7dba3d gov/peer grid_t.cpp 85 no suitable peer found in grid 
+0x342952cc7dc4be gov/relay daemon_t.cpp 94 Sent 1 dgrams succ to a number of devices= 1 
+0x342952cc7dd62b gov/socket datagram.cpp 238 deleted datagram 0x7f57f800be50 
+0x342952cc7df646 gov/relay pushman.cpp 77 wait 
+0x342952cc7e03c9 gov bgtask.cpp 100 reset_wait 0 
+0x342952cc7e1090 gov/relay pushman.cpp 84 waiting 
+0x342952ccb9c300 gov bgtask.cpp 97 reset_wait 1 
+0x342952ccb9f079 gov/relay pushman.cpp 88 resumed 
+0x342952ccb9ff27 gov/relay pushman.cpp 56 push_to_devices 
+0x342952ccba0fa2 gov/relay daemon_t.cpp 72 grid_devices_send 1 
+0x342952ccba1e92 gov/peer grid_t.cpp 58 prepare_worker_send visited 0 
+0x342952ccba2b9d gov/peer grid_t.cpp 62 grid size 2 
+0x342952ccba399c gov/peer grid_t.cpp 73 slot 1 is empty 
+0x342952ccba51b6 gov/peer grid_t.cpp 82 returning slot 0 
+0x342952ccba6884 gov/relay daemon_t.cpp 80 sending datagram to 192.168.0.38:36308 
+0x342952ccba766b wallet/wallet local_api.cpp 33 filter: peer subhome  subhomeh 11111111111111111111 == 11111111111111111111 
+0x342952ccba9cf3 gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f57f800be50 svc 10 sz 1260 
+0x342952ccbaae88 gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x342952ccbabac5 gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x342952ccbac6ff gov/id peer_t.cpp 178 outbound_traffic__goes_encrypted 1 inbound_traffic__was_encrypted 0 
+0x342952ccbad4c2 gov/socket datagram.cpp 242 encrypt dgram svc= 10 
+0x342952ccbae550 gov/crypto symmetric_encryption.cpp 66 encrypt block of 1260 bytes. 
+0x342952ccbaf27a gov/crypto symmetric_encryption.cpp 68 estimated size 1298 
+0x342952ccbb34a3 gov/crypto symmetric_encryption.cpp 79 final size 1298 
+0x342952ccbb4800 gov/crypto symmetric_encryption.cpp 58 IV sz  12 scrambled msg sz 1288 enc/dec ratio( 1260 ) =  1.02222 
+0x342952ccbb5e35 gov/crypto symmetric_encryption.cpp 84 total encrypted payload 1288 bytes. 
+0x342952ccbb74ce gov/id peer_t.cpp 186 datagram encrypted. svc 10 length 1260 -> svc 0 length 1298 
+0x342952ccbb83fd gov/id peer_t.cpp 187 deleting original clear-text datagram. 
+0x342952ccbb8f6c gov/socket datagram.cpp 238 deleted datagram 0x7f57f800be50 
+0x342952ccbb9cca gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 10 
+0x342952ccbbb20b gov/socket/outbound send_queue.cpp 56 admission pri 10 sz 1298 seq 0 recipient 192.168.0.38:36308 dgram svc field (to be overwritten) 10 
+0x342952ccbbc50e gov/socket datagram.cpp 441 completed? dend= 1298 size= 1298 completed= 1 
+0x342952ccbbd4a9 gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 10 
+0x342952ccbbe1bc gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 1298 pri 10 cli 0x7f57d4009140 sendref 0 
+0x342952ccbbf62e gov bgtask.cpp 105 wakeup 
+0x342952ccbc01aa gov bgtask.cpp 111 reset resume 
+0x342952ccbc0f9f gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x342952ccbc2644 gov/relay daemon_t.cpp 87 success 
+0x342952ccbc3815 gov/relay daemon_t.cpp 90 success sending datagram to 192.168.0.38:36308 
+0x342952ccbc454e gov/peer grid_t.cpp 58 prepare_worker_send visited 1 
+0x342952ccbc51dd gov/peer grid_t.cpp 62 grid size 2 
+0x342952ccbc5f3e gov/peer grid_t.cpp 73 slot 1 is empty 
+0x342952ccbc6faa gov/peer grid_t.cpp 78 slot occupied 0 already visited 
+0x342952ccbc7be6 gov/peer grid_t.cpp 85 no suitable peer found in grid 
+0x342952ccbc86fe gov/relay daemon_t.cpp 94 Sent 1 dgrams succ to a number of devices= 1 
+0x342952ccbc990b gov/socket datagram.cpp 238 deleted datagram 0x7f582000aa80 
+0x342952ccbca8d1 gov/relay pushman.cpp 77 wait 
+0x342952ccbcb469 gov bgtask.cpp 100 reset_wait 0 
+0x342952ccbcbff7 gov/relay pushman.cpp 84 waiting 
+0x342952cf08a7d0 gov bgtask.cpp 97 reset_wait 1 
+0x342952cf08f3e5 gov/relay pushman.cpp 88 resumed 
+0x342952cf090c40 gov/relay pushman.cpp 56 push_to_devices 
+0x342952cf092ce2 gov/relay daemon_t.cpp 72 grid_devices_send 1 
+0x342952cf094bda gov/peer grid_t.cpp 58 prepare_worker_send visited 0 
+0x342952cf09640c gov/peer grid_t.cpp 62 grid size 2 
+0x342952cf09983f gov/peer grid_t.cpp 82 returning slot 0 
+0x342952cf09bec2 gov/relay daemon_t.cpp 80 sending datagram to 192.168.0.38:36308 
+0x342952cf09d954 wallet/wallet local_api.cpp 33 filter: peer subhome  subhomeh 11111111111111111111 == 11111111111111111111 
+0x342952cf0a30f3 gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f582000aa80 svc 10 sz 82 
+0x342952cf0a5541 gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x342952cf0a6989 gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x342952cf0a7ddc gov/id peer_t.cpp 178 outbound_traffic__goes_encrypted 1 inbound_traffic__was_encrypted 0 
+0x342952cf0a93c0 gov/socket datagram.cpp 242 encrypt dgram svc= 10 
+0x342952cf0aacb6 gov/crypto symmetric_encryption.cpp 66 encrypt block of 82 bytes. 
+0x342952cf0ac2a9 gov/crypto symmetric_encryption.cpp 68 estimated size 120 
+0x342952cf0b2b75 gov/crypto symmetric_encryption.cpp 79 final size 120 
+0x342952cf0b4bca gov/crypto symmetric_encryption.cpp 58 IV sz  12 scrambled msg sz 110 enc/dec ratio( 82 ) =  1.34146 
+0x342952cf0b700d gov/crypto symmetric_encryption.cpp 84 total encrypted payload 110 bytes. 
+0x342952cf0b94d4 gov/id peer_t.cpp 186 datagram encrypted. svc 10 length 82 -> svc 0 length 120 
+0x342952cf0bad30 gov/id peer_t.cpp 187 deleting original clear-text datagram. 
+0x342952cf0bbf66 gov/socket datagram.cpp 238 deleted datagram 0x7f582000aa80 
+0x342952cf0bd4c5 gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 10 
+0x342952cf0bf6ee gov/socket/outbound send_queue.cpp 56 admission pri 10 sz 120 seq 0 recipient 192.168.0.38:36308 dgram svc field (to be overwritten) 10 
+0x342952cf0c1406 gov/socket datagram.cpp 441 completed? dend= 120 size= 120 completed= 1 
+0x342952cf0c2de5 gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 10 
+0x342952cf0c450c gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 120 pri 10 cli 0x7f57d4009140 sendref 0 
+0x342952cf0c65f6 gov bgtask.cpp 105 wakeup 
+0x342952cf0c7803 gov bgtask.cpp 111 reset resume 
+0x342952cf0c8eb5 gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x342952cf0cb066 gov/relay daemon_t.cpp 87 success 
+0x342952cf0ccc88 gov/relay daemon_t.cpp 90 success sending datagram to 192.168.0.38:36308 
+0x342952cf0ce1c8 gov/peer grid_t.cpp 58 prepare_worker_send visited 1 
+0x342952cf0cf5da gov/peer grid_t.cpp 62 grid size 2 
+0x342952cf0d127a gov/peer grid_t.cpp 78 slot occupied 0 already visited 
+0x342952cf0d2776 gov/peer grid_t.cpp 73 slot 1 is empty 
+0x342952cf0d5677 gov/peer grid_t.cpp 85 no suitable peer found in grid 
+0x342952cf0d6af4 gov/relay daemon_t.cpp 94 Sent 1 dgrams succ to a number of devices= 1 
+0x342952cf0d8a2a gov/socket datagram.cpp 238 deleted datagram 0x7f57e000c990 
+0x342952cf0da275 gov/relay pushman.cpp 77 wait 
+0x342952cf0db59d gov bgtask.cpp 100 reset_wait 0 
+0x342952cf0dc7b1 gov/relay pushman.cpp 84 waiting 
+0x34295346a06329 gov bgtask.cpp 97 reset_wait 1 
+0x34295346a15bcb gov/relay pushman.cpp 88 resumed 
+0x34295346a20986 gov/relay pushman.cpp 56 push_to_devices 
+0x34295346a27f44 gov/relay daemon_t.cpp 72 grid_devices_send 1 
+0x34295346a2deff gov/peer grid_t.cpp 58 prepare_worker_send visited 0 
+0x34295346a38c15 gov/peer grid_t.cpp 62 grid size 2 
+0x34295346a43644 gov/peer grid_t.cpp 82 returning slot 0 
+0x34295346a4baa2 gov/relay daemon_t.cpp 80 sending datagram to 192.168.0.38:36308 
+0x34295346a50f1a wallet/wallet local_api.cpp 33 filter: peer subhome  subhomeh 11111111111111111111 == 11111111111111111111 
+0x34295346a5e1be gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f57e000c990 svc 10 sz 108 
+0x34295346a64544 gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x34295346a68aa9 gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x34295346a6d365 gov/id peer_t.cpp 178 outbound_traffic__goes_encrypted 1 inbound_traffic__was_encrypted 0 
+0x34295346a72905 gov/socket datagram.cpp 242 encrypt dgram svc= 10 
+0x34295346a785d6 gov/crypto symmetric_encryption.cpp 66 encrypt block of 108 bytes. 
+0x34295346a7d171 gov/crypto symmetric_encryption.cpp 68 estimated size 146 
+0x34295346a954c3 gov/crypto symmetric_encryption.cpp 79 final size 146 
+0x34295346a9c26f gov/crypto symmetric_encryption.cpp 58 IV sz  12 scrambled msg sz 136 enc/dec ratio( 108 ) =  1.25926 
+0x34295346aa3f7c gov/crypto symmetric_encryption.cpp 84 total encrypted payload 136 bytes. 
+0x34295346aac0a0 gov/id peer_t.cpp 186 datagram encrypted. svc 10 length 108 -> svc 0 length 146 
+0x34295346ab7af8 gov/id peer_t.cpp 187 deleting original clear-text datagram. 
+0x34295346abc2c2 gov/socket datagram.cpp 238 deleted datagram 0x7f57e000c990 
+0x34295346ac0d65 gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 10 
+0x34295346ac882c gov/socket/outbound send_queue.cpp 56 admission pri 10 sz 146 seq 0 recipient 192.168.0.38:36308 dgram svc field (to be overwritten) 10 
+0x34295346acf0c5 gov/socket datagram.cpp 441 completed? dend= 146 size= 146 completed= 1 
+0x34295346ad46e6 gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 10 
+0x34295346ad8f2f gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 146 pri 10 cli 0x7f57d4009140 sendref 0 
+0x34295346adfe99 gov bgtask.cpp 105 wakeup 
+0x34295346ae3df0 gov bgtask.cpp 111 reset resume 
+0x34295346ae8af9 gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x34295346af05d3 gov/relay daemon_t.cpp 87 success 
+0x34295346af68f7 gov/relay daemon_t.cpp 90 success sending datagram to 192.168.0.38:36308 
+0x34295346afb27e gov/peer grid_t.cpp 58 prepare_worker_send visited 1 
+0x34295346aff6fc gov/peer grid_t.cpp 62 grid size 2 
+0x34295346b0573c gov/peer grid_t.cpp 78 slot occupied 0 already visited 
+0x34295346b0a059 gov/peer grid_t.cpp 73 slot 1 is empty 
+0x34295346b0e2ea gov/peer grid_t.cpp 85 no suitable peer found in grid 
+0x34295346b1215c gov/relay daemon_t.cpp 94 Sent 1 dgrams succ to a number of devices= 1 
+0x34295346b1865c gov/socket datagram.cpp 238 deleted datagram 0x7f5820006b90 
+0x34295346b1df86 gov/relay pushman.cpp 77 wait 
+0x34295346b2222f gov bgtask.cpp 100 reset_wait 0 
+0x34295346b263c2 gov/relay pushman.cpp 84 waiting 
+0x342953478976de gov bgtask.cpp 97 reset_wait 1 
+0x342953478a6c69 gov/relay pushman.cpp 88 resumed 
+0x342953478ac53a gov/relay pushman.cpp 56 push_to_devices 
+0x342953478b2801 gov/relay daemon_t.cpp 72 grid_devices_send 1 
+0x342953478b7af7 gov/peer grid_t.cpp 58 prepare_worker_send visited 0 
+0x342953478bc84f gov/peer grid_t.cpp 62 grid size 2 
+0x342953478c552f gov/peer grid_t.cpp 82 returning slot 0 
+0x342953478cdeeb gov/relay daemon_t.cpp 80 sending datagram to 192.168.0.38:36308 
+0x342953478da550 wallet/wallet local_api.cpp 33 filter: peer subhome  subhomeh 11111111111111111111 == 11111111111111111111 
+0x342953478e94e7 gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f57e000c990 svc 10 sz 174 
+0x342953478ef9c6 gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x342953478f430e gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x342953478f8985 gov/id peer_t.cpp 178 outbound_traffic__goes_encrypted 1 inbound_traffic__was_encrypted 0 
+0x342953478fdb8f gov/socket datagram.cpp 242 encrypt dgram svc= 10 
+0x34295347903459 gov/crypto symmetric_encryption.cpp 66 encrypt block of 174 bytes. 
+0x34295347907e20 gov/crypto symmetric_encryption.cpp 68 estimated size 212 
+0x3429534791de44 gov/crypto symmetric_encryption.cpp 79 final size 212 
+0x34295347924791 gov/crypto symmetric_encryption.cpp 58 IV sz  12 scrambled msg sz 202 enc/dec ratio( 174 ) =  1.16092 
+0x3429534792d12f gov/crypto symmetric_encryption.cpp 84 total encrypted payload 202 bytes. 
+0x342953479352c4 gov/id peer_t.cpp 186 datagram encrypted. svc 10 length 174 -> svc 0 length 212 
+0x3429534793aefe gov/id peer_t.cpp 187 deleting original clear-text datagram. 
+0x3429534793f02c gov/socket datagram.cpp 238 deleted datagram 0x7f57e000c990 
+0x34295347943816 gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 10 
+0x3429534794aeba gov/socket/outbound send_queue.cpp 56 admission pri 10 sz 212 seq 0 recipient 192.168.0.38:36308 dgram svc field (to be overwritten) 19559 
+0x34295347951703 gov/socket datagram.cpp 441 completed? dend= 212 size= 212 completed= 1 
+0x3429534795706c gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 10 
+0x34295347960976 gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 212 pri 10 cli 0x7f57d4009140 sendref 0 
+0x34295347968f90 gov bgtask.cpp 105 wakeup 
+0x3429534796d1fd gov bgtask.cpp 111 reset resume 
+0x34295347977f43 gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x3429534797ff42 gov/relay daemon_t.cpp 87 success 
+0x34295347986569 gov/relay daemon_t.cpp 90 success sending datagram to 192.168.0.38:36308 
+0x3429534798ae16 gov/peer grid_t.cpp 58 prepare_worker_send visited 1 
+0x3429534798f395 gov/peer grid_t.cpp 62 grid size 2 
+0x342953479953c1 gov/peer grid_t.cpp 78 slot occupied 0 already visited 
+0x34295347999c90 gov/peer grid_t.cpp 73 slot 1 is empty 
+0x3429534799e818 gov/peer grid_t.cpp 85 no suitable peer found in grid 
+0x342953479a294b gov/relay daemon_t.cpp 94 Sent 1 dgrams succ to a number of devices= 1 
+0x342953479a9167 gov/socket datagram.cpp 238 deleted datagram 0x7f57fc00aee0 
+0x342953479ae595 gov/relay pushman.cpp 77 wait 
+0x342953479b240a gov bgtask.cpp 100 reset_wait 0 
+0x342953479b65cd gov/relay pushman.cpp 84 waiting 
+0x34295347f13084 gov bgtask.cpp 97 reset_wait 1 
+0x34295347f15ef8 gov/relay pushman.cpp 88 resumed 
+0x34295347f16e3b gov/relay pushman.cpp 56 push_to_devices 
+0x34295347f17f77 gov/relay daemon_t.cpp 72 grid_devices_send 1 
+0x34295347f18f84 gov/peer grid_t.cpp 58 prepare_worker_send visited 0 
+0x34295347f19e26 gov/peer grid_t.cpp 62 grid size 2 
+0x34295347f1b7a9 gov/peer grid_t.cpp 82 returning slot 0 
+0x34295347f1cff7 gov/relay daemon_t.cpp 80 sending datagram to 192.168.0.38:36308 
+0x34295347f1decc wallet/wallet local_api.cpp 33 filter: peer subhome  subhomeh 11111111111111111111 == 11111111111111111111 
+0x34295347f205d0 gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f57fc00aee0 svc 10 sz 284 
+0x34295347f217c9 gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x34295347f224b3 gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x34295347f2319b gov/id peer_t.cpp 178 outbound_traffic__goes_encrypted 1 inbound_traffic__was_encrypted 0 
+0x34295347f25148 gov/socket datagram.cpp 242 encrypt dgram svc= 10 
+0x34295347f265ab gov/crypto symmetric_encryption.cpp 66 encrypt block of 284 bytes. 
+0x34295347f275ec gov/crypto symmetric_encryption.cpp 68 estimated size 322 
+0x34295347f2bd92 gov/crypto symmetric_encryption.cpp 79 final size 322 
+0x34295347f2d231 gov/crypto symmetric_encryption.cpp 58 IV sz  12 scrambled msg sz 312 enc/dec ratio( 284 ) =  1.09859 
+0x34295347f2ea5f gov/crypto symmetric_encryption.cpp 84 total encrypted payload 312 bytes. 
+0x34295347f336aa gov/id peer_t.cpp 186 datagram encrypted. svc 10 length 284 -> svc 0 length 322 
+0x34295347f346e3 gov/id peer_t.cpp 187 deleting original clear-text datagram. 
+0x34295347f352d7 gov/socket datagram.cpp 238 deleted datagram 0x7f57fc00aee0 
+0x34295347f36097 gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 10 
+0x34295347f376c1 gov/socket/outbound send_queue.cpp 56 admission pri 10 sz 322 seq 0 recipient 192.168.0.38:36308 dgram svc field (to be overwritten) 10 
+0x34295347f389c3 gov/socket datagram.cpp 441 completed? dend= 322 size= 322 completed= 1 
+0x34295347f399ea gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 10 
+0x34295347f3a7d2 gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 322 pri 10 cli 0x7f57d4009140 sendref 0 
+0x34295347f3bd2b gov bgtask.cpp 105 wakeup 
+0x34295347f3ca24 gov bgtask.cpp 111 reset resume 
+0x34295347f3d95a gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x34295347f3ed5b gov/relay daemon_t.cpp 87 success 
+0x34295347f3ffbb gov/relay daemon_t.cpp 90 success sending datagram to 192.168.0.38:36308 
+0x34295347f44a5f gov/peer grid_t.cpp 58 prepare_worker_send visited 1 
+0x34295347f4584f gov/peer grid_t.cpp 62 grid size 2 
+0x34295347f46a2b gov/peer grid_t.cpp 78 slot occupied 0 already visited 
+0x34295347f47817 gov/peer grid_t.cpp 73 slot 1 is empty 
+0x34295347f48474 gov/peer grid_t.cpp 85 no suitable peer found in grid 
+0x34295347f48fb4 gov/relay daemon_t.cpp 94 Sent 1 dgrams succ to a number of devices= 1 
+0x34295347f4d50e gov/socket datagram.cpp 238 deleted datagram 0x7f57f000c2c0 
+0x34295347f4e49c gov/relay pushman.cpp 77 wait 
+0x34295347f4f04d gov bgtask.cpp 100 reset_wait 0 
+0x34295347f4fc19 gov/relay pushman.cpp 84 waiting 
+0x342953fac6ac60 gov bgtask.cpp 97 reset_wait 1 
+0x342953fac6f714 gov/relay pushman.cpp 88 resumed 
+0x342953fac70a5c gov/relay pushman.cpp 56 push_to_devices 
+0x342953fac721e9 gov/relay daemon_t.cpp 72 grid_devices_send 1 
+0x342953fac7369d gov/peer grid_t.cpp 58 prepare_worker_send visited 0 
+0x342953fac746f9 gov/peer grid_t.cpp 62 grid size 2 
+0x342953fac79caa gov/peer grid_t.cpp 82 returning slot 0 
+0x342953fac7b4cb gov/relay daemon_t.cpp 80 sending datagram to 192.168.0.38:36308 
+0x342953fac7c588 wallet/wallet local_api.cpp 33 filter: peer subhome  subhomeh 11111111111111111111 == 11111111111111111111 
+0x342953fac7eddd gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f57f000c2c0 svc 10 sz 334 
+0x342953fac7ff58 gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x342953fac80cdc gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x342953fac81a60 gov/id peer_t.cpp 178 outbound_traffic__goes_encrypted 1 inbound_traffic__was_encrypted 0 
+0x342953fac8292c gov/socket datagram.cpp 242 encrypt dgram svc= 10 
+0x342953fac83975 gov/crypto symmetric_encryption.cpp 66 encrypt block of 334 bytes. 
+0x342953fac84743 gov/crypto symmetric_encryption.cpp 68 estimated size 372 
+0x342953fac88950 gov/crypto symmetric_encryption.cpp 79 final size 372 
+0x342953fac89bc2 gov/crypto symmetric_encryption.cpp 58 IV sz  12 scrambled msg sz 362 enc/dec ratio( 334 ) =  1.08383 
+0x342953fac8b26b gov/crypto symmetric_encryption.cpp 84 total encrypted payload 362 bytes. 
+0x342953fac8ca6a gov/id peer_t.cpp 186 datagram encrypted. svc 10 length 334 -> svc 0 length 372 
+0x342953fac8dc2f gov/id peer_t.cpp 187 deleting original clear-text datagram. 
+0x342953fac8e874 gov/socket datagram.cpp 238 deleted datagram 0x7f57f000c2c0 
+0x342953fac8f540 gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 10 
+0x342953fac90ab0 gov/socket/outbound send_queue.cpp 56 admission pri 10 sz 372 seq 0 recipient 192.168.0.38:36308 dgram svc field (to be overwritten) 10 
+0x342953fac91f36 gov/socket datagram.cpp 441 completed? dend= 372 size= 372 completed= 1 
+0x342953fac92f84 gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 10 
+0x342953fac93d50 gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 372 pri 10 cli 0x7f57d4009140 sendref 0 
+0x342953fac952df gov bgtask.cpp 105 wakeup 
+0x342953fac95ebb gov bgtask.cpp 111 reset resume 
+0x342953fac96ceb gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x342953fac982a7 gov/relay daemon_t.cpp 87 success 
+0x342953fac996cf gov/relay daemon_t.cpp 90 success sending datagram to 192.168.0.38:36308 
+0x342953fac9a50d gov/peer grid_t.cpp 58 prepare_worker_send visited 1 
+0x342953fac9b1f6 gov/peer grid_t.cpp 62 grid size 2 
+0x342953fac9c3a1 gov/peer grid_t.cpp 78 slot occupied 0 already visited 
+0x342953fac9d187 gov/peer grid_t.cpp 73 slot 1 is empty 
+0x342953fac9dd9f gov/peer grid_t.cpp 85 no suitable peer found in grid 
+0x342953fac9e865 gov/relay daemon_t.cpp 94 Sent 1 dgrams succ to a number of devices= 1 
+0x342953fac9fc94 gov/socket datagram.cpp 238 deleted datagram 0x7f5820006b90 
+0x342953faca0c68 gov/relay pushman.cpp 77 wait 
+0x342953faca181e gov bgtask.cpp 100 reset_wait 0 
+0x342953faca23bc gov/relay pushman.cpp 84 waiting 
+0x342953fb1e05f1 gov bgtask.cpp 97 reset_wait 1 
+0x342953fb1e348e gov/relay pushman.cpp 88 resumed 
+0x342953fb1e4484 gov/relay pushman.cpp 56 push_to_devices 
+0x342953fb1e57d2 gov/relay daemon_t.cpp 72 grid_devices_send 1 
+0x342953fb1e67fe gov/peer grid_t.cpp 58 prepare_worker_send visited 0 
+0x342953fb1e7642 gov/peer grid_t.cpp 62 grid size 2 
+0x342953fb1e8520 gov/peer grid_t.cpp 73 slot 1 is empty 
+0x342953fb1e9e47 gov/peer grid_t.cpp 82 returning slot 0 
+0x342953fb1eb554 gov/relay daemon_t.cpp 80 sending datagram to 192.168.0.38:36308 
+0x342953fb1ec45c wallet/wallet local_api.cpp 33 filter: peer subhome  subhomeh 11111111111111111111 == 11111111111111111111 
+0x342953fb1eec28 gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f5820006b90 svc 10 sz 1338 
+0x342953fb1efe4b gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x342953fb1f0aef gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x342953fb1f2ba3 gov/id peer_t.cpp 178 outbound_traffic__goes_encrypted 1 inbound_traffic__was_encrypted 0 
+0x342953fb1f3cd2 gov/socket datagram.cpp 242 encrypt dgram svc= 10 
+0x342953fb1f4e9d gov/crypto symmetric_encryption.cpp 66 encrypt block of 1338 bytes. 
+0x342953fb1f5cc6 gov/crypto symmetric_encryption.cpp 68 estimated size 1376 
+0x342953fb1fa350 gov/crypto symmetric_encryption.cpp 79 final size 1376 
+0x342953fb1fb741 gov/crypto symmetric_encryption.cpp 58 IV sz  12 scrambled msg sz 1366 enc/dec ratio( 1338 ) =  1.02093 
+0x342953fb1fcf13 gov/crypto symmetric_encryption.cpp 84 total encrypted payload 1366 bytes. 
+0x342953fb1fe73a gov/id peer_t.cpp 186 datagram encrypted. svc 10 length 1338 -> svc 0 length 1376 
+0x342953fb1ff7e0 gov/id peer_t.cpp 187 deleting original clear-text datagram. 
+0x342953fb2003e7 gov/socket datagram.cpp 238 deleted datagram 0x7f5820006b90 
+0x342953fb20121e gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 10 
+0x342953fb2028ce gov/socket/outbound send_queue.cpp 56 admission pri 10 sz 1376 seq 0 recipient 192.168.0.38:36308 dgram svc field (to be overwritten) 10 
+0x342953fb203c17 gov/socket datagram.cpp 441 completed? dend= 1376 size= 1376 completed= 1 
+0x342953fb204c2c gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 10 
+0x342953fb2059f4 gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 1376 pri 10 cli 0x7f57d4009140 sendref 0 
+0x342953fb207013 gov bgtask.cpp 105 wakeup 
+0x342953fb207cb5 gov bgtask.cpp 111 reset resume 
+0x342953fb208b6a gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x342953fb20a436 gov/relay daemon_t.cpp 87 success 
+0x342953fb20b718 gov/relay daemon_t.cpp 90 success sending datagram to 192.168.0.38:36308 
+0x342953fb20c483 gov/peer grid_t.cpp 58 prepare_worker_send visited 1 
+0x342953fb20d1b0 gov/peer grid_t.cpp 62 grid size 2 
+0x342953fb20e0cf gov/peer grid_t.cpp 73 slot 1 is empty 
+0x342953fb20f289 gov/peer grid_t.cpp 78 slot occupied 0 already visited 
+0x342953fb20ffd6 gov/peer grid_t.cpp 85 no suitable peer found in grid 
+0x342953fb210b13 gov/relay daemon_t.cpp 94 Sent 1 dgrams succ to a number of devices= 1 
+0x342953fb211ed9 gov/socket datagram.cpp 238 deleted datagram 0x7f57d000a3d0 
+0x342953fb212f21 gov/relay pushman.cpp 77 wait 
+0x342953fb213b07 gov bgtask.cpp 100 reset_wait 0 
+0x342953fb214804 gov/relay pushman.cpp 84 waiting 
+0x342953fb22e52c gov bgtask.cpp 97 reset_wait 1 
+0x342953fb2311ba gov/relay pushman.cpp 88 resumed 
+0x342953fb232184 gov/relay pushman.cpp 56 push_to_devices 
+0x342953fb2332f0 gov/relay daemon_t.cpp 72 grid_devices_send 1 
+0x342953fb2342f5 gov/peer grid_t.cpp 58 prepare_worker_send visited 0 
+0x342953fb2350c2 gov/peer grid_t.cpp 62 grid size 2 
+0x342953fb235fbc gov/peer grid_t.cpp 73 slot 1 is empty 
+0x342953fb237841 gov/peer grid_t.cpp 82 returning slot 0 
+0x342953fb238ef6 gov/relay daemon_t.cpp 80 sending datagram to 192.168.0.38:36308 
+0x342953fb239d9c wallet/wallet local_api.cpp 33 filter: peer subhome  subhomeh 11111111111111111111 == 11111111111111111111 
+0x342953fb23c549 gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f57d000a3d0 svc 10 sz 607 
+0x342953fb23d7bd gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x342953fb23e4fe gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x342953fb23f202 gov/id peer_t.cpp 178 outbound_traffic__goes_encrypted 1 inbound_traffic__was_encrypted 0 
+0x342953fb2400d5 gov/socket datagram.cpp 242 encrypt dgram svc= 10 
+0x342953fb2411bb gov/crypto symmetric_encryption.cpp 66 encrypt block of 607 bytes. 
+0x342953fb241f73 gov/crypto symmetric_encryption.cpp 68 estimated size 645 
+0x342953fb24646f gov/crypto symmetric_encryption.cpp 79 final size 645 
+0x342953fb2478f5 gov/crypto symmetric_encryption.cpp 58 IV sz  12 scrambled msg sz 635 enc/dec ratio( 607 ) =  1.04613 
+0x342953fb24908f gov/crypto symmetric_encryption.cpp 84 total encrypted payload 635 bytes. 
+0x342953fb24a82a gov/id peer_t.cpp 186 datagram encrypted. svc 10 length 607 -> svc 0 length 645 
+0x342953fb24b882 gov/id peer_t.cpp 187 deleting original clear-text datagram. 
+0x342953fb24d413 gov/socket datagram.cpp 238 deleted datagram 0x7f57d000a3d0 
+0x342953fb24e43c gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 10 
+0x342953fb24fbbe gov/socket/outbound send_queue.cpp 56 admission pri 10 sz 645 seq 0 recipient 192.168.0.38:36308 dgram svc field (to be overwritten) 10 
+0x342953fb251069 gov/socket datagram.cpp 441 completed? dend= 645 size= 645 completed= 1 
+0x342953fb2520a2 gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 10 
+0x342953fb252ed3 gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 645 pri 10 cli 0x7f57d4009140 sendref 0 
+0x342953fb254414 gov bgtask.cpp 105 wakeup 
+0x342953fb255013 gov bgtask.cpp 111 reset resume 
+0x342953fb255f1b gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x342953fb257698 gov/relay daemon_t.cpp 87 success 
+0x342953fb258993 gov/relay daemon_t.cpp 90 success sending datagram to 192.168.0.38:36308 
+0x342953fb2597a6 gov/peer grid_t.cpp 58 prepare_worker_send visited 1 
+0x342953fb25a546 gov/peer grid_t.cpp 62 grid size 2 
+0x342953fb25b7cb gov/peer grid_t.cpp 78 slot occupied 0 already visited 
+0x342953fb25c585 gov/peer grid_t.cpp 73 slot 1 is empty 
+0x342953fb25d3d5 gov/peer grid_t.cpp 85 no suitable peer found in grid 
+0x342953fb25e100 gov/relay daemon_t.cpp 94 Sent 1 dgrams succ to a number of devices= 1 
+0x342953fb2606d7 gov/socket datagram.cpp 238 deleted datagram 0x7f57d000a400 
+0x342953fb261a41 gov/relay pushman.cpp 77 wait 
+0x342953fb2627d9 gov bgtask.cpp 100 reset_wait 0 
+0x342953fb26346c gov/relay pushman.cpp 84 waiting 
+0x342953fb458ed3 gov bgtask.cpp 97 reset_wait 1 
+0x342953fb45bb81 gov/relay pushman.cpp 88 resumed 
+0x342953fb45cb92 gov/relay pushman.cpp 56 push_to_devices 
+0x342953fb45dd0a gov/relay daemon_t.cpp 72 grid_devices_send 1 
+0x342953fb45ec66 gov/peer grid_t.cpp 58 prepare_worker_send visited 0 
+0x342953fb45fa0d gov/peer grid_t.cpp 62 grid size 2 
+0x342953fb461346 gov/peer grid_t.cpp 82 returning slot 0 
+0x342953fb462aec gov/relay daemon_t.cpp 80 sending datagram to 192.168.0.38:36308 
+0x342953fb463a3c wallet/wallet local_api.cpp 33 filter: peer subhome  subhomeh 11111111111111111111 == 11111111111111111111 
+0x342953fb466268 gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f57d000a400 svc 10 sz 1418 
+0x342953fb467471 gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x342953fb4681f4 gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x342953fb468ef4 gov/id peer_t.cpp 178 outbound_traffic__goes_encrypted 1 inbound_traffic__was_encrypted 0 
+0x342953fb469d2e gov/socket datagram.cpp 242 encrypt dgram svc= 10 
+0x342953fb46ae1c gov/crypto symmetric_encryption.cpp 66 encrypt block of 1418 bytes. 
+0x342953fb46bc1a gov/crypto symmetric_encryption.cpp 68 estimated size 1456 
+0x342953fb47008e gov/crypto symmetric_encryption.cpp 79 final size 1456 
+0x342953fb471486 gov/crypto symmetric_encryption.cpp 58 IV sz  12 scrambled msg sz 1446 enc/dec ratio( 1418 ) =  1.01975 
+0x342953fb472e64 gov/crypto symmetric_encryption.cpp 84 total encrypted payload 1446 bytes. 
+0x342953fb4746a7 gov/id peer_t.cpp 186 datagram encrypted. svc 10 length 1418 -> svc 0 length 1456 
+0x342953fb47565d gov/id peer_t.cpp 187 deleting original clear-text datagram. 
+0x342953fb4762ed gov/socket datagram.cpp 238 deleted datagram 0x7f57d000a400 
+0x342953fb477097 gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 10 
+0x342953fb478654 gov/socket/outbound send_queue.cpp 56 admission pri 10 sz 1456 seq 0 recipient 192.168.0.38:36308 dgram svc field (to be overwritten) 10 
+0x342953fb47994c gov/socket datagram.cpp 441 completed? dend= 1456 size= 1456 completed= 1 
+0x342953fb47a8cf gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 10 
+0x342953fb47b619 gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 1456 pri 10 cli 0x7f57d4009140 sendref 0 
+0x342953fb47cadb gov bgtask.cpp 105 wakeup 
+0x342953fb47d6c6 gov bgtask.cpp 111 reset resume 
+0x342953fb47e591 gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x342953fb47fcb4 gov/relay daemon_t.cpp 87 success 
+0x342953fb481f69 gov/relay daemon_t.cpp 90 success sending datagram to 192.168.0.38:36308 
+0x342953fb482d3c gov/peer grid_t.cpp 58 prepare_worker_send visited 1 
+0x342953fb483a1e gov/peer grid_t.cpp 62 grid size 2 
+0x342953fb484c4f gov/peer grid_t.cpp 78 slot occupied 0 already visited 
+0x342953fb485a00 gov/peer grid_t.cpp 73 slot 1 is empty 
+0x342953fb48669b gov/peer grid_t.cpp 85 no suitable peer found in grid 
+0x342953fb4871ca gov/relay daemon_t.cpp 94 Sent 1 dgrams succ to a number of devices= 1 
+0x342953fb488494 gov/socket datagram.cpp 238 deleted datagram 0x7f57d8009bd0 
+0x342953fb48946f gov/relay pushman.cpp 77 wait 
+0x342953fb48a019 gov bgtask.cpp 100 reset_wait 0 
+0x342953fb48ac8c gov/relay pushman.cpp 84 waiting 
+0x342954725695a8 gov bgtask.cpp 97 reset_wait 1 
+0x342954725796ff gov/relay pushman.cpp 88 resumed 
+0x3429547257eda8 gov/relay pushman.cpp 56 push_to_devices 
+0x3429547258561b gov/relay daemon_t.cpp 72 grid_devices_send 1 
+0x3429547258b778 gov/peer grid_t.cpp 58 prepare_worker_send visited 0 
+0x342954725906c7 gov/peer grid_t.cpp 62 grid size 2 
+0x34295472599b85 gov/peer grid_t.cpp 82 returning slot 0 
+0x342954725a1be1 gov/relay daemon_t.cpp 80 sending datagram to 192.168.0.38:36308 
+0x342954725a7127 wallet/wallet local_api.cpp 33 filter: peer subhome  subhomeh 11111111111111111111 == 11111111111111111111 
+0x342954725b441f gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f57d8009bd0 svc 10 sz 676 
+0x342954725ba3b4 gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x342954725becdc gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x342954725c3299 gov/id peer_t.cpp 178 outbound_traffic__goes_encrypted 1 inbound_traffic__was_encrypted 0 
+0x342954725c7d7a gov/socket datagram.cpp 242 encrypt dgram svc= 10 
+0x342954725cdc37 gov/crypto symmetric_encryption.cpp 66 encrypt block of 676 bytes. 
+0x342954725d2488 gov/crypto symmetric_encryption.cpp 68 estimated size 714 
+0x342954725e8cb8 gov/crypto symmetric_encryption.cpp 79 final size 714 
+0x342954725ef5ba gov/crypto symmetric_encryption.cpp 58 IV sz  12 scrambled msg sz 704 enc/dec ratio( 676 ) =  1.04142 
+0x342954725f7460 gov/crypto symmetric_encryption.cpp 84 total encrypted payload 704 bytes. 
+0x342954725ff46f gov/id peer_t.cpp 186 datagram encrypted. svc 10 length 676 -> svc 0 length 714 
+0x34295472604d38 gov/id peer_t.cpp 187 deleting original clear-text datagram. 
+0x34295472608a4f gov/socket datagram.cpp 238 deleted datagram 0x7f57d8009bd0 
+0x3429547260d050 gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 10 
+0x342954726142c6 gov/socket/outbound send_queue.cpp 56 admission pri 10 sz 714 seq 0 recipient 192.168.0.38:36308 dgram svc field (to be overwritten) 10 
+0x3429547261b3d7 gov/socket datagram.cpp 441 completed? dend= 714 size= 714 completed= 1 
+0x34295472620be7 gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 10 
+0x3429547262565c gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 714 pri 10 cli 0x7f57d4009140 sendref 0 
+0x3429547262c7ef gov bgtask.cpp 105 wakeup 
+0x34295472630762 gov bgtask.cpp 111 reset resume 
+0x34295472635547 gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x3429547263d070 gov/relay daemon_t.cpp 87 success 
+0x34295472643469 gov/relay daemon_t.cpp 90 success sending datagram to 192.168.0.38:36308 
+0x3429547264803e gov/peer grid_t.cpp 58 prepare_worker_send visited 1 
+0x34295472652839 gov/peer grid_t.cpp 62 grid size 2 
+0x342954726584f2 gov/peer grid_t.cpp 73 slot 1 is empty 
+0x3429547265e7e9 gov/peer grid_t.cpp 78 slot occupied 0 already visited 
+0x34295472663080 gov/peer grid_t.cpp 85 no suitable peer found in grid 
+0x34295472666f46 gov/relay daemon_t.cpp 94 Sent 1 dgrams succ to a number of devices= 1 
+0x3429547266d4d0 gov/socket datagram.cpp 238 deleted datagram 0x7f582000aa80 
+0x342954726729dd gov/relay pushman.cpp 77 wait 
+0x34295472676fd9 gov bgtask.cpp 100 reset_wait 0 
+0x3429547267b08f gov/relay pushman.cpp 84 waiting 
+0x342954e9929c82 gov bgtask.cpp 97 reset_wait 1 
+0x342954e993a1fa gov/relay pushman.cpp 88 resumed 
+0x342954e993f585 gov/relay pushman.cpp 56 push_to_devices 
+0x342954e994bd0b gov/relay daemon_t.cpp 72 grid_devices_send 1 
+0x342954e9951d88 gov/peer grid_t.cpp 58 prepare_worker_send visited 0 
+0x342954e995693e gov/peer grid_t.cpp 62 grid size 2 
+0x342954e995fd35 gov/peer grid_t.cpp 82 returning slot 0 
+0x342954e9967dbd gov/relay daemon_t.cpp 80 sending datagram to 192.168.0.38:36308 
+0x342954e996d12b wallet/wallet local_api.cpp 33 filter: peer subhome  subhomeh 11111111111111111111 == 11111111111111111111 
+0x342954e997a38c gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f582000aa80 svc 10 sz 718 
+0x342954e99802e9 gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x342954e9984844 gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x342954e9989af8 gov/id peer_t.cpp 178 outbound_traffic__goes_encrypted 1 inbound_traffic__was_encrypted 0 
+0x342954e998ee21 gov/socket datagram.cpp 242 encrypt dgram svc= 10 
+0x342954e9994a23 gov/crypto symmetric_encryption.cpp 66 encrypt block of 718 bytes. 
+0x342954e999947d gov/crypto symmetric_encryption.cpp 68 estimated size 756 
+0x342954e99afae7 gov/crypto symmetric_encryption.cpp 79 final size 756 
+0x342954e99b6023 gov/crypto symmetric_encryption.cpp 58 IV sz  12 scrambled msg sz 746 enc/dec ratio( 718 ) =  1.039 
+0x342954e99bdda0 gov/crypto symmetric_encryption.cpp 84 total encrypted payload 746 bytes. 
+0x342954e99c586a gov/id peer_t.cpp 186 datagram encrypted. svc 10 length 718 -> svc 0 length 756 
+0x342954e99cabc5 gov/id peer_t.cpp 187 deleting original clear-text datagram. 
+0x342954e99ceb4d gov/socket datagram.cpp 238 deleted datagram 0x7f582000aa80 
+0x342954e99d32ac gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 10 
+0x342954e99da653 gov/socket/outbound send_queue.cpp 56 admission pri 10 sz 756 seq 0 recipient 192.168.0.38:36308 dgram svc field (to be overwritten) 10 
+0x342954e99e0cec gov/socket datagram.cpp 441 completed? dend= 756 size= 756 completed= 1 
+0x342954e99e5e5c gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 10 
+0x342954e99ea6ed gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 756 pri 10 cli 0x7f57d4009140 sendref 0 
+0x342954e99f15a0 gov bgtask.cpp 105 wakeup 
+0x342954e99f5301 gov bgtask.cpp 111 reset resume 
+0x342954e99fa278 gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x342954e9a01dd7 gov/relay daemon_t.cpp 87 success 
+0x342954e9a080c0 gov/relay daemon_t.cpp 90 success sending datagram to 192.168.0.38:36308 
+0x342954e9a0c9c5 gov/peer grid_t.cpp 58 prepare_worker_send visited 1 
+0x342954e9a10e57 gov/peer grid_t.cpp 62 grid size 2 
+0x342954e9a15ab9 gov/peer grid_t.cpp 73 slot 1 is empty 
+0x342954e9a1b49b gov/peer grid_t.cpp 78 slot occupied 0 already visited 
+0x342954e9a1fd2d gov/peer grid_t.cpp 85 no suitable peer found in grid 
+0x342954e9a23bee gov/relay daemon_t.cpp 94 Sent 1 dgrams succ to a number of devices= 1 
+0x342954e9a29e11 gov/socket datagram.cpp 238 deleted datagram 0x7f5820012600 
+0x342954e9a2f0cc gov/relay pushman.cpp 77 wait 
+0x342954e9a32e32 gov bgtask.cpp 100 reset_wait 0 
+0x342954e9a36d36 gov/relay pushman.cpp 84 waiting 
+0x3429552534eb87 gov bgtask.cpp 97 reset_wait 1 
+0x3429552535e9b4 gov/relay pushman.cpp 88 resumed 
+0x342955253645e7 gov/relay pushman.cpp 56 push_to_devices 
+0x3429552536ab3c gov/relay daemon_t.cpp 72 grid_devices_send 1 
+0x34295525370d43 gov/peer grid_t.cpp 58 prepare_worker_send visited 0 
+0x34295525375f03 gov/peer grid_t.cpp 62 grid size 2 
+0x3429552537f4a3 gov/peer grid_t.cpp 82 returning slot 0 
+0x3429552538755e gov/relay daemon_t.cpp 80 sending datagram to 192.168.0.38:36308 
+0x3429552538c700 wallet/wallet local_api.cpp 33 filter: peer subhome  subhomeh 11111111111111111111 == 11111111111111111111 
+0x3429552539965c gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f5820012600 svc 10 sz 745 
+0x3429552539f2c1 gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x342955253a3903 gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x342955253a8472 gov/id peer_t.cpp 178 outbound_traffic__goes_encrypted 1 inbound_traffic__was_encrypted 0 
+0x342955253b3ff8 gov/socket datagram.cpp 242 encrypt dgram svc= 10 
+0x342955253c1c88 gov/crypto symmetric_encryption.cpp 66 encrypt block of 745 bytes. 
+0x342955253c7776 gov/crypto symmetric_encryption.cpp 68 estimated size 783 
+0x342955253dde8b gov/crypto symmetric_encryption.cpp 79 final size 783 
+0x342955253e4497 gov/crypto symmetric_encryption.cpp 58 IV sz  12 scrambled msg sz 773 enc/dec ratio( 745 ) =  1.03758 
+0x342955253ec133 gov/crypto symmetric_encryption.cpp 84 total encrypted payload 773 bytes. 
+0x342955253f3efe gov/id peer_t.cpp 186 datagram encrypted. svc 10 length 745 -> svc 0 length 783 
+0x342955253f94c7 gov/id peer_t.cpp 187 deleting original clear-text datagram. 
+0x342955253fd223 gov/socket datagram.cpp 238 deleted datagram 0x7f5820012600 
+0x34295525401973 gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 10 
+0x342955254092c6 gov/socket/outbound send_queue.cpp 56 admission pri 10 sz 783 seq 0 recipient 192.168.0.38:36308 dgram svc field (to be overwritten) 10 
+0x3429552540fac9 gov/socket datagram.cpp 441 completed? dend= 783 size= 783 completed= 1 
+0x34295525414fde gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 10 
+0x34295525419a06 gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 783 pri 10 cli 0x7f57d4009140 sendref 0 
+0x342955254209d7 gov bgtask.cpp 105 wakeup 
+0x342955254246e0 gov bgtask.cpp 111 reset resume 
+0x342955254293b5 gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x3429552543099a gov/relay daemon_t.cpp 87 success 
+0x3429552543709f gov/relay daemon_t.cpp 90 success sending datagram to 192.168.0.38:36308 
+0x3429552543bd68 gov/peer grid_t.cpp 58 prepare_worker_send visited 1 
+0x34295525440470 gov/peer grid_t.cpp 62 grid size 2 
+0x34295525444fba gov/peer grid_t.cpp 73 slot 1 is empty 
+0x3429552544a962 gov/peer grid_t.cpp 78 slot occupied 0 already visited 
+0x3429552544ede4 gov/peer grid_t.cpp 85 no suitable peer found in grid 
+0x34295525452971 gov/relay daemon_t.cpp 94 Sent 1 dgrams succ to a number of devices= 1 
+0x34295525458f50 gov/socket datagram.cpp 238 deleted datagram 0x7f58200125a0 
+0x3429552545e37f gov/relay pushman.cpp 77 wait 
+0x34295525462279 gov bgtask.cpp 100 reset_wait 0 
+0x342955254664a2 gov/relay pushman.cpp 84 waiting 
+0x34295560d6e80a gov bgtask.cpp 97 reset_wait 1 
+0x34295560d7e37b gov/relay pushman.cpp 88 resumed 
+0x34295560d836f3 gov/relay pushman.cpp 56 push_to_devices 
+0x34295560d89d1b gov/relay daemon_t.cpp 72 grid_devices_send 1 
+0x34295560d8f811 gov/peer grid_t.cpp 58 prepare_worker_send visited 0 
+0x34295560d94524 gov/peer grid_t.cpp 62 grid size 2 
+0x34295560d99362 gov/peer grid_t.cpp 73 slot 1 is empty 
+0x34295560da1e47 gov/peer grid_t.cpp 82 returning slot 0 
+0x34295560da96dd gov/relay daemon_t.cpp 80 sending datagram to 192.168.0.38:36308 
+0x34295560dae5b7 wallet/wallet local_api.cpp 33 filter: peer subhome  subhomeh 11111111111111111111 == 11111111111111111111 
+0x34295560dbcc1e gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f58200125a0 svc 10 sz 774 
+0x34295560dc3122 gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x34295560dc787c gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x34295560dcbbe8 gov/id peer_t.cpp 178 outbound_traffic__goes_encrypted 1 inbound_traffic__was_encrypted 0 
+0x34295560dd093c gov/socket datagram.cpp 242 encrypt dgram svc= 10 
+0x34295560dd6a9e gov/crypto symmetric_encryption.cpp 66 encrypt block of 774 bytes. 
+0x34295560ddb619 gov/crypto symmetric_encryption.cpp 68 estimated size 812 
+0x34295560df26b2 gov/crypto symmetric_encryption.cpp 79 final size 812 
+0x34295560df8fc4 gov/crypto symmetric_encryption.cpp 58 IV sz  12 scrambled msg sz 802 enc/dec ratio( 774 ) =  1.03618 
+0x34295560e00c9e gov/crypto symmetric_encryption.cpp 84 total encrypted payload 802 bytes. 
+0x34295560e08bc7 gov/id peer_t.cpp 186 datagram encrypted. svc 10 length 774 -> svc 0 length 812 
+0x34295560e14b72 gov/id peer_t.cpp 187 deleting original clear-text datagram. 
+0x34295560e197ff gov/socket datagram.cpp 238 deleted datagram 0x7f58200125a0 
+0x34295560e1e347 gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 10 
+0x34295560e2bd80 gov/socket/outbound send_queue.cpp 56 admission pri 10 sz 812 seq 0 recipient 192.168.0.38:36308 dgram svc field (to be overwritten) 10 
+0x34295560e32899 gov/socket datagram.cpp 441 completed? dend= 812 size= 812 completed= 1 
+0x34295560e37fdc gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 10 
+0x34295560e3c64d gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 812 pri 10 cli 0x7f57d4009140 sendref 0 
+0x34295560e4364e gov bgtask.cpp 105 wakeup 
+0x34295560e47229 gov bgtask.cpp 111 reset resume 
+0x34295560e4bddf gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x34295560e53616 gov/relay daemon_t.cpp 87 success 
+0x34295560e59c44 gov/relay daemon_t.cpp 90 success sending datagram to 192.168.0.38:36308 
+0x34295560e5e5f2 gov/peer grid_t.cpp 58 prepare_worker_send visited 1 
+0x34295560e62d53 gov/peer grid_t.cpp 62 grid size 2 
+0x34295560e67597 gov/peer grid_t.cpp 73 slot 1 is empty 
+0x34295560e6cf1b gov/peer grid_t.cpp 78 slot occupied 0 already visited 
+0x34295560e71a84 gov/peer grid_t.cpp 85 no suitable peer found in grid 
+0x34295560e75850 gov/relay daemon_t.cpp 94 Sent 1 dgrams succ to a number of devices= 1 
+0x34295560e7bbca gov/socket datagram.cpp 238 deleted datagram 0x7f582000aa80 
+0x34295560e80e51 gov/relay pushman.cpp 77 wait 
+0x34295560e84c9f gov bgtask.cpp 100 reset_wait 0 
+0x34295560e88d4a gov/relay pushman.cpp 84 waiting 
+0x34295561e51f21 gov bgtask.cpp 97 reset_wait 1 
+0x34295561e54e69 gov/relay pushman.cpp 88 resumed 
+0x34295561e55d14 gov/relay pushman.cpp 56 push_to_devices 
+0x34295561e56d79 gov/relay daemon_t.cpp 72 grid_devices_send 1 
+0x34295561e57c96 gov/peer grid_t.cpp 58 prepare_worker_send visited 0 
+0x34295561e5895a gov/peer grid_t.cpp 62 grid size 2 
+0x34295561e5a208 gov/peer grid_t.cpp 82 returning slot 0 
+0x34295561e5b842 gov/relay daemon_t.cpp 80 sending datagram to 192.168.0.38:36308 
+0x34295561e5c630 wallet/wallet local_api.cpp 33 filter: peer subhome  subhomeh 11111111111111111111 == 11111111111111111111 
+0x34295561e5ec20 gov/socket/outbound caller_daemon_t.cpp 18 send1 0x7f582000aa80 svc 10 sz 1418 
+0x34295561e5fd06 gov/socket/outbound caller_daemon_t.cpp 30 send1 
+0x34295561e60931 gov/socket/outbound caller_daemon_t.cpp 39 encrypting 
+0x34295561e6161b gov/id peer_t.cpp 178 outbound_traffic__goes_encrypted 1 inbound_traffic__was_encrypted 0 
+0x34295561e623bd gov/socket datagram.cpp 242 encrypt dgram svc= 10 
+0x34295561e6340b gov/crypto symmetric_encryption.cpp 66 encrypt block of 1418 bytes. 
+0x34295561e641fd gov/crypto symmetric_encryption.cpp 68 estimated size 1456 
+0x34295561e68422 gov/crypto symmetric_encryption.cpp 79 final size 1456 
+0x34295561e696da gov/crypto symmetric_encryption.cpp 58 IV sz  12 scrambled msg sz 1446 enc/dec ratio( 1418 ) =  1.01975 
+0x34295561e6acf8 gov/crypto symmetric_encryption.cpp 84 total encrypted payload 1446 bytes. 
+0x34295561e6c322 gov/id peer_t.cpp 186 datagram encrypted. svc 10 length 1418 -> svc 0 length 1456 
+0x34295561e6d29c gov/id peer_t.cpp 187 deleting original clear-text datagram. 
+0x34295561e6ddf0 gov/socket datagram.cpp 238 deleted datagram 0x7f582000aa80 
+0x34295561e6eaef gov/socket/outbound caller_daemon_t.cpp 48 delivering datagram to sendq. priority 10 
+0x34295561e6ff70 gov/socket/outbound send_queue.cpp 56 admission pri 10 sz 1456 seq 0 recipient 192.168.0.38:36308 dgram svc field (to be overwritten) 10 
+0x34295561e71177 gov/socket datagram.cpp 441 completed? dend= 1456 size= 1456 completed= 1 
+0x34295561e72043 gov/socket/outbound send_queue.cpp 58 overwriting service field with pri 10 
+0x34295561e72edd gov/socket/outbound send_queue.cpp 334 new qi. dgram sz 1456 pri 10 cli 0x7f57d4009140 sendref 0 
+0x34295561e74326 gov bgtask.cpp 105 wakeup 
+0x34295561e74ed1 gov bgtask.cpp 111 reset resume 
+0x34295561e75d33 gov/socket/outbound send_queue.cpp 23 onwakeup 
+0x34295561e77492 gov/relay daemon_t.cpp 87 success 
+0x34295561e785d0 gov/relay daemon_t.cpp 90 success sending datagram to 192.168.0.38:36308 
+0x34295561e79241 gov/peer grid_t.cpp 58 prepare_worker_send visited 1 
+0x34295561e79e58 gov/peer grid_t.cpp 62 grid size 2 
+0x34295561e7c2cf gov/peer grid_t.cpp 78 slot occupied 0 already visited 
+0x34295561e7d331 gov/peer grid_t.cpp 73 slot 1 is empty 
+0x34295561e7dfe3 gov/peer grid_t.cpp 85 no suitable peer found in grid 
+0x34295561e7eadb gov/relay daemon_t.cpp 94 Sent 1 dgrams succ to a number of devices= 1 
+0x34295561e7fca0 gov/socket datagram.cpp 238 deleted datagram 0x7f582000ea00 
+0x34295561e80b8c gov/relay pushman.cpp 77 wait 
+0x34295561e81703 gov bgtask.cpp 100 reset_wait 0 
+0x34295561e822c4 gov/relay pushman.cpp 84 waiting 
