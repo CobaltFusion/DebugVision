@@ -1,6 +1,3 @@
-# DebugVision
-NextGen DebugView++ that is portable and with graphical log visualization 
-
 # gathering requirements
 
 - gantt chart timeline with markers to visualize processes and bottlenecks
