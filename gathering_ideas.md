@@ -129,7 +129,15 @@ We almost certainly have overlap between our goals and the goals from process mi
 - [Diana Hsieh - Time-Series Data NY Meetup #3 Livestream - Sep 20 2018](https://www.youtube.com/watch?v=TQk_tc03MyQ)
 - https://papertrailapp.com
 - https://www.spectx.com/ (good demo Liisa and Jüri, thanks!)
-- https://github.com/facontidavide/PlotJuggler 
+- https://github.com/facontidavide/PlotJuggler
+- https://gtkwave.sourceforge.net/ (VCD) 
+- https://sigrok.org/wiki/PulseView (VCD) 
+- https://marketplace.visualstudio.com/items?itemName=wavetrace.wavetrace (VCD) - 2021
+- https://docs.wokwi.com/guides/logic-analyzer
+- https://github.com/Ben1152000/sootty
+- https://github.com/brendangregg/FlameGraph (generate interactive SVG)
+- https://github.com/spiermar/d3-flame-graph?tab=readme-ov-file (d3-version)
+
 
 # print debugging 
 - https://buttondown.email/geoffreylitt/archive/starting-this-newsletter-print-debugging-byoc/
