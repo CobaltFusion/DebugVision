@@ -70,7 +70,8 @@ Search:
 
 Possible inputs:
 - compact binary format to collect high-resolution data (telemetry) for games and financial trading applications.
-- logs from text formatted file
+- [VCD](https://en.wikipedia.org/wiki/Value_change_dump) (Value Change Dump) an ASCII-based format described by IEEE standard 1364-2001
+- logs from a text formatted file
 - logs from OutputDebugString API (Win32 specfic)
 - logs from http(s)
 - logs from stdin
