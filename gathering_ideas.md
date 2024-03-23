@@ -137,6 +137,9 @@ We almost certainly have overlap between our goals and the goals from process mi
 - https://github.com/Ben1152000/sootty
 - https://github.com/brendangregg/FlameGraph (generate interactive SVG)
 - https://github.com/spiermar/d3-flame-graph?tab=readme-ov-file (d3-version)
+- https://fuchsia.dev/fuchsia-src/concepts/kernel/tracing-system#trace-client
+- https://perfetto.dev/ (google)
+- https://github.com/janestreet/magic-trace
 
 
 # print debugging 
