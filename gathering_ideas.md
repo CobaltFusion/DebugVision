@@ -141,6 +141,8 @@ We almost certainly have overlap between our goals and the goals from process mi
 - https://perfetto.dev/ (google) / https://perfetto.dev/docs/analysis/trace-processor
 - https://github.com/janestreet/magic-trace
 - https://doc.qt.io/qtcreator/creator-ctf-visualizer.html
+- https://www.kdab.com/full-stack-tracing-part-3/
+- https://babeltrace.org/
 
 
 # print debugging 
