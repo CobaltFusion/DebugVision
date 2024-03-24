@@ -28,6 +28,12 @@
   - Gui 'hello world' is 4MB (and can be created in 2 minutes, including installation, which requires only unzipping)
   - Gui tutorial https://www.ultimatepp.org/srcdoc$CtrlLib$Tutorial$en-us.html
 
+# limitations of exinsting tools to consider:
+
+- online tools (such as perfetto) can change over time and become incompatible with older data (bugs or not, it is nolonger ABI compatible), so consider a 'frozen' offline viewer to unsure that very data can be read anytime.
+- some trace formats (like VCD) require that you know up front what 'signals' are going to be present, this is probablematic, because when 'streaming' logs all possible occurances of names of function/events are defined up front.
+  
+
 # more...
 - online filters/highlighing storage to sync settings over difference workstations (login with google account?)
 - what do we do with internationalization? Chinese, Japanese characters, etc...
