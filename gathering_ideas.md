@@ -143,6 +143,8 @@ We almost certainly have overlap between our goals and the goals from process mi
 - https://doc.qt.io/qtcreator/creator-ctf-visualizer.html
 - https://www.kdab.com/full-stack-tracing-part-3/
 - https://babeltrace.org/
+- https://docs.google.com/document/d/1CvAClvFfyA5R-PhYUmn5OOQtYMH4h6I0nSsKchNAySU/preview#heading=h.yr4qxyxotyw
+- https://www.eclipse.org/tracecompass/
 
 
 # print debugging 
