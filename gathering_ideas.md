@@ -145,6 +145,7 @@ We almost certainly have overlap between our goals and the goals from process mi
 - https://babeltrace.org/
 - https://docs.google.com/document/d/1CvAClvFfyA5R-PhYUmn5OOQtYMH4h6I0nSsKchNAySU/preview#heading=h.yr4qxyxotyw
 - https://www.eclipse.org/tracecompass/
+- https://marketplace.visualstudio.com/items?itemName=eclipse-cdt.vscode-trace-extension
 
 
 # print debugging 
