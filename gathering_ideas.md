@@ -30,10 +30,10 @@
 
 # limitations of existing tools to consider:
 
-- online tools (such as perfetto) can (and do) change input format over time and become incompatible with older data (bugs or not, it is nolonger ABI compatible), so consider a 'frozen' offline viewer to unsure that very data can be read anytime. Perfetto can be installed locally, so that can be a way to deal with that
-- some trace formats (like VCD) require that you know up front what 'signals' are going to be present, this is probablematic, because when 'streaming' logs all possible occurances of names of function/events are defined up front.
+- online tools (such as perfetto) can (and do) change input format over time and become incompatible with older data (bugs or not, it is nolonger ABI compatible), so consider a 'frozen' offline viewer to unsure that very data can be read anytime. Perfetto can be installed locally, so that can be a way to deal with that.
+- some trace formats (like VCD) require that you know up front what 'signals' are going to be present, this is probablematic, because when 'streaming' logs all possible occurances of names of function/events are not known up front. So this kind of format requires post-processing.
+- some trace format (like chrome's trace.json) require special begin and end markers, `[ {"first": "v1"} , {"second": "v2"} ]` this may pose a problem when a program crashes and it does not write the end marker.
   
-
 # more...
 - online filters/highlighing storage to sync settings over difference workstations (login with google account?)
 - what do we do with internationalization? Chinese, Japanese characters, etc...
