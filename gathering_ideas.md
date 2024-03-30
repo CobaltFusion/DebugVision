@@ -13,6 +13,7 @@
   - <https://www.postgresql.org/docs/9.0/datatype-datetime.html>
   - debugview++ stores times in both wall-clock format with millisecond accuracy and offset from the first entry in microsecond accuracy. We have not had requests for more accuracy in the last six years.
   - for embedded systems it is plausible to measure in clockticks that are typically in the picosecond domain. I would say we postpone this usecase until we have good reason to support it. However, if we do decide to support it, we could add a special type of series that supports an 'offset from start of the series' in clockticks, where the clock frequency can vary over series.
+- the description of the [Trace Event Format](https://docs.google.com/document/d/1CvAClvFfyA5R-PhYUmn5OOQtYMH4h6I0nSsKchNAySU/preview) contains both very good ideas for the storage format and visualization
 
 # ideas
 - maybe use http://www.copperspice.com/
@@ -61,11 +62,11 @@ Visualization:
 - query using some kind of elastic search?
 - use online visualization (can that still be done as a 'live' view?)
 - check out <https://github.com/jlfwong/speedscope>
+- see also [Google perfetto](ui.perfetto.dev) and chrome's [Trace Event Format](https://docs.google.com/document/d/1CvAClvFfyA5R-PhYUmn5OOQtYMH4h6I0nSsKchNAySU/preview)
 
 communication:
  - gRPC https://grpc.io/
  
-
 Filter:
 - separation for input and view filter, meaning filtered messages from input filters is not kept at all, and filtered messages from view  filters and only not shown. (debugview++ only has the latter, which can make it difficult to setup very long lasting tests.) 
 
