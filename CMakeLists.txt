@@ -1,35 +1,65 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.31 FATAL_ERROR)
 
-set(CMAKE_CXX_STANDARD 20)
+project(debugvision)
+
+if(NOT CMAKE_BUILD_TYPE)
+  message(FATAL_ERROR "No build type specified, ie. use -DCMAKE_BUILD_TYPE=<config> typical values are Debug, Release, RelWithDebInfo and MinSizeRel")
+endif()
+
+if (MSVC)
+  include(cmake/CMakeLists.msvc.zero.config.cmake)
+endif()
+
+if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+    set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/install" CACHE PATH "installation path" FORCE)
+endif()
+
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# may be enable later once we have a way to install them.
-#set(Boost_USE_STATIC_LIBS ON)
-#find_package(Boost REQUIRED COMPONENTS system thread filesystem regex program_options)
-#find_package(GTest REQUIRED)
-#find_package(GMock REQUIRED)
-#find_package(fmt REQUIRED)
+find_package(CopperSpice REQUIRED)
 
-option(BUILD_WITH_ASAN "Build with address sanitizer" ON)
-option(BUILD_WITH_UBSAN "Build with undefined behaviour sanitizer" ON)
-option(BUILD_WITH_TSAN "Build with address sanitizer" OFF)
+include(cmake/CMakeLists.warnings.cmake)
 
-add_compile_options(-Wall -Wextra -pedantic -Wmissing-include-dirs -Wformat=2 -Wunused -Wno-error=unused-variable -Wcast-align -Wno-vla -Wnull-dereference -Wmaybe-uninitialized)
-add_compile_options(-Werror -fdiagnostics-color=auto)
+add_library(define_project_options INTERFACE)
 
 if(BUILD_WITH_ASAN)
-    add_compile_options(-fsanitize=address)
-    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fsanitize=address")
-endif(BUILD_WITH_ASAN)
+    target_compile_options(define_project_options INTERFACE -fsanitize=address)
+    target_link_options(define_project_options INTERFACE -fsanitize=address)
+    message("-- build with ASAN enabled")
+endif()
 
 if(BUILD_WITH_UBSAN)
-    add_compile_options(-fsanitize=undefined)
-    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fsanitize=undefined")
-endif(BUILD_WITH_UBSAN)
+    target_compile_options(define_project_options INTERFACE -fsanitize=undefined)
+    target_link_options(define_project_options INTERFACE -fsanitize=undefined)
+    message("-- build with UBSAN enabled")
+endif()
 
-if(BUILD_WITH_TSAN)
-    add_compile_options(-fsanitize=thread)
-    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fsanitize=thread")
-endif(BUILD_WITH_TSAN)
+# Setting the rpath to '$ORIGIN' ensures our application looks for the
+# CopperSpice libraries and plugins in its own directory first.
+set(CMAKE_INSTALL_RPATH "\$ORIGIN")
 
-add_subdirectory(tools)
+target_compile_options(define_project_options INTERFACE /utf-8)
+
+# here the 'project::' scoped targets are available, all project should only depend on these as needed through its target_link_libraries
+# doing so will automatically have them add their compiler and linker option as defined above.
+
+add_library(project::warnings_options ALIAS define_project_warning_options)
+add_library(project::warning_suppressions ALIAS define_project_warning_suppressions)
+add_library(project::project_options ALIAS define_project_options)
+
+add_subdirectory(src)
+
+if(${CMAKE_SIZEOF_VOID_P} EQUAL 4)
+   set(TARGETBITS 32)
+else()
+   set(TARGETBITS 64)
+endif()
+
+message("")
+message("${PROJECT_NAME} configured to run on:  ${CMAKE_SYSTEM_NAME} ${TARGETBITS} bit, ${CMAKE_BUILD_TYPE} Mode")
+message("${PROJECT_NAME} will be built in:      '${CMAKE_BINARY_DIR}'")
+message("CMAKE_C_COMPILER:                  '${CMAKE_C_COMPILER}'")
+message("CMAKE_CXX_COMPILER:                '${CMAKE_CXX_COMPILER}'")
+message("${PROJECT_NAME} will be installed in:  '${CMAKE_INSTALL_PREFIX}'")
+message("\n")
