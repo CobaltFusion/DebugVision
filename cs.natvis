@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+  <Type Name="QObject">
+    <DisplayString>{(void*)this} m_objectName: {m_objectName}</DisplayString>
+  </Type>
+  <Type Name="QWidget">
+    <DisplayString>{(void*)this} {data->crect}</DisplayString>
+  </Type>
+  <Type Name="QString8">
+    <DisplayString>Q8{ (char*)(&amp;m_string[0]),s8}</DisplayString>
+    <StringView>(char*)(&amp;m_string[0]),s8</StringView>
+  </Type>
+  <Type Name="QMenu">
+    <DisplayString> { d-&gt;actions }</DisplayString>
+  </Type>
+
+  <Type Name="QRect">
+    <DisplayString>[{x1},{y1};{x2},{y2}]</DisplayString>
+  </Type>
+
+</AutoVisualizer>
