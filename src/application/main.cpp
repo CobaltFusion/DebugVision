@@ -28,8 +28,6 @@ int APIENTRY WinMain(HINSTANCE, HINSTANCE, PSTR, INT)
 }
 #endif
 
-// perhaps use https://github.com/KDAB/KDDockWidgets
-
 int main(int argc, char *argv[])
 {
     InstallCrashHandler();

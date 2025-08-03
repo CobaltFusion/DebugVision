@@ -2,12 +2,14 @@ cmake_minimum_required(VERSION 3.31 FATAL_ERROR)
 
 project(debugvision)
 
-if(NOT CMAKE_BUILD_TYPE)
-  message(FATAL_ERROR "No build type specified, ie. use -DCMAKE_BUILD_TYPE=<config> typical values are Debug, Release, RelWithDebInfo and MinSizeRel")
+if(NOT CMAKE_BUILD_TYPE AND NOT "${CMAKE_GENERATOR}" MATCHES "Visual Studio")
+    message("CMAKE_GENERATOR: ${CMAKE_GENERATOR}")
+    message(FATAL_ERROR "No build type specified, ie. use -DCMAKE_BUILD_TYPE=<config> typical values are Debug, Release, RelWithDebInfo and MinSizeRel")
 endif()
 
 if (MSVC)
   include(cmake/CMakeLists.msvc.zero.config.cmake)
+  add_compile_options(/MP)
 endif()
 
 if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
