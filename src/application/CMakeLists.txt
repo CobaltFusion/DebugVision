@@ -19,9 +19,11 @@ target_link_libraries(debugvision PRIVATE
   project::project_options
   CopperSpice::CsCore
   CopperSpice::CsGui
+  dbghelp
 )
 
-if (MSVC)
+if (MSVC2)
+
   target_link_options(debugvision PRIVATE
     /SUBSYSTEM:WINDOWS
   )
