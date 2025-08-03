@@ -2,10 +2,6 @@ include(FetchContent)
 
 message("--- MSVC Zero Configuration Script")
 
-if(NOT CMAKE_BUILD_TYPE)
-  message(FATAL_ERROR "No build type specified, ie. specify -DCMAKE_BUILD_TYPE=Release to build in release configuration.")
-endif()
-
 Set(CS_URL "https://github.com/janwilmans/copperspice-gettingstarted/raw/develop/example_project_cmake/nuget/copperspice.2.0.0.nupkg")
 Set(NUGET_PACKAGE_PATH ${CMAKE_SOURCE_DIR}/packages)
 
