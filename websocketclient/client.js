@@ -116,6 +116,43 @@ function connect() {
     };
 }
 
+// ---- Raster with absolute time -----------------------------------
+const scriptStartTime = Date.now(); // absolute start timestamp
+
+function drawRaster(now) {
+    ctx.strokeStyle = "#222";
+    ctx.lineWidth = 1;
+    ctx.font = "10px monospace";
+    ctx.fillStyle = "#555";
+
+    // Vertical time grid (absolute times)
+    const interval = 1000; // 1 second
+    const firstTick = now - TIME_WINDOW_MS - ((now - TIME_WINDOW_MS - scriptStartTime) % interval);
+    for (let t = firstTick; t < now; t += interval) {
+        const x = timeToX(t, now);
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, canvas.height);
+        ctx.stroke();
+
+        const absSec = Math.floor((t - scriptStartTime) / 1000);
+        ctx.fillText(`${absSec}s`, x + 2, 10);
+    }
+
+    // Horizontal lines per channel
+    for (const [_, idx] of channels) {
+        const yTop = 40 + idx * CHANNEL_HEIGHT;
+        const yBottom = yTop + CHANNEL_HEIGHT;
+        const step = 5; // px steps inside channel
+        for (let y = yTop; y <= yBottom; y += step) {
+            ctx.beginPath();
+            ctx.moveTo(0, y);
+            ctx.lineTo(canvas.width, y);
+            ctx.stroke();
+        }
+    }
+}
+
 // ---- Rendering -----------------------------------------------------
 let smoothedNow = Date.now();
 let frozenNow = smoothedNow;
@@ -140,6 +177,9 @@ function render() {
     }
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // ---- Draw raster first ----
+    drawRaster(now);
 
     // ---- Compute lanes per channel ----
     for (const [name, idx] of channels) {
