@@ -1,14 +1,28 @@
+// TIME_SMOOTHING smooths how the how fast the window moves, not what happened
+// 0.0 never smooth, this can cause the window to lag or run fast over time
+// 1.0 jump instantly, (no smoothing)
+// 0.2 move 20% of the remaining difference per frame
+
 const WS_URL = "ws://localhost:8765";
 const canvas = document.getElementById("scope");
 const ctx = canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-window.addEventListener("resize", () => {
+// ---- Canvas --------------------------------------------------------
+function resize() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-});
+}
+window.addEventListener("resize", resize);
+resize();
+
+// ---- Stroke discipline --------------------------------------------
+ctx.lineCap = "butt";
+ctx.lineJoin = "miter";
+
+// Align only at draw time
+function align(v) {
+    return Math.round(v);
+}
 
 // ---- Configuration -------------------------------------------------
 const CHANNEL_HEIGHT = 50;
@@ -19,10 +33,10 @@ const LEVEL_PADDING = 4;
 const TIME_SMOOTHING = 0.2;
 
 // ---- Data model ----------------------------------------------------
-const channels = new Map();          // name -> index
-const channelVisible = new Map();    // index -> bool
-const channelLevel = new Map();      // index -> last value
-const channelRange = new Map();      // index -> { values: [] }
+const channels = new Map();
+const channelVisible = new Map();
+const channelLevel = new Map();
+const channelRange = new Map();
 
 let events = [];
 const incoming = [];
@@ -38,16 +52,19 @@ function getChannelIndex(name) {
     return channels.get(name);
 }
 
-// ---- Compute per-channel unique value lanes -----------------------
-function computeLanes(chIndex) {
-    const now = Date.now();
+// ---- Lane computation ---------------------------------------------------------
+function computeLanes(chIndex, now) {
     const values = Array.from(
         new Set(
             events
-                .filter(e => getChannelIndex(e.channel) === chIndex && e.ts >= now - TIME_WINDOW_MS)
+                .filter(e =>
+                    getChannelIndex(e.channel) === chIndex &&
+                    e.ts >= now - TIME_WINDOW_MS
+                )
                 .map(e => e.value)
         )
     ).sort((a, b) => a - b);
+
     channelRange.set(chIndex, { values });
 }
 
@@ -56,68 +73,68 @@ function valueToY(chIndex, value) {
     const bandHeight = CHANNEL_HEIGHT - 2 * LEVEL_PADDING;
     const { values } = channelRange.get(chIndex);
 
-    if (!values.length) return bandTop + bandHeight;
+    if (!values.length)
+        return bandTop + bandHeight;
 
-    const index = values.indexOf(value);
+    const i = values.indexOf(value);
     const laneHeight = bandHeight / values.length;
 
-    return bandTop + bandHeight - (index + 0.5) * laneHeight;
+    return bandTop + bandHeight - (i + 0.5) * laneHeight;
 }
 
-// ---- Convert timestamp to X ---------------------------------------
+// ---- Time mapping --------------------------------------------------
 function timeToX(ts, now) {
-    return canvas.width - ((now - ts) / TIME_WINDOW_MS) * canvas.width;
+    return canvas.width -
+        ((now - ts) / TIME_WINDOW_MS) * canvas.width;
 }
 
 // ---- Controls ------------------------------------------------------
 let paused = false;
 
-window.addEventListener("keydown", (e) => {
+window.addEventListener("keydown", e => {
     if (e.key >= "1" && e.key <= "3") {
         const idx = Number(e.key) - 1;
-        if (channelVisible.has(idx)) channelVisible.set(idx, !channelVisible.get(idx));
+        if (channelVisible.has(idx))
+            channelVisible.set(idx, !channelVisible.get(idx));
     }
-
-    if (e.key === "s" || e.key === "S") paused = !paused;
+    if (e.key === "s" || e.key === "S")
+        paused = !paused;
 });
 
-canvas.addEventListener(
-    "wheel",
-    (e) => {
-        e.preventDefault();
-        const ZOOM = 1.15;
-        TIME_WINDOW_MS *= e.deltaY < 0 ? 1 / ZOOM : ZOOM;
-        TIME_WINDOW_MS = Math.max(MIN_TIME_WINDOW_MS, Math.min(MAX_TIME_WINDOW_MS, TIME_WINDOW_MS));
-    },
-    { passive: false }
-);
+canvas.addEventListener("wheel", e => {
+    e.preventDefault();
+    const ZOOM = 1.15;
+    TIME_WINDOW_MS *= e.deltaY < 0 ? 1 / ZOOM : ZOOM;
+    TIME_WINDOW_MS = Math.max(
+        MIN_TIME_WINDOW_MS,
+        Math.min(MAX_TIME_WINDOW_MS, TIME_WINDOW_MS)
+    );
+}, { passive: false });
 
 // ---- WebSocket -----------------------------------------------------
 let ws = null;
 let reconnectDelayMs = 1000;
-const MAX_RECONNECT_DELAY = 10000;
 
 function connect() {
     ws = new WebSocket(WS_URL);
 
-    ws.onopen = () => reconnectDelayMs = 1000;
-
-    ws.onmessage = (e) => {
-        if (paused) return;
-        const msg = JSON.parse(e.data);
-        if (msg.type === "event") incoming.push(msg);
+    ws.onmessage = e => {
+        if (!paused) {
+            const msg = JSON.parse(e.data);
+            if (msg.type === "event")
+                incoming.push(msg);
+        }
     };
-
-    ws.onerror = () => ws.close();
 
     ws.onclose = () => {
         setTimeout(connect, reconnectDelayMs);
-        reconnectDelayMs = Math.min(reconnectDelayMs * 2, MAX_RECONNECT_DELAY);
+        reconnectDelayMs = Math.min(reconnectDelayMs * 2, 10000);
     };
 }
+connect();
 
-// ---- Raster with absolute time -----------------------------------
-const scriptStartTime = Date.now(); // absolute start timestamp
+// ---- Raster --------------------------------------------------------
+const scriptStartTime = Date.now();
 
 function drawRaster(now) {
     ctx.strokeStyle = "#222";
@@ -125,11 +142,12 @@ function drawRaster(now) {
     ctx.font = "10px monospace";
     ctx.fillStyle = "#555";
 
-    // Vertical time grid (absolute times)
-    const interval = 1000; // 1 second
-    const firstTick = now - TIME_WINDOW_MS - ((now - TIME_WINDOW_MS - scriptStartTime) % interval);
+    const interval = 1000;
+    const firstTick =
+        now - TIME_WINDOW_MS - ((now - TIME_WINDOW_MS - scriptStartTime) % interval);
+
     for (let t = firstTick; t < now; t += interval) {
-        const x = timeToX(t, now);
+        const x = align(timeToX(t, now));
         ctx.beginPath();
         ctx.moveTo(x, 0);
         ctx.lineTo(x, canvas.height);
@@ -139,12 +157,11 @@ function drawRaster(now) {
         ctx.fillText(`${absSec}s`, x + 2, 10);
     }
 
-    // Horizontal lines per channel
-    for (const [_, idx] of channels) {
-        const yTop = 40 + idx * CHANNEL_HEIGHT;
-        const yBottom = yTop + CHANNEL_HEIGHT;
-        const step = 5; // px steps inside channel
-        for (let y = yTop; y <= yBottom; y += step) {
+    for (const [, idx] of channels) {
+        const yTop = align(40 + idx * CHANNEL_HEIGHT);
+        const yBottom = align(yTop + CHANNEL_HEIGHT);
+
+        for (let y = yTop; y <= yBottom; y += 5) {
             ctx.beginPath();
             ctx.moveTo(0, y);
             ctx.lineTo(canvas.width, y);
@@ -164,9 +181,9 @@ function render() {
         smoothedNow += (realNow - smoothedNow) * TIME_SMOOTHING;
         frozenNow = smoothedNow;
     }
+
     const now = paused ? frozenNow : smoothedNow;
 
-    // Ingest new events
     if (!paused && incoming.length) {
         events.push(...incoming);
         incoming.length = 0;
@@ -178,44 +195,42 @@ function render() {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // ---- Draw raster first ----
     drawRaster(now);
 
-    // ---- Compute lanes per channel ----
-    for (const [name, idx] of channels) {
-        computeLanes(idx);
-    }
+    for (const [, idx] of channels)
+        computeLanes(idx, now);
 
-    // ---- Draw stepped traces ----
     const lastValue = new Map(channelLevel);
     const lastTs = new Map();
-    for (const [_, idx] of channels) lastTs.set(idx, now - TIME_WINDOW_MS);
+    for (const [, idx] of channels)
+        lastTs.set(idx, now - TIME_WINDOW_MS);
+
+    ctx.fillStyle = "#0f0";
+    ctx.strokeStyle = "#0f0";
+    ctx.lineWidth = 2;
 
     for (const e of events) {
         const ch = getChannelIndex(e.channel);
         if (!channelVisible.get(ch)) continue;
 
-        const prevValue = lastValue.get(ch);
+        const prev = lastValue.get(ch);
         const t0 = lastTs.get(ch);
         const t1 = e.ts;
 
-        const x0 = timeToX(t0, now);
-        const x1 = timeToX(t1, now);
+        let x0 = align(timeToX(t0, now));
+        let x1 = align(timeToX(t1, now));
+        if (x1 <= x0) x1 = x0 + 1;
 
-        const yPrev = prevValue !== null ? valueToY(ch, prevValue) : valueToY(ch, e.value);
-        const yNew = valueToY(ch, e.value);
+        const yPrev = align(valueToY(ch, prev ?? e.value));
+        const yNew = align(valueToY(ch, e.value));
 
-        ctx.strokeStyle = "#0f0";
-        ctx.lineWidth = 2;
+        // ---- Horizontal hold as filled rectangle (spot-free)
+        const yTop = yPrev - 1;
+        const height = 2;
+        ctx.fillRect(x0, yTop, x1 - x0, height);
 
-        // horizontal hold
-        ctx.beginPath();
-        ctx.moveTo(x0, yPrev);
-        ctx.lineTo(x1, yPrev);
-        ctx.stroke();
-
-        // vertical step
-        if (prevValue !== null && prevValue !== e.value) {
+        // ---- Vertical step
+        if (prev !== null && prev !== e.value) {
             ctx.beginPath();
             ctx.moveTo(x1, yPrev);
             ctx.lineTo(x1, yNew);
@@ -226,29 +241,28 @@ function render() {
         lastTs.set(ch, t1);
     }
 
-    // extend to now
-    for (const [_, idx] of channels) {
+    // ---- Extend to now
+    for (const [, idx] of channels) {
         if (!channelVisible.get(idx)) continue;
-        const x0 = timeToX(lastTs.get(idx), now);
-        const x1 = canvas.width;
-        const y = valueToY(idx, lastValue.get(idx));
-        ctx.beginPath();
-        ctx.moveTo(x0, y);
-        ctx.lineTo(x1, y);
-        ctx.stroke();
+
+        const x0 = align(timeToX(lastTs.get(idx), now));
+        const y = align(valueToY(idx, lastValue.get(idx)));
+
+        ctx.fillRect(x0, y - 1, canvas.width - x0, 2);
     }
 
-    // ---- Channel labels ----
+    // ---- Channel labels
+    ctx.fillStyle = "#aaa";
     for (const [name, idx] of channels) {
         ctx.fillStyle = channelVisible.get(idx) ? "#aaa" : "#444";
         ctx.fillText(`[${idx + 1}] ${name}`, 5, 40 + idx * CHANNEL_HEIGHT + 20);
     }
 
+    // ---- Status
     ctx.fillStyle = paused ? "#f66" : "#aaa";
     ctx.fillText(`${paused ? "PAUSED" : "RUNNING"} — ${Math.round(TIME_WINDOW_MS)} ms`, 5, 20);
 
     requestAnimationFrame(render);
 }
 
-connect();
 requestAnimationFrame(render);
