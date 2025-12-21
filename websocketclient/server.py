@@ -8,9 +8,9 @@ HOST = "0.0.0.0"
 PORT = 8765
 
 CHANNELS = [
-    ("FSM.State", ["IDLE", "RUN", "ERROR"]),
-    ("Motor.Enable", [0, 1]),
-    ("Sensor.Ready", [0, 1]),
+    ("State", ["IDLE", "RUN", "ERROR"]),
+    ("Enable", [0, 1]),
+    ("Voltage", [0, 1, 2, 4, 5, 6, 7]),
 ]
 
 
@@ -19,9 +19,15 @@ async def sample_generator(queue: asyncio.Queue):
     Produces state-change samples and pushes them into a queue.
     """
     last_values = {}
-
+    clock = 0
+    count = 0
     while True:
         ts = int(time.time() * 1000)
+
+        count = count + 1
+        if count == 30:
+            count = 0
+            clock = int(not clock)
 
         ch, values = random.choice(CHANNELS)
         new_val = random.choice(values)
@@ -38,6 +44,15 @@ async def sample_generator(queue: asyncio.Queue):
             }
 
             await queue.put(sample)
+
+        sample = {
+            "type": "event",
+            "ts": ts,
+            "channel": 'Clock',
+            "value": clock,
+        }
+
+        await queue.put(sample)
 
         await asyncio.sleep(0.1)  # 10 Hz base rate
 
