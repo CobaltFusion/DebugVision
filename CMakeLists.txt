@@ -51,6 +51,7 @@ add_library(project::warning_suppressions ALIAS define_project_warning_suppressi
 add_library(project::project_options ALIAS define_project_options)
 
 add_subdirectory(src)
+add_subdirectory(websocketclient)
 
 if(${CMAKE_SIZEOF_VOID_P} EQUAL 4)
    set(TARGETBITS 32)
