@@ -1,8 +1,43 @@
+// ================================================================
+// Scope Viewer with Falling Flags + Rising Lollipops
+// ================================================================
+
+// ---- WebSocket --------------------------------------------------
+const WS_URL = "ws://localhost:8765";
+
+// ---- Canvas -----------------------------------------------------
+const canvas = document.getElementById("scope");
+
+// ---- Configuration ---------------------------------------------
+const config = {
+    CHANNEL_HEIGHT: 50,
+    LEVEL_PADDING: 4,
+
+    TIME_WINDOW_MS: 10000,
+    MIN_TIME_WINDOW_MS: 100,
+    MAX_TIME_WINDOW_MS: 60000,
+
+    TIME_SMOOTHING: 0.2,
+
+    // Falling edges
+    SHOW_FALLING_FLAGS: true,
+    FALLING_FLAG_SIZE: 4,
+
+    // Rising edges
+    SHOW_RISING_LOLLIPOPS: true,
+    RISING_DELAY_MS: 150,   // fixed time after edge
+    LOLLIPOP_HEIGHT: 10,
+    LOLLIPOP_RADIUS: 3
+};
+
+// ================================================================
+// Renderer
+// ================================================================
+
 class ScopeRenderer {
     constructor(canvas, config) {
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
-
         this.config = config;
 
         this.channels = new Map();
@@ -16,14 +51,14 @@ class ScopeRenderer {
         this.frozenNow = this.smoothedNow;
         this.scriptStartTime = Date.now();
 
-        this.resize();
-        window.addEventListener("resize", () => this.resize());
-
         this.ctx.lineCap = "butt";
         this.ctx.lineJoin = "miter";
+
+        this.resize();
+        window.addEventListener("resize", () => this.resize());
     }
 
-    /* ---------------- Infrastructure ---------------- */
+    // ---- Infrastructure ----------------------------------------
 
     resize() {
         this.canvas.width = window.innerWidth;
@@ -36,11 +71,11 @@ class ScopeRenderer {
 
     getChannelIndex(name) {
         if (!this.channels.has(name)) {
-            const index = this.channels.size;
-            this.channels.set(name, index);
-            this.channelVisible.set(index, true);
-            this.channelLevel.set(index, null);
-            this.channelRange.set(index, { values: [] });
+            const idx = this.channels.size;
+            this.channels.set(name, idx);
+            this.channelVisible.set(idx, true);
+            this.channelLevel.set(idx, null);
+            this.channelRange.set(idx, { values: [] });
         }
         return this.channels.get(name);
     }
@@ -50,7 +85,7 @@ class ScopeRenderer {
             this.channelVisible.set(idx, visible);
     }
 
-    /* ---------------- Data ingestion ---------------- */
+    // ---- Data ---------------------------------------------------
 
     pushEvents(events) {
         this.events.push(...events);
@@ -62,7 +97,7 @@ class ScopeRenderer {
         );
     }
 
-    /* ---------------- Lane computation ---------------- */
+    // ---- Lanes --------------------------------------------------
 
     computeLanes(chIndex, now) {
         const values = Array.from(
@@ -80,10 +115,7 @@ class ScopeRenderer {
     }
 
     valueToY(chIndex, value) {
-        const {
-            CHANNEL_HEIGHT,
-            LEVEL_PADDING
-        } = this.config;
+        const { CHANNEL_HEIGHT, LEVEL_PADDING } = this.config;
 
         const bandTop = 40 + chIndex * CHANNEL_HEIGHT + LEVEL_PADDING;
         const bandHeight = CHANNEL_HEIGHT - 2 * LEVEL_PADDING;
@@ -103,15 +135,17 @@ class ScopeRenderer {
             ((now - ts) / this.config.TIME_WINDOW_MS) * this.canvas.width;
     }
 
-    /* ---------------- Raster ---------------- */
+    // ---- Raster -------------------------------------------------
 
     drawRaster(now) {
         const ctx = this.ctx;
 
-        ctx.strokeStyle = "#222";
+        ctx.strokeStyle = "#555";
         ctx.lineWidth = 1;
-        ctx.font = "10px monospace";
-        ctx.fillStyle = "#555";
+
+        // scale labels
+        ctx.font = "12px monospace";
+        ctx.fillStyle = "#fff";
 
         const interval = 1000;
         const firstTick =
@@ -131,7 +165,7 @@ class ScopeRenderer {
 
         for (const [, idx] of this.channels) {
             const yTop = this.align(40 + idx * this.config.CHANNEL_HEIGHT);
-            const yBottom = this.align(yTop + this.config.CHANNEL_HEIGHT);
+            const yBottom = yTop + this.config.CHANNEL_HEIGHT;
 
             for (let y = yTop; y <= yBottom; y += 5) {
                 ctx.beginPath();
@@ -142,7 +176,35 @@ class ScopeRenderer {
         }
     }
 
-    /* ---------------- Frame rendering ---------------- */
+    // ---- Edge decorations --------------------------------------
+
+    drawFallingFlag(x, y, size) {
+        const ctx = this.ctx;
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.lineTo(x + size, y - size);
+        ctx.lineTo(x + size, y + size);
+        ctx.closePath();
+        ctx.fill();
+    }
+
+    drawRisingLollipop(x, y) {
+        const ctx = this.ctx;
+        const { LOLLIPOP_HEIGHT, LOLLIPOP_RADIUS } = this.config;
+
+        const stemTop = y - LOLLIPOP_HEIGHT;
+
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.lineTo(x, stemTop);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(x, stemTop, LOLLIPOP_RADIUS, 0, Math.PI * 2);
+        ctx.fill();
+    }
+
+    // ---- Render -------------------------------------------------
 
     render(paused) {
         const realNow = Date.now();
@@ -171,8 +233,9 @@ class ScopeRenderer {
         for (const [, idx] of this.channels)
             lastTs.set(idx, now - this.config.TIME_WINDOW_MS);
 
-        ctx.fillStyle = "#0f0";
+        // Base signal color
         ctx.strokeStyle = "#0f0";
+        ctx.fillStyle = "#0f0";
         ctx.lineWidth = 2;
 
         for (const e of this.events) {
@@ -190,19 +253,53 @@ class ScopeRenderer {
             const yPrev = this.align(this.valueToY(ch, prev ?? e.value));
             const yNew = this.align(this.valueToY(ch, e.value));
 
+            // Horizontal hold
             ctx.fillRect(x0, yPrev - 1, x1 - x0, 2);
 
             if (prev !== null && prev !== e.value) {
+                // Vertical step
                 ctx.beginPath();
                 ctx.moveTo(x1, yPrev);
                 ctx.lineTo(x1, yNew);
                 ctx.stroke();
+
+                // Falling edge
+                if (
+                    this.config.SHOW_FALLING_FLAGS &&
+                    e.value < prev
+                ) {
+                    this.drawFallingFlag(
+                        x1 - 1,
+                        yPrev,
+                        this.config.FALLING_FLAG_SIZE
+                    );
+                }
+
+                // Rising edge lollipop (fixed time offset)
+                if (
+                    this.config.SHOW_RISING_LOLLIPOPS &&
+                    e.value > prev
+                ) {
+                    const lx = this.align(
+                        this.timeToX(
+                            e.ts + this.config.RISING_DELAY_MS,
+                            now
+                        )
+                    );
+
+                    ctx.save();
+                    ctx.strokeStyle = "#f44";
+                    ctx.fillStyle = "#f44";
+                    this.drawRisingLollipop(lx, yNew);
+                    ctx.restore();
+                }
             }
 
             lastValue.set(ch, e.value);
             lastTs.set(ch, t1);
         }
 
+        // Extend to now
         for (const [, idx] of this.channels) {
             if (!this.channelVisible.get(idx)) continue;
             const x0 = this.align(this.timeToX(lastTs.get(idx), now));
@@ -210,12 +307,18 @@ class ScopeRenderer {
             ctx.fillRect(x0, y - 1, this.canvas.width - x0, 2);
         }
 
+        // Labels
         ctx.fillStyle = "#aaa";
         for (const [name, idx] of this.channels) {
             ctx.fillStyle = this.channelVisible.get(idx) ? "#aaa" : "#444";
-            ctx.fillText(`[${idx + 1}] ${name}`, 5, 40 + idx * this.config.CHANNEL_HEIGHT + 20);
+            ctx.fillText(
+                `[${idx + 1}] ${name}`,
+                5,
+                40 + idx * this.config.CHANNEL_HEIGHT + 20
+            );
         }
 
+        // Status
         ctx.fillStyle = paused ? "#f66" : "#aaa";
         ctx.fillText(
             `${paused ? "PAUSED" : "RUNNING"} — ${Math.round(this.config.TIME_WINDOW_MS)} ms`,
@@ -225,28 +328,19 @@ class ScopeRenderer {
     }
 }
 
-
-/*-=====-*/
-
-const canvas = document.getElementById("scope");
-
-const config = {
-    CHANNEL_HEIGHT: 50,
-    LEVEL_PADDING: 4,
-    TIME_WINDOW_MS: 10000,
-    MIN_TIME_WINDOW_MS: 100,
-    MAX_TIME_WINDOW_MS: 60000,
-    TIME_SMOOTHING: 0.2
-};
+// ================================================================
+// Application
+// ================================================================
 
 const renderer = new ScopeRenderer(canvas, config);
 
 let paused = false;
 const incoming = [];
 
-/* Controls */
+// ---- Controls ---------------------------------------------------
+
 window.addEventListener("keydown", e => {
-    if (e.key >= "1" && e.key <= "3") {
+    if (e.key >= "1" && e.key <= "9") {
         const idx = Number(e.key) - 1;
         renderer.setChannelVisible(
             idx,
@@ -267,27 +361,39 @@ canvas.addEventListener("wheel", e => {
     );
 }, { passive: false });
 
-/* WebSocket */
-const ws = new WebSocket("ws://localhost:8765");
-ws.onmessage = e => {
-    if (!paused) {
-        const msg = JSON.parse(e.data);
-        if (msg.type === "event")
-            incoming.push(msg);
-    }
-};
+// ---- WebSocket --------------------------------------------------
 
-/* Main loop */
+let ws = null;
+let reconnectDelayMs = 1000;
+
+function connect() {
+    ws = new WebSocket(WS_URL);
+
+    ws.onmessage = e => {
+        if (!paused) {
+            const msg = JSON.parse(e.data);
+            if (msg.type === "event")
+                incoming.push(msg);
+        }
+    };
+
+    ws.onclose = () => {
+        setTimeout(connect, reconnectDelayMs);
+        reconnectDelayMs = Math.min(reconnectDelayMs * 2, 10000);
+    };
+}
+
+connect();
+
+// ---- Main loop --------------------------------------------------
+
 function frame() {
     if (!paused && incoming.length) {
         renderer.pushEvents(incoming);
         incoming.length = 0;
     }
-
     renderer.render(paused);
     requestAnimationFrame(frame);
 }
 
 requestAnimationFrame(frame);
-
-
