@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+""" Random signal generator for testing with 'client.js'
+"""
+
 import asyncio
 import json
 import time
