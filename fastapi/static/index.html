@@ -4,22 +4,29 @@
 <head>
     <meta charset="UTF-8" />
     <title>Software Oscilloscope</title>
-    <style>
-        body {
-            margin: 0;
-            background: #111;
-            color: #eee;
-            font-family: monospace;
-        }
-
-        canvas {
-            display: block;
-        }
-    </style>
+    <link rel="stylesheet" href="static/styles.css" />
 </head>
 
 <body>
-    <canvas id="scope"></canvas>
+    <div id="app">
+        <div id="toolbar">
+            <button id="runBtn">Run</button>
+            <button id="pauseBtn">Pause</button>
+            <span id="status">RUNNING</span>
+        </div>
+
+        <div id="main">
+            <canvas id="scope"></canvas>
+
+            <div id="sidebar">
+                <div class="panel">
+                    <h3>Signals</h3>
+                    <ul id="signalList"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="static/client.js"></script>
 </body>
 
