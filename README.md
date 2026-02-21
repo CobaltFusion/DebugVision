@@ -1,29 +1,29 @@
-# ?? DebugVision
+# :rocket: DebugVision
 
 ### _The Software Oscilloscope for Developers_
 
 DebugVision turns your code into something you can _see_.
 
-Instead of digging through logs or guessing performance issues, DebugVision lets you instrument your code with lightweight **sample points** and visualize runtime behavior like an oscilloscope?live, interactive, and precise.
+Instead of digging through logs or guessing performance issues, DebugVision lets you instrument your code with lightweight **sample points** and visualize runtime behavior like an oscilloscope - live, interactive, and precise.
 
 ---
 
-## ? What is DebugVision?
+## :sparkles: What is DebugVision?
 
 DebugVision is an open-source tool for **visual debugging and profiling**.
 
 It helps you:
 
-- ?? Visualize timing and performance (latency, jitter, spikes)
-- ?? Trigger on specific events in your code
-- ?? Zoom into problem areas with high precision
-- ?? Understand complex runtime behavior at a glance
+- :bar_chart: Visualize timing and performance (latency, jitter, spikes)
+- :dart: Trigger on specific events in your code
+- :mag: Zoom into problem areas with high precision
+- :brain: Understand complex runtime behavior at a glance
 
-> Oscilloscope ? but for your software.
+> Oscilloscope :point_right: but for your software.
 
 ---
 
-## ?? How it works
+## :gear: How it works
 
 1. Add **sample points** to your code
 2. Run your application
@@ -38,7 +38,36 @@ You can:
 
 ---
 
-## ?? Why DebugVision?
+## :globe_with_meridians: Architecture & Language Support
+
+DebugVision is **not tied to a single programming language**.
+
+### :brain: Backends
+
+- :zap: C++ backend (high-performance, low-level instrumentation)
+- :snake: Python backend (rapid prototyping & flexibility)
+- :heavy_plus_sign: Designed to support **any language** via extensible adapters
+
+If you can emit structured runtime data, you can plug into DebugVision.
+
+---
+
+### :art: Frontend (Work in Progress)
+
+The visualization layer is still evolving ? and this is a great place to contribute.
+
+Strong directions we are exploring:
+
+- :globe_with_meridians: In-browser UI (cross-platform, zero install)
+- :zap: JavaScript-based visualization
+- :gear: WebAssembly for performance-critical parts
+- :package: Modern frameworks like Svelte
+
+> The frontend is intentionally open-ended ? your ideas can shape it.
+
+---
+
+## :dart: Why DebugVision?
 
 Debugging shouldn?t feel like guessing.
 
@@ -50,13 +79,13 @@ Traditional tools:
 
 DebugVision gives you:
 
-- ? Real-time insight
-- ?? Visual clarity
-- ?? Flexible instrumentation
+- :zap: Real-time insight
+- :art: Visual clarity
+- :jigsaw: Flexible instrumentation
 
 ---
 
-## ??? Example Use Cases
+## :camera: Example Use Cases
 
 - Game loops (frame timing, spikes)
 - Embedded systems
@@ -66,46 +95,21 @@ DebugVision gives you:
 
 ---
 
-## ?? New to this kind of tooling? You?re welcome here.
+## :seedling: New here? You?re welcome.
 
 You don?t need to be an expert to contribute.
 
 This project is especially friendly to:
 
-- ?? Beginners in C++ / systems programming
-- ?? Students learning about performance & debugging
-- ????? People from underrepresented groups in tech
+- :cherry_blossom: Beginners in C++ / systems programming
+- :mortar_board: Students learning about performance & debugging
+- :woman_technologist: People from underrepresented groups in tech
 
 If you?re curious, motivated, and want to learn?you belong here.
 
 ---
 
-## ?? Architecture & Language Support
-
-DebugVision is **not tied to a single programming language**.
-
-### ?? Backends
-
-- ?? C++ backend (high-performance, low-level instrumentation)
-- ?? Python backend (rapid prototyping & flexibility)
-- ? Designed to support **any language** via extensible adapters
-
-If you can emit structured runtime data, you can plug into DebugVision.
-
-### ?? Frontend (Work in Progress)
-
-The visualization layer is still evolving, and this is a great place to contribute.
-
-Strong directions we?re exploring:
-
-- ?? In-browser UI (cross-platform, zero install)
-- ? JavaScript-based visualization
-- ?? WebAssembly for performance-critical parts
-- ?? Modern frameworks like Svelte
-
-?? The frontend is intentionally open-ended ? your ideas can shape it.
-
-## ?? Contributing
+## :bulb: Contributing
 
 We?re building something ambitious, and we need help.
 
@@ -113,15 +117,16 @@ You can contribute by:
 
 - Fixing bugs
 - Improving the UI/UX
-- Adding visualizations
+- Building frontend experiments :eyes:
+- Adding language backends
 - Writing docs or tutorials
 - Suggesting ideas
 
-?? Check out: `good first issue` to get started
+:point_right: Check out: `good first issue` to get started
 
 ---
 
-## ??? Vision
+## :hammer_and_wrench: Vision
 
 We want DebugVision to become:
 
@@ -131,23 +136,22 @@ Not just for experts?but for _any developer who wants clarity_.
 
 ---
 
-## ?? Join Us
+## :heart: Join Us
 
-If you?ve ever thought:
+If you've ever thought:
 
-> ?There must be a better way to understand what my code is doing??
+> "There must be a better way to understand what my code is doing..."
 
-You?re in the right place.
+You're in the right place.
 
 ---
 
-## ?? Getting Started
-
-```bash
-
-# clone repo
+## :link: Getting Started
 
 - git clone https://github.com/CobaltFusion/DebugVision.git
 - do to the /fastapi/ directory and run 'start.bat' on windows to get a first impression.
 
-```
+## Screenshot of the /fastapi prototype
+
+[![Screenshot fastapi prototype](art/scope_fastapi.png)]
+[![Demo fastapi prototype](art/fastapi_demo.gif)]
