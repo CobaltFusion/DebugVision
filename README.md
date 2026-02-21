@@ -21,6 +21,18 @@ It helps you:
 
 > Oscilloscope :point_right: but for your software.
 
+## :sparkles: What can you build with this?
+
+- Visualize how your game loop behaves :video_game:
+- Explore timing in robotics or hardware projects :robot:
+- Turn boring logs into interactive graphs :chart_with_upwards_trend:
+- Experiment and _see_ how code behaves in real time
+
+## Screenshot of the /fastapi prototype
+
+[![Screenshot fastapi prototype](art/scope_fastapi.png)]
+[![Demo fastapi prototype](art/fastapi_demo.gif)]
+
 ---
 
 ## :gear: How it works
@@ -69,7 +81,7 @@ Strong directions we are exploring:
 
 ## :dart: Why DebugVision?
 
-Debugging shouldn?t feel like guessing.
+Debugging shouldn't feel like guessing.
 
 Traditional tools:
 
@@ -95,9 +107,9 @@ DebugVision gives you:
 
 ---
 
-## :seedling: New here? You?re welcome.
+## :seedling: New here? You're welcome.
 
-You don?t need to be an expert to contribute.
+You don't need to be an expert to contribute.
 
 This project is especially friendly to:
 
@@ -105,13 +117,13 @@ This project is especially friendly to:
 - :mortar_board: Students learning about performance & debugging
 - :woman_technologist: People from underrepresented groups in tech
 
-If you?re curious, motivated, and want to learn?you belong here.
+If you're curious, motivated, and want to learn? you belong here.
 
 ---
 
 ## :bulb: Contributing
 
-We?re building something ambitious, and we need help.
+We're building something ambitious, and we need help.
 
 You can contribute by:
 
@@ -132,7 +144,7 @@ We want DebugVision to become:
 
 > The go-to tool for understanding software behavior visually.
 
-Not just for experts?but for _any developer who wants clarity_.
+Not just for experts but for _any developer who wants clarity_.
 
 ---
 
@@ -150,8 +162,3 @@ You're in the right place.
 
 - git clone https://github.com/CobaltFusion/DebugVision.git
 - do to the /fastapi/ directory and run 'start.bat' on windows to get a first impression.
-
-## Screenshot of the /fastapi prototype
-
-[![Screenshot fastapi prototype](art/scope_fastapi.png)]
-[![Demo fastapi prototype](art/fastapi_demo.gif)]
