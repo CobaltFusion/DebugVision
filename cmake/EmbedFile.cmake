@@ -1,6 +1,8 @@
 # Writes a C++ source that defines the content of a file as 'std::string_view <NAME>()'.
 # usage: cmake -DINPUT=<file> -DOUTPUT=<file.cpp> -DNAME=<function> -P EmbedFile.cmake
 
+cmake_minimum_required(VERSION 3.28)
+
 file(READ ${INPUT} hex HEX)
 string(REGEX REPLACE "([0-9a-f][0-9a-f])" "'\\\\x\\1'," bytes "${hex}")
 string(REGEX REPLACE "(([^,]*,){32})" "\\1\n    " bytes "${bytes}")

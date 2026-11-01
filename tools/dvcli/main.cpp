@@ -32,7 +32,7 @@
 #endif
 #endif
 
-// docs/readme.html, embedded by CMakeLists.txt
+// the user manual (docs/manual.md converted to HTML), embedded by CMakeLists.txt
 std::string_view userManual();
 
 namespace {

@@ -35,7 +35,16 @@ FetchContent_Declare(doctest
   EXCLUDE_FROM_ALL
 )
 
-FetchContent_MakeAvailable(nlohmann_json pcre2)
+# only the sources: docs/CMakeLists.txt builds md2html from them, md4c's own CMakeLists.txt changes
+# global settings (BUILD_SHARED_LIBS, the MSVC runtime); SOURCE_SUBDIR without a CMakeLists.txt skips it
+FetchContent_Declare(md4c
+  URL https://github.com/mity/md4c/archive/refs/tags/release-0.5.2.tar.gz
+  URL_HASH SHA256=55d0111d48fb11883aaee91465e642b8b640775a4d6993c2d0e7a8092758ef21
+  DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+  SOURCE_SUBDIR none
+)
+
+FetchContent_MakeAvailable(nlohmann_json pcre2 md4c)
 
 if (DV_BUILD_TESTS)
   set(DOCTEST_NO_INSTALL ON CACHE BOOL "" FORCE)

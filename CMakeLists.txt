@@ -86,6 +86,10 @@ add_library(project::project_options ALIAS define_project_options)
 
 enable_testing()
 
+# the user manual, generated from docs/manual.md (target dv_manual)
+set(DV_MANUAL_HTML ${PROJECT_BINARY_DIR}/docs/manual.html)
+add_subdirectory(docs)
+
 add_subdirectory(libs/dvcore)
 add_subdirectory(tools/dvcli)
 

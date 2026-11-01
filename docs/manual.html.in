@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DebugVision User Manual</title>
+<style>
+  :root {
+    --bg: #ffffff; --fg: #1f2328; --muted: #59636e; --border: #d1d9e0; --code-bg: #f3f5f7; --accent: #0b6bcb;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #16181d; --fg: #e6e8eb; --muted: #9aa3ad; --border: #343a43; --code-bg: #22262d; --accent: #5aa7f0; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font: 15px/1.55 "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  }
+  main { max-width: 860px; margin: 0 auto; padding: 32px 16px 64px; }
+  h1 { font-size: 28px; margin: 0 0 4px; }
+  h1 + p { color: var(--muted); margin: 0 0 24px; }
+  h1 + p + ul { columns: 2; }
+  h2 { font-size: 20px; margin: 36px 0 8px; padding-bottom: 4px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; margin: 24px 0 6px; }
+  h4 { font-size: 15px; margin: 18px 0 4px; }
+  h4 + p { margin-top: 0; margin-left: 20px; }
+  p, ul, table { margin: 8px 0; }
+  a { color: var(--accent); }
+  code, pre { font-family: Consolas, "Cascadia Mono", Menlo, "DejaVu Sans Mono", monospace; font-size: 13px; }
+  code { background: var(--code-bg); padding: 1px 5px; border-radius: 4px; }
+  pre { background: var(--code-bg); padding: 10px 12px; border-radius: 6px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  table { border-collapse: collapse; width: 100%; display: block; overflow-x: auto; }
+  th, td { text-align: left; vertical-align: top; padding: 6px 10px; border-bottom: 1px solid var(--border); }
+  th { font-weight: 600; }
+  td:first-child { white-space: nowrap; }
+</style>
+</head>
+<body>
+<main>
+@MANUAL_BODY@
+</main>
+</body>
+</html>
