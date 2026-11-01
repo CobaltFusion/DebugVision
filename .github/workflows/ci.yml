@@ -33,7 +33,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-latest, ubuntu-latest]
+        include:
+          # runner images pinned to match the prebuilt CopperSpice release archives
+          - os: ubuntu-24.04
+            copperspice: copperspice-2.1.0-ubuntu24.04-x64.tar.bz2
+          - os: macos-15
+            copperspice: copperspice-2.1.0-osx15.1-arm64.tar.bz2
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -42,44 +47,21 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
-          sudo apt-get install -y ninja-build libx11-xcb-dev libxkbcommon-dev libxkbcommon-x11-dev libfontconfig1-dev libfreetype-dev \
-            libgl-dev libglib2.0-dev libxcb1-dev libxcb-xkb-dev libxcb-icccm4-dev libxcb-image0-dev libxcb-keysyms1-dev libxcb-randr0-dev \
-            libxcb-render-util0-dev libxcb-shape0-dev libxcb-sync-dev libxcb-xfixes0-dev libxcb-xinerama0-dev libxcb-cursor-dev \
-            libxi-dev libsm-dev libice-dev libxrender-dev libcups2-dev libssl-dev zlib1g-dev
+          sudo apt-get install -y ninja-build libxkbcommon-x11-0 libxcb-cursor0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1             libxcb-randr0 libxcb-render-util0 libxcb-shape0 libxcb-xinerama0 libxcb-xkb1 libfontconfig1 libfreetype6 libgl1 libcups2
 
       - name: Install build tools (macOS)
         if: runner.os == 'macOS'
         run: brew install ninja || true
 
-      - name: Cache CopperSpice
-        id: copperspice
-        uses: actions/cache@v4
-        with:
-          path: ~/copperspice-install
-          key: copperspice-${{ env.COPPERSPICE_TAG }}-gui-${{ runner.os }}-${{ runner.arch }}-v1
-
-      - name: Build CopperSpice
-        if: steps.copperspice.outputs.cache-hit != 'true'
+      - name: Install CopperSpice (prebuilt release)
         run: |
-          set -o pipefail
-          log="$RUNNER_TEMP/copperspice.log"
-          report() {
-            # annotations are readable without signing in, job logs are not
-            echo "::error title=CopperSpice build failed::$(grep -iE 'error|fatal|not found|missing' "$log" | tail -15 | sed ':a;N;$!ba;s/\n/%0A/g')"
-            exit 1
-          }
-          git clone --depth 1 --branch "$COPPERSPICE_TAG" https://github.com/copperspice/copperspice.git "$RUNNER_TEMP/copperspice"
-          cmake -G Ninja -S "$RUNNER_TEMP/copperspice" -B "$RUNNER_TEMP/copperspice-build" -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_INSTALL_PREFIX="$HOME/copperspice-install" \
-            -DWITH_NETWORK=OFF -DWITH_WEBKIT=OFF -DWITH_MULTIMEDIA=OFF -DWITH_OPENGL=OFF -DWITH_SQL=OFF -DWITH_SVG=OFF \
-            -DWITH_VULKAN=OFF -DWITH_XMLPATTERNS=OFF -DWITH_PSQL_PLUGIN=OFF -DWITH_MYSQL_PLUGIN=OFF -DWITH_ODBC_PLUGIN=OFF 2>&1 | tee "$log" || report
-          cmake --build "$RUNNER_TEMP/copperspice-build" 2>&1 | tee -a "$log" | { grep -vE '^\[[0-9]+/[0-9]+\]' || true; } || report
-          cmake --install "$RUNNER_TEMP/copperspice-build" > /dev/null 2>&1 || report
+          mkdir -p "$HOME/copperspice"
+          curl -sSL "https://github.com/copperspice/copperspice/releases/download/${COPPERSPICE_TAG}/${{ matrix.copperspice }}" | tar xj -C "$HOME/copperspice"
 
       - name: Configure
         run: |
-          CS_DIR=$(dirname "$(find "$HOME/copperspice-install" -name CopperSpiceConfig.cmake | head -1)")
-          cmake -G Ninja -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_PREFIX_PATH="$HOME/copperspice-install" -DCopperSpice_DIR="$CS_DIR"
+          CS_DIR=$(dirname "$(find "$HOME/copperspice" -name CopperSpiceConfig.cmake | head -1)")
+          cmake -G Ninja -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_PREFIX_PATH="$HOME/copperspice" -DCopperSpice_DIR="$CS_DIR"
 
       - name: Build
         run: cmake --build build
