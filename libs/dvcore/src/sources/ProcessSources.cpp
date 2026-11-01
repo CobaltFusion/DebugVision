@@ -322,7 +322,7 @@ private:
 #ifndef _WIN32
     void readFileSlice()
     {
-        std::string data(256 * 1024, ' ');
+        std::string data(256 * 1024, '\0');
         auto n = ::read(0, data.data(), data.size());
         data.resize(n > 0 ? static_cast<size_t>(n) : 0);
         onData(data, n <= 0);

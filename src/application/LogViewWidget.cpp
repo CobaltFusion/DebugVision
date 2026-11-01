@@ -81,17 +81,18 @@ LogViewWidget::LogViewWidget(ViewContext& context, std::shared_ptr<dv::View> vie
     m_header->setContextMenuPolicy(Qt::CustomContextMenu);
     for (int i = 0; i < columnCount && i < static_cast<int>(settings.columns.size()); ++i)
     {
-        m_header->resizeSection(i, settings.columns[i].width);
-        m_header->setSectionHidden(i, !settings.columns[i].visible);
+        auto& column = settings.columns[static_cast<size_t>(i)];
+        m_header->resizeSection(i, column.width);
+        m_header->setSectionHidden(i, !column.visible);
     }
     m_header->setSectionHidden(0, false); // the bookmark column is always shown
     // restore the column order
     std::vector<std::pair<int, int>> order;
     for (int i = 0; i < columnCount && i < static_cast<int>(settings.columns.size()); ++i)
-        order.emplace_back(settings.columns[i].order, i);
+        order.emplace_back(settings.columns[static_cast<size_t>(i)].order, i);
     std::sort(order.begin(), order.end());
     for (int visual = 0; visual < static_cast<int>(order.size()); ++visual)
-        m_header->moveSection(m_header->visualIndex(order[visual].second), visual);
+        m_header->moveSection(m_header->visualIndex(order[static_cast<size_t>(visual)].second), visual);
 
     connect(m_header, &QHeaderView::sectionResized, this, [this](int, int, int) {
         updateScrollBars();
@@ -108,7 +109,7 @@ LogViewWidget::LogViewWidget(ViewContext& context, std::shared_ptr<dv::View> vie
     setFocusPolicy(Qt::StrongFocus);
     verticalScrollBar()->setSingleStep(1);
     viewport()->setAutoFillBackground(false);
-    // every pixel is painted in paintEvent; an opaque surface also allows sub-pixel (ClearType) text rendering
+    // every pixel is painted in paintEvent, so no background fill is needed before it
     viewport()->setAttribute(Qt::WA_OpaquePaintEvent);
     setRowFont(font());
 }
@@ -125,9 +126,10 @@ dv::ViewSettings LogViewWidget::settings() const
     s.autoScrollStop = m_autoScrollStop;
     for (int i = 0; i < columnCount; ++i)
     {
-        s.columns[i].visible = !m_header->isSectionHidden(i);
-        s.columns[i].width = m_header->sectionSize(i) > 0 ? m_header->sectionSize(i) : s.columns[i].width;
-        s.columns[i].order = m_header->visualIndex(i);
+        auto& column = s.columns[static_cast<size_t>(i)];
+        column.visible = !m_header->isSectionHidden(i);
+        column.width = m_header->sectionSize(i) > 0 ? m_header->sectionSize(i) : column.width;
+        column.order = m_header->visualIndex(i);
     }
     return s;
 }
@@ -499,7 +501,7 @@ void LogViewWidget::paintEvent(QPaintEvent*)
             auto align = (column == static_cast<int>(dv::Column::Process)) ? Qt::AlignLeft : Qt::AlignRight;
             painter.setPen(foreground);
             auto inner = cell.adjusted(textMargin, 0, -textMargin, 0);
-            painter.drawText(inner, align | Qt::AlignVCenter, fm.elidedText(columnText(column, index, row), Qt::ElideRight, inner.width()));
+            painter.drawText(inner, static_cast<int>(align | Qt::AlignVCenter), fm.elidedText(columnText(column, index, row), Qt::ElideRight, inner.width()));
         }
         if (row.seq == m_focusSeq && hasFocus())
         {
