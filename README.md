@@ -43,7 +43,9 @@ All inputs are configurable sources (Log > Sources..., `--source type:key=value,
 libs/dvcore         engine: storage, encoding, sources, filters, settings (no GUI dependency)
   src/platform      the only OS specific code: win32, linux, macos, posix
 src/application     CopperSpice GUI
+src/launcher        Windows: the self-contained debugvision.exe
 tools/dvcli         command line version
+docs/readme.html    user manual, compiled into both programs (debugvision --help, dvcli --webhelp)
 ```
 
 ## Building

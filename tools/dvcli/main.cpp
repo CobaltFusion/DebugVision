@@ -11,19 +11,29 @@
 #include <condition_variable>
 #include <csignal>
 #include <cstdio>
+#include <filesystem>
 #include <fstream>
 #include <iostream>
 #include <mutex>
 #include <string>
+#include <string_view>
 #include <vector>
 
 #ifdef _WIN32
 #include <windows.h>
-#elif defined(__linux__)
+#include <objbase.h>
+#include <shellapi.h>
+#else
+#include <sys/wait.h>
+#include <unistd.h>
+#ifdef __linux__
 #include <fcntl.h>
 #include <sys/stat.h>
-#include <unistd.h>
 #endif
+#endif
+
+// docs/readme.html, embedded by CMakeLists.txt
+std::string_view userManual();
 
 namespace {
 
@@ -34,6 +44,7 @@ Usage:
   dvcli -x      stop all running dvcli instances (not available on macOS, use 'pkill dvcli')
   dvcli -u <message> [<port>]   send <message> as a UDP broadcast (default port 2020)
   dvcli -h | --help
+  dvcli --webhelp   open the user manual in the web browser
 
 Output:
   -c                   write to the console
@@ -132,6 +143,51 @@ int sendBroadcast(int argc, char* argv[], int i)
         std::fprintf(stderr, "dvcli: %s\n", error.c_str());
         return 1;
     }
+    return 0;
+}
+
+// --webhelp: writes the user manual to the temporary directory and opens it in the default web browser
+int showManual()
+{
+    std::error_code ec;
+    auto path = std::filesystem::temp_directory_path(ec) / "debugvision-readme.html";
+    {
+        auto manual = userManual();
+        std::ofstream out(path, std::ios::binary | std::ios::trunc);
+        out.write(manual.data(), static_cast<std::streamsize>(manual.size()));
+        if (!out)
+        {
+            std::fprintf(stderr, "dvcli: cannot write '%s'\n", dv::platform::pathToUtf8(path).c_str());
+            return 1;
+        }
+    }
+#ifdef _WIN32
+    CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
+    auto result = reinterpret_cast<INT_PTR>(ShellExecuteW(nullptr, L"open", path.c_str(), nullptr, nullptr, SW_SHOWNORMAL));
+    if (result <= 32)
+    {
+        std::fprintf(stderr, "dvcli: cannot open '%s'\n", dv::platform::pathToUtf8(path).c_str());
+        return 1;
+    }
+#else
+#ifdef __APPLE__
+    const char* opener = "open";
+#else
+    const char* opener = "xdg-open";
+#endif
+    auto pid = ::fork();
+    if (pid == 0)
+    {
+        ::execlp(opener, opener, path.c_str(), static_cast<char*>(nullptr));
+        ::_exit(127);
+    }
+    int status = 0;
+    if (pid < 0 || ::waitpid(pid, &status, 0) < 0 || !WIFEXITED(status) || WEXITSTATUS(status) != 0)
+    {
+        std::fprintf(stderr, "dvcli: cannot open '%s' with %s\n", path.c_str(), opener);
+        return 1;
+    }
+#endif
     return 0;
 }
 
@@ -300,6 +356,8 @@ int main(int argc, char* argv[])
                 std::fputs(sourceNote, stdout);
                 return 0;
             }
+            if (arg == "--webhelp")
+                return showManual();
             if (arg == "-x")
                 return stopAllInstances();
             if (arg == "-u")

@@ -51,6 +51,7 @@
   <li><a href="#sources">Source specifications</a></li>
   <li><a href="#examples">Examples</a></li>
   <li><a href="#settings">Settings</a></li>
+  <li><a href="#dvcli">dvcli: the command line version</a></li>
 </ul>
 </nav>
 
@@ -211,6 +212,120 @@ Settings are saved on exit to <code>settings.json</code> in the configuration di
 </table>
 <p>Help &gt; About DebugVision shows the settings file in use.</p>
 
+<h2 id="dvcli">dvcli: the command line version</h2>
+<p>
+<code>dvcli</code> captures the same sources as DebugVision without a window, filters the messages and writes them to the console
+and/or a log file. It is the equivalent of DebugView++'s DebugViewConsole and is meant for scripts, servers, build machines and
+remote sessions. It keeps no history, so it can run for a long time with constant memory use. Stop it with Ctrl+C,
+<code>dvcli -x</code> or a quit message (<code>-m</code>).
+</p>
+<pre><code>dvcli [options] [-c] [-d &lt;file&gt;] [--source &lt;spec&gt;]... [--udp &lt;port&gt;]... [--file &lt;path&gt;]... [--stdin]
+dvcli -x
+dvcli -u &lt;message&gt; [&lt;port&gt;]
+dvcli --list-sources
+dvcli -h | --help
+dvcli --webhelp</code></pre>
+<p>
+At least one of <code>-c</code> and <code>-d</code> is required. Single-letter flags without a value can be combined:
+<code>-clsn</code> is the same as <code>-c -l -s -n</code>.
+</p>
+
+<h3>Output</h3>
+<dl class="options">
+  <dt><code>-c</code></dt>
+  <dd>Writes the messages to standard output. On a console, Unicode text is shown correctly; when redirected, the output is UTF-8.</dd>
+
+  <dt><code>-d &lt;file&gt;</code></dt>
+  <dd>Writes the messages to <code>&lt;file&gt;</code> in DebugView++ <code>.dblog</code> format, with relative time, system time, process ID and process name,
+      regardless of the column options. An existing file is overwritten. The file can be opened in DebugVision and DebugView++.</dd>
+
+  <dt><code>-f</code></dt>
+  <dd>Flushes the output after every line. Without it, output is written in batches, which is faster; use <code>-f</code> when another
+      program reads the output as it is written.</dd>
+</dl>
+
+<h3>Columns</h3>
+<p>These select what is written before each message with <code>-c</code>, in this order. Without any of them only the message is written.</p>
+<table>
+  <tr><th>Option</th><th>Column</th></tr>
+  <tr><td><code>-l</code></td><td>line number, counting only the lines that pass the filters</td></tr>
+  <tr><td><code>-s</code></td><td>system (clock) time, <code>HH:MM:SS.mmm</code></td></tr>
+  <tr><td><code>-q</code></td><td>time in seconds since dvcli started</td></tr>
+  <tr><td><code>-p</code></td><td>process ID</td></tr>
+  <tr><td><code>-n</code></td><td>process name</td></tr>
+  <tr><td><code>-t</code></td><td>separates the columns with tabs instead of spaces, for importing into a spreadsheet</td></tr>
+</table>
+
+<h3>Capture</h3>
+<dl class="options">
+  <dt><code>--source &lt;spec&gt;</code>, <code>--udp &lt;port&gt;</code>, <code>--file &lt;path&gt;</code></dt>
+  <dd>Add sources, exactly as for DebugVision (see <a href="#sources">Source specifications</a>). Each can be given more than once.
+      On Windows, when no source is given, <code>OutputDebugString</code> is captured with scope <code>both</code>
+      (global capture needs administrator rights and is skipped silently without them). On Linux and macOS a source is required.</dd>
+
+  <dt><code>--stdin</code></dt>
+  <dd>Reads standard input as a source, for example <code>make 2&gt;&amp;1 | dvcli -c --stdin -i error</code>.</dd>
+
+  <dt><code>-a</code>, <code>-a-</code></dt>
+  <dd>Auto newline on (the default) or off. With auto newline, a message that does not end with a newline is still a line of its own
+      once no more data follows. With <code>-a-</code>, such text is joined with the next message until a newline arrives.</dd>
+
+  <dt><code>--list-sources</code></dt>
+  <dd>Lists the source types available on this platform with their default parameters, and exits.</dd>
+</dl>
+
+<h3>Filters</h3>
+<p>
+Filter texts are plain text (not regular expressions) and case-insensitive. Each option can be given more than once.
+Excludes win over includes; with several includes, a message is shown when it contains at least one of them.
+</p>
+<dl class="options">
+  <dt><code>-i &lt;text&gt;</code></dt>
+  <dd>Shows only messages that contain <code>&lt;text&gt;</code>.</dd>
+  <dt><code>-e &lt;text&gt;</code></dt>
+  <dd>Hides messages that contain <code>&lt;text&gt;</code>.</dd>
+  <dt><code>--include-process &lt;text&gt;</code>, <code>--exclude-process &lt;text&gt;</code></dt>
+  <dd>The same, applied to the process name instead of the message.</dd>
+  <dt><code>-m &lt;text&gt;</code></dt>
+  <dd>Quits after writing a message that passes the filters and contains <code>&lt;text&gt;</code>. Unlike the filters, this match is case-sensitive.
+      Useful in scripts that wait for a program to report something.</dd>
+  <dt><code>-v</code></dt>
+  <dd>Verbose: also shows dvcli's own messages, such as sources starting, stopping and failing. These have the process name <code>[internal]</code>.</dd>
+</dl>
+
+<h3>Other commands</h3>
+<dl class="options">
+  <dt><code>-x</code></dt>
+  <dd>Stops all running dvcli instances (on Windows those in the same logon session, on Linux those of the same user) and exits;
+      the instances flush their output before they quit.
+      Not available on macOS; use <code>pkill dvcli</code> there.</dd>
+  <dt><code>-u &lt;message&gt; [&lt;port&gt;]</code></dt>
+  <dd>Sends <code>&lt;message&gt;</code> as a UDP broadcast (to 255.255.255.255) on <code>&lt;port&gt;</code>, default 2020, and exits.
+      A DebugVision or dvcli with a UDP source on that port on the local network receives it, which is handy for testing a setup or marking a moment in a log.</dd>
+  <dt><code>-h</code>, <code>--help</code></dt>
+  <dd>Writes a summary of the options to standard output.</dd>
+  <dt><code>--webhelp</code></dt>
+  <dd>Opens this manual in the default web browser.</dd>
+</dl>
+
+<h3>Examples</h3>
+<pre><code># show OutputDebugString output (Windows) with time and process name
+dvcli -csn
+
+# log everything to a file without console output
+dvcli -d capture.dblog
+
+# console and file, only messages from processes whose name contains "server", without heartbeat messages
+dvcli -c -d server.dblog --include-process server -e heartbeat
+
+# follow a log file and stop when the test run finishes
+dvcli -c --file test.log -m "TESTS FINISHED"
+
+# listen on UDP port 2020 and write tab-separated columns to a file for a spreadsheet
+dvcli -clsqpnt --udp 2020 &gt; capture.tsv
+
+# send a test message to all listeners on port 2020
+dvcli -u "hello from the build server"</code></pre>
 
 </main>
 </body>
