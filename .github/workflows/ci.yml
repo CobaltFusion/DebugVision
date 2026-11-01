@@ -61,13 +61,20 @@ jobs:
       - name: Build CopperSpice
         if: steps.copperspice.outputs.cache-hit != 'true'
         run: |
+          set -o pipefail
+          log="$RUNNER_TEMP/copperspice.log"
+          report() {
+            # annotations are readable without signing in, job logs are not
+            echo "::error title=CopperSpice build failed::$(grep -iE 'error|fatal|not found|missing' "$log" | tail -15 | sed ':a;N;$!ba;s/\n/%0A/g')"
+            exit 1
+          }
           git clone --depth 1 --branch "$COPPERSPICE_TAG" https://github.com/copperspice/copperspice.git "$RUNNER_TEMP/copperspice"
           cmake -G Ninja -S "$RUNNER_TEMP/copperspice" -B "$RUNNER_TEMP/copperspice-build" -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_INSTALL_PREFIX="$HOME/copperspice-install" \
             -DWITH_NETWORK=OFF -DWITH_WEBKIT=OFF -DWITH_MULTIMEDIA=OFF -DWITH_OPENGL=OFF -DWITH_SQL=OFF -DWITH_SVG=OFF \
-            -DWITH_VULKAN=OFF -DWITH_XMLPATTERNS=OFF -DWITH_PSQL_PLUGIN=OFF -DWITH_MYSQL_PLUGIN=OFF -DWITH_ODBC_PLUGIN=OFF
-          cmake --build "$RUNNER_TEMP/copperspice-build"
-          cmake --install "$RUNNER_TEMP/copperspice-build"
+            -DWITH_VULKAN=OFF -DWITH_XMLPATTERNS=OFF -DWITH_PSQL_PLUGIN=OFF -DWITH_MYSQL_PLUGIN=OFF -DWITH_ODBC_PLUGIN=OFF 2>&1 | tee "$log" || report
+          cmake --build "$RUNNER_TEMP/copperspice-build" 2>&1 | tee -a "$log" | grep -vE '^\[[0-9]+/[0-9]+\]' || report
+          cmake --install "$RUNNER_TEMP/copperspice-build" > /dev/null 2>&1 || report
 
       - name: Configure
         run: |
