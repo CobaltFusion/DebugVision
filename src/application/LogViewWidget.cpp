@@ -56,6 +56,28 @@ QString expandTabs(std::string_view text)
     return toQString(s);
 }
 
+#ifdef _WIN32
+// The Windows style draws no line between the header and the rows, so it is drawn explicitly across the full width.
+// Fusion (Linux) and the macOS style draw their own.
+class UnderlinedHeaderView : public QHeaderView
+{
+public:
+    using QHeaderView::QHeaderView;
+
+protected:
+    void paintEvent(QPaintEvent* event) override
+    {
+        QHeaderView::paintEvent(event);
+        QPainter painter(viewport());
+        painter.setPen(QColor(160, 160, 160));
+        int y = viewport()->height() - 1;
+        painter.drawLine(0, y, viewport()->width(), y);
+    }
+};
+#else
+using UnderlinedHeaderView = QHeaderView;
+#endif
+
 } // namespace
 
 LogViewWidget::LogViewWidget(ViewContext& context, std::shared_ptr<dv::View> view, const dv::ViewSettings& settings, QWidget* parent) :
@@ -74,7 +96,7 @@ LogViewWidget::LogViewWidget(ViewContext& context, std::shared_ptr<dv::View> vie
         titles.append(QString::fromUtf8(t));
     m_headerModel->setHorizontalHeaderLabels(titles);
 
-    m_header = new QHeaderView(Qt::Horizontal, this);
+    m_header = new UnderlinedHeaderView(Qt::Horizontal, this);
     m_header->setModel(m_headerModel);
     m_header->setSectionsMovable(true);
     m_header->setStretchLastSection(false);
