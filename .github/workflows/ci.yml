@@ -64,7 +64,13 @@ jobs:
           cmake -G Ninja -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_PREFIX_PATH="$HOME/copperspice" -DCopperSpice_DIR="$CS_DIR"
 
       - name: Build
-        run: cmake --build build
+        run: |
+          set -o pipefail
+          if ! cmake --build build 2>&1 | tee build.log; then
+            # annotations are readable without signing in, job logs are not
+            grep -E 'error:' build.log | sort -u | head -40 | while IFS= read -r line; do echo "::error::$line"; done
+            exit 1
+          fi
 
       - name: Test
         run: ctest --test-dir build --output-on-failure --timeout 300
