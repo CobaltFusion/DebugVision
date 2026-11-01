@@ -1,5 +1,6 @@
 // DebugVision: a portable, CPU-efficient log viewer in the spirit of DebugView++
 
+#include "Help.h"
 #include "MainWindow.h"
 #include "Text.h"
 
@@ -50,7 +51,8 @@ const char* const usage =
     "  --udp <port>           shorthand for --source udp:port=<port>\n"
     "  --file <path>          shorthand for --source file:path=<path> (tail the file)\n"
     "  --settings <file>      use this settings file (also: a .json file argument)\n"
-    "  logfile                load a log file (.log, .dblog, .txt)\n\n"
+    "  logfile                load a log file (.log, .dblog, .txt)\n"
+    "  -h, --help             open the user manual in the web browser (also /h, /?)\n\n"
     "Data piped into standard input is captured as well.\n";
 
 } // namespace
@@ -65,6 +67,7 @@ int main(int argc, char* argv[])
 
     StartupOptions options;
     std::string error;
+    bool showHelp = false;
     try
     {
         auto& registry = dv::SourceRegistry::instance();
@@ -86,10 +89,10 @@ int main(int argc, char* argv[])
                 options.extraSources.push_back(registry.parseSpec("file:path=" + value()));
             else if (arg == "--settings")
                 options.settingsFile = value();
-            else if (arg == "--help" || arg == "-h" || arg == "/?")
+            else if (arg == "--help" || arg == "-h" || arg == "/h" || arg == "/?")
             {
-                std::fputs(usage, stdout);
-                return 0;
+                showHelp = true;
+                break;
             }
             else if (!arg.empty() && arg[0] == '-')
                 throw std::runtime_error("unknown option '" + arg + "'");
@@ -119,6 +122,11 @@ int main(int argc, char* argv[])
     // Windows and macOS use their native style; the generic fallback style on Linux looks dated
     QApplication::setStyle(QString("fusion"));
 #endif
+    if (showHelp)
+    {
+        std::fputs(usage, stdout);
+        return openUserManual() ? 0 : 1;
+    }
     if (!error.empty())
     {
         QMessageBox::critical(nullptr, "DebugVision", toQString(error) + "\n\n" + toQString(usage));

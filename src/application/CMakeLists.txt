@@ -1,18 +1,21 @@
-# compile the icons into the executable
-COPPERSPICE_RESOURCES(${CMAKE_CURRENT_SOURCE_DIR}/icons/icons.qrc)
+# compile the icons and the user manual into the executable
+COPPERSPICE_RESOURCES(${CMAKE_CURRENT_SOURCE_DIR}/icons/icons.qrc ${CMAKE_CURRENT_SOURCE_DIR}/help/help.qrc)
 
-# the macro only depends on the .qrc file itself; also rerun rcc when one of the icons changes
+# the macro only depends on the .qrc file itself; also rerun rcc when one of the files it lists changes
 file(GLOB DV_ICON_FILES CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/icons/*.png)
 add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/qrc_icons.cpp APPEND DEPENDS ${DV_ICON_FILES})
+add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/qrc_help.cpp APPEND DEPENDS ${PROJECT_SOURCE_DIR}/docs/readme.html)
 
 add_executable(debugvision WIN32 MACOSX_BUNDLE
   main.cpp
   FilterDialog.cpp
+  Help.cpp
   LogViewWidget.cpp
   MainWindow.cpp
   RunDialog.cpp
   SourcesDialog.cpp
   ${CMAKE_CURRENT_BINARY_DIR}/qrc_icons.cpp
+  ${CMAKE_CURRENT_BINARY_DIR}/qrc_help.cpp
 )
 
 if (WIN32)

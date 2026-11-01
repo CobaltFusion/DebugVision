@@ -1,6 +1,7 @@
 #include "MainWindow.h"
 
 #include "FilterDialog.h"
+#include "Help.h"
 #include "RunDialog.h"
 #include "SourcesDialog.h"
 #include "Text.h"
@@ -319,6 +320,10 @@ void MainWindow::createActions()
 #endif
 
     auto help = menuBar()->addMenu("&Help");
+    add(help, "&User Manual", "F1", [this] {
+        if (!openUserManual())
+            QMessageBox::warning(this, "DebugVision", "The user manual could not be opened.");
+    });
     add(help, "&About DebugVision", "", [this] { showAbout(); });
 
     // icons (from DebugView++) on the menu items, and the toolbar in DebugView++'s button order
