@@ -7,13 +7,29 @@ if(NOT CMAKE_BUILD_TYPE AND NOT "${CMAKE_GENERATOR}" MATCHES "Visual Studio")
     message(FATAL_ERROR "No build type specified, ie. use -DCMAKE_BUILD_TYPE=<config> typical values are Debug, Release, RelWithDebInfo and MinSizeRel")
 endif()
 
-option(DV_BUILD_GUI "Build the CopperSpice GUI application (requires CopperSpice)" ON)
+# COPPERSPICE_DIR is the CopperSpice install prefix, taken from -DCOPPERSPICE_DIR=..., the COPPERSPICE_DIR environment variable or /opt/copperspice
+set(DV_DEFAULT_COPPERSPICE_DIR "")
+if (DEFINED ENV{COPPERSPICE_DIR})
+  set(DV_DEFAULT_COPPERSPICE_DIR "$ENV{COPPERSPICE_DIR}")
+elseif (EXISTS "/opt/copperspice")
+  set(DV_DEFAULT_COPPERSPICE_DIR "/opt/copperspice")
+endif()
+set(COPPERSPICE_DIR "${DV_DEFAULT_COPPERSPICE_DIR}" CACHE PATH "CopperSpice install prefix")
+
+# build the GUI by default only when a CopperSpice install was specified or found (MSVC can fall back to the nuget package)
+if (COPPERSPICE_DIR OR CopperSpice_DIR OR CMAKE_PREFIX_PATH OR MSVC)
+  set(DV_BUILD_GUI_DEFAULT ON)
+else()
+  set(DV_BUILD_GUI_DEFAULT OFF)
+endif()
+
+option(DV_BUILD_GUI "Build the GUI application (requires CopperSpice)" ${DV_BUILD_GUI_DEFAULT})
 option(DV_BUILD_TESTS "Build the dvcore unit tests" ON)
 option(DV_BUILD_EXAMPLES "Build the websocket example" OFF)
 
 if (MSVC)
-  # only fall back to the copperspice nuget package when no CMAKE_PREFIX_PATH was given
-  if (DV_BUILD_GUI AND NOT CMAKE_PREFIX_PATH)
+  # only fall back to the copperspice nuget package when no CopperSpice install was given
+  if (DV_BUILD_GUI AND NOT CMAKE_PREFIX_PATH AND NOT COPPERSPICE_DIR AND NOT CopperSpice_DIR)
     include(cmake/CMakeLists.msvc.zero.config.cmake)
   endif()
   add_compile_options(/MP)
@@ -28,7 +44,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 if (DV_BUILD_GUI)
-  find_package(CopperSpice REQUIRED)
+  find_package(CopperSpice REQUIRED PATHS ${COPPERSPICE_DIR} PATH_SUFFIXES cmake/CopperSpice lib/cmake/CopperSpice lib64/cmake/CopperSpice)
 endif()
 
 include(cmake/CMakeLists.warnings.cmake)

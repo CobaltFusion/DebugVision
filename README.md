@@ -51,13 +51,20 @@ tools/dvconsole     command line version
 Requirements: CMake 3.28+, a C++20 compiler (MSVC 2022, GCC 11+, Clang 14+, Apple Clang 15+), and for the GUI a GUI-enabled [CopperSpice](https://www.copperspice.com/) 2.1 install. nlohmann/json, PCRE2 and doctest are downloaded by CMake.
 
 ```
-# engine, console tool and tests only
-cmake -G Ninja -S . -B build -DCMAKE_BUILD_TYPE=Release -DDV_BUILD_GUI=OFF
-
-# with the GUI
-cmake -G Ninja -S . -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=<copperspice> -DCopperSpice_DIR=<dir of CopperSpiceConfig.cmake>
+cmake -G Ninja -S . -B build -DCMAKE_BUILD_TYPE=Release -DCOPPERSPICE_DIR=<copperspice install prefix>
 cmake --build build -t install
 ctest --test-dir build --output-on-failure
 ```
+
+### Where CopperSpice is installed
+
+The GUI is built by default when a CopperSpice install is specified or found; otherwise only the engine, console tool and tests are built. CMake looks for `CopperSpiceConfig.cmake` under the CopperSpice install prefix (in `cmake/CopperSpice`, `lib/cmake/CopperSpice` or `lib64/cmake/CopperSpice`), taken from the first of:
+
+1. `-DCOPPERSPICE_DIR=/path/to/copperspice` on the cmake command line (stored in the cache, so only needed on the first configure)
+2. the `COPPERSPICE_DIR` environment variable, e.g. `COPPERSPICE_DIR=/path/to/copperspice ./build.sh`
+3. `/opt/copperspice`, if it exists. On Debian 13, extract the prebuilt release there:
+   `sudo mkdir -p /opt/copperspice && curl -sSL https://github.com/copperspice/copperspice/releases/download/cs-2.1.0/copperspice-2.1.0-debian13-x64.tar.bz2 | sudo tar xj -C /opt/copperspice`
+
+Alternatively `-DCopperSpice_DIR=<dir containing CopperSpiceConfig.cmake>` or `-DCMAKE_PREFIX_PATH=...` also enables the GUI and points CMake at the install. With MSVC the GUI is always on by default and falls back to a CopperSpice nuget package. `-DDV_BUILD_GUI=ON|OFF` overrides the default; `build.sh` passes its arguments on to cmake, e.g. `./build.sh -DDV_BUILD_GUI=OFF`.
 
 See `build.bat` and `build.sh`.
