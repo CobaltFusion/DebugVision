@@ -73,7 +73,7 @@ jobs:
             -DCMAKE_INSTALL_PREFIX="$HOME/copperspice-install" \
             -DWITH_NETWORK=OFF -DWITH_WEBKIT=OFF -DWITH_MULTIMEDIA=OFF -DWITH_OPENGL=OFF -DWITH_SQL=OFF -DWITH_SVG=OFF \
             -DWITH_VULKAN=OFF -DWITH_XMLPATTERNS=OFF -DWITH_PSQL_PLUGIN=OFF -DWITH_MYSQL_PLUGIN=OFF -DWITH_ODBC_PLUGIN=OFF 2>&1 | tee "$log" || report
-          cmake --build "$RUNNER_TEMP/copperspice-build" 2>&1 | tee -a "$log" | grep -vE '^\[[0-9]+/[0-9]+\]' || report
+          cmake --build "$RUNNER_TEMP/copperspice-build" 2>&1 | tee -a "$log" | { grep -vE '^\[[0-9]+/[0-9]+\]' || true; } || report
           cmake --install "$RUNNER_TEMP/copperspice-build" > /dev/null 2>&1 || report
 
       - name: Configure
