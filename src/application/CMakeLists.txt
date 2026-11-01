@@ -1,6 +1,10 @@
 # compile the icons into the executable
 COPPERSPICE_RESOURCES(${CMAKE_CURRENT_SOURCE_DIR}/icons/icons.qrc)
 
+# the macro only depends on the .qrc file itself; also rerun rcc when one of the icons changes
+file(GLOB DV_ICON_FILES CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/icons/*.png)
+add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/qrc_icons.cpp APPEND DEPENDS ${DV_ICON_FILES})
+
 add_executable(debugvision WIN32 MACOSX_BUNDLE
   main.cpp
   FilterDialog.cpp
