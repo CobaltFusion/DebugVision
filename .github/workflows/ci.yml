@@ -47,7 +47,8 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
-          sudo apt-get install -y ninja-build libxkbcommon-x11-0 libxcb-cursor0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1             libxcb-randr0 libxcb-render-util0 libxcb-shape0 libxcb-xinerama0 libxcb-xkb1 libfontconfig1 libfreetype6 libgl1 libcups2
+          # -dev packages: the CopperSpice CMake exports link against the unversioned .so names (e.g. libOpenGL.so)
+          sudo apt-get install -y ninja-build libopengl-dev libgl-dev libglib2.0-dev libfontconfig1-dev libfreetype-dev libcups2-dev             libx11-xcb-dev libxkbcommon-dev libxkbcommon-x11-dev libxcb1-dev libxcb-xkb-dev libxcb-icccm4-dev libxcb-image0-dev             libxcb-keysyms1-dev libxcb-randr0-dev libxcb-render-util0-dev libxcb-shape0-dev libxcb-sync-dev libxcb-xfixes0-dev             libxcb-xinerama0-dev libxcb-cursor-dev libxi-dev libsm-dev libice-dev libxrender-dev libssl-dev zlib1g-dev
 
       - name: Install build tools (macOS)
         if: runner.os == 'macOS'
@@ -57,6 +58,13 @@ jobs:
         run: |
           mkdir -p "$HOME/copperspice"
           curl -sSL "https://github.com/copperspice/copperspice/releases/download/${COPPERSPICE_TAG}/${{ matrix.copperspice }}" | tar xj -C "$HOME/copperspice"
+          if [ "$RUNNER_OS" = "macOS" ]; then
+            # the exported targets contain the SDK path of the machine CopperSpice was built on
+            SDK=$(xcrun --show-sdk-path)
+            grep -rlE '/SDKs/MacOSX[0-9.]*\.sdk' "$HOME/copperspice" --include='*.cmake' | while read -r f; do
+              sed -i '' -E "s#/[^;\"]*/SDKs/MacOSX[0-9.]*\.sdk#${SDK}#g" "$f"
+            done
+          fi
 
       - name: Configure
         run: |
