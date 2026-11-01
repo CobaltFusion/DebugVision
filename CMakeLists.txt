@@ -87,7 +87,7 @@ add_library(project::project_options ALIAS define_project_options)
 enable_testing()
 
 add_subdirectory(libs/dvcore)
-add_subdirectory(tools/dvconsole)
+add_subdirectory(tools/dvcli)
 
 if (DV_BUILD_GUI)
   add_subdirectory(src)

@@ -29,12 +29,12 @@ All inputs are configurable sources (Log > Sources..., `--source type:key=value,
 | `tcp-listen`, `tcp-connect` | all | line based TCP |
 | `dbgview-agent` | all | client for the Sysinternals DebugView agent (`dbgview.exe /a`) |
 
-`dvconsole --list-sources` shows the parameters of every type.
+`dvcli --list-sources` shows the parameters of every type.
 
 ### Platform restrictions
 
 - OutputDebugString exists only on Windows.
-- macOS: no tray icon ("Hide When Minimized"), no `dvconsole -x`, `.app` bundles cannot be run as a process source.
+- macOS: no tray icon ("Hide When Minimized"), no `dvcli -x`, `.app` bundles cannot be run as a process source.
 - Windows PowerShell 5.1 `Add-Content` refuses to write to a file that any other program has open (even a plain reader), so it fails while the file is tailed; `>>` redirection and most loggers work.
 
 ## Layout
@@ -43,7 +43,7 @@ All inputs are configurable sources (Log > Sources..., `--source type:key=value,
 libs/dvcore         engine: storage, encoding, sources, filters, settings (no GUI dependency)
   src/platform      the only OS specific code: win32, linux, macos, posix
 src/application     CopperSpice GUI
-tools/dvconsole     command line version
+tools/dvcli         command line version
 ```
 
 ## Building

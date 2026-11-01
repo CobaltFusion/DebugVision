@@ -211,7 +211,7 @@ public:
 // blocking connect with a timeout; call it from a helper thread, not from the event loop
 std::unique_ptr<TcpStream> tcpConnect(const std::string& host, uint16_t port, std::chrono::milliseconds timeout, std::string& error);
 
-// sends a UDP datagram (used by 'dvconsole -u'); address may be a broadcast address
+// sends a UDP datagram (used by 'dvcli -u'); address may be a broadcast address
 bool sendUdp(const std::string& address, uint16_t port, std::string_view data, std::string& error);
 
 // Misc

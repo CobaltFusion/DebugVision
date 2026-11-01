@@ -1,4 +1,4 @@
-// dvconsole: the command line version of DebugVision (the equivalent of DebugView++'s DebugViewConsole)
+// dvcli: the command line version of DebugVision (the equivalent of DebugView++'s DebugViewConsole)
 
 #include "dvcore/Clock.h"
 #include "dvcore/FileFormat.h"
@@ -27,13 +27,13 @@
 
 namespace {
 
-const char* const usage = R"(dvconsole - capture and filter debug output
+const char* const usage = R"(dvcli - capture and filter debug output
 
 Usage:
-  dvconsole [options] [-c] [-d <file>] [--source <spec>]... [--udp <port>]... [--file <path>]... [--stdin]
-  dvconsole -x      stop all running dvconsole instances (not available on macOS, use 'pkill dvconsole')
-  dvconsole -u <message> [<port>]   send <message> as a UDP broadcast (default port 2020)
-  dvconsole -h | --help
+  dvcli [options] [-c] [-d <file>] [--source <spec>]... [--udp <port>]... [--file <path>]... [--stdin]
+  dvcli -x      stop all running dvcli instances (not available on macOS, use 'pkill dvcli')
+  dvcli -u <message> [<port>]   send <message> as a UDP broadcast (default port 2020)
+  dvcli -h | --help
 
 Output:
   -c                   write to the console
@@ -121,7 +121,7 @@ int sendBroadcast(int argc, char* argv[], int i)
 {
     if (i + 1 >= argc)
     {
-        std::fprintf(stderr, "dvconsole: -u requires a message\n");
+        std::fprintf(stderr, "dvcli: -u requires a message\n");
         return 1;
     }
     std::string message = argv[i + 1];
@@ -129,7 +129,7 @@ int sendBroadcast(int argc, char* argv[], int i)
     std::string error;
     if (!dv::platform::sendUdp("255.255.255.255", static_cast<uint16_t>(port), message, error))
     {
-        std::fprintf(stderr, "dvconsole: %s\n", error.c_str());
+        std::fprintf(stderr, "dvcli: %s\n", error.c_str());
         return 1;
     }
     return 0;
@@ -137,7 +137,7 @@ int sendBroadcast(int argc, char* argv[], int i)
 
 // -x: stop all running instances
 #ifdef _WIN32
-const wchar_t* const quitEventName = L"DebugVisionConsoleQuitEvent";
+const wchar_t* const quitEventName = L"DebugVisionCliQuitEvent";
 
 int stopAllInstances()
 {
@@ -168,7 +168,7 @@ int stopAllInstances()
     std::error_code ec;
     for (auto& entry : std::filesystem::directory_iterator(runtimeDirectory(), ec))
     {
-        if (entry.path().filename().string().rfind("dvconsole-quit-", 0) != 0)
+        if (entry.path().filename().string().rfind("dvcli-quit-", 0) != 0)
             continue;
         auto fd = ::open(entry.path().c_str(), O_WRONLY | O_NONBLOCK);
         if (fd < 0)
@@ -186,7 +186,7 @@ std::filesystem::path g_quitFifo;
 
 void watchQuitRequests(dv::platform::EventLoop& loop)
 {
-    g_quitFifo = runtimeDirectory() / ("dvconsole-quit-" + std::to_string(::getpid()));
+    g_quitFifo = runtimeDirectory() / ("dvcli-quit-" + std::to_string(::getpid()));
     ::mkfifo(g_quitFifo.c_str(), 0600);
     auto fd = ::open(g_quitFifo.c_str(), O_RDWR | O_NONBLOCK); // O_RDWR: no EOF storm without writers
     if (fd >= 0)
@@ -195,7 +195,7 @@ void watchQuitRequests(dv::platform::EventLoop& loop)
 #else
 int stopAllInstances()
 {
-    std::fprintf(stderr, "dvconsole: -x is not available on this platform, use 'pkill dvconsole'\n");
+    std::fprintf(stderr, "dvcli: -x is not available on this platform, use 'pkill dvcli'\n");
     return 1;
 }
 
@@ -412,7 +412,7 @@ int main(int argc, char* argv[])
                 g_signaled = false;
             }
             store.consumeSignal();
-            // keep memory bounded: dvconsole does not need history
+            // keep memory bounded: dvcli does not need history
             next = std::max(next, store.beginSeq());
             next = store.forEach(next, store.endSeq(), [&](const dv::LineRef& line) {
                 auto id = line.record->originId;
@@ -444,7 +444,7 @@ int main(int argc, char* argv[])
     }
     catch (const std::exception& e)
     {
-        std::fprintf(stderr, "dvconsole: %s\n", e.what());
+        std::fprintf(stderr, "dvcli: %s\n", e.what());
         return 1;
     }
     return 0;
