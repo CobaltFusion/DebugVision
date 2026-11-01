@@ -1,70 +1,123 @@
-#include <iostream>
+// DebugVision: a portable, CPU-efficient log viewer in the spirit of DebugView++
 
-#include <QString>
-#include <QWindow>
-#include <QMainWindow>
+#include "MainWindow.h"
+#include "Text.h"
+
+#include "dvcore/Platform.h"
+#include "dvcore/SourceConfig.h"
+
 #include <QApplication>
-#include <QMenuBar>
-#include <QStatusBar>
+#include <QMessageBox>
 
-#include "ui_mainwindow.h"
-#include "customlistview.h"
-#include "crashhandler.h"
+#include <cstdio>
+#include <string>
 
-#include <thread>
-#include <chrono>
-#include <cstdint>
-#include <stacktrace>
+#ifdef _WIN32
+#include <windows.h>
 
-using namespace std::chrono_literals;
+namespace {
 
-#ifdef _MSC_VER
-#include <atlstr.h>
+void enablePrivilege(const wchar_t* name)
+{
+    HANDLE token = nullptr;
+    if (!OpenProcessToken(GetCurrentProcess(), TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, &token))
+        return;
+    TOKEN_PRIVILEGES tp{};
+    tp.PrivilegeCount = 1;
+    tp.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
+    if (LookupPrivilegeValueW(nullptr, name, &tp.Privileges[0].Luid))
+        AdjustTokenPrivileges(token, FALSE, &tp, sizeof(tp), nullptr, nullptr);
+    CloseHandle(token);
+}
 
-int main(int argc, char *argv[]);
+} // namespace
+
+int main(int argc, char* argv[]);
+
 int APIENTRY WinMain(HINSTANCE, HINSTANCE, PSTR, INT)
 {
     return main(__argc, __argv);
 }
 #endif
 
-int main(int argc, char *argv[])
+namespace {
+
+const char* const usage =
+    "Usage: debugvision [options] [logfile]\n\n"
+    "  --min                  start minimized (also /min)\n"
+    "  --source <spec>        add a source for this session, e.g. udp:port=2020 or file:path=app.log\n"
+    "  --udp <port>           shorthand for --source udp:port=<port>\n"
+    "  --file <path>          shorthand for --source file:path=<path> (tail the file)\n"
+    "  --settings <file>      use this settings file (also: a .json file argument)\n"
+    "  logfile                load a log file (.log, .dblog, .txt)\n\n"
+    "Data piped into standard input is captured as well.\n";
+
+} // namespace
+
+int main(int argc, char* argv[])
 {
-    InstallCrashHandler();
+#ifdef _WIN32
+    // needed to capture OutputDebugString from services (Global\DBWIN) and to resolve process names
+    enablePrivilege(L"SeDebugPrivilege");
+    enablePrivilege(L"SeCreateGlobalPrivilege");
+#endif
+
+    StartupOptions options;
+    std::string error;
+    try
+    {
+        auto& registry = dv::SourceRegistry::instance();
+        for (int i = 1; i < argc; ++i)
+        {
+            std::string arg = argv[i];
+            auto value = [&]() -> std::string {
+                if (i + 1 >= argc)
+                    throw std::runtime_error("option " + arg + " requires a value");
+                return argv[++i];
+            };
+            if (arg == "--min" || arg == "/min" || arg == "-min")
+                options.minimized = true;
+            else if (arg == "--source")
+                options.extraSources.push_back(registry.parseSpec(value()));
+            else if (arg == "--udp")
+                options.extraSources.push_back(registry.parseSpec("udp:port=" + value()));
+            else if (arg == "--file")
+                options.extraSources.push_back(registry.parseSpec("file:path=" + value()));
+            else if (arg == "--settings")
+                options.settingsFile = value();
+            else if (arg == "--help" || arg == "-h" || arg == "/?")
+            {
+                std::fputs(usage, stdout);
+                return 0;
+            }
+            else if (!arg.empty() && arg[0] == '-')
+                throw std::runtime_error("unknown option '" + arg + "'");
+            else
+            {
+                auto path = dv::platform::utf8ToPath(arg);
+                auto ext = path.extension().string();
+                if (ext == ".json" || ext == ".JSON")
+                    options.settingsFile = arg;
+                else if (!options.loadFile.empty())
+                    throw std::runtime_error("only one log file can be given");
+                else
+                    options.loadFile = arg;
+            }
+        }
+        options.captureStdin = dv::platform::isPipe(0) || dv::platform::isRegularFile(0);
+    }
+    catch (const std::exception& e)
+    {
+        error = e.what();
+    }
 
     QApplication app(argc, argv);
-    QMainWindow mainWindow;
-
-    Ui::MainWindow window;
-    window.setupUi(&mainWindow);
-
-    mainWindow.resize(400, 300);
-    mainWindow.setWindowTitle("Hello Copperspice");
-
-    auto list = new CustomListViewWithHeaders(window.widget);
-    window.horizontalLayout_2->addWidget(list);
-
-    // QList<QString> list;
-    // list.append("quite");
-    // list.append("quiter");
-    // list.append(QString::fromUtf8("パーソナル 😱 コンピューター 😱"));
-
-    // auto menubar = mainWindow.menuBar();
-    // auto menu = menubar->addMenu("Options");
-    // auto flashAction = menu->addAction("Flash");
-    // auto assertAction = menu->addAction("Assert");
-    // auto sb = mainWindow.statusBar();
-    // sb->showMessage("This message will disappear after 2 seconds", 2000);
-
-    // QObject::connect(flashAction, &QAction::triggered, &mainWindow, [sb]
-    //                  { sb->showMessage("Flash message that will disappear after 2 seconds", 2000); });
-
-    // QObject::connect(assertAction, &QAction::triggered, &mainWindow, []
-    //                  { assert("This is not a valid assertion" && false); });
-
-    // QString qs("Hello copperspice\n");
-    // std::cout << qs.toStdString();
-
-    mainWindow.show();
+    QApplication::setApplicationName("DebugVision");
+    if (!error.empty())
+    {
+        QMessageBox::critical(nullptr, "DebugVision", toQString(error) + "\n\n" + toQString(usage));
+        return 1;
+    }
+    MainWindow window(options);
     return app.exec();
 }

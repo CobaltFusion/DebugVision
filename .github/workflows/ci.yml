@@ -5,6 +5,9 @@ on:
   pull_request:
   workflow_dispatch:
 
+env:
+  COPPERSPICE_TAG: cs-2.1.0
+
 jobs:
   core:
     name: dvcore + dvconsole (${{ matrix.os }})
@@ -24,3 +27,55 @@ jobs:
 
       - name: Test
         run: ctest --test-dir build -C RelWithDebInfo --output-on-failure --timeout 300
+
+  gui:
+    name: GUI (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install build tools (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build libx11-xcb-dev libxkbcommon-dev libxkbcommon-x11-dev libfontconfig1-dev libfreetype-dev \
+            libgl-dev libglib2.0-dev libxcb1-dev libxcb-xkb-dev libxcb-icccm4-dev libxcb-image0-dev libxcb-keysyms1-dev libxcb-randr0-dev \
+            libxcb-render-util0-dev libxcb-shape0-dev libxcb-sync-dev libxcb-xfixes0-dev libxcb-xinerama0-dev libxcb-cursor-dev \
+            libxi-dev libsm-dev libice-dev libxrender-dev libcups2-dev libssl-dev zlib1g-dev
+
+      - name: Install build tools (macOS)
+        if: runner.os == 'macOS'
+        run: brew install ninja || true
+
+      - name: Cache CopperSpice
+        id: copperspice
+        uses: actions/cache@v4
+        with:
+          path: ~/copperspice-install
+          key: copperspice-${{ env.COPPERSPICE_TAG }}-gui-${{ runner.os }}-${{ runner.arch }}-v1
+
+      - name: Build CopperSpice
+        if: steps.copperspice.outputs.cache-hit != 'true'
+        run: |
+          git clone --depth 1 --branch "$COPPERSPICE_TAG" https://github.com/copperspice/copperspice.git "$RUNNER_TEMP/copperspice"
+          cmake -G Ninja -S "$RUNNER_TEMP/copperspice" -B "$RUNNER_TEMP/copperspice-build" -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_INSTALL_PREFIX="$HOME/copperspice-install" \
+            -DWITH_NETWORK=OFF -DWITH_WEBKIT=OFF -DWITH_MULTIMEDIA=OFF -DWITH_OPENGL=OFF -DWITH_SQL=OFF -DWITH_SVG=OFF \
+            -DWITH_VULKAN=OFF -DWITH_XMLPATTERNS=OFF -DWITH_PSQL_PLUGIN=OFF -DWITH_MYSQL_PLUGIN=OFF -DWITH_ODBC_PLUGIN=OFF
+          cmake --build "$RUNNER_TEMP/copperspice-build"
+          cmake --install "$RUNNER_TEMP/copperspice-build"
+
+      - name: Configure
+        run: |
+          CS_DIR=$(dirname "$(find "$HOME/copperspice-install" -name CopperSpiceConfig.cmake | head -1)")
+          cmake -G Ninja -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_PREFIX_PATH="$HOME/copperspice-install" -DCopperSpice_DIR="$CS_DIR"
+
+      - name: Build
+        run: cmake --build build
+
+      - name: Test
+        run: ctest --test-dir build --output-on-failure --timeout 300

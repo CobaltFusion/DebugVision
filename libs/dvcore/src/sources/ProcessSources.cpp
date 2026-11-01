@@ -292,6 +292,12 @@ public:
             }
         });
 #else
+        if (platform::isRegularFile(0))
+        {
+            // a redirected regular file is always 'readable' and cannot be watched by epoll; read it in slices
+            readFileSlice();
+            return;
+        }
         m_reader = std::make_unique<platform::AsyncReader>(::dup(0));
         m_watch = loop.watch(m_reader->waitHandle(), [this] {
             std::string data;
@@ -313,6 +319,24 @@ public:
     void setPaused(bool paused) override { m_paused = paused; }
 
 private:
+#ifndef _WIN32
+    void readFileSlice()
+    {
+        std::string data(256 * 1024, ' ');
+        auto n = ::read(0, data.data(), data.size());
+        data.resize(n > 0 ? static_cast<size_t>(n) : 0);
+        onData(data, n <= 0);
+        if (n > 0)
+        {
+            std::weak_ptr<bool> alive = m_alive;
+            m_loop->post([this, alive] {
+                if (!alive.expired())
+                    readFileSlice();
+            });
+        }
+    }
+#endif
+
     void onData(const std::string& data, bool eof)
     {
         if (!m_paused)
