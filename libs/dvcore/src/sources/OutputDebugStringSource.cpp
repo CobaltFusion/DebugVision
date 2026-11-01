@@ -24,6 +24,11 @@ struct DbWinBuffer
 class DbWinChannel
 {
 public:
+    // global capture without administrator rights
+    struct AccessDenied
+    {
+    };
+
     // throws std::runtime_error, e.g. when another debug viewer already owns the DBWIN objects
     explicit DbWinChannel(bool global)
     {
@@ -39,7 +44,7 @@ public:
         m_mapping = CreateFileMappingW(INVALID_HANDLE_VALUE, &sa, PAGE_READWRITE, 0, sizeof(DbWinBuffer), (prefix + L"DBWIN_BUFFER").c_str());
         auto error = GetLastError();
         if (!m_mapping && global && error == ERROR_ACCESS_DENIED)
-            fail(global, "requires running as administrator");
+            throw AccessDenied();
         if (!m_mapping)
             fail(global, "cannot create DBWIN_BUFFER");
         if (error == ERROR_ALREADY_EXISTS)
@@ -197,6 +202,7 @@ public:
         m_sink = &sink;
         m_cache.attach(loop, sink, [this](uint32_t pid) { m_assembler.flush(*m_sink, pid); });
         std::vector<std::string> errors;
+        m_globalDenied = false;
         if (m_params.scope != "global")
             open(false, errors);
         if (m_params.scope != "local")
@@ -205,10 +211,10 @@ public:
             sink.internal(e);
         if (m_channels.empty())
         {
-            setStatus(SourceState::Error, errors.empty() ? "error" : "error: " + errors.front());
+            setStatus(SourceState::Error, !errors.empty() ? "error: " + errors.front() : m_globalDenied ? "error: global capture requires running as administrator" : "error");
             return;
         }
-        std::string text = m_channels.size() == 2 ? "capturing local + global" : m_params.scope == "global" ? "capturing global" : "capturing local";
+        std::string text = m_channels.size() == 2 ? "capturing local + global" : m_params.scope == "global" && !m_globalDenied ? "capturing global" : "capturing local";
         setStatus(SourceState::Running, text + (errors.empty() ? std::string() : " (" + errors.front() + ")"));
     }
 
@@ -235,6 +241,11 @@ private:
             auto raw = channel.get();
             m_watches.push_back(m_loop->watch(raw->dataReady(), [this, raw] { onData(*raw); }));
             m_channels.push_back(std::move(channel));
+        }
+        catch (const DbWinChannel::AccessDenied&)
+        {
+            // global capture is silently skipped without administrator rights; local capture still works
+            m_globalDenied = true;
         }
         catch (const std::exception& e)
         {
@@ -264,6 +275,7 @@ private:
     Sink* m_sink = nullptr;
     std::string m_text;
     bool m_paused = false;
+    bool m_globalDenied = false;
 };
 
 } // namespace
