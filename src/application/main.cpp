@@ -7,6 +7,7 @@
 #include "dvcore/SourceConfig.h"
 
 #include <QApplication>
+#include <QIcon>
 #include <QMessageBox>
 
 #include <cstdio>
@@ -113,6 +114,11 @@ int main(int argc, char* argv[])
 
     QApplication app(argc, argv);
     QApplication::setApplicationName("DebugVision");
+    QApplication::setWindowIcon(QIcon(":/icons/debugvision.png"));
+#if !defined(_WIN32) && !defined(__APPLE__)
+    // Windows and macOS use their native style; the generic fallback style on Linux looks dated
+    QApplication::setStyle(QString("fusion"));
+#endif
     if (!error.empty())
     {
         QMessageBox::critical(nullptr, "DebugVision", toQString(error) + "\n\n" + toQString(usage));

@@ -104,9 +104,12 @@ LogViewWidget::LogViewWidget(ViewContext& context, std::shared_ptr<dv::View> vie
             contextMenuRequested(QCursor::pos(), false);
     });
 
+    m_bookmarkIcon = QPixmap(":/icons/bookmark-marker.png");
     setFocusPolicy(Qt::StrongFocus);
     verticalScrollBar()->setSingleStep(1);
     viewport()->setAutoFillBackground(false);
+    // every pixel is painted in paintEvent; an opaque surface also allows sub-pixel (ClearType) text rendering
+    viewport()->setAttribute(Qt::WA_OpaquePaintEvent);
     setRowFont(font());
 }
 
@@ -133,7 +136,17 @@ void LogViewWidget::setRowFont(const QFont& font)
 {
     setFont(font);
     QFontMetrics fm(font);
-    m_rowHeight = fm.height() + 2;
+    m_rowHeight = std::max(fm.height() + 2, 18);
+    // make sure the fixed-format columns fit their content in this font
+    auto fit = [&](dv::Column column, const char* sample) {
+        auto needed = fm.width(QString::fromUtf8(sample)) + 2 * textMargin + 4;
+        if (m_header->sectionSize(static_cast<int>(column)) < needed)
+            m_header->resizeSection(static_cast<int>(column), needed);
+    };
+    fit(dv::Column::Line, "8888888");
+    fit(dv::Column::Date, "8888/88/88");
+    fit(dv::Column::Time, "88:88:88.888");
+    fit(dv::Column::Pid, "888888");
     updateHeaderGeometry();
     updateScrollBars();
     viewport()->update();
@@ -475,13 +488,7 @@ void LogViewWidget::paintEvent(QPaintEvent*)
             if (column == static_cast<int>(dv::Column::Bookmark))
             {
                 if (m_bookmarks.count(row.seq))
-                {
-                    painter.setBrush(QColor(80, 120, 230));
-                    painter.setPen(Qt::NoPen);
-                    auto d = std::min(cell.width(), m_rowHeight) - 6;
-                    painter.drawEllipse(cell.left() + 3, y + (m_rowHeight - d) / 2, d, d);
-                    painter.setBrush(Qt::NoBrush);
-                }
+                    painter.drawPixmap(cell.left() + (cell.width() - 16) / 2, y + (m_rowHeight - 16) / 2, m_bookmarkIcon);
                 continue;
             }
             if (column == static_cast<int>(dv::Column::Message))

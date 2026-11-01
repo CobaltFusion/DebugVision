@@ -17,6 +17,8 @@
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QFontDialog>
+#include <QIcon>
+#include <QSize>
 #include <QInputDialog>
 #include <QLabel>
 #include <QLineEdit>
@@ -319,12 +321,63 @@ void MainWindow::createActions()
     auto help = menuBar()->addMenu("&Help");
     add(help, "&About DebugVision", "", [this] { showAbout(); });
 
-    // find bar
-    auto toolbar = addToolBar("Find");
+    // icons (from DebugView++) on the menu items, and the toolbar in DebugView++'s button order
+    auto findAction = [this](const QString& text) -> QAction* {
+        for (auto menuAction : menuBar()->actions())
+            for (auto action : menuAction->menu()->actions())
+                if (action->text() == text)
+                    return action;
+        return nullptr;
+    };
+    struct ToolButton
+    {
+        const char* text; // menu text, nullptr = separator
+        const char* icon;
+    };
+    const ToolButton buttons[] = {
+        {"&Open...", "open"},
+        {"Save &Log...", "save"},
+        {nullptr, nullptr},
+        {"&Copy", "copy"},
+        {"&Clear Log", "clear"},
+        {nullptr, nullptr},
+        {"&Auto Scroll", "autoscroll"},
+        {"&Clock Time", "clocktime"},
+        {"&Font...", "font"},
+        {"&Filters...", "filter"},
+        {"&Link Views", "linkviews"},
+        {nullptr, nullptr},
+        {"Toggle &Bookmark", "bookmark"},
+        {"Previous Bookmark", "bookmark-previous"},
+        {"Next Bookmark", "bookmark-next"},
+        {"Clear Bookmarks", "bookmark-clear"},
+        {nullptr, nullptr},
+        {"&Pause", "pause"},
+    };
+    auto toolbar = addToolBar("Toolbar");
+    toolbar->setObjectName("toolbar");
     toolbar->setMovable(false);
+    toolbar->setIconSize(QSize(16, 16));
+    for (auto& b : buttons)
+    {
+        if (!b.text)
+        {
+            toolbar->addSeparator();
+            continue;
+        }
+        if (auto action = findAction(QString::fromUtf8(b.text)))
+        {
+            action->setIcon(QIcon(":/icons/" + QString::fromUtf8(b.icon) + ".png"));
+            toolbar->addAction(action);
+        }
+    }
+
+    // find bar
+    toolbar->addSeparator();
     toolbar->addWidget(new QLabel(" Find: "));
     m_findText = new QLineEdit;
     m_findText->setMaximumWidth(300);
+    m_findText->setPlaceholderText("Ctrl+F");
     m_findText->setClearButtonEnabled(true);
     toolbar->addWidget(m_findText);
     auto next = toolbar->addAction("Next");
@@ -353,11 +406,17 @@ void MainWindow::applySettings()
     if (m_settings.x >= 0 && m_settings.y >= 0)
         move(m_settings.x, m_settings.y);
     resize(m_settings.width, m_settings.height);
+    // an explicit default: a bare 'typewriter' style hint resolves to Consolas on Windows
+#if defined(_WIN32)
+    const char* defaultFont = "Courier New";
+#elif defined(__APPLE__)
+    const char* defaultFont = "Menlo";
+#else
+    const char* defaultFont = "DejaVu Sans Mono";
+#endif
     QFont font = this->font();
-    if (!m_settings.fontName.empty())
-        font.setFamily(toQString(m_settings.fontName));
-    else
-        font.setStyleHint(QFont::TypeWriter);
+    font.setFamily(toQString(m_settings.fontName.empty() ? std::string(defaultFont) : m_settings.fontName));
+    font.setStyleHint(QFont::TypeWriter); // fallback when the family is not installed
     font.setPointSize(m_settings.fontSize);
     for (auto v : views())
         v->setRowFont(font);
@@ -1021,7 +1080,9 @@ void MainWindow::editHistorySize()
 void MainWindow::chooseFont()
 {
     bool ok = false;
-    auto font = QFontDialog::getFont(&ok, currentView() ? currentView()->font() : this->font(), this);
+    // only scalable fonts: bitmap fonts (e.g. 'Courier', as opposed to 'Courier New') are replaced by a fallback when drawn
+    auto font = QFontDialog::getFont(&ok, currentView() ? currentView()->font() : this->font(), this, "Font",
+        QFontDialog::MonospacedFonts | QFontDialog::ScalableFonts);
     if (!ok)
         return;
     m_settings.fontName = toStd(font.family());

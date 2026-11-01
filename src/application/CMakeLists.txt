@@ -1,3 +1,6 @@
+# compile the icons into the executable
+COPPERSPICE_RESOURCES(${CMAKE_CURRENT_SOURCE_DIR}/icons/icons.qrc)
+
 add_executable(debugvision WIN32 MACOSX_BUNDLE
   main.cpp
   FilterDialog.cpp
@@ -5,7 +8,12 @@ add_executable(debugvision WIN32 MACOSX_BUNDLE
   MainWindow.cpp
   RunDialog.cpp
   SourcesDialog.cpp
+  ${CMAKE_CURRENT_BINARY_DIR}/qrc_icons.cpp
 )
+
+if (WIN32)
+  target_sources(debugvision PRIVATE icons/debugvision.rc)
+endif()
 
 target_link_libraries(debugvision PRIVATE
   dvcore

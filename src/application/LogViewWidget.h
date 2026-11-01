@@ -7,6 +7,7 @@
 #include <QAbstractScrollArea>
 #include <QFont>
 #include <QHeaderView>
+#include <QPixmap>
 #include <QStandardItemModel>
 
 #include <functional>
@@ -148,4 +149,5 @@ private:
     mutable std::unordered_map<uint32_t, QColor> m_processColorCache;
     mutable dv::ColorGenerator m_processColorGenerator{0.2, 0.95};
     mutable std::vector<dv::ViewLine> m_lineBuffer;
+    QPixmap m_bookmarkIcon;
 };
