@@ -26,6 +26,7 @@ endif()
 option(DV_BUILD_GUI "Build the GUI application (requires CopperSpice)" ${DV_BUILD_GUI_DEFAULT})
 option(DV_BUILD_TESTS "Build the dvcore unit tests" ON)
 option(DV_BUILD_EXAMPLES "Build the websocket example" OFF)
+option(DV_SELF_CONTAINED "Windows: install the GUI as one debugvision.exe that unpacks its DLLs to a temporary directory" ON)
 
 if (MSVC)
   # only fall back to the copperspice nuget package when no CopperSpice install was given

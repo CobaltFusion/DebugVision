@@ -28,6 +28,11 @@ target_link_libraries(debugvision PRIVATE
   CopperSpice::CsGui
 )
 
+if (WIN32 AND DV_SELF_CONTAINED)
+  # src/launcher embeds the application and its libraries into the installed debugvision.exe
+  return()
+endif()
+
 install(TARGETS debugvision
   RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}
   BUNDLE DESTINATION ${CMAKE_INSTALL_PREFIX}

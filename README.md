@@ -67,4 +67,6 @@ The GUI is built by default when a CopperSpice install is specified or found; ot
 
 Alternatively `-DCopperSpice_DIR=<dir containing CopperSpiceConfig.cmake>` or `-DCMAKE_PREFIX_PATH=...` also enables the GUI and points CMake at the install. With MSVC the GUI is always on by default and falls back to a CopperSpice nuget package. `-DDV_BUILD_GUI=ON|OFF` overrides the default; `build.sh` passes its arguments on to cmake, e.g. `./build.sh -DDV_BUILD_GUI=OFF`.
 
+On Windows the installed `debugvision.exe` is self-contained: the application, the CopperSpice DLLs, the platform plugin and the MSVC runtime are embedded in it, compressed with the Windows compression API (XPRESS Huffman, fast to decompress). At startup they are unpacked into a new directory under `%TEMP%\DebugVision`, which is removed when the application exits (directories left behind by a killed run are removed at the next start). `-DDV_SELF_CONTAINED=OFF` installs the plain executable with the DLLs next to it instead.
+
 See `build.bat` and `build.sh`.
