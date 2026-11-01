@@ -34,21 +34,28 @@ public:
         SetSecurityDescriptorDacl(&sd, TRUE, nullptr, FALSE);
         SECURITY_ATTRIBUTES sa{sizeof(sa), &sd, FALSE};
 
-        m_bufferReady = CreateEventW(&sa, FALSE, TRUE, (prefix + L"DBWIN_BUFFER_READY").c_str());
-        auto error = GetLastError();
-        if (!m_bufferReady)
-            fail(global, "cannot create DBWIN_BUFFER_READY");
-        if (error == ERROR_ALREADY_EXISTS)
-            fail(global, "another debug output viewer (e.g. DebugView) is already running");
-        m_dataReady = CreateEventW(&sa, FALSE, FALSE, (prefix + L"DBWIN_DATA_READY").c_str());
-        if (!m_dataReady)
-            fail(global, "cannot create DBWIN_DATA_READY");
+        // Only an existing buffer means another viewer is running. The events can outlive a viewer: any process holding a
+        // handle to them (e.g. a writer that cached its handles while a viewer ran) keeps them alive, so they are reused.
         m_mapping = CreateFileMappingW(INVALID_HANDLE_VALUE, &sa, PAGE_READWRITE, 0, sizeof(DbWinBuffer), (prefix + L"DBWIN_BUFFER").c_str());
+        auto error = GetLastError();
+        if (!m_mapping && global && error == ERROR_ACCESS_DENIED)
+            fail(global, "requires running as administrator");
         if (!m_mapping)
             fail(global, "cannot create DBWIN_BUFFER");
+        if (error == ERROR_ALREADY_EXISTS)
+            fail(global, "another debug output viewer (e.g. DebugView) is already running");
         m_view = static_cast<const DbWinBuffer*>(MapViewOfFile(m_mapping, FILE_MAP_READ, 0, 0, sizeof(DbWinBuffer)));
         if (!m_view)
             fail(global, "cannot map DBWIN_BUFFER");
+        m_bufferReady = CreateEventW(&sa, FALSE, TRUE, (prefix + L"DBWIN_BUFFER_READY").c_str());
+        if (!m_bufferReady)
+            fail(global, "cannot create DBWIN_BUFFER_READY");
+        m_dataReady = CreateEventW(&sa, FALSE, FALSE, (prefix + L"DBWIN_DATA_READY").c_str());
+        if (!m_dataReady)
+            fail(global, "cannot create DBWIN_DATA_READY");
+        // reused events may have been left in any state by the previous viewer
+        ResetEvent(m_dataReady);
+        SetEvent(m_bufferReady);
     }
 
     ~DbWinChannel() { close(); }
