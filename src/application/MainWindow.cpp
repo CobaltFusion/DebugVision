@@ -5,6 +5,7 @@
 #include "RunDialog.h"
 #include "SourcesDialog.h"
 #include "Text.h"
+#include "ViewTab.h"
 
 #include "dvcore/Clock.h"
 #include "dvcore/FileFormat.h"
@@ -610,16 +611,22 @@ void MainWindow::dropEvent(QDropEvent* event)
 
 // ---------------------------------------------------------------------------------------------------- views
 
+ViewTab* MainWindow::tabAt(int index) const
+{
+    return static_cast<ViewTab*>(m_tabs->widget(index));
+}
+
 LogViewWidget* MainWindow::currentView() const
 {
-    return static_cast<LogViewWidget*>(m_tabs->currentWidget());
+    auto tab = tabAt(m_tabs->currentIndex());
+    return tab ? tab->logView() : nullptr;
 }
 
 std::vector<LogViewWidget*> MainWindow::views() const
 {
     std::vector<LogViewWidget*> result;
     for (int i = 0; i < m_tabs->count(); ++i)
-        result.push_back(static_cast<LogViewWidget*>(m_tabs->widget(i)));
+        result.push_back(tabAt(i)->logView());
     return result;
 }
 
@@ -648,7 +655,7 @@ LogViewWidget* MainWindow::addView(const dv::ViewSettings& settings)
             m_autoScroll->setChecked(widget->autoScroll());
     };
     widget->zoomRequested = [this](int delta) { zoom(delta); };
-    m_tabs->addTab(widget, widget->name());
+    m_tabs->addTab(new ViewTab(widget), widget->name());
     updateTabTitles();
     return widget;
 }
@@ -657,10 +664,10 @@ void MainWindow::closeView(int index)
 {
     if (m_tabs->count() <= 1 || index < 0)
         return;
-    auto widget = static_cast<LogViewWidget*>(m_tabs->widget(index));
-    m_worker.removeView(widget->view());
+    auto tab = tabAt(index);
+    m_worker.removeView(tab->logView()->view());
     m_tabs->removeTab(index);
-    widget->deleteLater();
+    tab->deleteLater();
     updateTabTitles();
 }
 
@@ -673,8 +680,7 @@ void MainWindow::newView()
         return;
     settings.name = toStd(dialog.name());
     settings.filters = dialog.filters();
-    auto widget = addView(settings);
-    m_tabs->setCurrentWidget(widget);
+    m_tabs->setCurrentWidget(ViewTab::of(addView(settings)));
     saveSettings();
 }
 
@@ -685,7 +691,7 @@ void MainWindow::copyView()
         return;
     auto settings = v->settings();
     settings.name += " (copy)";
-    m_tabs->setCurrentWidget(addView(settings));
+    m_tabs->setCurrentWidget(ViewTab::of(addView(settings)));
     saveSettings();
 }
 
@@ -724,7 +730,7 @@ void MainWindow::onTabChanged(int index)
     // linked views: show the line that was focused in the previous view
     if (m_linkViews && m_linkViews->isChecked() && m_previousTab >= 0 && m_previousTab < m_tabs->count() && m_previousTab != index)
     {
-        auto previous = static_cast<LogViewWidget*>(m_tabs->widget(m_previousTab));
+        auto previous = tabAt(m_previousTab)->logView();
         if (previous && previous->focusSeq() != UINT64_MAX)
             v->setFocusSeq(previous->focusSeq());
     }
@@ -742,7 +748,7 @@ void MainWindow::updateTabTitles()
 {
     for (auto v : views())
     {
-        auto index = m_tabs->indexOf(v);
+        auto index = m_tabs->indexOf(ViewTab::of(v));
         m_tabs->setTabText(index, v->name() + (v->property("newLines").toBool() ? QString("*") : QString()));
     }
     m_tabs->tabBar()->setVisible(m_tabs->count() > 1);
@@ -970,10 +976,10 @@ void MainWindow::loadConfiguration()
         // replace the views and sources, keep the window settings
         while (m_tabs->count() > 0)
         {
-            auto widget = static_cast<LogViewWidget*>(m_tabs->widget(0));
-            m_worker.removeView(widget->view());
+            auto tab = tabAt(0);
+            m_worker.removeView(tab->logView()->view());
             m_tabs->removeTab(0);
-            widget->deleteLater();
+            tab->deleteLater();
         }
         for (auto& view : loaded.views)
             addView(view);

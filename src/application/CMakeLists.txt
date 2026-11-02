@@ -24,6 +24,7 @@ add_executable(debugvision WIN32 MACOSX_BUNDLE
   MainWindow.cpp
   RunDialog.cpp
   SourcesDialog.cpp
+  ViewTab.cpp
   ${CMAKE_CURRENT_BINARY_DIR}/qrc_icons.cpp
   ${CMAKE_CURRENT_BINARY_DIR}/qrc_help.cpp
 )

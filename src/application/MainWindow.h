@@ -23,6 +23,7 @@ class QSystemTrayIcon;
 class QTabWidget;
 class QTimer;
 class SourcesDialog;
+class ViewTab;
 
 struct StartupOptions
 {
@@ -57,6 +58,7 @@ private:
     void saveSettings();
 
     // views
+    ViewTab* tabAt(int index) const;
     LogViewWidget* currentView() const;
     std::vector<LogViewWidget*> views() const;
     LogViewWidget* addView(const dv::ViewSettings& settings);
