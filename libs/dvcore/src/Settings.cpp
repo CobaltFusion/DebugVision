@@ -13,7 +13,7 @@ namespace dv {
 namespace {
 
 constexpr std::array columnNames = {"bookmark", "line", "date", "time", "pid", "process", "message"};
-constexpr const char* appKeys[] = {"window", "font", "linkViews", "alwaysOnTop", "hideWhenMinimized", "prefixPid", "historyLimit", "legacyCharset", "customColors", "views", "currentView", "sources"};
+constexpr const char* appKeys[] = {"window", "font", "linkViews", "alwaysOnTop", "hideWhenMinimized", "trafficIndicator", "prefixPid", "historyLimit", "legacyCharset", "customColors", "views", "currentView", "sources"};
 
 } // namespace
 
@@ -103,6 +103,7 @@ void to_json(nlohmann::json& j, const AppSettings& s)
     j["linkViews"] = s.linkViews;
     j["alwaysOnTop"] = s.alwaysOnTop;
     j["hideWhenMinimized"] = s.hideWhenMinimized;
+    j["trafficIndicator"] = s.trafficIndicator;
     j["prefixPid"] = s.prefixPid;
     j["historyLimit"] = s.historyLimit;
     j["legacyCharset"] = s.legacyCharset;
@@ -135,6 +136,7 @@ void from_json(const nlohmann::json& j, AppSettings& s)
     s.linkViews = j.value("linkViews", s.linkViews);
     s.alwaysOnTop = j.value("alwaysOnTop", s.alwaysOnTop);
     s.hideWhenMinimized = j.value("hideWhenMinimized", s.hideWhenMinimized);
+    s.trafficIndicator = j.value("trafficIndicator", s.trafficIndicator);
     s.prefixPid = j.value("prefixPid", s.prefixPid);
     s.historyLimit = j.value("historyLimit", s.historyLimit);
     s.legacyCharset = j.value("legacyCharset", s.legacyCharset);

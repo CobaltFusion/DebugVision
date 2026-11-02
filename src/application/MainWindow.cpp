@@ -5,6 +5,7 @@
 #include "RunDialog.h"
 #include "SourcesDialog.h"
 #include "Text.h"
+#include "TrafficIndicator.h"
 #include "ViewTab.h"
 
 #include "dvcore/Clock.h"
@@ -326,6 +327,10 @@ void MainWindow::createActions()
     // restricted on macOS: minimized windows go to the Dock
     m_hideWhenMinimized = addToggle(options, "&Hide When Minimized", "", m_settings.hideWhenMinimized, [this](bool on) { m_settings.hideWhenMinimized = on; });
 #endif
+    addToggle(options, "&Traffic Indicator", "", m_settings.trafficIndicator, [this](bool on) {
+        m_settings.trafficIndicator = on;
+        m_trafficIndicator->setVisible(on);
+    });
 
     auto help = menuBar()->addMenu("&Help");
     add(help, "&User Manual", "F1", [this] {
@@ -398,6 +403,14 @@ void MainWindow::createActions()
     connect(m_findText, &QLineEdit::returnPressed, this, [this]() { find(true); });
     connect(next, &QAction::triggered, this, [this](bool) { find(true); });
     connect(previous, &QAction::triggered, this, [this](bool) { find(false); });
+
+    // the traffic indicator, at the right end
+    auto spacer = new QWidget;
+    spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    toolbar->addWidget(spacer);
+    // a widget in a toolbar is shown and hidden by its action
+    m_trafficIndicator = toolbar->addWidget(new TrafficIndicator(m_store, toolbar));
+    m_trafficIndicator->setVisible(m_settings.trafficIndicator);
 }
 
 void MainWindow::createStatusBar()

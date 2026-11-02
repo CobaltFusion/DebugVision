@@ -28,6 +28,8 @@ Every line gets a line number, a time stamp, the process ID and the process name
 - **Bookmarks**: Ctrl+F2 toggles a bookmark, F2 and Shift+F2 jump between bookmarks.
 - **Timeline**: View > Timeline (Ctrl+L) shows the lines of a view on a time axis below the list, as bars from a begin
   line to an end line and as markers for single events. See [Timeline](#timeline).
+- **Traffic indicator**: Options > Traffic Indicator shows, at the right of the toolbar, a light that is on while lines
+  arrive and a graph of the lines per 100 ms over the last 6 seconds (full scale is 10 lines per 100 ms).
 - **Pausing**: Pause (or Ctrl+Shift+P) stops capturing temporarily. Log > Clear Log (Ctrl+Shift+X) empties the log.
 - **Saving**: File > Save Log saves everything in DebugView++ `.dblog` format, Save View only the filtered lines and Save Selection only the selected ones.
   File > Save Configuration saves the views, filters and sources to a `.json` file.

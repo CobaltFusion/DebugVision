@@ -27,6 +27,7 @@ add_executable(debugvision WIN32 MACOSX_BUNDLE
   SourcesDialog.cpp
   TimelineRulesEditor.cpp
   TimelineWidget.cpp
+  TrafficIndicator.cpp
   ViewTab.cpp
   ${CMAKE_CURRENT_BINARY_DIR}/qrc_icons.cpp
   ${CMAKE_CURRENT_BINARY_DIR}/qrc_help.cpp

@@ -138,4 +138,5 @@ private:
     QAction* m_prefixPid = nullptr;
     QAction* m_alwaysOnTop = nullptr;
     QAction* m_hideWhenMinimized = nullptr;
+    QAction* m_trafficIndicator = nullptr; // the toolbar action of the TrafficIndicator
 };

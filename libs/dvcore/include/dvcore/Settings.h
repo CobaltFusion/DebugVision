@@ -61,6 +61,7 @@ struct AppSettings
     bool linkViews = false;
     bool alwaysOnTop = false;
     bool hideWhenMinimized = false;
+    bool trafficIndicator = false;
     bool prefixPid = false;
     uint64_t historyLimit = 0; // lines, 0 = unlimited
     std::string legacyCharset; // default charset for 8-bit text that is not UTF-8
