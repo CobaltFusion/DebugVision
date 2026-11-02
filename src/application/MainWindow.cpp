@@ -4,6 +4,7 @@
 #include "Help.h"
 #include "RunDialog.h"
 #include "SourcesDialog.h"
+#include "TimelineDialog.h"
 #include "Text.h"
 #include "ViewTab.h"
 
@@ -283,6 +284,7 @@ void MainWindow::createActions()
             ViewTab::of(v)->setTimelineVisible(on);
         saveSettings();
     });
+    add(view, "Timeline Rul&es...", "", [this] { editTimelineRules(); });
     view->addSeparator();
     m_linkViews = addToggle(view, "&Link Views", "", m_settings.linkViews, [this](bool on) { m_settings.linkViews = on; });
 
@@ -730,6 +732,29 @@ void MainWindow::editFilters()
     v->setName(dialog.name());
     setFilters(v, dialog.filters());
     updateTabTitles();
+    saveSettings();
+}
+
+void MainWindow::editTimelineRules()
+{
+    auto v = currentView();
+    if (!v)
+        return;
+    auto tab = ViewTab::of(v);
+    TimelineDialog dialog(tab->timelineRules(), this);
+    if (dialog.exec() != QDialog::Accepted)
+        return;
+    try
+    {
+        tab->setTimelineRules(dialog.rules());
+    }
+    catch (const dv::TimelineError& e)
+    {
+        QMessageBox::warning(this, "Timeline Rules", toQString(e.what()));
+        return;
+    }
+    tab->setTimelineVisible(true);
+    m_timeline->setChecked(true);
     saveSettings();
 }
 

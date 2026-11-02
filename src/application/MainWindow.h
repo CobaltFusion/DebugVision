@@ -66,6 +66,7 @@ private:
     void newView();
     void copyView();
     void editFilters();
+    void editTimelineRules();
     void onTabChanged(int index);
     void updateTabTitles();
     void showViewContextMenu(LogViewWidget* view, QPoint globalPos, bool onProcessColumn);

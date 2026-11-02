@@ -272,7 +272,8 @@ void TimelineWidget::drawRuler(QPainter& painter)
         painter.drawLine(x, rulerHeight, x, height());
         painter.setPen(palette.color(QPalette::WindowText));
         painter.drawLine(x, rulerHeight - 5, x, rulerHeight - 1);
-        painter.drawText(x + 3, rulerHeight - 7, QString::number(t / 1e9, 'f', decimals) + " s");
+        auto seconds = std::abs(t) < step / 2 ? 0.0 : t / 1e9; // no "-0.0"
+        painter.drawText(x + 3, rulerHeight - 7, QString::number(seconds, 'f', decimals) + " s");
     }
 }
 

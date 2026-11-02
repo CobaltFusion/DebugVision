@@ -1,11 +1,11 @@
 #include "FilterDialog.h"
 
+#include "ColorButton.h"
 #include "Text.h"
 
 #include "dvcore/FilterEngine.h"
 
 #include <QCheckBox>
-#include <QColorDialog>
 #include <QComboBox>
 #include <QDialogButtonBox>
 #include <QFileDialog>
@@ -13,7 +13,6 @@
 #include <QHeaderView>
 #include <QLabel>
 #include <QLineEdit>
-#include <QMenu>
 #include <QMessageBox>
 #include <QPushButton>
 #include <QTabWidget>
@@ -42,63 +41,6 @@ const std::vector<dv::MatchType> processMatches = {dv::MatchType::Simple, dv::Ma
 
 constexpr int colorRole = Qt::UserRole + 1;
 constexpr int autoRole = Qt::UserRole + 2;
-
-// a button that shows and edits a dv::Color; 'Auto' is offered for backgrounds of message filters
-class ColorButton : public QPushButton
-{
-public:
-    ColorButton(dv::Color color, bool allowAuto, QWidget* parent) :
-        QPushButton(parent),
-        m_color(color),
-        m_allowAuto(allowAuto)
-    {
-        update();
-        connect(this, &QPushButton::clicked, this, [this](bool) { choose(); });
-    }
-
-    dv::Color color() const { return m_color; }
-
-private:
-    void choose()
-    {
-        if (m_allowAuto)
-        {
-            QMenu menu(this);
-            auto pick = menu.addAction("Choose color...");
-            auto automatic = menu.addAction("Auto (a color per distinct match)");
-            auto chosen = menu.exec(mapToGlobal(QPoint(0, height())));
-            if (chosen == automatic)
-            {
-                m_color = dv::Color::autoColor();
-                update();
-                return;
-            }
-            if (chosen != pick)
-                return;
-        }
-        auto initial = m_color.isAuto ? QColor(Qt::white) : QColor(m_color.red(), m_color.green(), m_color.blue());
-        auto c = QColorDialog::getColor(initial, this);
-        if (!c.isValid())
-            return;
-        m_color = dv::Color::fromRgb(static_cast<uint8_t>(c.red()), static_cast<uint8_t>(c.green()), static_cast<uint8_t>(c.blue()));
-        update();
-    }
-
-    void update()
-    {
-        if (m_color.isAuto)
-        {
-            setText("Auto");
-            setStyleSheet(QString());
-            return;
-        }
-        setText(QString());
-        setStyleSheet(QString("background-color: rgb(%1,%2,%3)").formatArg(QString::number(m_color.red())).formatArg(QString::number(m_color.green())).formatArg(QString::number(m_color.blue())));
-    }
-
-    dv::Color m_color;
-    bool m_allowAuto;
-};
 
 } // namespace
 
@@ -218,8 +160,8 @@ void FilterDialog::addRow(QTableWidget* table, const dv::Filter& filter, bool pr
             type->setCurrentIndex(type->findData(static_cast<int>(dv::FilterType::Token)));
     });
 
-    table->setCellWidget(row, ColBackground, new ColorButton(filter.background, !process, table));
-    table->setCellWidget(row, ColForeground, new ColorButton(filter.foreground, false, table));
+    table->setCellWidget(row, ColBackground, new ColorButton(filter.background, process ? QString() : QString("a color per distinct match"), table));
+    table->setCellWidget(row, ColForeground, new ColorButton(filter.foreground, QString(), table));
 }
 
 std::vector<dv::Filter> FilterDialog::readTable(QTableWidget* table) const
