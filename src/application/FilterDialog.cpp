@@ -2,6 +2,8 @@
 
 #include "ColorButton.h"
 #include "Text.h"
+#include "TimelineRulesEditor.h"
+#include "UnderlinedHeaderView.h"
 
 #include "dvcore/FilterEngine.h"
 
@@ -44,11 +46,11 @@ constexpr int autoRole = Qt::UserRole + 2;
 
 } // namespace
 
-FilterDialog::FilterDialog(const QString& name, const dv::FilterSet& filters, QWidget* parent) :
+FilterDialog::FilterDialog(const QString& name, const dv::FilterSet& filters, const std::vector<dv::TimelineRule>& rules, QWidget* parent) :
     QDialog(parent)
 {
-    setWindowTitle("Filters");
-    resize(820, 480);
+    setWindowTitle("Filters and Timeline Rules");
+    resize(940, 480);
     auto layout = new QVBoxLayout(this);
 
     auto nameRow = new QHBoxLayout;
@@ -60,23 +62,28 @@ FilterDialog::FilterDialog(const QString& name, const dv::FilterSet& filters, QW
     m_tabs = new QTabWidget;
     m_messages = createTable(false);
     m_processes = createTable(true);
+    m_timeline = new TimelineRulesEditor(rules);
     m_tabs->addTab(m_messages, "Messages");
     m_tabs->addTab(m_processes, "Processes");
+    m_tabs->addTab(m_timeline, "Timeline Rules");
     layout->addWidget(m_tabs);
 
+    // one row of buttons for all tabs, acting on the current one
     auto buttons = new QHBoxLayout;
-    auto add = new QPushButton("Add");
+    m_add = new QPushButton("Add");
+    m_addSpan = new QPushButton("Add Span");
+    m_addEvent = new QPushButton("Add Event");
     auto remove = new QPushButton("Remove");
     auto up = new QPushButton("Move Up");
     auto down = new QPushButton("Move Down");
     auto clear = new QPushButton("Remove All");
-    auto load = new QPushButton("Load...");
-    auto save = new QPushButton("Save...");
+    m_load = new QPushButton("Load...");
+    m_save = new QPushButton("Save...");
     auto help = new QPushButton("RegEx...");
-    for (auto b : {add, remove, up, down, clear})
+    for (auto b : {m_add, m_addSpan, m_addEvent, remove, up, down, clear})
         buttons->addWidget(b);
     buttons->addStretch();
-    for (auto b : {load, save, help})
+    for (auto b : {m_load, m_save, help})
         buttons->addWidget(b);
     layout->addLayout(buttons);
 
@@ -85,30 +92,63 @@ FilterDialog::FilterDialog(const QString& name, const dv::FilterSet& filters, QW
     connect(box, &QDialogButtonBox::accepted, this, &FilterDialog::accept);
     connect(box, &QDialogButtonBox::rejected, this, &FilterDialog::reject);
 
-    connect(add, &QPushButton::clicked, this, [this](bool) {
+    connect(m_add, &QPushButton::clicked, this, [this](bool) {
         auto table = currentTable();
         addRow(table, dv::Filter{}, table == m_processes);
         table->setCurrentCell(table->rowCount() - 1, ColText);
         table->editItem(table->item(table->rowCount() - 1, ColText));
     });
+    connect(m_addSpan, &QPushButton::clicked, this, [this](bool) { m_timeline->addNew(dv::TimelineKind::Span); });
+    connect(m_addEvent, &QPushButton::clicked, this, [this](bool) { m_timeline->addNew(dv::TimelineKind::Event); });
     connect(remove, &QPushButton::clicked, this, [this](bool) {
         auto table = currentTable();
-        if (table->currentRow() >= 0)
+        if (!table)
+            m_timeline->removeCurrent();
+        else if (table->currentRow() >= 0)
             table->removeRow(table->currentRow());
     });
     connect(up, &QPushButton::clicked, this, [this](bool) { moveRow(-1); });
     connect(down, &QPushButton::clicked, this, [this](bool) { moveRow(1); });
-    connect(clear, &QPushButton::clicked, this, [this](bool) { currentTable()->setRowCount(0); });
-    connect(load, &QPushButton::clicked, this, [this](bool) { this->load(); });
-    connect(save, &QPushButton::clicked, this, [this](bool) { this->save(); });
+    connect(clear, &QPushButton::clicked, this, [this](bool) {
+        if (auto table = currentTable())
+            table->setRowCount(0);
+        else
+            m_timeline->removeAll();
+    });
+    connect(m_load, &QPushButton::clicked, this, [this](bool) { this->load(); });
+    connect(m_save, &QPushButton::clicked, this, [this](bool) { this->save(); });
     connect(help, &QPushButton::clicked, this, [this](bool) { showRegexHelp(); });
+    connect(m_tabs, &QTabWidget::currentChanged, this, [this](int) { updateButtons(); });
 
     setFilters(filters, false);
+    updateButtons();
+}
+
+void FilterDialog::updateButtons()
+{
+    // filter files hold filters only
+    bool timeline = currentTable() == nullptr;
+    m_add->setVisible(!timeline);
+    m_load->setVisible(!timeline);
+    m_save->setVisible(!timeline);
+    m_addSpan->setVisible(timeline);
+    m_addEvent->setVisible(timeline);
+}
+
+void FilterDialog::showTimelineRules()
+{
+    m_tabs->setCurrentWidget(m_timeline);
+}
+
+std::vector<dv::TimelineRule> FilterDialog::timelineRules() const
+{
+    return m_timeline->rules();
 }
 
 QTableWidget* FilterDialog::createTable(bool)
 {
     auto table = new QTableWidget(0, ColCount);
+    table->setHorizontalHeader(new UnderlinedHeaderView(Qt::Horizontal, table));
     QStringList headers;
     headers << "" << "Filter" << "Match" << "Type" << "Bg" << "Fg";
     table->setHorizontalHeaderLabels(headers);
@@ -126,7 +166,9 @@ QTableWidget* FilterDialog::createTable(bool)
 
 QTableWidget* FilterDialog::currentTable() const
 {
-    return m_tabs->currentIndex() == 1 ? m_processes : m_messages;
+    if (m_tabs->currentWidget() == m_timeline)
+        return nullptr;
+    return m_tabs->currentWidget() == m_processes ? m_processes : m_messages;
 }
 
 void FilterDialog::addRow(QTableWidget* table, const dv::Filter& filter, bool process)
@@ -213,6 +255,11 @@ dv::FilterSet FilterDialog::filters() const
 void FilterDialog::moveRow(int delta)
 {
     auto table = currentTable();
+    if (!table)
+    {
+        m_timeline->moveRow(delta);
+        return;
+    }
     auto row = table->currentRow();
     auto target = row + delta;
     if (row < 0 || target < 0 || target >= table->rowCount())
@@ -274,7 +321,8 @@ void FilterDialog::showRegexHelp()
         "^ $      start and end of the message\n"
         "a|b      a or b\n"
         "(...)    group; with RegexGroups only the groups are highlighted\n"
-        "(?:...)  group without capture\n\n"
+        "(?:...)  group without capture\n"
+        "\\1       in the End of a timeline span: what group 1 of Begin matched\n\n"
         "Simple: the text is matched literally.\n"
         "Wildcard: * matches any text, ? an optional character.");
 }
@@ -303,6 +351,12 @@ void FilterDialog::accept()
             }
         }
         QMessageBox::warning(this, "Filters", toQString(e.what()));
+        return;
+    }
+    if (auto error = m_timeline->validate(); !error.isEmpty())
+    {
+        m_tabs->setCurrentWidget(m_timeline);
+        QMessageBox::warning(this, "Timeline Rules", error);
         return;
     }
     QDialog::accept();

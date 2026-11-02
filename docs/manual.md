@@ -164,7 +164,8 @@ The timeline shows the lines of a view on a time axis, like an oscilloscope or [
 how long things take, how they overlap and when events happen. It is shown below the log list with View > Timeline (Ctrl+L)
 and uses only the lines the view shows, so the view's filters also filter the timeline. Each view has its own timeline and rules.
 
-Each process gets a lane. What appears in it is set with View > Timeline Rules...:
+Each process gets a lane. What appears in it is set on the Timeline Rules tab of the filter dialog (View > Timeline Rules...,
+or View > Filters... and then the tab):
 
 | Kind | Patterns | Drawn as |
 |---|---|---|

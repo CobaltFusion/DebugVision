@@ -1,15 +1,12 @@
-#include "TimelineDialog.h"
+#include "TimelineRulesEditor.h"
 
 #include "ColorButton.h"
 #include "Text.h"
+#include "UnderlinedHeaderView.h"
 
 #include <QComboBox>
-#include <QDialogButtonBox>
-#include <QHBoxLayout>
 #include <QHeaderView>
 #include <QLabel>
-#include <QMessageBox>
-#include <QPushButton>
 #include <QTableWidget>
 #include <QVBoxLayout>
 
@@ -43,23 +40,24 @@ QString cellText(QTableWidget* table, int row, int column)
 
 } // namespace
 
-TimelineDialog::TimelineDialog(const std::vector<dv::TimelineRule>& rules, QWidget* parent) :
-    QDialog(parent)
+TimelineRulesEditor::TimelineRulesEditor(const std::vector<dv::TimelineRule>& rules, QWidget* parent) :
+    QWidget(parent)
 {
-    setWindowTitle("Timeline Rules");
-    resize(940, 420);
     auto layout = new QVBoxLayout(this);
+    layout->setContentsMargins(0, 0, 0, 0);
 
     auto help = new QLabel(
         "A <b>span</b> draws a bar from a line matching <i>Begin</i> to the next line of the same process matching <i>End</i>. "
         "With capture groups both must capture the same text, so <tt>frame (\\d+) start</tt> pairs with <tt>frame (\\d+) done</tt> "
         "of the same frame. In a regular expression <i>End</i>, <tt>\\1</tt> to <tt>\\9</tt> refer to the groups of <i>Begin</i>: "
-        "<tt>Enter (\\w+)</tt> pairs with <tt>Exit \\1</tt> of the same name. "
+        "<tt>Enter (\\w+)</tt> pairs with <tt>Exit \\1</tt> of the same name. A bar shows what <i>Begin</i> captured, or else the name. "
         "An <b>event</b> marks every line matching <i>Begin</i>. Only the lines shown in the view are used.");
     help->setWordWrap(true);
+    help->setContentsMargins(4, 4, 4, 4);
     layout->addWidget(help);
 
     m_table = new QTableWidget(0, ColCount);
+    m_table->setHorizontalHeader(new UnderlinedHeaderView(Qt::Horizontal, m_table));
     QStringList headers;
     headers << "" << "Name" << "Kind" << "Begin / Event" << "End" << "Match" << "Shape" << "Color";
     m_table->setHorizontalHeaderLabels(headers);
@@ -76,36 +74,11 @@ TimelineDialog::TimelineDialog(const std::vector<dv::TimelineRule>& rules, QWidg
     m_table->setSelectionMode(QAbstractItemView::SingleSelection);
     layout->addWidget(m_table);
 
-    auto buttons = new QHBoxLayout;
-    auto addSpan = new QPushButton("Add Span");
-    auto addEvent = new QPushButton("Add Event");
-    auto remove = new QPushButton("Remove");
-    auto up = new QPushButton("Move Up");
-    auto down = new QPushButton("Move Down");
-    for (auto b : {addSpan, addEvent, remove, up, down})
-        buttons->addWidget(b);
-    buttons->addStretch();
-    layout->addLayout(buttons);
-
-    auto box = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
-    layout->addWidget(box);
-    connect(box, &QDialogButtonBox::accepted, this, &TimelineDialog::accept);
-    connect(box, &QDialogButtonBox::rejected, this, &TimelineDialog::reject);
-
-    connect(addSpan, &QPushButton::clicked, this, [this](bool) { addNew(dv::TimelineKind::Span); });
-    connect(addEvent, &QPushButton::clicked, this, [this](bool) { addNew(dv::TimelineKind::Event); });
-    connect(remove, &QPushButton::clicked, this, [this](bool) {
-        if (m_table->currentRow() >= 0)
-            m_table->removeRow(m_table->currentRow());
-    });
-    connect(up, &QPushButton::clicked, this, [this](bool) { moveRow(-1); });
-    connect(down, &QPushButton::clicked, this, [this](bool) { moveRow(1); });
-
     for (auto& rule : rules)
         addRow(rule);
 }
 
-void TimelineDialog::addRow(const dv::TimelineRule& rule)
+void TimelineRulesEditor::addRow(const dv::TimelineRule& rule)
 {
     auto row = m_table->rowCount();
     m_table->insertRow(row);
@@ -147,7 +120,7 @@ void TimelineDialog::addRow(const dv::TimelineRule& rule)
     updateRow(row);
 }
 
-void TimelineDialog::updateRow(int row)
+void TimelineRulesEditor::updateRow(int row)
 {
     bool span = combo(m_table, row, ColKind)->currentData().toInt() == static_cast<int>(dv::TimelineKind::Span);
     if (auto end = m_table->item(row, ColEnd))
@@ -155,7 +128,7 @@ void TimelineDialog::updateRow(int row)
     combo(m_table, row, ColShape)->setEnabled(!span);
 }
 
-void TimelineDialog::addNew(dv::TimelineKind kind)
+void TimelineRulesEditor::addNew(dv::TimelineKind kind)
 {
     dv::TimelineRule rule;
     rule.kind = kind;
@@ -165,7 +138,7 @@ void TimelineDialog::addNew(dv::TimelineKind kind)
     m_table->editItem(m_table->item(row, ColBegin));
 }
 
-std::vector<dv::TimelineRule> TimelineDialog::rules() const
+std::vector<dv::TimelineRule> TimelineRulesEditor::rules() const
 {
     std::vector<dv::TimelineRule> result;
     for (int row = 0; row < m_table->rowCount(); ++row)
@@ -187,7 +160,18 @@ std::vector<dv::TimelineRule> TimelineDialog::rules() const
     return result;
 }
 
-void TimelineDialog::moveRow(int delta)
+void TimelineRulesEditor::removeCurrent()
+{
+    if (m_table->currentRow() >= 0)
+        m_table->removeRow(m_table->currentRow());
+}
+
+void TimelineRulesEditor::removeAll()
+{
+    m_table->setRowCount(0);
+}
+
+void TimelineRulesEditor::moveRow(int delta)
 {
     auto row = m_table->currentRow();
     auto target = row + delta;
@@ -203,9 +187,9 @@ void TimelineDialog::moveRow(int delta)
     m_table->setCurrentCell(target, ColBegin);
 }
 
-void TimelineDialog::accept()
+QString TimelineRulesEditor::validate()
 {
-    // compile the rules before closing, and point at the row with an error
+    // compile the rules, and point at the row with an error
     try
     {
         dv::TimelineModel model(rules());
@@ -224,8 +208,7 @@ void TimelineDialog::accept()
                 break;
             }
         }
-        QMessageBox::warning(this, "Timeline Rules", toQString(e.what()));
-        return;
+        return toQString(e.what());
     }
-    QDialog::accept();
+    return QString();
 }

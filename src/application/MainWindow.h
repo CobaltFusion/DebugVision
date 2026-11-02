@@ -65,8 +65,7 @@ private:
     void closeView(int index);
     void newView();
     void copyView();
-    void editFilters();
-    void editTimelineRules();
+    void editFilters(bool timelineRules = false); // opens the dialog on the Timeline Rules tab
     void onTabChanged(int index);
     void updateTabTitles();
     void showViewContextMenu(LogViewWidget* view, QPoint globalPos, bool onProcessColumn);

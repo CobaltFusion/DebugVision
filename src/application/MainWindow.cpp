@@ -4,7 +4,6 @@
 #include "Help.h"
 #include "RunDialog.h"
 #include "SourcesDialog.h"
-#include "TimelineDialog.h"
 #include "Text.h"
 #include "ViewTab.h"
 
@@ -284,7 +283,7 @@ void MainWindow::createActions()
             ViewTab::of(v)->setTimelineVisible(on);
         saveSettings();
     });
-    add(view, "Timeline Rul&es...", "", [this] { editTimelineRules(); });
+    add(view, "Timeline Rul&es...", "", [this] { editFilters(true); });
     view->addSeparator();
     m_linkViews = addToggle(view, "&Link Views", "", m_settings.linkViews, [this](bool on) { m_settings.linkViews = on; });
 
@@ -688,11 +687,13 @@ void MainWindow::newView()
 {
     dv::ViewSettings settings;
     settings.name = "View " + std::to_string(m_tabs->count() + 1);
-    FilterDialog dialog(toQString(settings.name), dv::FilterSet{}, this);
+    FilterDialog dialog(toQString(settings.name), dv::FilterSet{}, {}, this);
     if (dialog.exec() != QDialog::Accepted)
         return;
     settings.name = toStd(dialog.name());
     settings.filters = dialog.filters();
+    settings.timelineRules = dialog.timelineRules();
+    settings.showTimeline = !settings.timelineRules.empty();
     m_tabs->setCurrentWidget(ViewTab::of(addView(settings)));
     saveSettings();
 }
@@ -721,40 +722,38 @@ void MainWindow::setFilters(LogViewWidget* view, const dv::FilterSet& filters)
     }
 }
 
-void MainWindow::editFilters()
-{
-    auto v = currentView();
-    if (!v)
-        return;
-    FilterDialog dialog(v->name(), v->view()->filters(), this);
-    if (dialog.exec() != QDialog::Accepted)
-        return;
-    v->setName(dialog.name());
-    setFilters(v, dialog.filters());
-    updateTabTitles();
-    saveSettings();
-}
-
-void MainWindow::editTimelineRules()
+void MainWindow::editFilters(bool timelineRules)
 {
     auto v = currentView();
     if (!v)
         return;
     auto tab = ViewTab::of(v);
-    TimelineDialog dialog(tab->timelineRules(), this);
+    FilterDialog dialog(v->name(), v->view()->filters(), tab->timelineRules(), this);
+    if (timelineRules)
+        dialog.showTimelineRules();
     if (dialog.exec() != QDialog::Accepted)
         return;
-    try
+    v->setName(dialog.name());
+    setFilters(v, dialog.filters());
+    auto rules = dialog.timelineRules();
+    if (rules != tab->timelineRules())
     {
-        tab->setTimelineRules(dialog.rules());
+        try
+        {
+            tab->setTimelineRules(rules);
+        }
+        catch (const dv::TimelineError& e)
+        {
+            QMessageBox::warning(this, "Timeline Rules", toQString(e.what()));
+        }
+        // show what the new rules make of the view
+        if (!rules.empty())
+        {
+            tab->setTimelineVisible(true);
+            m_timeline->setChecked(true);
+        }
     }
-    catch (const dv::TimelineError& e)
-    {
-        QMessageBox::warning(this, "Timeline Rules", toQString(e.what()));
-        return;
-    }
-    tab->setTimelineVisible(true);
-    m_timeline->setChecked(true);
+    updateTabTitles();
     saveSettings();
 }
 
