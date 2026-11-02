@@ -10,6 +10,7 @@ User manual: a portable, CPU-efficient log viewer in the spirit of DebugView++
 - [Settings](#settings)
 - [Timeline](#timeline)
 - [dvcli: the command line version](#dvcli-the-command-line-version)
+- [dvtest: test data for the timeline](#dvtest-test-data-for-the-timeline)
 
 ## Overall usage
 
@@ -339,4 +340,65 @@ dvcli -clsqpnt --udp 2020 > capture.tsv
 
 # send a test message to all listeners on port 2020
 dvcli -u "hello from the build server"
+```
+
+## dvtest: test data for the timeline
+
+`dvtest` writes log lines that simulate a program at work: nested function calls, events inside them, and singular events
+such as interrupts. The lines are written in real time, so their time stamps show how long each call took. Use it to try
+out the timeline and its rules, or filters, without a real program.
+
+```
+dvtest [options]
+```
+
+Every call is written as a begin line and an end line in one of three styles, chosen at random per top-level call:
+
+| Style | Begin | End |
+|---|---|---|
+| `enter-leave` | `parse - Enter` | `parse - Leave` |
+| `begin-end` | `Begin - parse` | `End - parse` |
+| `enter-exit` | `Enter parse` | `Exit parse` |
+
+Inside a call it sometimes writes `parse - Event occurred`, and now and then `parse - Exception`.
+
+#### What to generate
+
+| Option | |
+|---|---|
+| `-n`, `--count <N>` | the number of top-level calls (default 20) |
+| `--endless` | keep generating until stopped with Ctrl+C |
+| `--style <styles>` | the styles to use, comma-separated: `enter-leave`, `begin-end`, `enter-exit` or `all` (default) |
+| `--depth <N>` | the maximum nesting depth of calls (default 4) |
+| `--events <rate>` | random singular events (`IRQ 5`, `IRQ 11`, `GC pause`, `cache miss`), `<rate>` per second on average |
+| `--tick <ms>` | a regular `Tick <n>` event every `<ms>` milliseconds |
+| `--seed <N>` | the random seed, to repeat the same sequence |
+
+#### Where the lines go
+
+| Option | |
+|---|---|
+| (default) | standard output, to pipe into DebugVision (see the examples below) |
+| `--udp [host:]port` | a UDP datagram per line (host default 127.0.0.1), for a UDP source |
+| `--ods` | OutputDebugString (Windows) |
+| `--speed <factor>` | the time scale: `2` runs twice as fast, `0` writes everything without waiting (default 1) |
+
+#### Timeline rules for its output
+
+| Name | Kind | Begin | End | Match | Shape |
+|---|---|---|---|---|---|
+| enter-leave | Span | `(\w+) - Enter` | `\1 - Leave` | Regex | |
+| begin-end | Span | `Begin - (\w+)` | `End - \1` | Regex | |
+| enter-exit | Span | `Enter (\w+)` | `Exit \1` | Regex | |
+| event | Event | `Event occurred` | | Simple | Lollipop |
+| exception | Event | `Exception` | | Simple | Triangle |
+| IRQ | Event | `IRQ` | | Simple | Square |
+| tick | Event | `Tick` | | Simple | Lollipop |
+
+```
+# 100 calls with 20 random events per second and a tick every 50 ms, into DebugVision
+dvtest -n 100 --events 20 --tick 50 | debugvision
+
+# endlessly, as OutputDebugString, three times as fast
+dvtest --endless --ods --speed 3
 ```

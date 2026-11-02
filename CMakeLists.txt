@@ -92,6 +92,7 @@ add_subdirectory(docs)
 
 add_subdirectory(libs/dvcore)
 add_subdirectory(tools/dvcli)
+add_subdirectory(tools/dvtest)
 
 if (DV_BUILD_GUI)
   add_subdirectory(src)

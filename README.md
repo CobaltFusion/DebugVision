@@ -45,6 +45,7 @@ libs/dvcore         engine: storage, encoding, sources, filters, settings (no GU
 src/application     CopperSpice GUI
 src/launcher        Windows: the self-contained debugvision.exe
 tools/dvcli         command line version
+tools/dvtest        generates nested calls and events to try out the timeline
 docs/manual.md      user manual, converted to HTML at build time and compiled into both programs (debugvision --help, dvcli --webhelp)
 ```
 
