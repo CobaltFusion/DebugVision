@@ -7,6 +7,14 @@ on:
 
 env:
   COPPERSPICE_TAG: cs-2.1.0
+  # -dev packages: the CopperSpice CMake exports link against the unversioned .so names (e.g. libOpenGL.so);
+  # xvfb and xauth for the GUI smoke test
+  LINUX_GUI_PACKAGES: >-
+    ninja-build libopengl-dev libgl-dev libglib2.0-dev libfontconfig1-dev libfreetype-dev libcups2-dev
+    libx11-xcb-dev libxkbcommon-dev libxkbcommon-x11-dev libxcb1-dev libxcb-xkb-dev libxcb-icccm4-dev libxcb-image0-dev
+    libxcb-keysyms1-dev libxcb-randr0-dev libxcb-render-util0-dev libxcb-shape0-dev libxcb-sync-dev libxcb-xfixes0-dev
+    libxcb-xinerama0-dev libxcb-cursor-dev libxi-dev libsm-dev libice-dev libxrender-dev libssl-dev zlib1g-dev
+    xvfb xauth
 
 jobs:
   core:
@@ -47,8 +55,7 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
-          # -dev packages: the CopperSpice CMake exports link against the unversioned .so names (e.g. libOpenGL.so)
-          sudo apt-get install -y ninja-build libopengl-dev libgl-dev libglib2.0-dev libfontconfig1-dev libfreetype-dev libcups2-dev             libx11-xcb-dev libxkbcommon-dev libxkbcommon-x11-dev libxcb1-dev libxcb-xkb-dev libxcb-icccm4-dev libxcb-image0-dev             libxcb-keysyms1-dev libxcb-randr0-dev libxcb-render-util0-dev libxcb-shape0-dev libxcb-sync-dev libxcb-xfixes0-dev             libxcb-xinerama0-dev libxcb-cursor-dev libxi-dev libsm-dev libice-dev libxrender-dev libssl-dev zlib1g-dev
+          sudo apt-get install -y $LINUX_GUI_PACKAGES
 
       - name: Install build tools (macOS)
         if: runner.os == 'macOS'
@@ -74,7 +81,7 @@ jobs:
       - name: Build
         run: |
           set -o pipefail
-          if ! cmake --build build 2>&1 | tee build.log; then
+          if ! cmake --build build -t install 2>&1 | tee build.log; then
             # annotations are readable without signing in, job logs are not
             grep -E 'error:' build.log | sort -u | head -40 | while IFS= read -r line; do echo "::error::$line"; done
             exit 1
@@ -82,3 +89,100 @@ jobs:
 
       - name: Test
         run: ctest --test-dir build --output-on-failure --timeout 300
+
+      - name: GUI smoke test
+        if: runner.os == 'Linux'
+        run: ci/gui-smoke-test.sh build/install/debugvision
+
+  gui-debian:
+    name: GUI (debian 13)
+    runs-on: ubuntu-latest
+    container: debian:trixie
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Install build tools
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends build-essential cmake git curl bzip2 ca-certificates $LINUX_GUI_PACKAGES
+
+      - uses: actions/checkout@v4
+
+      - name: Install CopperSpice (prebuilt release)
+        # /opt/copperspice is the default CMake looks in, so configure needs no CopperSpice options
+        run: |
+          mkdir -p /opt/copperspice
+          curl -sSL "https://github.com/copperspice/copperspice/releases/download/${COPPERSPICE_TAG}/copperspice-2.1.0-debian13-x64.tar.bz2" | tar xj -C /opt/copperspice
+
+      - name: Configure
+        run: cmake -G Ninja -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo
+
+      - name: Build
+        run: |
+          set -o pipefail
+          if ! cmake --build build -t install 2>&1 | tee build.log; then
+            grep -E 'error:' build.log | sort -u | head -40 | while IFS= read -r line; do echo "::error::$line"; done
+            exit 1
+          fi
+
+      - name: Test
+        run: ctest --test-dir build --output-on-failure --timeout 300
+
+      - name: GUI smoke test
+        run: ci/gui-smoke-test.sh build/install/debugvision
+
+  gui-windows:
+    name: GUI (windows-2022)
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Install CopperSpice (installer)
+        shell: pwsh
+        timeout-minutes: 15
+        run: |
+          $setup = "$env:RUNNER_TEMP\setup-CopperSpice.exe"
+          Invoke-WebRequest "https://github.com/copperspice/copperspice/releases/download/$env:COPPERSPICE_TAG/setup-CopperSpice-2.1.0-x64-MSVC-release.exe" -OutFile $setup
+          # a CreateInstall installer; -silent is its unattended mode
+          $p = Start-Process $setup -ArgumentList '-silent' -PassThru
+          if (-not $p.WaitForExit(600000)) { Stop-Process $p -Force; throw 'the CopperSpice installer did not finish within 10 minutes' }
+          "installer exit code: $($p.ExitCode)"
+          # the install folder is not documented: look in the likely places
+          $roots = @('C:\', $env:ProgramFiles, ${env:ProgramFiles(x86)}, $env:LOCALAPPDATA, $env:USERPROFILE) | Where-Object { $_ -and (Test-Path $_) }
+          $config = $null
+          foreach ($root in $roots) {
+            $config = Get-ChildItem $root -Directory -Filter '*opper*' -ErrorAction SilentlyContinue |
+              ForEach-Object { Get-ChildItem $_.FullName -Recurse -Filter CopperSpiceConfig.cmake -ErrorAction SilentlyContinue } |
+              Select-Object -First 1
+            if ($config) { break }
+          }
+          if (-not $config) {
+            foreach ($root in $roots) { "--- $root"; Get-ChildItem $root -Directory -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Name }
+            throw 'CopperSpiceConfig.cmake not found after installing CopperSpice'
+          }
+          $configDir = $config.Directory.FullName
+          $prefix = (Resolve-Path "$configDir\..\..").Path
+          "CopperSpice config: $configDir, prefix: $prefix"
+          "CS_CONFIG_DIR=$configDir" >> $env:GITHUB_ENV
+          "CS_PREFIX=$prefix" >> $env:GITHUB_ENV
+
+      - name: Configure
+        run: cmake -G Ninja -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCOPPERSPICE_DIR="$env:CS_PREFIX" -DCopperSpice_DIR="$env:CS_CONFIG_DIR"
+
+      - name: Build
+        run: cmake --build build -t install
+
+      - name: Test
+        run: ctest --test-dir build --output-on-failure --timeout 300
+
+      - name: Check the self-contained executable
+        shell: pwsh
+        run: |
+          $exe = Get-Item build\install\debugvision.exe
+          "debugvision.exe: $($exe.Length) bytes"
+          if ($exe.Length -lt 10MB) { throw 'debugvision.exe does not contain the embedded application and DLLs' }
+          build\install\dvcli.exe --list-sources
+          if ($LASTEXITCODE -ne 0) { throw "dvcli --list-sources failed with $LASTEXITCODE" }
