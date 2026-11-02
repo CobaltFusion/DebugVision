@@ -204,7 +204,7 @@ TEST_CASE("udp sender filter")
     ingest.stop();
 }
 
-TEST_CASE("udp sender sends all datagrams from one port")
+TEST_CASE("udp sender: one port for all datagrams, one process by default")
 {
     LineStore store;
     Ingest ingest(store);
@@ -226,5 +226,10 @@ TEST_CASE("udp sender sends all datagrams from one port")
     });
     REQUIRE(processes.size() == 2);
     CHECK(processes[0] == processes[1]);
+    CHECK(processes[0] == "[UDP 127.0.0.1]"); // the default process name has no port
+    // a sender that opens a socket per datagram: still one process by default
+    CHECK(platform::sendUdp("127.0.0.1", 34570, "third", error));
+    CHECK(waitFor([&] { return messages(store).size() == 3; }));
+    store.forEach(store.endSeq() - 1, store.endSeq(), [&](const LineRef& line) { CHECK(store.origins().get(line.record->originId).processName == "[UDP 127.0.0.1]"); });
     ingest.stop();
 }

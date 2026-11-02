@@ -29,7 +29,7 @@ struct UdpParams
     uint16_t port = 2020;
     std::string multicastGroup;              // optional
     std::vector<std::string> allowedSenders; // optional: addresses or CIDR ranges
-    std::string processName = "[UDP {ip}:{port}]";
+    std::string processName = "[UDP {ip}]";
     bool splitOnNewline = true;
 };
 
