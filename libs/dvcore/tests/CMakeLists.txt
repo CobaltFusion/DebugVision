@@ -4,6 +4,7 @@ add_executable(dvcore_tests
   test_linestore.cpp
   test_fileformat.cpp
   test_filters.cpp
+  test_matcher.cpp
   test_sourceconfig.cpp
   test_eventloop.cpp
   test_sources.cpp
