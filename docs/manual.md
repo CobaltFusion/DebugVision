@@ -8,6 +8,7 @@ User manual: a portable, CPU-efficient log viewer in the spirit of DebugView++
 - [Source specifications](#source-specifications)
 - [Examples](#examples)
 - [Settings](#settings)
+- [Timeline](#timeline)
 - [dvcli: the command line version](#dvcli-the-command-line-version)
 
 ## Overall usage
@@ -24,6 +25,8 @@ Every line gets a line number, a time stamp, the process ID and the process name
   Ctrl+H (highlight), Ctrl+I (include), Ctrl+E (exclude) or Ctrl+K (token).
 - **Finding text**: Ctrl+F, then F3 for the next match and Shift+F3 for the previous one.
 - **Bookmarks**: Ctrl+F2 toggles a bookmark, F2 and Shift+F2 jump between bookmarks.
+- **Timeline**: View > Timeline (Ctrl+L) shows the lines of a view on a time axis below the list, as bars from a begin
+  line to an end line and as markers for single events. See [Timeline](#timeline).
 - **Pausing**: Pause (or Ctrl+Shift+P) stops capturing temporarily. Log > Clear Log (Ctrl+Shift+X) empties the log.
 - **Saving**: File > Save Log saves everything in DebugView++ `.dblog` format, Save View only the filtered lines and Save Selection only the selected ones.
   File > Save Configuration saves the views, filters and sources to a `.json` file.
@@ -153,6 +156,42 @@ Settings are saved on exit to `settings.json` in the configuration directory, un
 | macOS | `~/Library/Application Support/DebugVision/settings.json` |
 
 Help > About DebugVision shows the settings file in use.
+
+## Timeline
+
+The timeline shows the lines of a view on a time axis, like an oscilloscope or [TimeLens](https://github.com/CobaltFusion/timelens):
+how long things take, how they overlap and when events happen. It is shown below the log list with View > Timeline (Ctrl+L)
+and uses only the lines the view shows, so the view's filters also filter the timeline. Each view has its own timeline and rules.
+
+Each process gets a lane. What appears in it is set with View > Timeline Rules...:
+
+| Kind | Patterns | Drawn as |
+|---|---|---|
+| Span | Begin and End | A bar from a line matching Begin to the next line of the same process matching End. Overlapping bars are stacked; a bar that has not ended yet is drawn faded up to the newest line. |
+| Event | Begin | A marker on every matching line: a lollipop (a line with a circle), a square or a triangle, to tell kinds of events apart. |
+
+The patterns use the match types of filters: Simple, Wildcard, Regex and RegexCase. When the Begin and End patterns contain
+capture groups, a span only ends at an End line that captures the same text. With the rules
+
+| Name | Kind | Begin | End | Match |
+|---|---|---|---|---|
+| frame | Span | `frame (\d+) start` | `frame (\d+) done` | Regex |
+| IRQ | Event | `IRQ` | | Simple |
+
+the lines `Frame 1 start`, `Frame 2 start`, `Frame 1 done`, `Frame 2 done` make two overlapping bars, and every line containing
+`IRQ` gets a lollipop. Spans nest: an End closes the most recent open span of its rule and process.
+
+#### Using the timeline
+
+- **Mouse wheel**: zoom in or out around the mouse pointer.
+- **Drag with the right or middle button**: pan.
+- **Drag with the left button**: measure the time between two points.
+- **Click a bar or marker**: select its line in the list. The line selected in the list is shown as a red vertical line.
+- **Hover a bar**: its duration, its begin and end lines, and the minimum, average and maximum duration of the completed spans of that rule in that lane.
+- **Keys** (click the timeline first): `a` and `d` pan, `w` and `s` zoom, Home or `q` show everything and follow new lines again, Esc removes the measurement.
+
+While Auto Scroll is on, the newest line stays at the right edge. Zooming or panning stops that until Home or `q` is pressed.
+Drag the divider between the list and the timeline to give the timeline more room.
 
 ## dvcli: the command line version
 
