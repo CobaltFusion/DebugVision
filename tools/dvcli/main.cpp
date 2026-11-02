@@ -7,6 +7,7 @@
 #include "dvcore/LineStore.h"
 #include "dvcore/Platform.h"
 
+#include <algorithm>
 #include <atomic>
 #include <condition_variable>
 #include <csignal>
@@ -59,6 +60,7 @@ Columns:
   -t                   separate columns with tabs instead of spaces
 Capture:
   At least one source is required.
+  dvcli exits when all sources have ended (e.g. end of --stdin).
   -a                   auto newline: every message is a line of its own (default on; -a- turns it off)
   --ods                capture OutputDebugString (Windows), local and global (global needs administrator rights)
   --source <spec>      add a source, e.g. udp:port=2020,bind=0.0.0.0  file:path=app.log,tail=1
@@ -98,16 +100,33 @@ struct Options
 std::mutex g_mutex;
 std::condition_variable g_cv;
 std::atomic<bool> g_quit{false};
+std::atomic<bool> g_sourcesEnded{false};
 bool g_signaled = false;
 
-void requestQuit()
+void wakeMain()
 {
-    g_quit = true;
     {
         std::lock_guard lock(g_mutex);
         g_signaled = true;
     }
     g_cv.notify_one();
+}
+
+void requestQuit()
+{
+    g_quit = true;
+    wakeMain();
+}
+
+// true when no source will produce lines anymore, e.g. stdin at end of input or a process that exited;
+// live sources (OutputDebugString, UDP, TCP, tailed files) never end
+bool allSourcesEnded(const std::vector<dv::SourceInfo>& sources)
+{
+    return !sources.empty() && std::all_of(sources.begin(), sources.end(), [](const dv::SourceInfo& s) {
+        if (s.config.type == "process" && s.config.getParams<dv::ProcessParams>().restartOnExit)
+            return false;
+        return s.status.state == dv::SourceState::Stopped;
+    });
 }
 
 void onSignal(int)
@@ -438,17 +457,19 @@ int main(int argc, char* argv[])
         Output output(options);
 
         dv::LineStore store;
-        store.setListener([] {
-            {
-                std::lock_guard lock(g_mutex);
-                g_signaled = true;
-            }
-            g_cv.notify_one();
-        });
+        store.setListener(wakeMain);
         dv::Ingest ingest(store);
         watchQuitRequests(ingest.loop());
         std::signal(SIGINT, onSignal);
         std::signal(SIGTERM, onSignal);
+        // a source adds its last lines before it reports Stopped, so they are in the store when g_sourcesEnded is seen
+        ingest.setStatusCallback([&ingest] {
+            if (!g_sourcesEnded && allSourcesEnded(ingest.sources()))
+            {
+                g_sourcesEnded = true;
+                wakeMain();
+            }
+        });
         ingest.applySources(configs);
         ingest.start();
 
@@ -464,6 +485,7 @@ int main(int argc, char* argv[])
                 g_cv.wait_for(lock, std::chrono::milliseconds(250), [] { return g_signaled; });
                 g_signaled = false;
             }
+            bool ended = g_sourcesEnded;
             store.consumeSignal();
             // keep memory bounded: dvcli does not need history
             next = std::max(next, store.beginSeq());
@@ -484,6 +506,8 @@ int main(int argc, char* argv[])
             });
             output.flush();
             store.crop(next);
+            if (ended)
+                break;
         }
         ingest.stop();
         output.flush();

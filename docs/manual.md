@@ -216,6 +216,15 @@ and/or a log file. It is the equivalent of DebugView++'s DebugViewConsole and is
 remote sessions. It keeps no history, so it can run for a long time with constant memory use. Stop it with Ctrl+C,
 `dvcli -x` or a quit message (`-m`).
 
+dvcli also stops by itself, after writing all lines, when all its sources have ended:
+
+- `--stdin` at the end of the input;
+- a process source when its program has exited (unless `restartOnExit` is set);
+- a file source with `tail=0` once the file is read.
+
+Live sources never end: OutputDebugString, UDP, TCP and tailed files. So `--stdin --udp 2020` keeps running after the
+input ended.
+
 ```
 dvcli [options] [-c] [-d <file>] [--ods] [--source <spec>]... [--udp <port>]... [--file <path>]... [--stdin]
 dvcli -x
@@ -272,7 +281,8 @@ Add sources, exactly as for DebugVision (see [Source specifications](#source-spe
 
 #### `--stdin`
 
-Reads standard input as a source, for example `make 2>&1 | dvcli -c --stdin -i error`.
+Reads standard input as a source. dvcli exits at the end of the input: `make 2>&1 | dvcli -c --stdin -i error` shows the
+errors and exits when `make` is done.
 
 #### `-a`, `-a-`
 

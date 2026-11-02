@@ -19,3 +19,5 @@ target_link_libraries(dvcli PRIVATE
 add_dependencies(dvcli dv_manual)
 
 install(TARGETS dvcli DESTINATION ${CMAKE_INSTALL_PREFIX})
+
+add_test(NAME dvcli_stdin_end COMMAND ${CMAKE_COMMAND} -DDVCLI=$<TARGET_FILE:dvcli> -P ${CMAKE_CURRENT_SOURCE_DIR}/test_stdin_end.cmake)
