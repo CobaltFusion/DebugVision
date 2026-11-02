@@ -217,7 +217,7 @@ remote sessions. It keeps no history, so it can run for a long time with constan
 `dvcli -x` or a quit message (`-m`).
 
 ```
-dvcli [options] [-c] [-d <file>] [--source <spec>]... [--udp <port>]... [--file <path>]... [--stdin]
+dvcli [options] [-c] [-d <file>] [--ods] [--source <spec>]... [--udp <port>]... [--file <path>]... [--stdin]
 dvcli -x
 dvcli -u <message> [<port>]
 dvcli --list-sources
@@ -259,11 +259,16 @@ These select what is written before each message with `-c`, in this order. Witho
 
 ### Capture
 
+At least one source is required; nothing is captured by default.
+
+#### `--ods`
+
+Windows only: captures `OutputDebugString` with scope `both`, the same as `--source outputdebugstring:scope=both`.
+Global capture needs administrator rights and is skipped silently without them.
+
 #### `--source <spec>`, `--udp <port>`, `--file <path>`
 
 Add sources, exactly as for DebugVision (see [Source specifications](#source-specifications)). Each can be given more than once.
-On Windows, when no source is given, `OutputDebugString` is captured with scope `both`
-(global capture needs administrator rights and is skipped silently without them). On Linux and macOS a source is required.
 
 #### `--stdin`
 
@@ -328,13 +333,13 @@ Opens this manual in the default web browser.
 
 ```
 # show OutputDebugString output (Windows) with time and process name
-dvcli -csn
+dvcli -csn --ods
 
-# log everything to a file without console output
-dvcli -d capture.dblog
+# log all OutputDebugString output to a file without console output
+dvcli -d capture.dblog --ods
 
 # console and file, only messages from processes whose name contains "server", without heartbeat messages
-dvcli -c -d server.dblog --include-process server -e heartbeat
+dvcli -c -d server.dblog --ods --include-process server -e heartbeat
 
 # follow a log file and stop when the test run finishes
 dvcli -c --file test.log -m "TESTS FINISHED"

@@ -40,7 +40,7 @@ namespace {
 const char* const usage = R"(dvcli - capture and filter debug output
 
 Usage:
-  dvcli [options] [-c] [-d <file>] [--source <spec>]... [--udp <port>]... [--file <path>]... [--stdin]
+  dvcli [options] [-c] [-d <file>] [--ods] [--source <spec>]... [--udp <port>]... [--file <path>]... [--stdin]
   dvcli -x      stop all running dvcli instances (not available on macOS, use 'pkill dvcli')
   dvcli -u <message> [<port>]   send <message> as a UDP broadcast (default port 2020)
   dvcli -h | --help
@@ -58,7 +58,9 @@ Columns:
   -n                   process name
   -t                   separate columns with tabs instead of spaces
 Capture:
+  At least one source is required.
   -a                   auto newline: every message is a line of its own (default on; -a- turns it off)
+  --ods                capture OutputDebugString (Windows), local and global (global needs administrator rights)
   --source <spec>      add a source, e.g. udp:port=2020,bind=0.0.0.0  file:path=app.log,tail=1
                        process:command=make,arguments=-j8;all   tcp-listen:port=2021
   --udp <port>         shorthand for --source udp:port=<port>
@@ -73,12 +75,6 @@ Filters (case-insensitive text):
   -m <text>            quit when a (filtered) message contains <text>
   -v                   verbose
 )";
-
-#ifdef _WIN32
-const char* const sourceNote = "On Windows, OutputDebugString is captured when no other source is given.\n";
-#else
-const char* const sourceNote = "At least one source is required (OutputDebugString exists only on Windows).\n";
-#endif
 
 struct Options
 {
@@ -353,7 +349,6 @@ int main(int argc, char* argv[])
             if (arg == "-h" || arg == "--help")
             {
                 std::fputs(usage, stdout);
-                std::fputs(sourceNote, stdout);
                 return 0;
             }
             if (arg == "--webhelp")
@@ -389,6 +384,14 @@ int main(int argc, char* argv[])
             else if (arg == "--udp") options.sources.push_back("udp:port=" + value());
             else if (arg == "--file") options.sources.push_back("file:path=" + value());
             else if (arg == "--stdin") options.readStdin = true;
+            else if (arg == "--ods")
+            {
+#ifdef _WIN32
+                options.sources.push_back("outputdebugstring:scope=both");
+#else
+                throw std::runtime_error("--ods: OutputDebugString exists only on Windows");
+#endif
+            }
             else
             {
                 // combined short flags, e.g. -clsqpn
@@ -426,15 +429,7 @@ int main(int argc, char* argv[])
         if (options.readStdin)
             configs.push_back(registry.makeDefault("stdin"));
         if (configs.empty())
-        {
-#ifdef _WIN32
-            auto ods = registry.makeDefault("outputdebugstring");
-            ods.setParams(dv::OutputDebugStringParams{"both"});
-            configs.push_back(ods);
-#else
-            throw std::runtime_error("no source given; use --source, --udp, --file or --stdin");
-#endif
-        }
+            throw std::runtime_error("no source given; use --ods, --source, --udp, --file or --stdin");
         for (auto& c : configs)
             c.autoNewline = options.autoNewline;
 
