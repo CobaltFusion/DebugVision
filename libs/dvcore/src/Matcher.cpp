@@ -237,6 +237,21 @@ bool Matcher::matchKey(std::string_view text, FilterState& state, std::string& k
 
 bool Matcher::matchGroups(std::string_view text, FilterState& state, std::string& groups) const
 {
+    std::vector<std::string> list;
+    groups.clear();
+    if (!matchGroups(text, state, list))
+        return false;
+    for (size_t g = 0; g < list.size(); ++g)
+    {
+        if (g > 0)
+            groups.push_back('\0');
+        groups += list[g];
+    }
+    return true;
+}
+
+bool Matcher::matchGroups(std::string_view text, FilterState& state, std::vector<std::string>& groups) const
+{
     groups.clear();
     if (m_literal)
         return containsIgnoreCase(text, m_lowerNeedle);
@@ -245,12 +260,14 @@ bool Matcher::matchGroups(std::string_view text, FilterState& state, std::string
     if (rc < 0)
         return false;
     auto ov = pcre2_get_ovector_pointer_8(md);
+    // groups after the last one that participated are not counted in rc
+    uint32_t count = 0;
+    pcre2_pattern_info_8(code(m_code), PCRE2_INFO_CAPTURECOUNT, &count);
+    groups.resize(count);
     for (int g = 1; g < rc; ++g)
     {
-        if (g > 1)
-            groups.push_back('\0');
         if (ov[2 * g] != PCRE2_UNSET)
-            groups.append(text.substr(ov[2 * g], ov[2 * g + 1] - ov[2 * g]));
+            groups[static_cast<size_t>(g - 1)] = std::string(text.substr(ov[2 * g], ov[2 * g + 1] - ov[2 * g]));
     }
     return true;
 }

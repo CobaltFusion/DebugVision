@@ -18,8 +18,9 @@
 namespace dv {
 
 // What the timeline of a view shows: a Span rule makes a bar from a line matching 'begin' to the next line matching
-// 'end' (of the same process; when the patterns have capture groups, the groups must be equal, so
-// "frame (\d+) start" pairs with "frame (\d+) done" of the same frame). An Event rule marks single lines.
+// 'end' of the same process. With capture groups the groups must be equal, so "frame (\d+) start" pairs with
+// "frame (\d+) done" of the same frame. In a regular expression end pattern \1 to \9 refer to the groups of the
+// begin pattern instead: "Enter (\w+)" pairs with "Exit \1" of the same name. An Event rule marks single lines.
 enum class TimelineKind : int
 {
     Span = 0,
@@ -120,9 +121,22 @@ private:
     {
         std::optional<Matcher> begin;
         std::optional<Matcher> end;
+        // with back references: the groups that form the pairing key, in reference order (empty: all groups)
+        std::vector<size_t> beginKeyGroups;
+        std::vector<size_t> endKeyGroups;
+        bool caseless = true; // the key is compared without case, like the match
     };
 
     TimelineLane& lane(std::string_view process);
+
+public:
+    // replaces each \N in a regular expression end pattern by a capture group with the pattern of group N of the
+    // begin pattern, so the end matches what the begin matched; returns "" when 'end' has no back references.
+    // beginGroups/endGroups receive the (0-based) groups to compare. Throws std::runtime_error for a bad reference.
+    static std::string rewriteBackReferences(const std::string& begin, const std::string& end, std::vector<size_t>& beginGroups,
+        std::vector<size_t>& endGroups);
+
+private:
 
     std::vector<TimelineRule> m_rules;
     std::vector<Compiled> m_compiled;
@@ -131,7 +145,7 @@ private:
     std::map<std::string, size_t, std::less<>> m_laneIndex;
     // (rule, pid, capture groups) -> the open spans, innermost last, as (lane, span index)
     std::map<std::tuple<uint32_t, uint32_t, std::string>, std::vector<std::pair<size_t, size_t>>> m_open;
-    std::string m_groups;
+    std::vector<std::string> m_groups;
     int64_t m_firstNs = INT64_MAX;
     int64_t m_lastNs = INT64_MIN;
 };

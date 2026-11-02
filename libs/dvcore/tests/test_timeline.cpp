@@ -81,6 +81,70 @@ TEST_CASE("timeline: capture groups pair interleaved spans")
     CHECK(spans[1].depth == 1);
 }
 
+TEST_CASE("timeline: \\1 in the end pattern refers to the group of the begin pattern")
+{
+    TimelineModel model({span("Enter (.*)", "Exit \\1", MatchType::Regex)});
+    feed(model, {{0, "Enter outer"}, {10, "Enter inner"}, {20, "Exit inner"}, {25, "Exit nothing"}, {30, "Exit outer"}});
+    auto& spans = model.lanes()[0].spans;
+    REQUIRE(spans.size() == 2);
+    CHECK(spans[0].beginNs == 0);
+    CHECK(spans[0].endNs == 30);
+    CHECK(spans[1].beginNs == 10);
+    CHECK(spans[1].endNs == 20);
+}
+
+TEST_CASE("timeline: a back reference matches what the begin group matched, not more")
+{
+    TimelineModel model({span("Enter (\\w+)", "Exit \\1", MatchType::Regex)});
+    feed(model, {{0, "Enter foo"}, {5, "Exit foobar"}, {10, "Exit foo, took 10 ns"}});
+    auto& spans = model.lanes()[0].spans;
+    REQUIRE(spans.size() == 1);
+    CHECK(spans[0].endNs == 10); // "foobar" is another name, the text after "foo" does not matter
+}
+
+TEST_CASE("timeline: back references compare like the match type, with or without case")
+{
+    TimelineModel caseless({span("enter (\\w+)", "exit \\1", MatchType::Regex)});
+    feed(caseless, {{0, "ENTER Foo"}, {5, "exit foo"}});
+    CHECK(caseless.lanes()[0].spans[0].endNs == 5);
+
+    TimelineModel exact({span("enter (\\w+)", "exit \\1", MatchType::RegexCase)});
+    feed(exact, {{0, "enter Foo"}, {5, "exit foo"}, {7, "exit Foo"}});
+    CHECK(exact.lanes()[0].spans[0].endNs == 7);
+}
+
+TEST_CASE("timeline: several back references, in any order")
+{
+    TimelineModel model({span("(\\w+) calls (\\w+)", "return to \\1 from \\2", MatchType::Regex)});
+    feed(model, {{0, "a calls b"}, {1, "c calls b"}, {2, "return to c from b"}, {3, "return to a from b"}});
+    auto& spans = model.lanes()[0].spans;
+    REQUIRE(spans.size() == 2);
+    CHECK(spans[0].endNs == 3);
+    CHECK(spans[1].endNs == 2);
+
+    std::vector<size_t> beginGroups;
+    std::vector<size_t> endGroups;
+    CHECK(TimelineModel::rewriteBackReferences("(\\w+) calls (\\d+)", "back \\2 to \\1", beginGroups, endGroups) == "back (\\d+) to (\\w+)");
+    CHECK(beginGroups == std::vector<size_t>{1, 0});
+    CHECK(endGroups == std::vector<size_t>{0, 1});
+}
+
+TEST_CASE("timeline: rewriting back references")
+{
+    std::vector<size_t> b;
+    std::vector<size_t> e;
+    // named groups count, non-capturing groups and lookbehinds do not; escapes and classes are skipped
+    CHECK(TimelineModel::rewriteBackReferences("(?:x)(?<=y)\\((?<name>[a-z(]+)\\)", "(end) \\1", b, e) == "(end) ([a-z(]+)");
+    CHECK(b == std::vector<size_t>{0});
+    CHECK(e == std::vector<size_t>{1}); // the user's own group in end comes first
+    b.clear();
+    e.clear();
+    CHECK(TimelineModel::rewriteBackReferences("(\\w+)", "literal \\\\1 and [\\1]", b, e).empty()); // no references
+    CHECK_THROWS_AS(TimelineModel::rewriteBackReferences("(\\w+)", "Exit \\2", b, e), std::runtime_error);
+    CHECK_THROWS_AS(TimelineModel::rewriteBackReferences("(\\w+)", "Exit \\12", b, e), std::runtime_error);
+    CHECK_THROWS_AS(TimelineModel({span("Enter (\\w+)", "Exit \\2", MatchType::Regex)}), TimelineError);
+}
+
 TEST_CASE("timeline: spans pair per process, lanes per process name")
 {
     TimelineModel model({span("start", "done")});

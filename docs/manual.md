@@ -181,6 +181,17 @@ capture groups, a span only ends at an End line that captures the same text. Wit
 the lines `Frame 1 start`, `Frame 2 start`, `Frame 1 done`, `Frame 2 done` make two overlapping bars, and every line containing
 `IRQ` gets a lollipop. Spans nest: an End closes the most recent open span of its rule and process.
 
+In a regular expression (Regex or RegexCase), `\1` to `\9` in the End pattern refer to the groups captured by the Begin
+pattern, so the End must contain the same text as the Begin captured:
+
+| Name | Kind | Begin | End | Match |
+|---|---|---|---|---|
+| calls | Span | `Enter (\w+)` | `Exit \1` | Regex |
+
+pairs `Enter parse` with the next `Exit parse` of the same process, and `Enter load` with `Exit load`, so calls of different
+functions can overlap or nest. `\1` matches what the group pattern of Begin matches (here `\w+`), so `Exit parse, took 3 ms`
+also ends the `parse` span, but `Exit parser` does not. With Regex the names are compared without case, with RegexCase with case.
+
 #### Using the timeline
 
 - **Mouse wheel**: zoom in or out around the mouse pointer.

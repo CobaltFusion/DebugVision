@@ -6,6 +6,7 @@
 #include <functional>
 #include <string>
 #include <string_view>
+#include <vector>
 
 namespace dv {
 
@@ -32,6 +33,8 @@ public:
 
     // like matches(), and returns the capture groups of the match joined with '\0' (empty when the pattern has none)
     bool matchGroups(std::string_view text, FilterState& state, std::string& groups) const;
+    // the same, one string per capture group (empty when a group did not participate)
+    bool matchGroups(std::string_view text, FilterState& state, std::vector<std::string>& groups) const;
 
 private:
     MatchType m_type;

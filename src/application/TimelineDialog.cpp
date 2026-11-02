@@ -53,7 +53,9 @@ TimelineDialog::TimelineDialog(const std::vector<dv::TimelineRule>& rules, QWidg
     auto help = new QLabel(
         "A <b>span</b> draws a bar from a line matching <i>Begin</i> to the next line of the same process matching <i>End</i>. "
         "With capture groups both must capture the same text, so <tt>frame (\\d+) start</tt> pairs with <tt>frame (\\d+) done</tt> "
-        "of the same frame. An <b>event</b> marks every line matching <i>Begin</i>. Only the lines shown in the view are used.");
+        "of the same frame. In a regular expression <i>End</i>, <tt>\\1</tt> to <tt>\\9</tt> refer to the groups of <i>Begin</i>: "
+        "<tt>Enter (\\w+)</tt> pairs with <tt>Exit \\1</tt> of the same name. "
+        "An <b>event</b> marks every line matching <i>Begin</i>. Only the lines shown in the view are used.");
     help->setWordWrap(true);
     layout->addWidget(help);
 
