@@ -8,6 +8,7 @@ add_library(dvcore STATIC
   src/LineStore.cpp
   src/LogView.cpp
   src/Matcher.cpp
+  src/Timeline.cpp
   src/Settings.cpp
   src/Source.cpp
   src/SourceConfig.cpp
