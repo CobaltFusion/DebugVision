@@ -123,7 +123,8 @@ const std::string& ViewTab::processName(uint32_t originId)
 void ViewTab::feed()
 {
     auto view = m_logView->view();
-    if (view->generation() != m_generation || view->size() < m_fed)
+    bool rebuilt = view->generation() != m_generation || view->size() < m_fed;
+    if (rebuilt)
     {
         m_generation = view->generation();
         m_model.reset();
@@ -148,5 +149,5 @@ void ViewTab::feed()
         }
         m_fed += lines.size();
     }
-    m_timeline->modelChanged(m_logView->autoScroll());
+    m_timeline->modelChanged(m_logView->autoScroll(), rebuilt);
 }

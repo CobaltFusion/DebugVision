@@ -362,21 +362,56 @@ std::unique_ptr<TcpStream> tcpConnect(const std::string& host, uint16_t port, st
     return nullptr;
 }
 
-bool sendUdp(const std::string& address, uint16_t port, std::string_view data, std::string& error)
+std::unique_ptr<UdpSender> UdpSender::open(const std::string& address, uint16_t port, std::string& error)
 {
+    class UdpSenderWin32 : public UdpSender
+    {
+    public:
+        UdpSenderWin32(SOCKET s, const addrinfo& ai) :
+            m_socket(s),
+            m_addrLen(static_cast<int>(ai.ai_addrlen))
+        {
+            std::memcpy(&m_addr, ai.ai_addr, ai.ai_addrlen);
+        }
+
+        ~UdpSenderWin32() override { closesocket(m_socket); }
+
+        bool send(std::string_view data, std::string& error) override
+        {
+            if (sendto(m_socket, data.data(), static_cast<int>(data.size()), 0, reinterpret_cast<const sockaddr*>(&m_addr), m_addrLen) != SOCKET_ERROR)
+                return true;
+            error = socketError();
+            return false;
+        }
+
+    private:
+        SOCKET m_socket;
+        sockaddr_storage m_addr{};
+        int m_addrLen;
+    };
+
     ensureWinsock();
     auto ai = resolve(address, port, SOCK_DGRAM, false, error);
     if (!ai)
-        return false;
+        return nullptr;
     auto s = socket(ai->ai_family, ai->ai_socktype, ai->ai_protocol);
+    if (s == INVALID_SOCKET)
+    {
+        error = socketError();
+        freeaddrinfo(ai);
+        return nullptr;
+    }
     BOOL broadcast = TRUE;
     setsockopt(s, SOL_SOCKET, SO_BROADCAST, reinterpret_cast<const char*>(&broadcast), sizeof(broadcast));
-    auto n = sendto(s, data.data(), static_cast<int>(data.size()), 0, ai->ai_addr, static_cast<int>(ai->ai_addrlen));
-    if (n == SOCKET_ERROR)
-        error = socketError();
-    closesocket(s);
+    auto sender = std::make_unique<UdpSenderWin32>(s, *ai);
     freeaddrinfo(ai);
-    return n != SOCKET_ERROR;
+    return sender;
+}
+
+bool sendUdp(const std::string& address, uint16_t port, std::string_view data, std::string& error)
+{
+    auto sender = UdpSender::open(address, port, error);
+    return sender && sender->send(data, error);
 }
 
 } // namespace dv::platform

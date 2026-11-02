@@ -314,20 +314,55 @@ std::unique_ptr<TcpStream> tcpConnect(const std::string& host, uint16_t port, st
     return nullptr;
 }
 
-bool sendUdp(const std::string& address, uint16_t port, std::string_view data, std::string& error)
+std::unique_ptr<UdpSender> UdpSender::open(const std::string& address, uint16_t port, std::string& error)
 {
+    class UdpSenderPosix : public UdpSender
+    {
+    public:
+        UdpSenderPosix(int fd, const addrinfo& ai) :
+            m_fd(fd),
+            m_addrLen(ai.ai_addrlen)
+        {
+            std::memcpy(&m_addr, ai.ai_addr, ai.ai_addrlen);
+        }
+
+        ~UdpSenderPosix() override { ::close(m_fd); }
+
+        bool send(std::string_view data, std::string& error) override
+        {
+            if (::sendto(m_fd, data.data(), data.size(), 0, reinterpret_cast<const sockaddr*>(&m_addr), m_addrLen) >= 0)
+                return true;
+            error = std::strerror(errno);
+            return false;
+        }
+
+    private:
+        int m_fd;
+        sockaddr_storage m_addr{};
+        socklen_t m_addrLen;
+    };
+
     auto ai = resolve(address, port, SOCK_DGRAM, false, error);
     if (!ai)
-        return false;
+        return nullptr;
     auto fd = ::socket(ai->ai_family, ai->ai_socktype, ai->ai_protocol);
+    if (fd < 0)
+    {
+        error = std::strerror(errno);
+        freeaddrinfo(ai);
+        return nullptr;
+    }
     int broadcast = 1;
     setsockopt(fd, SOL_SOCKET, SO_BROADCAST, &broadcast, sizeof(broadcast));
-    auto n = ::sendto(fd, data.data(), data.size(), 0, ai->ai_addr, ai->ai_addrlen);
-    if (n < 0)
-        error = std::strerror(errno);
-    ::close(fd);
+    auto sender = std::make_unique<UdpSenderPosix>(fd, *ai);
     freeaddrinfo(ai);
-    return n >= 0;
+    return sender;
+}
+
+bool sendUdp(const std::string& address, uint16_t port, std::string_view data, std::string& error)
+{
+    auto sender = UdpSender::open(address, port, error);
+    return sender && sender->send(data, error);
 }
 
 } // namespace dv::platform

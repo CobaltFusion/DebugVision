@@ -66,11 +66,13 @@ void TimelineWidget::rulesChanged()
         auto c = rule.color.isAuto ? generator.next() : rule.color;
         m_ruleColors.push_back(QColor(c.red(), c.green(), c.blue()));
     }
+    measureLabels(true);
     update();
 }
 
-void TimelineWidget::modelChanged(bool follow)
+void TimelineWidget::modelChanged(bool follow, bool rebuilt)
 {
+    measureLabels(rebuilt);
     if (m_model.empty())
     {
         m_fitted = false;
@@ -99,15 +101,22 @@ void TimelineWidget::setCursorNs(int64_t ns)
 
 // ---------------------------------------------------------------------------------------------------- geometry
 
+void TimelineWidget::measureLabels(bool all)
+{
+    auto& lanes = m_model.lanes();
+    if (all || lanes.size() < m_measuredLanes)
+    {
+        m_labelWidth = 60;
+        m_measuredLanes = 0;
+    }
+    QFontMetrics fm(font());
+    for (; m_measuredLanes < lanes.size(); ++m_measuredLanes)
+        m_labelWidth = std::max(m_labelWidth, std::min(fm.width(toQString(lanes[m_measuredLanes].name)) + 20, 200));
+}
+
 int TimelineWidget::labelWidth() const
 {
-    if (width() < minPlotWidth)
-        return 0;
-    QFontMetrics fm(font());
-    int w = 60;
-    for (auto& lane : m_model.lanes())
-        w = std::max(w, fm.width(toQString(lane.name)) + 20);
-    return std::min(w, 200);
+    return width() < minPlotWidth ? 0 : m_labelWidth;
 }
 
 int TimelineWidget::plotWidth() const
@@ -181,7 +190,7 @@ void TimelineWidget::panBy(double dx)
 
 // ---------------------------------------------------------------------------------------------------- painting
 
-void TimelineWidget::paintEvent(QPaintEvent*)
+void TimelineWidget::paintEvent(QPaintEvent* event)
 {
     QPainter painter(this);
     auto palette = this->palette();
@@ -196,11 +205,18 @@ void TimelineWidget::paintEvent(QPaintEvent*)
         return;
     }
 
+    // only the lanes in the exposed area: the widget is as high as all lanes, the scroll area shows a part of it
+    auto exposed = event->rect();
     int top = rulerHeight;
-    for (size_t i = 0; i < m_model.lanes().size(); ++i)
+    for (size_t i = 0; i < m_model.lanes().size() && top <= exposed.bottom(); ++i)
     {
         auto& lane = m_model.lanes()[i];
         auto h = laneHeight(lane);
+        if (top + h <= exposed.top())
+        {
+            top += h;
+            continue;
+        }
         if (i % 2 == 1)
             painter.fillRect(QRect(0, top, width(), h), palette.color(QPalette::AlternateBase));
         drawLane(painter, lane, top);
@@ -459,6 +475,13 @@ QString TimelineWidget::toolTip(const Hit& hit) const
 }
 
 // ---------------------------------------------------------------------------------------------------- input
+
+void TimelineWidget::changeEvent(QEvent* event)
+{
+    if (event->type() == QEvent::FontChange)
+        measureLabels(true);
+    QWidget::changeEvent(event);
+}
 
 bool TimelineWidget::event(QEvent* event)
 {

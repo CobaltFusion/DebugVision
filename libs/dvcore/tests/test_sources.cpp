@@ -203,3 +203,28 @@ TEST_CASE("udp sender filter")
     CHECK(messages(store).empty());
     ingest.stop();
 }
+
+TEST_CASE("udp sender sends all datagrams from one port")
+{
+    LineStore store;
+    Ingest ingest(store);
+    ingest.start();
+    ingest.addSource(SourceRegistry::instance().parseSpec("udp:port=34570,bind=127.0.0.1"));
+    CHECK(waitFor([&] { return !ingest.sources().empty() && ingest.sources()[0].status.state == SourceState::Running; }));
+    std::string error;
+    auto sender = platform::UdpSender::open("127.0.0.1", 34570, error);
+    REQUIRE(sender);
+    CHECK(sender->send("first", error));
+    CHECK(sender->send("second", error));
+    CHECK(waitFor([&] { return messages(store).size() == 2; }));
+    // the process name contains the sender's port, so both lines have the same process
+    std::vector<std::string> processes;
+    store.forEach(store.beginSeq(), store.endSeq(), [&](const LineRef& line) {
+        auto& name = store.origins().get(line.record->originId).processName;
+        if (name != "[internal]")
+            processes.push_back(name);
+    });
+    REQUIRE(processes.size() == 2);
+    CHECK(processes[0] == processes[1]);
+    ingest.stop();
+}

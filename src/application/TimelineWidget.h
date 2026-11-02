@@ -22,8 +22,9 @@ class TimelineWidget : public QWidget
 public:
     TimelineWidget(const dv::TimelineModel& model, const int64_t& timeBase, QWidget* parent = nullptr);
 
-    // call after the model changed; 'follow' keeps the newest line in view (the list's Auto Scroll)
-    void modelChanged(bool follow);
+    // call after the model changed; 'follow' keeps the newest line in view (the list's Auto Scroll),
+    // 'rebuilt': the model was reset and filled again
+    void modelChanged(bool follow, bool rebuilt);
     void rulesChanged(); // recomputes the rule colors
     void setCursorNs(int64_t ns); // the time of the line focused in the list, INT64_MIN for none
 
@@ -39,6 +40,7 @@ protected:
     void mouseMoveEvent(QMouseEvent* event) override;
     void mouseReleaseEvent(QMouseEvent* event) override;
     void keyPressEvent(QKeyEvent* event) override;
+    void changeEvent(QEvent* event) override;
     bool event(QEvent* event) override;
 
 private:
@@ -49,6 +51,9 @@ private:
         const dv::TimelineEvent* event = nullptr;
     };
 
+    // updates m_labelWidth for the lanes added since the last call, or for all lanes; text measuring is too slow
+    // to do for every item drawn
+    void measureLabels(bool all);
     int labelWidth() const;
     int plotLeft() const { return labelWidth(); }
     int plotWidth() const;
@@ -71,6 +76,8 @@ private:
     const dv::TimelineModel& m_model;
     const int64_t& m_timeBase;
     std::vector<QColor> m_ruleColors;
+    int m_labelWidth = 60; // the width of the lane names column (when shown)
+    size_t m_measuredLanes = 0;
     int64_t m_viewStart = 0;
     int64_t m_viewWidth = 10'000'000'000; // ns
     bool m_live = true;

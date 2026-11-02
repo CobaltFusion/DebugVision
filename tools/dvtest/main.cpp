@@ -8,6 +8,7 @@
 #include <cstdint>
 #include <cstdio>
 #include <cstdlib>
+#include <memory>
 #include <random>
 #include <stdexcept>
 #include <string>
@@ -185,14 +186,22 @@ public:
     explicit Output(const Options& options) :
         m_options(options)
     {
+        if (m_options.udpPort != 0)
+        {
+            // one socket for all lines: a sender port per line would be a process (and a timeline lane) per line
+            std::string error;
+            m_udp = dv::platform::UdpSender::open(m_options.udpHost, m_options.udpPort, error);
+            if (!m_udp)
+                throw std::runtime_error(error);
+        }
     }
 
     void write(const std::string& line)
     {
-        if (m_options.udpPort != 0)
+        if (m_udp)
         {
             std::string error;
-            if (!dv::platform::sendUdp(m_options.udpHost, m_options.udpPort, line, error))
+            if (!m_udp->send(line, error))
                 throw std::runtime_error(error);
             return;
         }
@@ -210,6 +219,7 @@ public:
 
 private:
     const Options& m_options;
+    std::unique_ptr<dv::platform::UdpSender> m_udp;
 };
 
 std::vector<Style> parseStyles(const std::string& text)
