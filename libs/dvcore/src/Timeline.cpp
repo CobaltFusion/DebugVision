@@ -126,6 +126,21 @@ std::string joinKey(const std::vector<std::string>& groups, const std::vector<si
     return key;
 }
 
+// the text a span shows: the given groups (all groups when empty) as captured, in pattern order, separated by spaces
+std::string spanLabel(const std::vector<std::string>& groups, const std::vector<size_t>& indices)
+{
+    std::string label;
+    for (size_t g = 0; g < groups.size(); ++g)
+    {
+        if (groups[g].empty() || (!indices.empty() && std::find(indices.begin(), indices.end(), g) == indices.end()))
+            continue;
+        if (!label.empty())
+            label.push_back(' ');
+        label += groups[g];
+    }
+    return label;
+}
+
 } // namespace
 
 std::string TimelineModel::rewriteBackReferences(const std::string& begin, const std::string& end, std::vector<size_t>& beginGroups,
@@ -339,7 +354,7 @@ void TimelineModel::add(uint64_t seq, int64_t ns, std::string_view text, std::st
             l.rowEnds[depth] = INT64_MAX;
             auto laneIndex = static_cast<size_t>(&l - m_lanes.data());
             m_open[std::make_tuple(rule, pid, *beginKey)].emplace_back(laneIndex, l.spans.size());
-            l.spans.push_back(TimelineSpan{ns, -1, seq, UINT64_MAX, rule, depth});
+            l.spans.push_back(TimelineSpan{ns, -1, seq, UINT64_MAX, rule, depth, spanLabel(m_groups, compiled.beginKeyGroups)});
         }
     }
 }

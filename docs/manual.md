@@ -193,13 +193,16 @@ pairs `Enter parse` with the next `Exit parse` of the same process, and `Enter l
 functions can overlap or nest. `\1` matches what the group pattern of Begin matches (here `\w+`), so `Exit parse, took 3 ms`
 also ends the `parse` span, but `Exit parser` does not. With Regex the names are compared without case, with RegexCase with case.
 
+A bar shows what its Begin pattern captured, here the function name (`parse`); with back references only the referenced
+groups. A rule without capture groups shows its name, or its Begin pattern when it has no name.
+
 #### Using the timeline
 
 - **Mouse wheel**: zoom in or out around the mouse pointer.
 - **Drag with the right or middle button**: pan.
 - **Drag with the left button**: measure the time between two points.
 - **Click a bar or marker**: select its line in the list. The line selected in the list is shown as a red vertical line.
-- **Hover a bar**: its duration, its begin and end lines, and the minimum, average and maximum duration of the completed spans of that rule in that lane.
+- **Hover a bar**: its duration, its begin and end lines, and the minimum, average and maximum duration of the completed spans of that rule in that lane that captured the same text (the same function, frame, ...).
 - **Keys** (click the timeline first): `a` and `d` pan, `w` and `s` zoom, Home or `q` show everything and follow new lines again, Esc removes the measurement.
 
 While Auto Scroll is on, the newest line stays at the right edge. Zooming or panning stops that until Home or `q` is pressed.

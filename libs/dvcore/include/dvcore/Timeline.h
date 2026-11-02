@@ -78,6 +78,7 @@ struct TimelineSpan
     uint64_t endSeq; // UINT64_MAX while open
     uint32_t rule;
     uint32_t depth; // row within the lane, for overlapping spans
+    std::string label; // what the begin pattern captured (the referenced groups with back references), "" without groups
 };
 
 struct TimelineEvent

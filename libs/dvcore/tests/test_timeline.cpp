@@ -93,6 +93,19 @@ TEST_CASE("timeline: \\1 in the end pattern refers to the group of the begin pat
     CHECK(spans[1].endNs == 20);
 }
 
+TEST_CASE("timeline: a span is labelled with what the begin pattern captured")
+{
+    TimelineModel model({span("Enter (.*)", "Exit \\1", MatchType::Regex), span("(\\w+) calls (\\w+)", "return to \\2", MatchType::Regex),
+        span("frame (\\d+) start", "frame (\\d+) done", MatchType::Regex), span("work", "rest")});
+    feed(model, {{0, "Enter Send_Packet"}, {1, "a calls b"}, {2, "Frame 7 start"}, {3, "work"}});
+    auto& spans = model.lanes()[0].spans;
+    REQUIRE(spans.size() == 4);
+    CHECK(spans[0].label == "Send_Packet"); // as captured, not lowercased like the key
+    CHECK(spans[1].label == "b");           // only the referenced group
+    CHECK(spans[2].label == "7");           // without back references: all groups
+    CHECK(spans[3].label.empty());
+}
+
 TEST_CASE("timeline: a back reference matches what the begin group matched, not more")
 {
     TimelineModel model({span("Enter (\\w+)", "Exit \\1", MatchType::Regex)});

@@ -17,7 +17,7 @@ namespace {
 
 constexpr int rulerHeight = 22;
 constexpr int markerArea = 14; // above the bars of a lane: the heads of the event markers
-constexpr int rowHeight = 12;  // one row of bars
+constexpr int rowHeight = 16;  // one row of bars, high enough for its label
 constexpr int laneGap = 6;
 constexpr int minPlotWidth = 420; // below this the label column is hidden
 constexpr int64_t minViewWidth = 1000;                       // 1 us
@@ -313,7 +313,7 @@ void TimelineWidget::drawLane(QPainter& painter, const dv::TimelineLane& lane, i
         if (bar.width() > 40)
         {
             painter.setPen(textColorOn(color));
-            auto name = toQString(m_model.rules()[span.rule].displayName());
+            auto name = toQString(span.label.empty() ? m_model.rules()[span.rule].displayName() : span.label);
             painter.drawText(bar.adjusted(3, 0, -3, 0), static_cast<int>(Qt::AlignLeft | Qt::AlignVCenter),
                 fm.elidedText(name, Qt::ElideRight, static_cast<int>(bar.width()) - 6));
         }
@@ -431,20 +431,21 @@ QString TimelineWidget::toolTip(const Hit& hit) const
         return QString();
     auto& span = *hit.span;
     auto& rule = m_model.rules()[span.rule];
-    QString text = toQString(rule.displayName()) + "\n" + toQString(hit.lane->name) + "\n";
+    QString text = toQString(rule.displayName()) + (span.label.empty() ? QString() : ": " + toQString(span.label)) + "\n" +
+        toQString(hit.lane->name) + "\n";
     if (span.endNs < 0)
         text += "open for " + formatDuration(spanEnd(span) - span.beginNs) + ", from " + line(span.beginSeq);
     else
         text += formatDuration(span.endNs - span.beginNs) + ", " + line(span.beginSeq) + " to " + line(span.endSeq);
 
-    // statistics of the completed spans of this rule in this lane
+    // statistics of the completed spans of this rule in this lane that captured the same text
     int64_t count = 0;
     int64_t sum = 0;
     int64_t min = INT64_MAX;
     int64_t max = 0;
     for (auto& s : hit.lane->spans)
     {
-        if (s.rule != span.rule || s.endNs < 0)
+        if (s.rule != span.rule || s.endNs < 0 || s.label != span.label)
             continue;
         auto d = s.endNs - s.beginNs;
         ++count;
