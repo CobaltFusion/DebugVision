@@ -92,7 +92,7 @@ jobs:
 
       - name: GUI smoke test
         if: runner.os == 'Linux'
-        run: ci/gui-smoke-test.sh build/install/debugvision
+        run: ci/gui-smoke-test.sh build/install/debugvision ci/timeline-settings.json
 
   gui-debian:
     name: GUI (debian 13)
@@ -130,7 +130,7 @@ jobs:
         run: ctest --test-dir build --output-on-failure --timeout 300
 
       - name: GUI smoke test
-        run: ci/gui-smoke-test.sh build/install/debugvision
+        run: ci/gui-smoke-test.sh build/install/debugvision ci/timeline-settings.json
 
   gui-windows:
     name: GUI (windows-2022)

@@ -89,6 +89,14 @@ TimelineModel::TimelineModel(std::vector<TimelineRule> rules) :
     }
 }
 
+std::vector<std::pair<size_t, size_t>> TimelineModel::openSpans() const
+{
+    std::vector<std::pair<size_t, size_t>> result;
+    for (auto& [key, spans] : m_open)
+        result.insert(result.end(), spans.begin(), spans.end());
+    return result;
+}
+
 void TimelineModel::reset()
 {
     m_lanes.clear();

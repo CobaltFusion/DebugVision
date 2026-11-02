@@ -66,6 +66,7 @@ TEST_CASE("timeline: open spans, unmatched ends and nesting")
     CHECK(spans[2].endNs == -1);
     CHECK(spans[2].depth == 1); // row 1 is free again at 50
     CHECK(model.lanes()[0].depthCount() == 2);
+    CHECK(model.openSpans().size() == 2);
 }
 
 TEST_CASE("timeline: capture groups pair interleaved spans")

@@ -69,7 +69,8 @@ void to_json(nlohmann::json& j, const ViewSettings& v)
     nlohmann::json columns = nlohmann::json::object();
     for (size_t i = 0; i < v.columns.size() && i < columnNames.size(); ++i)
         columns[columnNames[i]] = v.columns[i];
-    j = {{"name", v.name}, {"filters", v.filters}, {"columns", columns}, {"clockTime", v.clockTime}, {"processColors", v.processColors}, {"autoScroll", v.autoScroll}, {"autoScrollStop", v.autoScrollStop}};
+    j = {{"name", v.name}, {"filters", v.filters}, {"columns", columns}, {"clockTime", v.clockTime}, {"processColors", v.processColors}, {"autoScroll", v.autoScroll}, {"autoScrollStop", v.autoScrollStop},
+        {"timelineRules", v.timelineRules}, {"showTimeline", v.showTimeline}, {"timelineHeight", v.timelineHeight}};
 }
 
 void from_json(const nlohmann::json& j, ViewSettings& v)
@@ -88,6 +89,10 @@ void from_json(const nlohmann::json& j, ViewSettings& v)
     v.processColors = j.value("processColors", v.processColors);
     v.autoScroll = j.value("autoScroll", v.autoScroll);
     v.autoScrollStop = j.value("autoScrollStop", v.autoScrollStop);
+    if (j.contains("timelineRules"))
+        v.timelineRules = j["timelineRules"].get<std::vector<TimelineRule>>();
+    v.showTimeline = j.value("showTimeline", v.showTimeline);
+    v.timelineHeight = j.value("timelineHeight", v.timelineHeight);
 }
 
 void to_json(nlohmann::json& j, const AppSettings& s)

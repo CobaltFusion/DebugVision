@@ -278,6 +278,12 @@ void MainWindow::createActions()
         m_worker.wake();
     });
     view->addSeparator();
+    m_timeline = addToggle(view, "&Timeline", "Ctrl+L", false, [this](bool on) {
+        if (auto v = currentView())
+            ViewTab::of(v)->setTimelineVisible(on);
+        saveSettings();
+    });
+    view->addSeparator();
     m_linkViews = addToggle(view, "&Link Views", "", m_settings.linkViews, [this](bool on) { m_settings.linkViews = on; });
 
     auto log = menuBar()->addMenu("&Log");
@@ -434,7 +440,7 @@ void MainWindow::saveSettings()
 {
     m_settings.views.clear();
     for (auto v : views())
-        m_settings.views.push_back(v->settings());
+        m_settings.views.push_back(ViewTab::of(v)->settings());
     m_settings.currentView = m_tabs->currentIndex();
     m_settings.maximized = isMaximized();
     if (!isMaximized() && !isMinimized())
@@ -493,7 +499,9 @@ void MainWindow::onUpdate()
     auto current = currentView();
     for (auto v : views())
     {
-        if (v->refresh() && v != current && !v->property("newLines").toBool())
+        auto grown = v->refresh();
+        ViewTab::of(v)->refresh();
+        if (grown && v != current && !v->property("newLines").toBool())
         {
             v->setProperty("newLines", true);
             updateTabTitles();
@@ -529,6 +537,7 @@ void MainWindow::updateActionStates()
     m_processColors->setChecked(v->processColors());
     m_autoScroll->setChecked(v->autoScroll());
     m_autoScrollStop->setChecked(v->autoScrollStop());
+    m_timeline->setChecked(ViewTab::of(v)->timelineVisible());
 }
 
 void MainWindow::closeEvent(QCloseEvent* event)
@@ -647,6 +656,8 @@ LogViewWidget* MainWindow::addView(const dv::ViewSettings& settings)
         widget->setRowFont(current->font());
     widget->contextMenuRequested = [this, widget](QPoint pos, bool onProcess) { showViewContextMenu(widget, pos, onProcess); };
     widget->selectionChanged = [this, widget] {
+        if (auto tab = ViewTab::of(widget))
+            tab->focusChanged();
         if (widget == currentView())
             m_statusSelection->setText(widget->statusText());
     };
@@ -655,7 +666,7 @@ LogViewWidget* MainWindow::addView(const dv::ViewSettings& settings)
             m_autoScroll->setChecked(widget->autoScroll());
     };
     widget->zoomRequested = [this](int delta) { zoom(delta); };
-    m_tabs->addTab(new ViewTab(widget), widget->name());
+    m_tabs->addTab(new ViewTab(widget, m_context, settings), widget->name());
     updateTabTitles();
     return widget;
 }
@@ -689,7 +700,7 @@ void MainWindow::copyView()
     auto v = currentView();
     if (!v)
         return;
-    auto settings = v->settings();
+    auto settings = ViewTab::of(v)->settings();
     settings.name += " (copy)";
     m_tabs->setCurrentWidget(ViewTab::of(addView(settings)));
     saveSettings();

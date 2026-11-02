@@ -112,6 +112,8 @@ public:
     bool empty() const { return m_firstNs > m_lastNs; }
     int64_t firstNs() const { return m_firstNs; }
     int64_t lastNs() const { return m_lastNs; } // the newest line, where open spans end for now
+    // the spans that are still open, as (lane, span index)
+    std::vector<std::pair<size_t, size_t>> openSpans() const;
 
 private:
     struct Compiled

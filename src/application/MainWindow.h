@@ -130,6 +130,7 @@ private:
     QAction* m_processColors = nullptr;
     QAction* m_autoScroll = nullptr;
     QAction* m_autoScrollStop = nullptr;
+    QAction* m_timeline = nullptr;
     QAction* m_linkViews = nullptr;
     QAction* m_pause = nullptr;
     QAction* m_globalCapture = nullptr;

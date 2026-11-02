@@ -1,0 +1,12 @@
+{
+  "views": [
+    {
+      "name": "All",
+      "showTimeline": true,
+      "timelineRules": [
+        { "name": "frame", "kind": "Span", "begin": "frame (\\d+) start", "end": "frame (\\d+) done", "matchType": "Regex", "color": "auto" },
+        { "name": "IRQ", "kind": "Event", "begin": "IRQ", "matchType": "Simple", "shape": "Lollipop", "color": "#d03030" }
+      ]
+    }
+  ]
+}

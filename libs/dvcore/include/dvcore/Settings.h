@@ -2,6 +2,7 @@
 
 #include "dvcore/Filter.h"
 #include "dvcore/SourceConfig.h"
+#include "dvcore/Timeline.h"
 
 #include <nlohmann/json.hpp>
 
@@ -41,6 +42,9 @@ struct ViewSettings
     bool processColors = false;
     bool autoScroll = true;
     bool autoScrollStop = true;
+    std::vector<TimelineRule> timelineRules;
+    bool showTimeline = false;
+    int timelineHeight = 200; // pixels
 
     static std::vector<ColumnSettings> defaultColumns();
 };
