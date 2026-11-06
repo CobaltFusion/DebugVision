@@ -4,6 +4,7 @@ add_library(dvcore STATIC
   src/FileFormat.cpp
   src/Filter.cpp
   src/FilterEngine.cpp
+  src/HttpProxy.cpp
   src/Ingest.cpp
   src/LineStore.cpp
   src/LogView.cpp
@@ -13,6 +14,8 @@ add_library(dvcore STATIC
   src/Source.cpp
   src/SourceConfig.cpp
   src/sources/FileSource.cpp
+  src/sources/HttpSource.cpp
+  src/platform/HttpCurl.cpp
   src/sources/NetworkSources.cpp
   src/sources/ProcessSources.cpp
 )
@@ -23,9 +26,10 @@ if (WIN32)
     src/platform/win32/FileWin32.cpp
     src/platform/win32/MiscWin32.cpp
     src/platform/win32/SocketWin32.cpp
+    src/platform/win32/SystemProxyWin32.cpp
     src/sources/OutputDebugStringSource.cpp
   )
-  target_link_libraries(dvcore PRIVATE ws2_32 psapi shell32 ole32)
+  target_link_libraries(dvcore PRIVATE ws2_32 psapi shell32 ole32 winhttp)
 else()
   target_sources(dvcore PRIVATE
     src/platform/posix/FilePosix.cpp
@@ -55,6 +59,7 @@ target_link_libraries(dvcore
     project::project_options
   PRIVATE
     pcre2-8-static
+    CURL::libcurl # see cmake/Curl.cmake
     project::warnings_options
     project::warning_suppressions
 )

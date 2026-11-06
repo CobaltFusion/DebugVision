@@ -20,6 +20,7 @@ Every line gets a line number, a time stamp, the process ID and the process name
 - **Sources** (Log > Sources...): on Windows, `OutputDebugString` is captured by default. You can also tail files,
   capture the output of a program (File > Run...), listen on UDP or TCP, or connect to the Sysinternals DebugView agent.
   Dropping a log file on the window opens it; dropping an executable or script runs it as a process source.
+  Dropping an `http://` or `https://` link (e.g. from a web browser) tails the file it points to.
 - **Views** are tabs (File > New View, Ctrl+N). Each view has its own filters, so you can watch the same log in different ways.
 - **Filters** (View > Filters..., F5) are regular expressions or plain text. Their types are: Include, Exclude, Highlight, Token (colors the matching text),
   Stop and Track (scrolling), Once, Clear, Beep and Bookmark. The quickest way to make one is to select text in the view and press
@@ -30,6 +31,11 @@ Every line gets a line number, a time stamp, the process ID and the process name
   line to an end line and as markers for single events. See [Timeline](#timeline).
 - **Traffic indicator**: Options > Traffic Indicator shows, at the right of the toolbar, a light that is on while lines
   arrive and a graph of the lines per 100 ms over the last 6 seconds (full scale is 10 lines per 100 ms).
+- **HTTP proxy**: Options > HTTP Proxy... sets the proxy of the `http` sources that have no `proxy` parameter of their own,
+  e.g. `http://proxy.example.com:8080`, `http://user:password@proxy:3128` or `socks5h://127.0.0.1:1080` (e.g. `ssh -D 1080 user@host`).
+  Empty uses the system proxy settings, `direct` no proxy. See the `http` source type.
+  The dialog suggests the SOCKS proxies it finds on this computer (ports 1080, 1081, and 9050/9150 for Tor), e.g. an
+  `ssh -D 1080 user@host` tunnel; Use puts one in the field. A detected proxy is never used unless you choose it.
 - **Pausing**: Pause (or Ctrl+Shift+P) stops capturing temporarily. Log > Clear Log (Ctrl+Shift+X) empties the log.
 - **Saving**: File > Save Log saves everything in DebugView++ `.dblog` format, Save View only the filtered lines and Save Selection only the selected ones.
   File > Save Configuration saves the views, filters and sources to a `.json` file.
@@ -122,6 +128,7 @@ Boolean values accept `true`/`false`, `1`/`0`, `yes`/`no` and `on`/`off`.
 | `tcp-listen` | `port` (`2021`), `bind` (`0.0.0.0`), `maxClients` (`16`) | Accepts TCP connections and reads lines from every connected client. |
 | `tcp-connect` | `host` (`127.0.0.1`), `port` (`2021`), `reconnectSeconds` (`5`) | Connects to a TCP server and reads lines from it, reconnecting after the given delay when the connection is lost. |
 | `dbgview-agent` | `host` (`127.0.0.1`), `port` (`2020`) | Connects to a Sysinternals DebugView agent (`dbgview.exe /a`), which can capture output on another machine. |
+| `http` | `url`, `tail` (`true`), `pollMilliseconds` (`1000`), `startAt` (`beginning`), `format` (`auto`), `proxy` | Reads a log file from a web server (`http://` or `https://`). With `tail=true` the server is asked for the bytes after the ones already read (an HTTP Range request) every `pollMilliseconds`; a server without Range support makes it download the whole file at every poll. A truncated file is read again from the start; network and HTTP errors are retried. `startAt` and `format` work as for `file`. Uses libcurl; on Windows with the certificate store of Windows. `proxy` is `direct` (no proxy), `system` (the proxy settings of Windows, including setup scripts and automatic detection; the `http_proxy`, `https_proxy` and `all_proxy` environment variables), or a proxy URL `[scheme://][user:password@]host:port` with scheme `http` (the default), `https`, `socks4`, `socks4a`, `socks5` or `socks5h` (the `a` and `h` variants let the proxy resolve the host name). Proxies that ask for a user name and password get the ones of the proxy URL (basic, digest, NTLM or Negotiate). Empty uses Options > HTTP Proxy... (`--proxy` for dvcli). |
 
 ## Examples
 
@@ -228,7 +235,7 @@ Live sources never end: OutputDebugString, UDP, TCP and tailed files. So `--stdi
 input ended.
 
 ```
-dvcli [options] [-c] [-d <file>] [--ods] [--source <spec>]... [--udp <port>]... [--file <path>]... [--stdin]
+dvcli [options] [-c] [-d <file>] [--ods] [--source <spec>]... [--udp <port>]... [--file <path>]... [--url <url>]... [--stdin]
 dvcli -x
 dvcli -u <message> [<port>]
 dvcli --list-sources
@@ -280,6 +287,18 @@ Global capture needs administrator rights and is skipped silently without them.
 #### `--source <spec>`, `--udp <port>`, `--file <path>`
 
 Add sources, exactly as for DebugVision (see [Source specifications](#source-specifications)). Each can be given more than once.
+
+#### `--url <url>`
+
+Tails an `http://` or `https://` URL, like `--source http:url=<url>`, but the URL may contain commas. Can be given more than once.
+
+#### `--proxy <proxy>`
+
+The proxy of the `http` sources without a `proxy` parameter of their own: `http://host:port`, `http://user:password@host:port`,
+`https://`, `socks4://`, `socks4a://`, `socks5://` and `socks5h://` (the `a` and `h` variants let the proxy resolve the host
+name), or `direct` for no proxy. Without `--proxy`, the proxy settings of Windows are used, and the `http_proxy`,
+`https_proxy` and `all_proxy` environment variables. For example, through an ssh tunnel:
+`ssh -D 1080 user@gateway`, then `dvcli -c --proxy socks5h://127.0.0.1:1080 --url https://intranet.example.com/build.log`.
 
 #### `--stdin`
 

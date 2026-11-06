@@ -128,6 +128,21 @@ void from_json(const nlohmann::json& j, DbgviewAgentParams& p)
     read(j, "autoLaunchLocal", p.autoLaunchLocal);
 }
 
+void to_json(nlohmann::json& j, const HttpParams& p)
+{
+    j = {{"url", p.url}, {"tail", p.tail}, {"pollMilliseconds", p.pollMilliseconds}, {"startAt", p.startAt}, {"format", p.format}, {"proxy", p.proxy}};
+}
+
+void from_json(const nlohmann::json& j, HttpParams& p)
+{
+    read(j, "url", p.url);
+    read(j, "tail", p.tail);
+    read(j, "pollMilliseconds", p.pollMilliseconds);
+    read(j, "startAt", p.startAt);
+    read(j, "format", p.format);
+    read(j, "proxy", p.proxy);
+}
+
 Encoding SourceConfig::encodingValue() const
 {
     return parseEncoding(encoding).value_or(Encoding::Auto);
@@ -193,6 +208,20 @@ std::string newSourceId()
     return buf;
 }
 
+void applyHttpProxyDefault(std::vector<SourceConfig>& configs, const std::string& proxy)
+{
+    if (proxy.empty())
+        return;
+    for (auto& c : configs)
+    {
+        if (c.type != "http")
+            continue;
+        auto it = c.params.find("proxy");
+        if (it == c.params.end() || !it->is_string() || it->get<std::string>().empty())
+            c.params["proxy"] = proxy;
+    }
+}
+
 std::string describeSource(const SourceConfig& c)
 {
     if (!c.name.empty())
@@ -219,6 +248,8 @@ std::string describeSource(const SourceConfig& c)
         return "stdin";
     if (c.type == "dbgview-agent")
         return "DbgView agent " + c.getParams<DbgviewAgentParams>().host;
+    if (c.type == "http")
+        return c.getParams<HttpParams>().url;
     return c.type;
 }
 
@@ -267,6 +298,15 @@ SourceRegistry::SourceRegistry()
     m_types.push_back(SourceType{"dbgview-agent", "DbgView agent", DbgviewAgentParams{},
         [](const SourceConfig& c) { return validatePort(c.getParams<DbgviewAgentParams>().port); },
         &createDbgviewAgentSource});
+    m_types.push_back(SourceType{"http", "HTTP(S) URL", HttpParams{},
+        [](const SourceConfig& c) {
+            auto p = c.getParams<HttpParams>();
+            if (p.url.rfind("http://", 0) != 0 && p.url.rfind("https://", 0) != 0)
+                return std::string("url must start with http:// or https://");
+            auto error = platform::validateHttpProxy(p.proxy);
+            return error.empty() ? error : "proxy: " + error;
+        },
+        &createHttpSource});
 }
 
 const SourceRegistry& SourceRegistry::instance()

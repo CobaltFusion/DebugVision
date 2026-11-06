@@ -5,7 +5,9 @@
 #include "dvcore/Source.h"
 #include "dvcore/SourceConfig.h"
 
+#include <cstdint>
 #include <memory>
+#include <string_view>
 
 namespace dv {
 
@@ -19,6 +21,16 @@ std::unique_ptr<Source> createFileSource(const SourceConfig& config);
 std::unique_ptr<Source> createProcessSource(const SourceConfig& config);
 std::unique_ptr<Source> createStdinSource(const SourceConfig& config);
 std::unique_ptr<Source> createDbgviewAgentSource(const SourceConfig& config);
+std::unique_ptr<Source> createHttpSource(const SourceConfig& config);
+
+// a parsed Content-Range header ("bytes 0-99/1234" or "bytes */1234"); -1 for the parts that are missing or "*"
+struct ContentRange
+{
+    int64_t first = -1;
+    int64_t last = -1;
+    int64_t total = -1;
+};
+ContentRange parseContentRange(std::string_view header);
 
 // "[UDP {ip}:{port}]" style process name templates
 std::string expandProcessName(const std::string& pattern, const std::string& ip, uint16_t port);

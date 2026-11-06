@@ -72,6 +72,16 @@ struct DbgviewAgentParams
     bool autoLaunchLocal = false; // Windows only: start 'dbgview.exe /a' when it is next to the executable
 };
 
+struct HttpParams
+{
+    std::string url;                   // http:// or https://
+    bool tail = true;
+    int pollMilliseconds = 1000;
+    std::string startAt = "beginning"; // beginning | end
+    std::string format = "auto";       // auto | text | dblog | sysinternals
+    std::string proxy;                 // "" = the default proxy (see applyHttpProxyDefault), otherwise see platform::HttpProxy
+};
+
 void to_json(nlohmann::json& j, const OutputDebugStringParams& p);
 void from_json(const nlohmann::json& j, OutputDebugStringParams& p);
 void to_json(nlohmann::json& j, const UdpParams& p);
@@ -86,6 +96,8 @@ void to_json(nlohmann::json& j, const ProcessParams& p);
 void from_json(const nlohmann::json& j, ProcessParams& p);
 void to_json(nlohmann::json& j, const DbgviewAgentParams& p);
 void from_json(const nlohmann::json& j, DbgviewAgentParams& p);
+void to_json(nlohmann::json& j, const HttpParams& p);
+void from_json(const nlohmann::json& j, HttpParams& p);
 
 struct SourceConfig
 {
@@ -128,6 +140,10 @@ void to_json(nlohmann::json& j, const SourceConfig& c);
 void from_json(const nlohmann::json& j, SourceConfig& c);
 
 std::string newSourceId();
+
+// fills in 'proxy' for the http sources that do not have their own proxy setting, e.g. the proxy of the application
+// settings or of 'dvcli --proxy'; done on the configs given to Ingest, so the saved source settings keep "" (= default)
+void applyHttpProxyDefault(std::vector<SourceConfig>& configs, const std::string& proxy);
 
 struct SourceType
 {

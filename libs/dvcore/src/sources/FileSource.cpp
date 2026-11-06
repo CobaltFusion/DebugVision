@@ -3,8 +3,7 @@
 
 #include "Sources.h"
 
-#include "dvcore/Clock.h"
-#include "dvcore/FileFormat.h"
+#include "LogTextReader.h"
 
 #include <algorithm>
 #include <vector>
@@ -29,7 +28,7 @@ public:
         m_config(config),
         m_params(config.getParams<FileParams>()),
         m_path(platform::utf8ToPath(m_params.path)),
-        m_legacy(legacyCodecFor(config)),
+        m_reader(config.encodingValue(), legacyCodecFor(config), m_params.format),
         m_buffer(readBlockSize)
     {
         m_name = config.processNameOverride.empty() ? platform::pathToUtf8(m_path.filename()) : config.processNameOverride;
@@ -39,8 +38,7 @@ public:
     {
         m_loop = &loop;
         m_sink = &sink;
-        m_origin = sink.origin(m_name);
-        m_baseSteadyNs = nowSteadyNs();
+        m_reader.attach(sink, sink.origin(m_name));
         if (m_params.tail)
             m_watch = loop.watchFile(m_path, [this] { onChange(); });
         if (!openFile(m_params.startAt == "end"))
@@ -86,14 +84,7 @@ private:
         std::string sample(sampleSize, '\0');
         auto n = m_file.read(sample.data(), sample.size());
         sample.resize(n > 0 ? static_cast<size_t>(n) : 0);
-        auto configured = m_config.encodingValue();
-        auto detected = detectEncoding(sample);
-        auto encoding = configured == Encoding::Auto ? detected.encoding : configured;
-        m_decoder = LineDecoder(encoding, m_legacy);
-        m_offset = detected.encoding == encoding ? detected.bomLength : 0;
-        m_format = detectFormat(sample, encoding);
-        m_firstLine = m_format == LogFormat::DbLog;
-        m_sysinternals = SysinternalsParser{};
+        m_offset = m_reader.begin(sample, platform::pathToUtf8(m_path.extension()));
 
         auto size = m_file.size();
         if (atEnd && size > 0)
@@ -102,30 +93,10 @@ private:
         m_lastActivity = std::chrono::steady_clock::now();
         m_nextRotationCheck = m_lastActivity + rotationCheckInterval;
 
-        auto description = std::string(m_params.tail ? "tailing " : "loading ") + platform::pathToUtf8(m_path.filename()) + " (" + toText(encoding) +
-            (m_format != LogFormat::Text ? std::string(", ") + toText(m_format) : std::string()) + ")";
+        auto description = std::string(m_params.tail ? "tailing " : "loading ") + platform::pathToUtf8(m_path.filename()) + " (" + m_reader.description() + ")";
         setStatus(SourceState::Running, description);
         m_sink->internal("Started " + description);
         return true;
-    }
-
-    LogFormat detectFormat(const std::string& sample, Encoding encoding)
-    {
-        if (m_params.format == "text")
-            return LogFormat::Text;
-        if (m_params.format == "dblog")
-            return LogFormat::DbLog;
-        if (m_params.format == "sysinternals")
-            return LogFormat::Sysinternals;
-        // decode the first two lines of the sample
-        std::vector<std::string> lines;
-        LineDecoder probe(encoding, m_legacy);
-        probe.feed(sample, [&](std::string_view line) {
-            if (lines.size() < 2)
-                lines.emplace_back(line);
-        });
-        lines.resize(2);
-        return detectLogFormat(lines[0], lines[1], platform::pathToUtf8(m_path.extension()));
     }
 
     void onChange()
@@ -152,7 +123,7 @@ private:
             flushPartial();
             m_file.seek(0);
             m_offset = 0;
-            m_decoder.reset();
+            m_reader.reset();
         }
         size_t total = 0;
         bool eof = false;
@@ -166,7 +137,7 @@ private:
             }
             m_offset += static_cast<uint64_t>(n);
             total += static_cast<size_t>(n);
-            m_decoder.feed(std::string_view(m_buffer.data(), static_cast<size_t>(n)), [this](std::string_view line) { addLine(line); });
+            m_reader.feed(std::string_view(m_buffer.data(), static_cast<size_t>(n)));
         }
         if (total > 0)
             m_lastActivity = std::chrono::steady_clock::now();
@@ -195,49 +166,9 @@ private:
         setStatus(SourceState::Stopped, "loaded " + platform::pathToUtf8(m_path.filename()));
     }
 
-    void addLine(std::string_view line)
-    {
-        if (m_format == LogFormat::Text)
-        {
-            m_sink->add(0, m_origin, line);
-            return;
-        }
-        ParsedLine parsed;
-        bool ok = false;
-        if (m_format == LogFormat::DbLog)
-        {
-            if (m_firstLine)
-            {
-                m_firstLine = false;
-                if (isDbLogHeader(line))
-                    return;
-            }
-            ok = parseDbLogLine(line, parsed);
-        }
-        else
-        {
-            ok = m_sysinternals.parse(line, parsed);
-        }
-        if (!ok)
-        {
-            m_sink->add(0, m_origin, line);
-            return;
-        }
-        auto now = nowSystemNs();
-        auto systemNs = parsed.hasSystemTime ? parsed.systemNs : now;
-        if (!m_haveFirstSystem)
-        {
-            m_firstSystemNs = systemNs;
-            m_haveFirstSystem = true;
-        }
-        auto relativeNs = parsed.hasRelativeTime ? static_cast<int64_t>(parsed.relativeSeconds * 1e9) : systemNs - m_firstSystemNs;
-        auto origin = parsed.processName.empty() ? m_origin : m_sink->origin(parsed.processName);
-        m_sink->add(m_baseSteadyNs + relativeNs, systemNs, parsed.pid, origin, parsed.message);
-    }
-
     void flushPartial()
     {
-        m_decoder.flush([this](std::string_view line) { addLine(line); });
+        m_reader.flush();
     }
 
     void schedulePoll(std::chrono::milliseconds interval)
@@ -304,15 +235,10 @@ private:
     FileParams m_params;
     std::filesystem::path m_path;
     std::string m_name;
-    std::shared_ptr<LegacyCodec> m_legacy;
-    LineDecoder m_decoder;
-    LogFormat m_format = LogFormat::Text;
-    SysinternalsParser m_sysinternals;
-    bool m_firstLine = false;
+    LogTextReader m_reader;
 
     platform::EventLoop* m_loop = nullptr;
     Sink* m_sink = nullptr;
-    uint32_t m_origin = 0;
     platform::File m_file;
     std::optional<platform::FileId> m_fileId;
     std::string m_openError;
@@ -325,9 +251,6 @@ private:
     std::chrono::steady_clock::time_point m_nextRotationCheck;
     bool m_readScheduled = false;
     bool m_stopped = false;
-    int64_t m_baseSteadyNs = 0;
-    int64_t m_firstSystemNs = 0;
-    bool m_haveFirstSystem = false;
 };
 
 } // namespace

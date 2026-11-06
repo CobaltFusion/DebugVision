@@ -223,6 +223,59 @@ public:
 // sends one UDP datagram (used by 'dvcli -u'); address may be a broadcast address
 bool sendUdp(const std::string& address, uint16_t port, std::string_view data, std::string& error);
 
+// HTTP(S) GET requests, with libcurl
+struct HttpResponse
+{
+    int status = 0;           // HTTP status code; 0 when the request failed, see error
+    std::string error;
+    std::string contentRange; // the Content-Range header, e.g. "bytes 0-99/1234" or "bytes */1234"
+    std::string body;
+};
+
+// A proxy setting is "" or "system" (the proxy settings of Windows; the http_proxy/https_proxy/all_proxy environment
+// variables), "direct" (no proxy), or a proxy URL [scheme://][user:password@]host:port.
+// Schemes: http (the default), https, socks4, socks4a, socks5 and socks5h.
+struct HttpProxy
+{
+    std::string scheme = "http";
+    std::string user;     // percent-decoded
+    std::string password; // percent-decoded
+    std::string host;     // without the brackets of an IPv6 address
+    uint16_t port = 0;
+};
+
+// returns false with 'error' set when 'proxy' is not a valid proxy URL;
+// "", "system" and "direct" are not URLs: check them before calling this
+bool parseHttpProxy(const std::string& proxy, HttpProxy& out, std::string& error);
+// returns "" when 'proxy' is a valid proxy setting
+std::string validateHttpProxy(const std::string& proxy);
+
+// A SOCKS 5 proxy found on this machine, e.g. an 'ssh -D 1080 user@host' tunnel; only a suggestion, never used by itself
+struct DetectedProxy
+{
+    std::string proxy; // e.g. "socks5h://127.0.0.1:1080"
+    std::string note;  // e.g. "Tor", "requires a user name and password"; may be empty
+};
+
+// the default ports: 1080 and 1081 (ssh -D and most SOCKS servers), 9050 (Tor) and 9150 (Tor Browser)
+std::vector<uint16_t> defaultSocksPorts();
+// probes 127.0.0.1 on 'ports' with a SOCKS 5 greeting (nothing else is sent); blocks up to about 'timeout' per port
+// that accepts the connection, ports without a listener are skipped right away
+std::vector<DetectedProxy> detectLocalSocksProxies(const std::vector<uint16_t>& ports, std::chrono::milliseconds timeout);
+
+class HttpClient
+{
+public:
+    // 'proxy' is a proxy setting (see HttpProxy); returns nullptr with 'error' set when it is invalid
+    static std::unique_ptr<HttpClient> create(const std::string& proxy, std::string& error);
+    virtual ~HttpClient() = default;
+    // blocking GET with "Range: bytes=first-last" (redirects are followed); call it from a helper thread, not from the event loop
+    virtual HttpResponse get(const std::string& url, uint64_t first, uint64_t last) = 0;
+    // thread-safe: makes a running get() return quickly, and every later one fail
+    virtual void cancel() = 0;
+};
+
+
 // Misc
 std::string processName(uint32_t pid); // executable file name of a running process, or "" when unknown
 uint32_t currentProcessId();

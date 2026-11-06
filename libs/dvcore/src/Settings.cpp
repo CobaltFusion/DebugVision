@@ -13,7 +13,7 @@ namespace dv {
 namespace {
 
 constexpr std::array columnNames = {"bookmark", "line", "date", "time", "pid", "process", "message"};
-constexpr const char* appKeys[] = {"window", "font", "linkViews", "alwaysOnTop", "hideWhenMinimized", "trafficIndicator", "prefixPid", "historyLimit", "legacyCharset", "customColors", "views", "currentView", "sources"};
+constexpr const char* appKeys[] = {"window", "font", "linkViews", "alwaysOnTop", "hideWhenMinimized", "trafficIndicator", "prefixPid", "historyLimit", "legacyCharset", "httpProxy", "customColors", "views", "currentView", "sources"};
 
 } // namespace
 
@@ -107,6 +107,7 @@ void to_json(nlohmann::json& j, const AppSettings& s)
     j["prefixPid"] = s.prefixPid;
     j["historyLimit"] = s.historyLimit;
     j["legacyCharset"] = s.legacyCharset;
+    j["httpProxy"] = s.httpProxy;
     j["customColors"] = s.customColors;
     j["views"] = s.views;
     j["currentView"] = s.currentView;
@@ -140,6 +141,7 @@ void from_json(const nlohmann::json& j, AppSettings& s)
     s.prefixPid = j.value("prefixPid", s.prefixPid);
     s.historyLimit = j.value("historyLimit", s.historyLimit);
     s.legacyCharset = j.value("legacyCharset", s.legacyCharset);
+    s.httpProxy = j.value("httpProxy", s.httpProxy);
     s.customColors = j.value("customColors", s.customColors);
     s.views = j.value("views", std::vector<ViewSettings>());
     s.currentView = j.value("currentView", 0);

@@ -9,6 +9,7 @@ add_executable(dvcore_tests
   test_sourceconfig.cpp
   test_eventloop.cpp
   test_sources.cpp
+  test_http.cpp
 )
 
 target_link_libraries(dvcore_tests PRIVATE
@@ -16,6 +17,9 @@ target_link_libraries(dvcore_tests PRIVATE
   doctest::doctest
   project::warning_suppressions
 )
+
+# the HTTP test uses parseContentRange from the private sources header
+target_include_directories(dvcore_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../src)
 
 target_compile_definitions(dvcore_tests PRIVATE DV_TESTFILES_DIR="${CMAKE_CURRENT_SOURCE_DIR}/testfiles")
 

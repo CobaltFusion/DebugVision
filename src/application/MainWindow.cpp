@@ -15,11 +15,14 @@
 #include <QAction>
 #include <QApplication>
 #include <QCloseEvent>
+#include <QDialog>
+#include <QDialogButtonBox>
 #include <QDragEnterEvent>
 #include <QDropEvent>
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QFontDialog>
+#include <QHBoxLayout>
 #include <QIcon>
 #include <QSize>
 #include <QInputDialog>
@@ -29,6 +32,7 @@
 #include <QMenuBar>
 #include <QMessageBox>
 #include <QMimeData>
+#include <QPushButton>
 #include <QStatusBar>
 #include <QSystemTrayIcon>
 #include <QTabBar>
@@ -36,6 +40,7 @@
 #include <QTimer>
 #include <QToolBar>
 #include <QUrl>
+#include <QVBoxLayout>
 
 #include <fstream>
 
@@ -331,6 +336,7 @@ void MainWindow::createActions()
         m_settings.trafficIndicator = on;
         m_trafficIndicator->setVisible(on);
     });
+    add(options, "HTTP &Proxy...", "", [this] { chooseHttpProxy(); });
 
     auto help = menuBar()->addMenu("&Help");
     add(help, "&User Manual", "F1", [this] {
@@ -587,16 +593,47 @@ void MainWindow::changeEvent(QEvent* event)
 #endif
 }
 
+namespace {
+
+bool isHttpUrl(const QUrl& url)
+{
+    auto scheme = url.scheme().toLower();
+    return url.isValid() && (scheme == "http" || scheme == "https");
+}
+
+// the URLs of a drop; a link dragged as plain text (e.g. from a terminal or an editor) counts as well
+QList<QUrl> droppedUrls(const QMimeData* data)
+{
+    if (data->hasUrls())
+        return data->urls();
+    QList<QUrl> urls;
+    if (data->hasText())
+    {
+        QUrl url(data->text().trimmed());
+        if (isHttpUrl(url))
+            urls.append(url);
+    }
+    return urls;
+}
+
+} // namespace
+
 void MainWindow::dragEnterEvent(QDragEnterEvent* event)
 {
-    if (event->mimeData()->hasUrls())
+    if (!droppedUrls(event->mimeData()).isEmpty())
         event->acceptProposedAction();
 }
 
 void MainWindow::dropEvent(QDropEvent* event)
 {
-    for (auto& url : event->mimeData()->urls())
+    for (auto& url : droppedUrls(event->mimeData()))
     {
+        if (isHttpUrl(url))
+        {
+            addUrlSource(toStd(url.toString()), true);
+            setWindowTitle("[" + url.toString() + "] - DebugVision");
+            continue;
+        }
         if (!url.isLocalFile())
             continue;
         auto pathText = toStd(url.toLocalFile());
@@ -930,7 +967,9 @@ void MainWindow::excludeSelectedLines()
 
 void MainWindow::applySources()
 {
-    m_ingest.applySources(m_settings.sources);
+    auto sources = m_settings.sources;
+    dv::applyHttpProxyDefault(sources, m_settings.httpProxy);
+    m_ingest.applySources(sources);
 #ifdef _WIN32
     if (m_globalCapture)
     {
@@ -949,6 +988,65 @@ void MainWindow::addFileSource(const std::string& path, bool tail, bool temporar
     dv::FileParams params;
     params.path = path;
     params.tail = tail;
+    config.setParams(params);
+    config.temporary = temporary;
+    m_settings.sources.push_back(config);
+    applySources();
+}
+
+void MainWindow::chooseHttpProxy()
+{
+    QDialog dialog(this);
+    dialog.setWindowTitle("HTTP Proxy");
+    auto layout = new QVBoxLayout(&dialog);
+    layout->addWidget(new QLabel("Proxy for the http(s) sources that do not have their own proxy setting.\n"
+                                 "Empty: the system proxy settings; 'direct': no proxy;\n"
+                                 "e.g. http://proxy.example.com:8080, socks5h://127.0.0.1:1080 or http://user:password@proxy:3128"));
+    auto edit = new QLineEdit(toQString(m_settings.httpProxy));
+    edit->setPlaceholderText("system proxy settings");
+    layout->addWidget(edit);
+
+    // local SOCKS proxies (e.g. 'ssh -D 1080 user@host') are only suggested: one is used only when chosen here
+    auto detected = dv::platform::detectLocalSocksProxies(dv::platform::defaultSocksPorts(), std::chrono::milliseconds(300));
+    for (auto& proxy : detected)
+    {
+        auto row = new QHBoxLayout;
+        auto text = "Detected on this computer: " + toQString(proxy.proxy) + (proxy.note.empty() ? QString() : " (" + toQString(proxy.note) + ")");
+        row->addWidget(new QLabel(text), 1);
+        auto use = new QPushButton("Use");
+        use->setToolTip("Puts this proxy in the field above; it is saved with OK");
+        auto value = toQString(proxy.proxy);
+        connect(use, &QPushButton::clicked, &dialog, [edit, value](bool) {
+            edit->setText(value);
+            edit->setFocus();
+        });
+        row->addWidget(use);
+        layout->addLayout(row);
+    }
+
+    auto buttons = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+    layout->addWidget(buttons);
+    connect(buttons, &QDialogButtonBox::rejected, &dialog, &QDialog::reject);
+    connect(buttons, &QDialogButtonBox::accepted, &dialog, [&dialog, edit]() {
+        auto error = dv::platform::validateHttpProxy(toStd(edit->text().trimmed()));
+        if (!error.empty())
+        {
+            QMessageBox::warning(&dialog, "HTTP Proxy", toQString(error));
+            return;
+        }
+        dialog.accept();
+    });
+    if (dialog.exec() != QDialog::Accepted)
+        return;
+    m_settings.httpProxy = toStd(edit->text().trimmed());
+    applySources(); // restarts the http sources that use the default proxy
+}
+
+void MainWindow::addUrlSource(const std::string& url, bool temporary)
+{
+    auto config = dv::SourceRegistry::instance().makeDefault("http");
+    dv::HttpParams params;
+    params.url = url;
     config.setParams(params);
     config.temporary = temporary;
     m_settings.sources.push_back(config);

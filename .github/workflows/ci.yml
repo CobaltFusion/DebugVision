@@ -8,13 +8,13 @@ on:
 env:
   COPPERSPICE_TAG: cs-2.1.0
   # -dev packages: the CopperSpice CMake exports link against the unversioned .so names (e.g. libOpenGL.so);
-  # xvfb and xauth for the GUI smoke test
+  # xvfb and xauth for the GUI smoke test; libcurl4-openssl-dev for the http(s) source
   LINUX_GUI_PACKAGES: >-
     ninja-build libopengl-dev libgl-dev libglib2.0-dev libfontconfig1-dev libfreetype-dev libcups2-dev
     libx11-xcb-dev libxkbcommon-dev libxkbcommon-x11-dev libxcb1-dev libxcb-xkb-dev libxcb-icccm4-dev libxcb-image0-dev
     libxcb-keysyms1-dev libxcb-randr0-dev libxcb-render-util0-dev libxcb-shape0-dev libxcb-sync-dev libxcb-xfixes0-dev
     libxcb-xinerama0-dev libxcb-cursor-dev libxi-dev libsm-dev libice-dev libxrender-dev libssl-dev zlib1g-dev
-    xvfb xauth
+    libcurl4-openssl-dev xvfb xauth
 
 jobs:
   core:
@@ -26,6 +26,13 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
+
+      # libcurl for the http(s) source; Windows builds it from source, macOS has it (see cmake/Curl.cmake)
+      - name: Install libcurl (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libcurl4-openssl-dev
 
       - name: Configure
         run: cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DDV_BUILD_GUI=OFF

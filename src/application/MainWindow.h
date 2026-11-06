@@ -83,6 +83,8 @@ private:
     // commands
     void openFile(bool tail);
     void addFileSource(const std::string& path, bool tail, bool temporary);
+    void addUrlSource(const std::string& url, bool temporary); // tails an http(s) URL
+    void chooseHttpProxy();
     void runProcess(const QString& program = QString());
     void runScript(const std::string& path);
     void saveText(const std::string& text, const QString& title);

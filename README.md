@@ -28,6 +28,7 @@ All inputs are configurable sources (Log > Sources..., `--source type:key=value,
 | `udp` | all | UDP listener with optional multicast group and sender filter |
 | `tcp-listen`, `tcp-connect` | all | line based TCP |
 | `dbgview-agent` | all | client for the Sysinternals DebugView agent (`dbgview.exe /a`) |
+| `http` | all | tail a log file on a web server over http(s) with Range requests (or drop a link on the window) |
 
 `dvcli --list-sources` shows the parameters of every type.
 
@@ -51,7 +52,7 @@ docs/manual.md      user manual, converted to HTML at build time and compiled in
 
 ## Building
 
-Requirements: CMake 3.28+, a C++20 compiler (MSVC 2022, GCC 11+, Clang 14+, Apple Clang 15+), and for the GUI a GUI-enabled [CopperSpice](https://www.copperspice.com/) 2.1 install. nlohmann/json, PCRE2 and doctest are downloaded by CMake.
+Requirements: CMake 3.28+, a C++20 compiler (MSVC 2022, GCC 11+, Clang 14+, Apple Clang 15+), and for the GUI a GUI-enabled [CopperSpice](https://www.copperspice.com/) 2.1 install. nlohmann/json, PCRE2 and doctest are downloaded by CMake. libcurl (for the `http` source) is the system libcurl on Linux and macOS when installed (e.g. `libcurl4-openssl-dev`), otherwise, and always on Windows, CMake builds a small static libcurl from source (Schannel TLS on Windows; OpenSSL, e.g. `libssl-dev`, elsewhere).
 
 ```
 cmake -G Ninja -S . -B build -DCMAKE_BUILD_TYPE=Release -DCOPPERSPICE_DIR=<copperspice install prefix>

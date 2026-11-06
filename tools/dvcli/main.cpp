@@ -41,7 +41,7 @@ namespace {
 const char* const usage = R"(dvcli - capture and filter debug output
 
 Usage:
-  dvcli [options] [-c] [-d <file>] [--ods] [--source <spec>]... [--udp <port>]... [--file <path>]... [--stdin]
+  dvcli [options] [-c] [-d <file>] [--ods] [--source <spec>]... [--udp <port>]... [--file <path>]... [--url <url>]... [--stdin]
   dvcli -x      stop all running dvcli instances (not available on macOS, use 'pkill dvcli')
   dvcli -u <message> [<port>]   send <message> as a UDP broadcast (default port 2020)
   dvcli -h | --help
@@ -67,6 +67,10 @@ Capture:
                        process:command=make,arguments=-j8;all   tcp-listen:port=2021
   --udp <port>         shorthand for --source udp:port=<port>
   --file <path>        shorthand for --source file:path=<path>
+  --url <url>          tail an http:// or https:// URL, shorthand for --source http:url=<url>
+  --proxy <proxy>      proxy for the http sources without a proxy parameter: http://host:port,
+                       http://user:password@host:port, socks5h://host:1080, or 'direct';
+                       default: the proxy settings of Windows, or the http(s)_proxy environment variables
   --stdin              read standard input
   --list-sources       show the available source types
 Filters (case-insensitive text):
@@ -93,6 +97,8 @@ struct Options
     bool verbose = false;
     bool readStdin = false;
     std::vector<std::string> sources;
+    std::vector<std::string> urls;
+    std::string proxy;
     dv::FilterSet filters;
     std::string quitMessage;
 };
@@ -402,6 +408,13 @@ int main(int argc, char* argv[])
             else if (arg == "--source") options.sources.push_back(value());
             else if (arg == "--udp") options.sources.push_back("udp:port=" + value());
             else if (arg == "--file") options.sources.push_back("file:path=" + value());
+            else if (arg == "--url") options.urls.push_back(value());
+            else if (arg == "--proxy")
+            {
+                options.proxy = value();
+                if (auto error = dv::platform::validateHttpProxy(options.proxy); !error.empty())
+                    throw std::runtime_error("--proxy: " + error);
+            }
             else if (arg == "--stdin") options.readStdin = true;
             else if (arg == "--ods")
             {
@@ -445,10 +458,21 @@ int main(int argc, char* argv[])
         std::vector<dv::SourceConfig> configs;
         for (auto& spec : options.sources)
             configs.push_back(registry.parseSpec(spec));
+        for (auto& url : options.urls)
+        {
+            // not a spec: URLs can contain commas
+            auto type = registry.find("http");
+            auto config = registry.makeDefault("http");
+            config.params["url"] = url;
+            if (auto error = type->validate(config); !error.empty())
+                throw std::runtime_error("--url: " + error);
+            configs.push_back(config);
+        }
+        dv::applyHttpProxyDefault(configs, options.proxy);
         if (options.readStdin)
             configs.push_back(registry.makeDefault("stdin"));
         if (configs.empty())
-            throw std::runtime_error("no source given; use --ods, --source, --udp, --file or --stdin");
+            throw std::runtime_error("no source given; use --ods, --source, --udp, --file, --url or --stdin");
         for (auto& c : configs)
             c.autoNewline = options.autoNewline;
 

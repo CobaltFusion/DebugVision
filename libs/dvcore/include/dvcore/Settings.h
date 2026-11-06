@@ -65,6 +65,7 @@ struct AppSettings
     bool prefixPid = false;
     uint64_t historyLimit = 0; // lines, 0 = unlimited
     std::string legacyCharset; // default charset for 8-bit text that is not UTF-8
+    std::string httpProxy;     // proxy of the http sources without their own proxy setting; "" = the system proxy settings
     std::vector<uint32_t> customColors;
     std::vector<ViewSettings> views;
     int currentView = 0;

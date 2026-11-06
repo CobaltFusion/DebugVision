@@ -46,6 +46,8 @@ FetchContent_Declare(md4c
 
 FetchContent_MakeAvailable(nlohmann_json pcre2 md4c)
 
+include(${CMAKE_CURRENT_LIST_DIR}/Curl.cmake)
+
 if (DV_BUILD_TESTS)
   set(DOCTEST_NO_INSTALL ON CACHE BOOL "" FORCE)
   FetchContent_MakeAvailable(doctest)
