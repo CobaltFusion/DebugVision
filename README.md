@@ -12,9 +12,14 @@ Logging that already marks where things begin and end, such as enter/leave lines
 requests, makes this a lot more insightful: every pair becomes a span, so you see how long things take, how they nest
 and overlap, and where the time goes.
 
-## Next release (not released yet)
+![DebugVision showing the output of dvtest as it arrives, with the nested calls on the timeline](docs/images/debugvision.gif)
 
-The first release will contain the log viewer, `debugvision`, and its command line version, `dvcli`, for Windows, Linux and macOS:
+## Release 0.1.0
+
+The first release contains the log viewer, `debugvision`, and its command line version, `dvcli`, for Windows, Linux and macOS
+([download](https://github.com/CobaltFusion/DebugVision/releases): a zip for Windows, a `.deb` for Debian 12 and 13):
+
+<img src="docs/images/debugvision.png" alt="The log viewer with a highlighted exception and the timeline below it" width="480" align="right">
 
 - **Sources**: Win32 OutputDebugString (local and global), log files (tailed through truncation and rotation, DebugView++
   `.dblog` and Sysinternals `.log` formats), program output, standard input, UDP (with multicast and a sender filter),
@@ -103,3 +108,9 @@ Alternatively `-DCopperSpice_DIR=<dir containing CopperSpiceConfig.cmake>` or `-
 On Windows the installed `debugvision.exe` is self-contained: the application, the CopperSpice DLLs, the platform plugin and the MSVC runtime are embedded in it, compressed with the Windows compression API (XPRESS Huffman, fast to decompress). At startup they are unpacked into a new directory under `%TEMP%\DebugVision`, which is removed when the application exits (directories left behind by a killed run are removed at the next start). `-DDV_SELF_CONTAINED=OFF` installs the plain executable with the DLLs next to it instead.
 
 See `build.bat` and `build.sh`.
+
+### Release packages
+
+A `v*` tag runs `.github/workflows/release.yml`: it builds the Windows zip and the Debian 12 and 13 packages
+(`ci/make-deb.sh`, which packages a Linux install tree), installs each package on a clean Debian, and creates a draft
+release with the files. A push to a `release/**` branch builds and tests the same files without creating a release.

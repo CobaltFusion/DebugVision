@@ -1,0 +1,194 @@
+name: Release
+
+# A v* tag builds the release files and creates a draft GitHub release with them, to check and publish by hand.
+# A push to a release/** branch builds and tests the same files (as workflow artifacts) without creating a release.
+on:
+  push:
+    tags: ['v*']
+    branches: ['release/**']
+
+permissions:
+  contents: write
+
+env:
+  COPPERSPICE_TAG: cs-2.1.0
+  LINUX_GUI_PACKAGES: >-
+    ninja-build libopengl-dev libgl-dev libglib2.0-dev libfontconfig1-dev libfreetype-dev libcups2-dev
+    libx11-xcb-dev libxkbcommon-dev libxkbcommon-x11-dev libxcb1-dev libxcb-xkb-dev libxcb-icccm4-dev libxcb-image0-dev
+    libxcb-keysyms1-dev libxcb-randr0-dev libxcb-render-util0-dev libxcb-shape0-dev libxcb-sync-dev libxcb-xfixes0-dev
+    libxcb-xinerama0-dev libxcb-cursor-dev libxi-dev libsm-dev libice-dev libxrender-dev libssl-dev zlib1g-dev
+    libcurl4-openssl-dev
+
+jobs:
+  version:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - id: version
+        run: |
+          if [ "$GITHUB_REF_TYPE" = tag ]; then version=${GITHUB_REF_NAME#v}; else version=0.0.0~${GITHUB_SHA::8}; fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+  deb:
+    name: .deb (debian ${{ matrix.debian }})
+    needs: version
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - debian: 12
+            codename: bookworm
+          - debian: 13
+            codename: trixie
+    runs-on: ubuntu-latest
+    container: debian:${{ matrix.codename }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Install build tools
+        run: |
+          if [ "${{ matrix.codename }}" = bookworm ]; then
+            # CMake 3.28+ is needed, bookworm has 3.25
+            echo "deb http://deb.debian.org/debian bookworm-backports main" > /etc/apt/sources.list.d/backports.list
+            apt-get update
+            apt-get install -y --no-install-recommends -t bookworm-backports cmake
+          else
+            apt-get update
+            apt-get install -y --no-install-recommends cmake
+          fi
+          apt-get install -y --no-install-recommends build-essential git curl bzip2 ca-certificates dpkg-dev $LINUX_GUI_PACKAGES
+
+      - uses: actions/checkout@v4
+
+      - name: Install CopperSpice (prebuilt release)
+        run: |
+          mkdir -p /opt/copperspice
+          curl -sSL "https://github.com/copperspice/copperspice/releases/download/${COPPERSPICE_TAG}/copperspice-2.1.0-debian${{ matrix.debian }}-x64.tar.bz2" | tar xj -C /opt/copperspice
+
+      - name: Build
+        run: |
+          cmake -G Ninja -S . -B build -DCMAKE_BUILD_TYPE=Release
+          cmake --build build -t install
+
+      - name: Test
+        run: ctest --test-dir build --output-on-failure --timeout 300
+
+      - name: Package
+        run: ci/make-deb.sh build/install "${{ needs.version.outputs.version }}" dist
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: deb-${{ matrix.debian }}
+          path: dist/*.deb
+
+  deb-test:
+    name: install test (debian ${{ matrix.debian }})
+    needs: deb
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - debian: 12
+            codename: bookworm
+          - debian: 13
+            codename: trixie
+    runs-on: ubuntu-latest
+    container: debian:${{ matrix.codename }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: deb-${{ matrix.debian }}
+          path: dist
+
+      - name: Install the package on a clean system
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends ./dist/*.deb xvfb xauth
+
+      - name: Run the installed programs
+        run: |
+          dvcli --list-sources
+          dvtest -n 2 --speed 0
+          ci/gui-smoke-test.sh /usr/bin/debugvision ci/timeline-settings.json
+
+  windows:
+    name: zip (windows)
+    needs: version
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Install CopperSpice (installer)
+        shell: pwsh
+        timeout-minutes: 15
+        run: |
+          $setup = "$env:RUNNER_TEMP\setup-CopperSpice.exe"
+          Invoke-WebRequest "https://github.com/copperspice/copperspice/releases/download/$env:COPPERSPICE_TAG/setup-CopperSpice-2.1.0-x64-MSVC-release.exe" -OutFile $setup
+          $p = Start-Process $setup -ArgumentList '-silent' -PassThru
+          if (-not $p.WaitForExit(600000)) { Stop-Process $p -Force; throw 'the CopperSpice installer did not finish within 10 minutes' }
+          $roots = @('C:\', $env:ProgramFiles, ${env:ProgramFiles(x86)}, $env:LOCALAPPDATA, $env:USERPROFILE) | Where-Object { $_ -and (Test-Path $_) }
+          $config = $null
+          foreach ($root in $roots) {
+            $config = Get-ChildItem $root -Directory -Filter '*opper*' -ErrorAction SilentlyContinue |
+              ForEach-Object { Get-ChildItem $_.FullName -Recurse -Filter CopperSpiceConfig.cmake -ErrorAction SilentlyContinue } |
+              Select-Object -First 1
+            if ($config) { break }
+          }
+          if (-not $config) { throw 'CopperSpiceConfig.cmake not found after installing CopperSpice' }
+          $configDir = $config.Directory.FullName
+          "CS_CONFIG_DIR=$configDir" >> $env:GITHUB_ENV
+          "CS_PREFIX=$((Resolve-Path "$configDir\..\..").Path)" >> $env:GITHUB_ENV
+
+      - name: Build
+        run: |
+          cmake -G Ninja -S . -B build -DCMAKE_BUILD_TYPE=Release -DCOPPERSPICE_DIR="$env:CS_PREFIX" -DCopperSpice_DIR="$env:CS_CONFIG_DIR"
+          cmake --build build -t install
+
+      - name: Test
+        run: ctest --test-dir build --output-on-failure --timeout 300
+
+      - name: Package
+        shell: pwsh
+        run: |
+          build\install\dvcli.exe --list-sources
+          if ($LASTEXITCODE -ne 0) { throw "dvcli --list-sources failed with $LASTEXITCODE" }
+          $name = "DebugVision-${{ needs.version.outputs.version }}-windows-x64".Replace('~', '-')
+          New-Item -ItemType Directory "dist\$name" | Out-Null
+          Copy-Item build\install\debugvision.exe, build\install\dvcli.exe, build\install\dvtest.exe, README.md, LICENSE "dist\$name"
+          if ((Get-Item "dist\$name\debugvision.exe").Length -lt 10MB) { throw 'debugvision.exe does not contain the embedded application and DLLs' }
+          Compress-Archive "dist\$name" "dist\$name.zip"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows
+          path: dist/*.zip
+
+  release:
+    if: github.ref_type == 'tag'
+    needs: [version, deb-test, windows]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+
+      - name: Create a draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          ls -la dist
+          (cd dist && sha256sum * > SHA256SUMS)
+          sed "s/<version>/${{ needs.version.outputs.version }}/g" ci/release-notes.md > "$RUNNER_TEMP/notes.md"
+          gh release create "$GITHUB_REF_NAME" dist/* --draft --verify-tag --title "DebugVision ${{ needs.version.outputs.version }}" --notes-file "$RUNNER_TEMP/notes.md"
