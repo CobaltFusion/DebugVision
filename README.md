@@ -1,10 +1,33 @@
 # DebugVision
 
-DebugVision "The software oscilloscope". Our goal is to provide a set of features that can best be compared with an oscilloscope, but for debugging and profiling software.
+DebugVision "See what your software does". Our goal is to provide a set of features that can best be compared with a trace viewer and a live dashboard: the timeline of a profiler, but for debugging and profiling software while it runs.
 
 The main idea is to instrument existing code with 'sample' points to collect information about the runtime behavior. Then the software can be configured to visualize and decode the information in an application specific way.
 This could mean you can visualize the latency (min/max/average) of your main loop.
-But you can also 'trigger' and 'zoom in' to specific pieces of your code.
+You can also stop at a specific event, and zoom in on a specific piece of your code on the timeline.
+
+## Next release (not released yet)
+
+The first release will contain the log viewer, `debugvision`, and its command line version, `dvcli`, for Windows, Linux and macOS:
+
+- **Sources**: Win32 OutputDebugString (local and global), log files (tailed through truncation and rotation, DebugView++
+  `.dblog` and Sysinternals `.log` formats), program output, standard input, UDP (with multicast and a sender filter),
+  TCP, the Sysinternals DebugView agent, and log files on a web server over http(s)
+- **Drag and drop**: drop a log file to open it, an executable or script to run it, or an `http(s)://` link to tail it
+- **http(s) sources**: Range requests fetch only the new bytes; works through http, https and SOCKS proxies (e.g. an
+  `ssh -D` tunnel), with proxy authentication (basic, digest, NTLM, Negotiate), the proxy settings of Windows, and
+  suggestions for the SOCKS proxies found on this computer
+- **Views and filters**: views as tabs, each with its own filters: include, exclude, highlight, token, stop, track, once,
+  clear, beep and bookmark, as regular expressions (PCRE2) or plain text; find, bookmarks, process colors, clock or relative time
+- **Timeline**: the lines of a view on a time axis, as spans from a begin line to an end line and as events, with rules
+  in the filter dialog; `dvtest` generates test data for it
+- **Columns**: show, hide and reorder them; double-click the separator in the header to fit a column to the visible lines
+- **Traffic indicator**: an optional light and graph of the incoming lines in the toolbar
+- **Saving**: the log, the view or the selection in DebugView++ `.dblog` format; views, filters and sources as a configuration file
+- **dvcli**: capture and filter on the command line, write to the console and/or a `.dblog` file, quit on a message,
+  exit when all sources have ended, send UDP test messages
+- **User manual**: compiled into both programs (`debugvision --help`, Help > User Manual, `dvcli --webhelp`)
+- **Windows**: `debugvision.exe` is one self-contained file, no installation or Visual C++ redistributable needed
 
 ## The log viewer
 

@@ -32,7 +32,7 @@ async def sample_generator(queue: asyncio.Queue):
         ch, values = random.choice(CHANNELS)
         new_val = random.choice(values)
 
-        # Only emit on change (oscilloscope-style)
+        # Only emit on change: a timeline shows the transitions
         if last_values.get(ch) != new_val:
             last_values[ch] = new_val
 

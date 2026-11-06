@@ -25,6 +25,8 @@ Every line gets a line number, a time stamp, the process ID and the process name
 - **Filters** (View > Filters..., F5) are regular expressions or plain text. Their types are: Include, Exclude, Highlight, Token (colors the matching text),
   Stop and Track (scrolling), Once, Clear, Beep and Bookmark. The quickest way to make one is to select text in the view and press
   Ctrl+H (highlight), Ctrl+I (include), Ctrl+E (exclude) or Ctrl+K (token).
+- **Columns**: right-click the column headers to show or hide columns, drag a header to move its column, and
+  double-click the separator at the right of a column to fit it to the lines that are visible.
 - **Finding text**: Ctrl+F, then F3 for the next match and Shift+F3 for the previous one.
 - **Bookmarks**: Ctrl+F2 toggles a bookmark, F2 and Shift+F2 jump between bookmarks.
 - **Timeline**: View > Timeline (Ctrl+L) shows the lines of a view on a time axis below the list, as bars from a begin
@@ -169,7 +171,7 @@ Help > About DebugVision shows the settings file in use.
 
 ## Timeline
 
-The timeline shows the lines of a view on a time axis, like an oscilloscope or [TimeLens](https://github.com/CobaltFusion/timelens):
+The timeline shows the lines of a view on a time axis, like the timeline of a profiler or a trace viewer, or [TimeLens](https://github.com/CobaltFusion/timelens):
 how long things take, how they overlap and when events happen. It is shown below the log list with View > Timeline (Ctrl+L)
 and uses only the lines the view shows, so the view's filters also filter the timeline. Each view has its own timeline and rules.
 
