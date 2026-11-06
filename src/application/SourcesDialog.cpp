@@ -1,6 +1,7 @@
 #include "SourcesDialog.h"
 
 #include "Text.h"
+#include "UnderlinedHeaderView.h"
 
 #include <QCheckBox>
 #include <QComboBox>
@@ -233,6 +234,7 @@ SourcesDialog::SourcesDialog(std::vector<dv::SourceConfig> configs, std::vector<
     resize(760, 360);
     auto layout = new QVBoxLayout(this);
     m_table = new QTableWidget(0, 4);
+    m_table->setHorizontalHeader(new UnderlinedHeaderView(Qt::Horizontal, m_table));
     QStringList headers;
     headers << "" << "Name" << "Type" << "Status";
     m_table->setHorizontalHeaderLabels(headers);
