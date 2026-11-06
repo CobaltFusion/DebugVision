@@ -51,6 +51,8 @@ jobs:
         run: |
           apt-get update
           apt-get install -y --no-install-recommends build-essential git curl bzip2 ca-certificates dpkg-dev file $LINUX_GUI_PACKAGES
+          # dpkg-shlibdeps needs the libraries of the bundled CopperSpice Wayland plugin to find their packages
+          apt-get install -y --no-install-recommends libwayland-client0 libwayland-cursor0 libwayland-egl1 libegl1
           if [ "${{ matrix.codename }}" = bookworm ]; then
             # CMake 3.28+ is needed and bookworm has 3.25; the backports CMake needs a newer libcurl than libcurl4-openssl-dev
             curl -sSL https://github.com/Kitware/CMake/releases/download/v3.31.6/cmake-3.31.6-linux-x86_64.tar.gz | tar xz -C /opt
