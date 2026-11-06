@@ -118,6 +118,8 @@ private:
     QString processName(const dv::LineRecord& record) const;
     QColor processColor(uint32_t originId) const;
     void drawMessage(QPainter& painter, const QRect& rect, const Row& row, const QColor& foreground);
+    // resizes 'column' to fit its title and its text in the lines that are visible
+    void fitColumnToVisibleLines(int column);
     std::string lineAsLog(const Row& row) const;
     void notifySelection();
     void onUserScroll();

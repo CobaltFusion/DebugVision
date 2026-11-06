@@ -100,6 +100,8 @@ LogViewWidget::LogViewWidget(ViewContext& context, std::shared_ptr<dv::View> vie
         viewport()->update();
     });
     connect(m_header, &QHeaderView::sectionMoved, this, [this](int, int, int) { viewport()->update(); });
+    // double-click on the separator at the right of a column: fit it to the lines that are visible
+    connect(m_header, &QHeaderView::sectionHandleDoubleClicked, this, [this](int column) { fitColumnToVisibleLines(column); });
     connect(m_header, &QHeaderView::customContextMenuRequested, this, [this](const QPoint&) {
         // the column menu is handled by the main window through the same callback
         if (contextMenuRequested)
@@ -510,6 +512,44 @@ void LogViewWidget::paintEvent(QPaintEvent*)
             painter.drawRect(rowRect.adjusted(0, 0, -1, -1));
         }
     }
+}
+
+void LogViewWidget::fitColumnToVisibleLines(int column)
+{
+    if (column < 0 || column >= columnCount || column == static_cast<int>(dv::Column::Bookmark))
+        return;
+    QFontMetrics fm(font());
+    // never narrower than the column title
+    int width = m_header->sectionSizeHint(column);
+
+    // the same lines and the same text as paintEvent()
+    auto first = static_cast<size_t>(verticalScrollBar()->value());
+    std::vector<dv::ViewLine> lines;
+    m_view->lines(first, static_cast<size_t>(visibleRows() + 1), lines);
+    for (size_t i = 0; i < lines.size(); ++i)
+    {
+        Row row;
+        row.seq = lines[i].seq;
+        row.chunk = m_context.store->chunkFor(row.seq);
+        if (!row.chunk)
+            continue;
+        row.record = row.chunk->record(static_cast<uint32_t>(row.seq - row.chunk->firstSeq()));
+        row.text = row.chunk->text(row.record);
+        int textWidth = 0;
+        if (column == static_cast<int>(dv::Column::Message))
+        {
+            textWidth = fm.width(expandTabs(row.text));
+            if (m_context.prefixPid)
+                textWidth += fm.width("[" + QString::number(row.record.pid) + "] ");
+        }
+        else
+        {
+            textWidth = fm.width(columnText(column, first + i, row));
+        }
+        // +2: rounding of the text width, so the text is not elided
+        width = std::max(width, textWidth + 2 * textMargin + 2);
+    }
+    m_header->resizeSection(column, std::min(width, m_header->maximumSectionSize()));
 }
 
 bool LogViewWidget::isSelected(uint64_t seq) const
