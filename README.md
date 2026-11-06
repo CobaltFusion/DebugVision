@@ -1,10 +1,16 @@
 # DebugVision
 
-DebugVision "See what your software does". Our goal is to provide a set of features that can best be compared with a trace viewer and a live dashboard: the timeline of a profiler, but for debugging and profiling software while it runs.
+DebugVision "See what your software does". It turns the logs your software already writes into a picture of its runtime
+behavior: something like a trace viewer or the timeline of a profiler, but for debugging and profiling software while it runs.
 
-The main idea is to instrument existing code with 'sample' points to collect information about the runtime behavior. Then the software can be configured to visualize and decode the information in an application specific way.
-This could mean you can visualize the latency (min/max/average) of your main loop.
-You can also stop at a specific event, and zoom in on a specific piece of your code on the timeline.
+The main idea is to use existing logs, without adding instrumentation to the code. DebugVision collects log lines from
+wherever they are written (OutputDebugString, files, program output, the network, a web server), filters and highlights
+them, and rules that match lines with regular expressions turn them into spans and events on a timeline, configured for
+your application. You can stop at a specific event, and zoom in on a specific piece of your code on the timeline.
+
+Logging that already marks where things begin and end, such as enter/leave lines of functions or the start and end of
+requests, makes this a lot more insightful: every pair becomes a span, so you see how long things take, how they nest
+and overlap, and where the time goes.
 
 ## Next release (not released yet)
 
