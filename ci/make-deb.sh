@@ -57,9 +57,14 @@ EOF
 mkdir -p "$work/debian"
 printf 'Source: debugvision\n\nPackage: debugvision\nArchitecture: any\n' > "$work/debian/control"
 binaries=$(find "$root/opt/debugvision" -type f \( -name '*.so*' -o -perm -u+x \) -exec sh -c 'head -c 4 "$1" | grep -q ELF' _ {} \; -print)
-depends=$(cd "$work" && dpkg-shlibdeps -O --ignore-missing-info -l"$root/opt/debugvision" $binaries 2>/dev/null | sed -n 's/^shlibs:Depends=//p')
+if [ -z "$binaries" ]; then
+    echo "error: no ELF files found in $install" >&2
+    exit 1
+fi
+shlibdeps=$(cd "$work" && dpkg-shlibdeps -O --ignore-missing-info --warnings=0 -l"$root/opt/debugvision" $binaries)
+depends=$(echo "$shlibdeps" | sed -n 's/^shlibs:Depends=//p')
 if [ -z "$depends" ]; then
-    echo "error: dpkg-shlibdeps found no dependencies" >&2
+    echo "error: dpkg-shlibdeps found no dependencies: $shlibdeps" >&2
     exit 1
 fi
 

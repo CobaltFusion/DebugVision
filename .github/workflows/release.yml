@@ -49,16 +49,16 @@ jobs:
     steps:
       - name: Install build tools
         run: |
+          apt-get update
+          apt-get install -y --no-install-recommends build-essential git curl bzip2 ca-certificates dpkg-dev file $LINUX_GUI_PACKAGES
           if [ "${{ matrix.codename }}" = bookworm ]; then
-            # CMake 3.28+ is needed, bookworm has 3.25
-            echo "deb http://deb.debian.org/debian bookworm-backports main" > /etc/apt/sources.list.d/backports.list
-            apt-get update
-            apt-get install -y --no-install-recommends -t bookworm-backports cmake
+            # CMake 3.28+ is needed and bookworm has 3.25; the backports CMake needs a newer libcurl than libcurl4-openssl-dev
+            curl -sSL https://github.com/Kitware/CMake/releases/download/v3.31.6/cmake-3.31.6-linux-x86_64.tar.gz | tar xz -C /opt
+            ln -s /opt/cmake-3.31.6-linux-x86_64/bin/cmake /opt/cmake-3.31.6-linux-x86_64/bin/ctest /usr/local/bin/
           else
-            apt-get update
             apt-get install -y --no-install-recommends cmake
           fi
-          apt-get install -y --no-install-recommends build-essential git curl bzip2 ca-certificates dpkg-dev $LINUX_GUI_PACKAGES
+          cmake --version
 
       - uses: actions/checkout@v4
 
