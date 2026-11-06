@@ -63,12 +63,26 @@ inline constexpr PayloadFile payload[] = {
 ${DV_PAYLOAD_TABLE}};
 ")
 
+# hash the embedded files on every build: payload.hash is rewritten only when their contents changed, so the files are
+# compressed again even when a replaced file kept an older timestamp (e.g. after reinstalling CopperSpice)
+set(DV_PAYLOAD_FILES ${DV_PAYLOAD_SOURCES})
+list(REMOVE_ITEM DV_PAYLOAD_FILES debugvision) # the target name, its file is in the list as $<TARGET_FILE:debugvision>
+list(JOIN DV_PAYLOAD_FILES "\n" DV_PAYLOAD_SOURCE_LINES)
+file(GENERATE OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/payload_files_$<CONFIG>.txt CONTENT "${DV_PAYLOAD_SOURCE_LINES}\n")
+add_custom_target(debugvision_payload_hash
+  COMMAND ${CMAKE_COMMAND} -DFILE_LIST=${CMAKE_CURRENT_BINARY_DIR}/payload_files_$<CONFIG>.txt -DOUTPUT=${CMAKE_CURRENT_BINARY_DIR}/payload.hash -P ${CMAKE_CURRENT_SOURCE_DIR}/payload_hash.cmake
+  BYPRODUCTS ${CMAKE_CURRENT_BINARY_DIR}/payload.hash
+  COMMENT "Checking the contents of the files embedded in debugvision.exe"
+  VERBATIM
+)
+add_dependencies(debugvision_payload_hash debugvision)
+
 add_custom_command(
   OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/payload.stamp
   COMMAND ${CMAKE_COMMAND} -E make_directory ${DV_PAYLOAD_DIR}/platforms
   ${DV_COMPRESS_COMMANDS}
   COMMAND ${CMAKE_COMMAND} -E touch ${CMAKE_CURRENT_BINARY_DIR}/payload.stamp
-  DEPENDS ${DV_PAYLOAD_SOURCES} dv_compress
+  DEPENDS ${DV_PAYLOAD_SOURCES} ${CMAKE_CURRENT_BINARY_DIR}/payload.hash dv_compress
   COMMENT "Compressing the files embedded in debugvision.exe"
 )
 set_source_files_properties(${CMAKE_CURRENT_BINARY_DIR}/payload.rc PROPERTIES OBJECT_DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/payload.stamp)
