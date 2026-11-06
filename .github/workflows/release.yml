@@ -190,6 +190,8 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          # GitHub replaces the ~ of the Debian version in asset names with a dot: use those names for SHA256SUMS too
+          for f in dist/*~*; do [ -e "$f" ] && mv "$f" "${f//\~/.}"; done
           ls -la dist
           (cd dist && sha256sum * > SHA256SUMS)
           sed "s/<version>/${{ needs.version.outputs.version }}/g" ci/release-notes.md > "$RUNNER_TEMP/notes.md"

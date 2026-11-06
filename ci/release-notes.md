@@ -8,14 +8,14 @@ does, with the features of DebugView++, a timeline, and a command line version.
 | File | |
 |---|---|
 | `DebugVision-<version>-windows-x64.zip` | Windows 10/11 x64: `debugvision.exe` is self-contained (no installation, no Visual C++ redistributable needed), with `dvcli.exe` and `dvtest.exe` |
-| `debugvision_<version>-1~deb12_amd64.deb` | Debian 12 (bookworm) |
-| `debugvision_<version>-1~deb13_amd64.deb` | Debian 13 (trixie) |
+| `debugvision_<version>-1.deb12_amd64.deb` | Debian 12 (bookworm) |
+| `debugvision_<version>-1.deb13_amd64.deb` | Debian 13 (trixie) |
 | `SHA256SUMS` | checksums of the files |
 
 On Debian, install the package with its dependencies:
 
 ```
-sudo apt install ./debugvision_<version>-1~deb13_amd64.deb
+sudo apt install ./debugvision_<version>-1.deb13_amd64.deb
 ```
 
 It installs into `/opt/debugvision`, with `debugvision`, `dvcli` and `dvtest` in `/usr/bin` and an entry in the
